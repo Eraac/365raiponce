@@ -28,8 +28,8 @@ security:
         api:
             pattern:   ^/
             stateless: true
+            anonymous: true
             lexik_jwt: ~
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/,       roles: IS_AUTHENTICATED_FULLY }
