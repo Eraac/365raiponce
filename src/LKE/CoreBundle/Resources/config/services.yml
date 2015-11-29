@@ -1,0 +1,3 @@
+services:
+    lke_core.paginator:
+        class: LKE\CoreBundle\Service\Paginator

@@ -3,3 +3,8 @@ api_lke_user:
     resource: "@LKEUserBundle/Resources/config/routing.yml"
     name_prefix: api_
 
+api_lke_remark:
+    type:     rest
+    resource: "@LKERemarkBundle/Resources/config/routing.yml"
+    name_prefix: api_
+

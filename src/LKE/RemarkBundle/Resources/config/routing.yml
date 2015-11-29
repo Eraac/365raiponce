@@ -1,0 +1,3 @@
+remark:
+    type:     rest
+    resource: LKE\RemarkBundle\Controller\RemarkController
