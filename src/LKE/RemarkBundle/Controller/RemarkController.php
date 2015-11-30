@@ -88,7 +88,11 @@ class RemarkController extends Controller
             throw $this->createNotFoundException();
         }
 
-        // TODO check access (for read or edit)
+        $security = $this->get('lke_remark.access_remark');
+
+        if (!$security->canAccess($remark, $this->getUser(), $edit)) {
+            throw $this->createAccessDeniedException();
+        }
 
         return $remark;
     }
