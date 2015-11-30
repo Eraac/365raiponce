@@ -18,7 +18,7 @@ class RemarkController extends Controller
     {
         list($limit, $page) = $this->get('lke_core.paginator')->getBorne($request, 20);
 
-        $remarks = $this->getRepository()->getPostedRemark($limit, $page);
+        $remarks = $this->getRepository()->getPostedRemark($limit, $page - 1);
 
         return $remarks;
     }
@@ -57,7 +57,7 @@ class RemarkController extends Controller
         list($limit, $page) = $this->get('lke_core.paginator')->getBorne($request, 20);
         $idUser = $this->getUser()->getId();
 
-        $remarks = $this->getRepository()->getUserRemarks($idUser, $limit, $page);
+        $remarks = $this->getRepository()->getUserRemarks($idUser, $limit, $page - 1);
 
         return $remarks;
     }

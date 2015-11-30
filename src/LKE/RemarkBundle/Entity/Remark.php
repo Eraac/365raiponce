@@ -59,6 +59,14 @@ class Remark
     private $createdAt;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updatedAt", type="datetime")
+     * @JMS\Expose()
+     */
+    private $updatedAt;
+
+    /**
      * @ORM\ManyToOne(targetEntity="LKE\RemarkBundle\Entity\Theme")
      * @JMS\Expose()
      */
@@ -198,7 +206,16 @@ class Remark
     public function prePersist()
     {
         $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
         $this->postedAt = null;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function onUpdate()
+    {
+        $this->updatedAt = new \DateTime();
     }
 
     /**
@@ -215,6 +232,24 @@ class Remark
     public function setAuthor($author)
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
