@@ -33,4 +33,14 @@ class RemarkRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function getUnpublishedRemark($limit, $page)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->where('r.postedAt is null')
+            ->setMaxResults($limit)
+            ->setFirstResult($page * $limit);
+
+        return $qb->getQuery()->getResult();
+    }
 }
