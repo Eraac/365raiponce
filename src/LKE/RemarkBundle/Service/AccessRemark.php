@@ -3,7 +3,6 @@
 namespace LKE\RemarkBundle\Service;
 
 use LKE\RemarkBundle\Entity\Remark;
-use LKE\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 class AccessRemark

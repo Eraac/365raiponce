@@ -28,7 +28,7 @@ class RemarkController extends Controller
      */
     public function getRemarkAction($id)
     {
-        return $this->getRemark($id);
+        return $this->get('lke_remark.get_remark')->getRemark($id);
     }
 
     /**
@@ -68,23 +68,6 @@ class RemarkController extends Controller
         }
 
         return new JsonResponse(array(), 400); // TODO Error message
-    }
-
-    private function getRemark($id)
-    {
-        $remark = $this->getRepository()->find($id);
-
-        if (null === $remark) {
-            throw $this->createNotFoundException();
-        }
-
-        $security = $this->get('lke_remark.access_remark');
-
-        if (!$security->canAccess($remark)) {
-            throw $this->createAccessDeniedException();
-        }
-
-        return $remark;
     }
 
     private function getRepository()

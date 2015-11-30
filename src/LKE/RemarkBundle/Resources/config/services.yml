@@ -2,3 +2,15 @@ services:
     lke_remark.access_remark:
         class: LKE\RemarkBundle\Service\AccessRemark
         arguments: [@security.authorization_checker]
+
+    lke_remark.get_remark:
+        class: LKE\RemarkBundle\Service\GetRemark
+        arguments: [@doctrine, @lke_remark.access_remark]
+
+    lke_remark.get_theme:
+        class: LKE\RemarkBundle\Service\GetTheme
+        arguments: [@doctrine]
+
+    lke_remark.get_emotion:
+        class: LKE\RemarkBundle\Service\GetEmotion
+        arguments: [@doctrine]
