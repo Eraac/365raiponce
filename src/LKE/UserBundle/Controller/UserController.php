@@ -17,6 +17,14 @@ class UserController extends Controller
         
         return $users;
     }
+
+    /**
+     * @View(serializerGroups={"Default", "details-user"})
+     */
+    public function getMeAction()
+    {
+        return $this->getUser();
+    }
     
     /**
      * @View(serializerGroups={"Default", "details-user"})

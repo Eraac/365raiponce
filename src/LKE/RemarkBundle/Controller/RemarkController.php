@@ -5,6 +5,7 @@ namespace LKE\RemarkBundle\Controller;
 use LKE\RemarkBundle\Entity\Remark;
 use LKE\RemarkBundle\Form\RemarkType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\View;
 
@@ -43,15 +44,22 @@ class RemarkController extends Controller
      */
     public function patchRemarkAction(Request $request, $id)
     {
-        $remark = $this->getRemark($id);
+        $remark = $this->getRemark($id, true);
 
         return $this->formRemark($remark, $request, "patch");
     }
 
-    public function getMyRemarksAction()
+    /**
+     * @View(serializerGroups={"Default"})
+     */
+    public function getMeRemarksAction(Request $request)
     {
-        // TODO
-        return array();
+        list($limit, $page) = $this->get('lke_core.paginator')->getBorne($request, 20);
+        $idUser = $this->getUser()->getId();
+
+        $remarks = $this->getRepository()->getUserRemarks($idUser, $limit, $page);
+
+        return $remarks;
     }
 
     private function formRemark(Remark $remark, Request $request, $method = "post")
@@ -69,10 +77,10 @@ class RemarkController extends Controller
             return $remark;
         }
 
-        return $form; // TODO Ne pas retourner un code http 200
+        return new JsonResponse(array(), 400); // TODO Error message
     }
 
-    private function getRemark($id)
+    private function getRemark($id, $edit = false)
     {
         $remark = $this->getRepository()->find($id);
 
@@ -80,7 +88,7 @@ class RemarkController extends Controller
             throw $this->createNotFoundException();
         }
 
-        // TODO check access
+        // TODO check access (for read or edit)
 
         return $remark;
     }
