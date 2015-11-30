@@ -80,12 +80,13 @@ class Remark
     private $emotion;
 
     /**
-     * @ORM\Column(name="scale", type="smallint")
+     * @ORM\Column(name="scale_emotion", type="smallint")
+     * @JMS\Expose()
      */
-    private $scale;
+    private $scaleEmotion;
 
     /**
-     * @ORM\Column(name="email", type="string", length=140)
+     * @ORM\Column(name="email", type="string", length=140, nullable=true)
      * @JMS\Expose()
      * @JMS\Groups({"admin-remark"})
      */
@@ -288,17 +289,17 @@ class Remark
     /**
      * @return mixed
      */
-    public function getScale()
+    public function getScaleEmotion()
     {
-        return $this->scale;
+        return $this->scaleEmotion;
     }
 
     /**
-     * @param mixed $scale
+     * @param mixed $scaleEmotion
      */
-    public function setScale($scale)
+    public function setScaleEmotion($scaleEmotion)
     {
-        $this->scale = $scale;
+        $this->scaleEmotion = $scaleEmotion;
 
         return $this;
     }

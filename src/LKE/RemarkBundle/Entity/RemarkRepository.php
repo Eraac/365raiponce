@@ -16,6 +16,7 @@ class RemarkRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('r')
             ->where('r.postedAt is not null')
+            ->orderBy('r.postedAt', 'DESC')
             ->setMaxResults($limit)
             ->setFirstResult($page * $limit);
 
