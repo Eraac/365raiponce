@@ -17,6 +17,7 @@ class RemarkType extends AbstractType
         $builder
             ->add('context', 'text')
             ->add('sentence', 'textarea')
+            ->add('email', 'email')
             ->add('theme', 'entity', array(
                 'class' => 'LKERemarkBundle:Theme',
                 'choice_label' => 'name'

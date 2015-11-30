@@ -74,10 +74,11 @@ class Remark
     private $theme;
 
     /**
-     * @ORM\ManyToOne(targetEntity="LKE\UserBundle\Entity\User")
+     * @ORM\Column(name="email", type="string", length=140)
      * @JMS\Expose()
+     * @JMS\Groups({"admin-remark"})
      */
-    private $author;
+    private $email;
 
     /**
      * Get id
@@ -222,17 +223,17 @@ class Remark
     /**
      * @return mixed
      */
-    public function getAuthor()
+    public function getEmail()
     {
-        return $this->author;
+        return $this->email;
     }
 
     /**
-     * @param mixed $author
+     * @param mixed $email
      */
-    public function setAuthor($author)
+    public function setEmail($email)
     {
-        $this->author = $author;
+        $this->email = $email;
 
         return $this;
     }

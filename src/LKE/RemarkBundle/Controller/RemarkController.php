@@ -40,16 +40,6 @@ class RemarkController extends Controller
     }
 
     /**
-     * @View(serializerGroups={"Default", "detail-remark"})
-     */
-    public function patchRemarkAction(Request $request, $id)
-    {
-        $remark = $this->getRemark($id, true);
-
-        return $this->formRemark($remark, $request, "patch");
-    }
-
-    /**
      * @View(serializerGroups={"Default"})
      */
     public function getMeRemarksAction(Request $request)
@@ -70,7 +60,7 @@ class RemarkController extends Controller
 
         if ($form->isValid())
         {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($remark);
             $em->flush();
 
@@ -80,7 +70,7 @@ class RemarkController extends Controller
         return new JsonResponse(array(), 400); // TODO Error message
     }
 
-    private function getRemark($id, $edit = false)
+    private function getRemark($id)
     {
         $remark = $this->getRepository()->find($id);
 
@@ -90,7 +80,7 @@ class RemarkController extends Controller
 
         $security = $this->get('lke_remark.access_remark');
 
-        if (!$security->canAccess($remark, $this->getUser(), $edit)) {
+        if (!$security->canAccess($remark)) {
             throw $this->createAccessDeniedException();
         }
 

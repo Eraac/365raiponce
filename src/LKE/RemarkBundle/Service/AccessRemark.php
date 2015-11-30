@@ -15,20 +15,9 @@ class AccessRemark
         $this->authorizationChecker = $authorizationChecker;
     }
 
-    public function canAccess(Remark $remark, $user, $isForEdit = false)
+    public function canAccess(Remark $remark)
     {
-        if (!$user instanceof User) {
-            return false;
-        }
-
-        return  ($this->authorizationChecker->isGranted("ROLE_ADMIN")) ||
-                (!$isForEdit && ($this->isPosted($remark) || $this->isOwner($remark, $user))) ||
-                ($isForEdit && $this->isOwner($remark, $user) && !$this->isPosted($remark));
-    }
-
-    private function isOwner(Remark $remark, User $user)
-    {
-        return ($remark->getAuthor()->getId() === $user->getId());
+        return ($this->authorizationChecker->isGranted("ROLE_ADMIN") || $this->isPosted($remark));
     }
 
     private function isPosted(Remark $remark)
