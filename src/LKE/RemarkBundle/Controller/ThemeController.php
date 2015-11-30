@@ -26,14 +26,14 @@ class ThemeController extends Controller
     /**
      * @View(serializerGroups={"Default"})
      */
-    public function getThemeAction($id)
+    public function getThemeAction($slug)
     {
-        return $this->getTheme($id);
+        return $this->getTheme($slug);
     }
 
-    private function getTheme($id)
+    private function getTheme($slug)
     {
-        $theme = $this->getRepository()->find($id);
+        $theme = $this->getRepository()->findBySlug($slug);
 
         if (null === $theme) {
             throw $this->createNotFoundException();

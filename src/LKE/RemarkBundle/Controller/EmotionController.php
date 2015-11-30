@@ -26,14 +26,14 @@ class EmotionController extends Controller
     /**
      * @View(serializerGroups={"Default"})
      */
-    public function getEmotionAction($id)
+    public function getEmotionAction($slug)
     {
-        return $this->getEmotion($id);
+        return $this->getEmotion($slug);
     }
 
-    private function getEmotion($id)
+    private function getEmotion($slug)
     {
-        $emotion = $this->getRepository()->find($id);
+        $emotion = $this->getRepository()->findBySlug($slug);
 
         if (null === $emotion) {
             throw $this->createNotFoundException();

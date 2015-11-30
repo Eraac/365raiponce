@@ -20,4 +20,13 @@ class EmotionRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function findBySlug($slug)
+    {
+        $qb = $this->createQueryBuilder('e')
+                ->where('e.slug = :slug')
+                ->setParameter('slug', $slug);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
 }
