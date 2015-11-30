@@ -5,3 +5,7 @@ remark:
 theme:
     type:     rest
     resource: LKE\RemarkBundle\Controller\ThemeController
+
+emotion:
+    type:     rest
+    resource: LKE\RemarkBundle\Controller\EmotionController
