@@ -1,3 +1,7 @@
 remark:
     type:     rest
     resource: LKE\RemarkBundle\Controller\RemarkController
+
+theme:
+    type:     rest
+    resource: LKE\RemarkBundle\Controller\ThemeController

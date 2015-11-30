@@ -12,4 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class ThemeRepository extends EntityRepository
 {
+    public function getThemes($limit, $page)
+    {
+        $qb = $this->createQueryBuilder('t')
+            ->setMaxResults($limit)
+            ->setFirstResult($page * $limit);
+
+        return $qb->getQuery()->getResult();
+    }
 }
