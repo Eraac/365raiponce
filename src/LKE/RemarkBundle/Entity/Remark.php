@@ -64,6 +64,11 @@ class Remark
      */
     private $theme;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="LKE\UserBundle\Entity\User")
+     * @JMS\Expose()
+     */
+    private $author;
 
     /**
      * Get id
@@ -194,5 +199,23 @@ class Remark
     {
         $this->createdAt = new \DateTime();
         $this->postedAt = null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param mixed $author
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+
+        return $this;
     }
 }
