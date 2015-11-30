@@ -1,0 +1,11 @@
+admin_remark:
+    type:     rest
+    resource: LKE\AdminBundle\Controller\RemarkController
+
+admin_theme:
+    type:     rest
+    resource: LKE\AdminBundle\Controller\ThemeController
+
+admin_emotion:
+    type:     rest
+    resource: LKE\AdminBundle\Controller\EmotionController

@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new LKE\RemarkBundle\LKERemarkBundle(),
             new LKE\CoreBundle\LKECoreBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new LKE\AdminBundle\LKEAdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

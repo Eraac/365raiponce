@@ -8,3 +8,8 @@ api_lke_remark:
     resource: "@LKERemarkBundle/Resources/config/routing.yml"
     name_prefix: api_
 
+api_lke_admin:
+    type:     rest
+    resource: "@LKEAdminBundle/Resources/config/routing.yml"
+    name_prefix: api_admin_
+    prefix: admin/
