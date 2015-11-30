@@ -22,6 +22,11 @@ class RemarkType extends AbstractType
                 'class' => 'LKERemarkBundle:Theme',
                 'choice_label' => 'name'
             ))
+            ->add('emotion', 'entity', array(
+                'class' => 'LKERemarkBundle:Emotion',
+                'choice_label' => 'name'
+            ))
+            ->add('scale', 'number')
         ;
     }
     

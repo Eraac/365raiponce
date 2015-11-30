@@ -74,6 +74,17 @@ class Remark
     private $theme;
 
     /**
+     * @ORM\ManyToOne(targetEntity="LKE\RemarkBundle\Entity\Emotion")
+     * @JMS\Expose()
+     */
+    private $emotion;
+
+    /**
+     * @ORM\Column(name="scale", type="smallint")
+     */
+    private $scale;
+
+    /**
      * @ORM\Column(name="email", type="string", length=140)
      * @JMS\Expose()
      * @JMS\Groups({"admin-remark"})
@@ -252,6 +263,42 @@ class Remark
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmotion()
+    {
+        return $this->emotion;
+    }
+
+    /**
+     * @param mixed $emotion
+     */
+    public function setEmotion($emotion)
+    {
+        $this->emotion = $emotion;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getScale()
+    {
+        return $this->scale;
+    }
+
+    /**
+     * @param mixed $scale
+     */
+    public function setScale($scale)
+    {
+        $this->scale = $scale;
 
         return $this;
     }
