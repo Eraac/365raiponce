@@ -35,6 +35,7 @@ class Emotion
     /**
      * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(length=128, unique=true)
+     * @JMS\Expose()
      */
     private $slug;
 
