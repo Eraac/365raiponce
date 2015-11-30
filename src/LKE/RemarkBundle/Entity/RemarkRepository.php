@@ -21,4 +21,15 @@ class RemarkRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function getUserRemarks($idUser, $limit, $page)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->where('r.author = :user')
+            ->setParameter('user', $idUser)
+            ->setMaxResults($limit)
+            ->setFirstResult($page * $limit);
+
+        return $qb->getQuery()->getResult();
+    }
 }
