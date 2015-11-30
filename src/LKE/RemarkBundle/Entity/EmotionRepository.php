@@ -12,4 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class EmotionRepository extends EntityRepository
 {
+    public function getEmotions($limit, $page)
+    {
+        $qb = $this->createQueryBuilder('e')
+                ->setFirstResult($page * $limit)
+                ->setMaxResults($limit);
+
+        return $qb->getQuery()->getResult();
+    }
 }
