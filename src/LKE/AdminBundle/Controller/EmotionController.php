@@ -6,6 +6,7 @@ use LKE\RemarkBundle\Entity\Emotion;
 use LKE\RemarkBundle\Form\EmotionType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use FOS\RestBundle\Controller\Annotations\View;
 
 class EmotionController extends Controller

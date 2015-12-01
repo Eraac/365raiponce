@@ -6,6 +6,7 @@ use LKE\RemarkBundle\Entity\Theme;
 use LKE\RemarkBundle\Form\ThemeType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use FOS\RestBundle\Controller\Annotations\View;
 
 class ThemeController extends Controller
