@@ -34,6 +34,6 @@ class EmotionType extends AbstractType
      */
     public function getName()
     {
-        return 'lke_remarkbundle_emotion';
+        return '';
     }
 }

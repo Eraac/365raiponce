@@ -45,6 +45,6 @@ class RemarkType extends AbstractType
      */
     public function getName()
     {
-        return 'lke_remarkbundle_remark';
+        return '';
     }
 }

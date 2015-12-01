@@ -34,6 +34,6 @@ class ThemeType extends AbstractType
      */
     public function getName()
     {
-        return 'lke_remarkbundle_theme';
+        return '';
     }
 }
