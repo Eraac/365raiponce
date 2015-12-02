@@ -4,6 +4,9 @@ namespace LKE\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use LKE\RemarkBundle\Form\Type\RemarkEditType;
+use LKE\RemarkBundle\Entity\Remark;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 
@@ -36,6 +39,34 @@ class RemarkController extends Controller
         $em->flush();
 
         return $remark;
+    }
+
+    /**
+     * @View(serializerGroups={"Default", "detail-remark"})
+     */
+    public function patchRemarkAction(Request $request, $id)
+    {
+        $remark = $this->get('lke_remark.get_remark')->getRemark($id);
+
+        return $this->formRemark($remark, $request);
+    }
+
+    private function formRemark(Remark $remark, Request $request)
+    {
+        $form = $this->createForm(new RemarkEditType(), $remark, array("method" => "patch"));
+
+        $form->handleRequest($request);
+
+        if ($form->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($remark);
+            $em->flush();
+
+            return $remark;
+        }
+
+        return new JsonResponse(array(), 400); // TODO Error message
     }
 
     public function deleteRemarkAction($id)
