@@ -1,12 +1,12 @@
 <?php
 
-namespace LKE\RemarkBundle\Form;
+namespace LKE\RemarkBundle\Type\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class EmotionType extends AbstractType
+class ThemeType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -25,7 +25,7 @@ class EmotionType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'LKE\RemarkBundle\Entity\Emotion'
+            'data_class' => 'LKE\RemarkBundle\Entity\Theme'
         ));
     }
 

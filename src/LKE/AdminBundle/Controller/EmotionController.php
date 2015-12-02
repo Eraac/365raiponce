@@ -3,7 +3,7 @@
 namespace LKE\AdminBundle\Controller;
 
 use LKE\RemarkBundle\Entity\Emotion;
-use LKE\RemarkBundle\Form\EmotionType;
+use LKE\RemarkBundle\Form\Type\EmotionType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;

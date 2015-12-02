@@ -1,6 +1,6 @@
 <?php
 
-namespace LKE\RemarkBundle\Form;
+namespace LKE\RemarkBundle\Type\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

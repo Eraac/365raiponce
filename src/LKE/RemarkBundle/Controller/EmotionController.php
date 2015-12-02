@@ -2,10 +2,7 @@
 
 namespace LKE\RemarkBundle\Controller;
 
-use LKE\RemarkBundle\Entity\Remark;
-use LKE\RemarkBundle\Form\RemarkType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\View;
 
