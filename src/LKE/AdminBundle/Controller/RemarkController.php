@@ -38,6 +38,17 @@ class RemarkController extends Controller
         return $remark;
     }
 
+    public function deleteRemarkAction($id)
+    {
+        $remark = $this->get('lke_remark.get_remark')->getRemark($id);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($remark);
+        $em->flush();
+
+        return new JsonResponse(array(), 204);
+    }
+
     private function getRepository()
     {
         return $this->getDoctrine()->getRepository('LKERemarkBundle:Remark');

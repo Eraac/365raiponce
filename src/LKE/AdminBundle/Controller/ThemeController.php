@@ -29,6 +29,17 @@ class ThemeController extends Controller
         return $this->formTheme($theme, $request, "patch");
     }
 
+    public function deleteThemeAction($slug)
+    {
+        $theme = $this->get("lke_remark.get_theme")->getTheme($slug);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($theme);
+        $em->flush();
+
+        return new JsonResponse(array(), 204);
+    }
+
     private function formTheme(Theme $theme, Request $request, $method = "post")
     {
         $form = $this->createForm(new ThemeType(), $theme, array("method" => $method));

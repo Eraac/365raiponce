@@ -29,6 +29,17 @@ class EmotionController extends Controller
         return $this->formEmotion($emotion, $request, "patch");
     }
 
+    public function deleteEmotionAction($slug)
+    {
+        $emotion = $this->get("lke_remark.get_emotion")->getEmotion($slug);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($emotion);
+        $em->flush();
+
+        return new JsonResponse(array(), 204);
+    }
+
     private function formEmotion(Emotion $emotion, Request $request, $method = "post")
     {
         $form = $this->createForm(new EmotionType(), $emotion, array("method" => $method));
