@@ -69,12 +69,14 @@ class Remark
 
     /**
      * @ORM\ManyToOne(targetEntity="LKE\RemarkBundle\Entity\Theme")
+     * @ORM\JoinColumn(onDelete="SET NULL")
      * @JMS\Expose()
      */
     private $theme;
 
     /**
      * @ORM\ManyToOne(targetEntity="LKE\RemarkBundle\Entity\Emotion")
+     * @ORM\JoinColumn(onDelete="SET NULL")
      * @JMS\Expose()
      */
     private $emotion;
