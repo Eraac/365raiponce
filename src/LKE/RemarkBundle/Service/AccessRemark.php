@@ -5,6 +5,7 @@ namespace LKE\RemarkBundle\Service;
 use LKE\RemarkBundle\Entity\Remark;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
+// TODO refactoring avec AccessResponse
 class AccessRemark
 {
     private $authorizationChecker;

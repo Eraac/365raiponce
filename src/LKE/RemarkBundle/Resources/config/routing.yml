@@ -9,3 +9,7 @@ theme:
 emotion:
     type:     rest
     resource: LKE\RemarkBundle\Controller\EmotionController
+
+response:
+    type:     rest
+    resource: LKE\RemarkBundle\Controller\ResponseController
