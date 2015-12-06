@@ -4,12 +4,13 @@ namespace LKE\RemarkBundle\Controller;
 
 use LKE\RemarkBundle\Entity\Remark;
 use LKE\RemarkBundle\Form\Type\RemarkType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use LKE\CoreBundle\Controller\CoreController;
+use LKE\UserBundle\Service\Access;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\View;
 
-class RemarkController extends Controller
+class RemarkController extends CoreController
 {
     /**
      * @View(serializerGroups={"Default"})
@@ -28,7 +29,7 @@ class RemarkController extends Controller
      */
     public function getRemarkAction($id)
     {
-        return $this->get('lke_remark.get_remark')->getRemark($id);
+        return $this->getEntity($id, Access::READ);
     }
 
     /**
@@ -70,8 +71,8 @@ class RemarkController extends Controller
         return new JsonResponse(array(), 400); // TODO Error message
     }
 
-    private function getRepository()
+    final protected function getRepositoryName()
     {
-        return $this->getDoctrine()->getRepository("LKERemarkBundle:Remark");
+        return "LKERemarkBundle:Remark";
     }
 }

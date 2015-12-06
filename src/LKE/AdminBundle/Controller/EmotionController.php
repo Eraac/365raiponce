@@ -2,14 +2,15 @@
 
 namespace LKE\AdminBundle\Controller;
 
-use LKE\RemarkBundle\Entity\Emotion;
-use LKE\RemarkBundle\Form\Type\EmotionType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use LKE\UserBundle\Service\Access;
+use LKE\RemarkBundle\Entity\Emotion;
+use LKE\RemarkBundle\Form\Type\EmotionType;
+use LKE\CoreBundle\Controller\CoreController;
 use FOS\RestBundle\Controller\Annotations\View;
 
-class EmotionController extends Controller
+class EmotionController extends CoreController
 {
     /**
      * @View(serializerGroups={"Default"})
@@ -24,14 +25,14 @@ class EmotionController extends Controller
      */
     public function patchEmotionsAction(Request $request, $slug)
     {
-        $emotion = $this->get("lke_remark.get_emotion")->getEmotion($slug);
+        $emotion = $this->getEntity($slug, Access::EDIT);
 
         return $this->formEmotion($emotion, $request, "patch");
     }
 
     public function deleteEmotionAction($slug)
     {
-        $emotion = $this->get("lke_remark.get_emotion")->getEmotion($slug);
+        $emotion = $this->getEntity($slug, Access::DELETE);
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($emotion);
@@ -56,5 +57,10 @@ class EmotionController extends Controller
         }
 
         return new JsonResponse(array(), 400); // TODO Error message
+    }
+
+    final protected function getRepositoryName()
+    {
+        return "LKERemarkBundle:Emotion";
     }
 }

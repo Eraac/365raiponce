@@ -2,15 +2,15 @@
 
 namespace LKE\AdminBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use LKE\RemarkBundle\Form\Type\RemarkEditType;
 use LKE\RemarkBundle\Entity\Remark;
+use LKE\CoreBundle\Controller\CoreController;
+use LKE\RemarkBundle\Form\Type\RemarkEditType;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 
-class RemarkController extends Controller
+class RemarkController extends CoreController
 {
     /**
      * @View(serializerGroups={"Default"})
@@ -30,7 +30,7 @@ class RemarkController extends Controller
      */
     public function postRemarkPublishAction($id)
     {
-        $remark = $this->get('lke_remark.get_remark')->getRemark($id);
+        $remark = $this->getEntity($id, Access::EDIT);
 
         $remark->setPostedAt(new \DateTime());
 
@@ -46,7 +46,7 @@ class RemarkController extends Controller
      */
     public function patchRemarkAction(Request $request, $id)
     {
-        $remark = $this->get('lke_remark.get_remark')->getRemark($id);
+        $remark = $this->getEntity($id, Access::EDIT);
 
         return $this->formRemark($remark, $request);
     }
@@ -71,7 +71,7 @@ class RemarkController extends Controller
 
     public function deleteRemarkAction($id)
     {
-        $remark = $this->get('lke_remark.get_remark')->getRemark($id);
+        $remark = $this->getEntity($id, Access::DELETE);
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($remark);
@@ -80,8 +80,8 @@ class RemarkController extends Controller
         return new JsonResponse(array(), 204);
     }
 
-    private function getRepository()
+    final protected function getRepositoryName()
     {
-        return $this->getDoctrine()->getRepository('LKERemarkBundle:Remark');
+        return 'LKERemarkBundle:Remark';
     }
 }

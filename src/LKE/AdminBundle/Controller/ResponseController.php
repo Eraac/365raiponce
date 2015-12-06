@@ -2,15 +2,12 @@
 
 namespace LKE\AdminBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use LKE\RemarkBundle\Form\Type\ResponseType;
-use LKE\RemarkBundle\Entity\Response;
+use LKE\CoreBundle\Controller\CoreController;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 
-class ResponseController extends Controller
+class ResponseController extends CoreController
 {
     /**
      * @View(serializerGroups={"Default", "admin-response"})
@@ -30,7 +27,7 @@ class ResponseController extends Controller
      */
     public function postResponsePublishAction($id)
     {
-        $response = $this->get('lke_remark.get_response')->getResponse($id);
+        $response = $this->getEntity($id, Access::EDIT);
 
         $response->setPostedAt(new \DateTime());
 
@@ -41,8 +38,8 @@ class ResponseController extends Controller
         return $response;
     }
 
-    private function getRepository()
+    final protected function getRepositoryName()
     {
-        return $this->getDoctrine()->getRepository('LKERemarkBundle:Response');
+        return 'LKERemarkBundle:Response';
     }
 }

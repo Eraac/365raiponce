@@ -4,14 +4,14 @@ namespace LKE\RemarkBundle\Controller;
 
 use LKE\RemarkBundle\Entity\Response;
 use LKE\RemarkBundle\Form\Type\ResponseType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use LKE\UserBundle\Service\Access;
+use LKE\CoreBundle\Controller\CoreController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use FOS\RestBundle\Controller\Annotations\View;
 
-class ResponseController extends Controller
+class ResponseController extends CoreController
 {
     /**
      *
@@ -31,7 +31,7 @@ class ResponseController extends Controller
      */
     public function getResponseAction($id)
     {
-        return $this->get('lke_remark.get_response')->getResponse($id, $this->getUser());
+        return $this->getEntity($id);
     }
 
     /**
@@ -40,7 +40,6 @@ class ResponseController extends Controller
      */
     public function postRemarkResponseAction(Request $request, $id)
     {
-        // TODO empêcher de pouvoir publier sur des remarques non publié
         return $this->formResponse(new Response(), $request, "post", $id);
     }
 
@@ -50,7 +49,7 @@ class ResponseController extends Controller
      */
     public function patchResponseAction(Request $request, $id)
     {
-        $response = $this->get('lke_remark.get_response')->getResponse($id, $this->getUser(), ACCESS::EDIT);
+        $response = $this->getEntity($id, ACCESS::EDIT);
 
         return $this->formResponse($response, $request, "patch");
     }
@@ -61,7 +60,7 @@ class ResponseController extends Controller
      */
     public function deleteResponseAction($id)
     {
-        $response = $this->get('lke_remark.get_response')->getResponse($id, $this->getUser(), Access::DELETE);
+        $response = $this->getEntity($id, Access::DELETE);
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($response);
@@ -92,7 +91,7 @@ class ResponseController extends Controller
         {
             if (!is_null($idRemark)) // Only pass one per response (on post)
             {
-                $remark = $this->get('lke_remark.get_remark')->getRemark($idRemark);
+                $remark = $this->getEntity($idRemark, Access::READ, "LKERemarkBundle:Remark");
                 $response->setRemark($remark);
                 $response->setAuthor($this->getUser());
             }
@@ -107,9 +106,9 @@ class ResponseController extends Controller
         return new JsonResponse(array(), 400); // TODO Error message
     }
 
-    private function getRepository()
+    final protected function getRepositoryName()
     {
-        return $this->getDoctrine()->getRepository("LKERemarkBundle:Response");
+        return "LKERemarkBundle:Response";
     }
 
     private function getUserId()

@@ -2,11 +2,12 @@
 
 namespace LKE\RemarkBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use LKE\CoreBundle\Controller\CoreController;
+use LKE\UserBundle\Service\Access;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\View;
 
-class ThemeController extends Controller
+class ThemeController extends CoreController
 {
     /**
      * @View(serializerGroups={"Default"})
@@ -25,22 +26,11 @@ class ThemeController extends Controller
      */
     public function getThemeAction($slug)
     {
-        return $this->getTheme($slug);
+        return $this->getEntity($slug, Access::READ);
     }
 
-    private function getTheme($slug)
+    final protected function getRepositoryName()
     {
-        $theme = $this->getRepository()->findBySlug($slug);
-
-        if (null === $theme) {
-            throw $this->createNotFoundException();
-        }
-
-        return $theme;
-    }
-
-    private function getRepository()
-    {
-        return $this->getDoctrine()->getRepository("LKERemarkBundle:Theme");
+        return "LKERemarkBundle:Theme";
     }
 }

@@ -5,6 +5,7 @@ namespace LKE\UserBundle\Service;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use LKE\UserBundle\Interfaces\Publishable;
 use LKE\UserBundle\Interfaces\Ownable;
+use LKE\UserBundle\Interfaces\ReadAccess;
 
 class Access
 {
@@ -21,7 +22,7 @@ class Access
 
     public function canRead($entity, $user = null)
     {
-        return ($this->isAdmin() || $this->isPublished($entity) || $this->isOwner($entity, $user));
+        return ($this->isFullyReadable($entity) || $this->isAdmin() || $this->isPublished($entity) || $this->isOwner($entity, $user));
     }
 
     public function canEdit($entity, $user)
@@ -32,6 +33,11 @@ class Access
     public function canDelete($entity, $user)
     {
         return ($this->isAdmin() || $this->isOwner($entity, $user));
+    }
+
+    private function isFullyReadable($entity)
+    {
+        return ($entity instanceof ReadAccess);
     }
 
     private function isAdmin()

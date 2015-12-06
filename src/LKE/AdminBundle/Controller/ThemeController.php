@@ -4,12 +4,13 @@ namespace LKE\AdminBundle\Controller;
 
 use LKE\RemarkBundle\Entity\Theme;
 use LKE\RemarkBundle\Form\Type\ThemeType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use LKE\UserBundle\Service\Access;
+use LKE\CoreBundle\Controller\CoreController;
 use FOS\RestBundle\Controller\Annotations\View;
 
-class ThemeController extends Controller
+class ThemeController extends CoreController
 {
     /**
      * @View(serializerGroups={"Default"})
@@ -24,14 +25,14 @@ class ThemeController extends Controller
      */
     public function patchThemesAction(Request $request, $slug)
     {
-        $theme = $this->get("lke_remark.get_theme")->getTheme($slug);
+        $theme = $this->getEntity($slug, Access::EDIT);
 
         return $this->formTheme($theme, $request, "patch");
     }
 
     public function deleteThemeAction($slug)
     {
-        $theme = $this->get("lke_remark.get_theme")->getTheme($slug);
+        $theme = $this->getEntity($slug, Access::DELETE);
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($theme);
@@ -56,5 +57,10 @@ class ThemeController extends Controller
         }
 
         return new JsonResponse(array(), 400); // TODO Error message
+    }
+
+    final protected function getRepositoryName()
+    {
+        return "LKERemarkBundle:Theme";
     }
 }

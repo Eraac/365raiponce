@@ -2,11 +2,12 @@
 
 namespace LKE\RemarkBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use LKE\UserBundle\Service\Access;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\View;
+use LKE\CoreBundle\Controller\CoreController;
 
-class EmotionController extends Controller
+class EmotionController extends CoreController
 {
     /**
      * @View(serializerGroups={"Default"})
@@ -25,22 +26,11 @@ class EmotionController extends Controller
      */
     public function getEmotionAction($slug)
     {
-        return $this->getEmotion($slug);
+        return $this->getEntity($slug, Access::READ);
     }
 
-    private function getEmotion($slug)
+    final protected function getRepositoryName()
     {
-        $emotion = $this->getRepository()->findBySlug($slug);
-
-        if (null === $emotion) {
-            throw $this->createNotFoundException();
-        }
-
-        return $emotion;
-    }
-
-    private function getRepository()
-    {
-        return $this->getDoctrine()->getRepository("LKERemarkBundle:Emotion");
+        return "LKERemarkBundle:Emotion";
     }
 }

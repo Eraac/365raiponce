@@ -1,3 +1,7 @@
 services:
     lke_core.paginator:
         class: LKE\CoreBundle\Service\Paginator
+
+    lke_core.get_entity:
+        class: LKE\CoreBundle\Service\GetEntity
+        arguments: [@doctrine, @lke_user.access]
