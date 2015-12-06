@@ -35,4 +35,16 @@ class ResponseRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function getUnpublishedResponses($limit, $page)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->join('r.remark', 're')
+            ->addSelect('re')
+            ->andWhere('r.postedAt is null')
+            ->setFirstResult($page * $limit)
+            ->setMaxResults($limit);
+
+        return $qb->getQuery()->getResult();
+    }
 }

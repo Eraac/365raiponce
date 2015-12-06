@@ -9,3 +9,7 @@ admin_theme:
 admin_emotion:
     type:     rest
     resource: LKE\AdminBundle\Controller\EmotionController
+
+admin_response:
+    type:     rest
+    resource: LKE\AdminBundle\Controller\ResponseController

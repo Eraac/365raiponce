@@ -35,16 +35,17 @@ class ResponseController extends Controller
 
     /**
      * @View(serializerGroups={"Default"})
-     * @Security("has_role('IS_AUTHENTICATED_REMEMBERED')")
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      */
     public function postRemarkResponseAction(Request $request, $id)
     {
+        // TODO empêcher de pouvoir publier sur des remarques non publié
         return $this->formResponse(new Response(), $request, "post", $id);
     }
 
     /**
      * @View(serializerGroups={"Default"})
-     * @Security("has_role('IS_AUTHENTICATED_REMEMBERED')")
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      */
     public function patchResponseAction(Request $request, $id)
     {
@@ -55,10 +56,11 @@ class ResponseController extends Controller
 
     /**
      * @View(serializerGroups={"Default"})
-     * @Security("has_role('IS_AUTHENTICATED_REMEMBERED')")
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      */
     public function deleteResponseAction($id)
     {
+        // TODO il faut sécuriser (possible de supprimer n'importe quel commentaire publié)
         $response = $this->get('lke_remark.get_response')->getResponse($id, $this->getUser());
 
         $em = $this->getDoctrine()->getManager();
