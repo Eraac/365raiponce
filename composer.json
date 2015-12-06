@@ -1,6 +1,7 @@
 {
     "name": "kevinlabesse/rest.project",
     "license": "proprietary",
+    "description": "Cette application vise à recenser toutes les remarques sexistes faites aux femmes au travail mais surtout à proposer des réponses possibles dans ce type de situation. Car un homme qui fait une remarque dans la rue, on peut lui répondre vertement et le remettre à sa place. Dans le cadre de l'entreprise, c'est différent et les femmes sont plus souvent démunies.",
     "type": "project",
     "autoload": {
         "psr-4": {
