@@ -2,9 +2,8 @@
 
 namespace LKE\UserBundle\Controller;
 
-use FOS\RestBundle\Controller\Annotations\View;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use FOS\RestBundle\Controller\Annotations\View;
 
 class UserController extends Controller
 {
