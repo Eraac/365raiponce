@@ -19,5 +19,21 @@ abstract class CoreController extends Controller
         return $this->getDoctrine()->getRepository($this->getRepositoryName());
     }
 
+    protected function getAllErrors($form)
+    {
+        $errorsString = array();
+
+        foreach ($form->all() as $child)
+        {
+            $errors = $child->getErrors(true, false);
+
+            foreach($errors as $error) {
+                $errorsString[$child->getName()] = $error->getMessage();
+            }
+        }
+
+        return $errorsString;
+    }
+
     abstract protected function getRepositoryName();
 }

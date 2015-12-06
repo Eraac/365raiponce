@@ -66,7 +66,7 @@ class RemarkController extends CoreController
             return $remark;
         }
 
-        return new JsonResponse(array(), 400); // TODO Error message
+        return new JsonResponse($this->getAllErrors($form), 400);
     }
 
     public function deleteRemarkAction($id)

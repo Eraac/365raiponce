@@ -77,6 +77,7 @@ class Remark implements PublishableInterface
      * @ORM\JoinColumn(onDelete="SET NULL")
      * @JMS\Expose()
      * @Assert\Valid()
+     * @Assert\NotNull()
      */
     private $theme;
 
@@ -85,6 +86,7 @@ class Remark implements PublishableInterface
      * @ORM\JoinColumn(onDelete="SET NULL")
      * @JMS\Expose()
      * @Assert\Valid()
+     * @Assert\NotNull()
      */
     private $emotion;
 
@@ -95,6 +97,7 @@ class Remark implements PublishableInterface
      *      min = 1,
      *      max = 10
      * )
+     * @Assert\NotBlank()
      */
     private $scaleEmotion;
 

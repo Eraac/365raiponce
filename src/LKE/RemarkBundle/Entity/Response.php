@@ -68,6 +68,7 @@ class Response implements OwnableInterface, PublishableInterface
      * @ORM\JoinColumn(onDelete="CASCADE")
      * @JMS\Expose()
      * @Assert\Valid()
+     * @Assert\NotNull()
      */
     private $author;
 
@@ -75,6 +76,7 @@ class Response implements OwnableInterface, PublishableInterface
      * @ORM\ManyToOne(targetEntity="LKE\RemarkBundle\Entity\Remark")
      * @ORM\JoinColumn(onDelete="CASCADE")
      * @Assert\Valid()
+     * @Assert\NotNull()
      */
     private $remark;
 
