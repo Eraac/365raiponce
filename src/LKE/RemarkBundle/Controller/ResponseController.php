@@ -39,7 +39,6 @@ class ResponseController extends Controller
      */
     public function postRemarkResponseAction(Request $request, $id)
     {
-
         return $this->formResponse(new Response(), $request, "post", $id);
     }
 
