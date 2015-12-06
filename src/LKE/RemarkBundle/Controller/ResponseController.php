@@ -7,6 +7,7 @@ use LKE\RemarkBundle\Form\Type\ResponseType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use LKE\UserBundle\Service\Access;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use FOS\RestBundle\Controller\Annotations\View;
 
@@ -49,7 +50,7 @@ class ResponseController extends Controller
      */
     public function patchResponseAction(Request $request, $id)
     {
-        $response = $this->get('lke_remark.get_response')->getResponse($id, $this->getUser(), true);
+        $response = $this->get('lke_remark.get_response')->getResponse($id, $this->getUser(), ACCESS::EDIT);
 
         return $this->formResponse($response, $request, "patch");
     }
@@ -60,8 +61,7 @@ class ResponseController extends Controller
      */
     public function deleteResponseAction($id)
     {
-        // TODO il faut sécuriser (possible de supprimer n'importe quel commentaire publié)
-        $response = $this->get('lke_remark.get_response')->getResponse($id, $this->getUser());
+        $response = $this->get('lke_remark.get_response')->getResponse($id, $this->getUser(), Access::DELETE);
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($response);

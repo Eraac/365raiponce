@@ -4,6 +4,7 @@ namespace LKE\RemarkBundle\Service;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use LKE\UserBundle\Service\Access;
 
 class GetResponse
 {
@@ -16,7 +17,7 @@ class GetResponse
         $this->security = $security;
     }
 
-    public function getResponse($id, $user = null, $edit = false)
+    public function getResponse($id, $user = null, $method = Access::READ)
     {
         $response = $this->getRepository()->find($id);
 
@@ -24,12 +25,31 @@ class GetResponse
             throw new NotFoundHttpException('Sorry response is : ' + $id + ' not exist');
         }
 
-        if ((!$edit && !$this->security->canRead($response, $user)) ||
-             ($edit && !$this->security->canWrite($response, $user))) {
+        $method = $this->getMethod($method);
+
+        if (!(method_exists($this->security, $method) && $this->security->$method($response, $user))) {
             throw new AccessDeniedException();
         }
 
         return $response;
+    }
+
+    private function getMethod($method)
+    {
+        switch($method)
+        {
+            case Access::READ:
+                return "canRead";
+
+            case Access::EDIT:
+                return "canEdit";
+
+            case Access::DELETE:
+                return "canDelete";
+
+            default:
+                return "canRead";
+        }
     }
 
     private function getRepository()
