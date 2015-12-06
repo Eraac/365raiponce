@@ -6,7 +6,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
-use LKE\UserBundle\Interfaces\ReadAccess;
+use LKE\UserBundle\Interfaces\ReadAccessInterface;
 
 /**
  * Emotion
@@ -15,7 +15,7 @@ use LKE\UserBundle\Interfaces\ReadAccess;
  * @ORM\Entity(repositoryClass="LKE\RemarkBundle\Entity\EmotionRepository")
  * @JMS\ExclusionPolicy("all")
  */
-class Emotion implements ReadAccess
+class Emotion implements ReadAccessInterface
 {
     /**
      * @var integer

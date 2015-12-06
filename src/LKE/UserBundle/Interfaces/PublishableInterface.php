@@ -2,7 +2,7 @@
 
 namespace LKE\UserBundle\Interfaces;
 
-interface Publishable
+interface PublishableInterface
 {
     public function isPublished();
 }

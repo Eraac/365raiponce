@@ -2,7 +2,7 @@
 
 namespace LKE\UserBundle\Interfaces;
 
-interface Ownable
+interface OwnableInterface
 {
     public function getOwner();
 }

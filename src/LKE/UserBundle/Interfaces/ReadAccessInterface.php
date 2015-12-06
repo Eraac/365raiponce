@@ -2,6 +2,6 @@
 
 namespace LKE\UserBundle\Interfaces;
 
-interface ReadAccess
+interface ReadAccessInterface
 {
 }

@@ -6,7 +6,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
-use LKE\UserBundle\Interfaces\ReadAccess;
+use LKE\UserBundle\Interfaces\ReadAccessInterface;
 
 /**
  * Theme
@@ -15,7 +15,7 @@ use LKE\UserBundle\Interfaces\ReadAccess;
  * @ORM\Entity(repositoryClass="LKE\RemarkBundle\Entity\ThemeRepository")
  * @JMS\ExclusionPolicy("all")
  */
-class Theme implements ReadAccess
+class Theme implements ReadAccessInterface
 {
     /**
      * @var integer

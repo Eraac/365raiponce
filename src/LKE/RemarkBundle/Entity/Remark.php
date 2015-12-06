@@ -5,7 +5,7 @@ namespace LKE\RemarkBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
-use LKE\UserBundle\Interfaces\Publishable;
+use LKE\UserBundle\Interfaces\PublishableInterface;
 
 /**
  * Remark
@@ -15,7 +15,7 @@ use LKE\UserBundle\Interfaces\Publishable;
  * @JMS\ExclusionPolicy("all")
  * @ORM\HasLifecycleCallbacks()
  */
-class Remark implements Publishable
+class Remark implements PublishableInterface
 {
     /**
      * @var integer

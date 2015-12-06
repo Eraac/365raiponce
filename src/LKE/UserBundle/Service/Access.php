@@ -3,9 +3,9 @@
 namespace LKE\UserBundle\Service;
 
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
-use LKE\UserBundle\Interfaces\Publishable;
-use LKE\UserBundle\Interfaces\Ownable;
-use LKE\UserBundle\Interfaces\ReadAccess;
+use LKE\UserBundle\Interfaces\PublishableInterface;
+use LKE\UserBundle\Interfaces\OwnableInterface;
+use LKE\UserBundle\Interfaces\ReadAccessInterface;
 
 class Access
 {
@@ -37,7 +37,7 @@ class Access
 
     private function isFullyReadable($entity)
     {
-        return ($entity instanceof ReadAccess);
+        return ($entity instanceof ReadAccessInterface);
     }
 
     private function isAdmin()
@@ -47,11 +47,11 @@ class Access
 
     private function isPublished($entity)
     {
-        return ($entity instanceof Publishable && $entity->isPublished());
+        return ($entity instanceof PublishableInterface && $entity->isPublished());
     }
 
     private function isOwner($entity, $user)
     {
-        return ($entity instanceof Ownable && $entity->getOwner() === $user);
+        return ($entity instanceof OwnableInterface && $entity->getOwner() === $user);
     }
 }
