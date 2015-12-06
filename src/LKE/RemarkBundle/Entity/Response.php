@@ -39,6 +39,8 @@ class Response implements Ownable, Publishable
      * @var \DateTime
      *
      * @ORM\Column(name="createdAt", type="datetime")
+     * @JMS\Groups({"admin-response"})
+     * @JMS\Expose()
      */
     private $createdAt;
 
@@ -46,6 +48,7 @@ class Response implements Ownable, Publishable
      * @var \DateTime
      *
      * @ORM\Column(name="updatedAt", type="datetime")
+     * @JMS\Expose()
      */
     private $updatedAt;
 
@@ -68,8 +71,16 @@ class Response implements Ownable, Publishable
      * @ORM\ManyToOne(targetEntity="LKE\RemarkBundle\Entity\Remark")
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
-    private $remark; // TODO expose just id
+    private $remark;
 
+
+    /**
+     * @JMS\VirtualProperty()
+     */
+    public function getRemarkId()
+    {
+        return $this->remark->getId();
+    }
 
     /**
      * Get id
