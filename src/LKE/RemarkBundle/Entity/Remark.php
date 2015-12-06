@@ -76,6 +76,7 @@ class Remark implements Publishable
      * @ORM\ManyToOne(targetEntity="LKE\RemarkBundle\Entity\Theme")
      * @ORM\JoinColumn(onDelete="SET NULL")
      * @JMS\Expose()
+     * @Assert\Valid()
      */
     private $theme;
 
@@ -83,6 +84,7 @@ class Remark implements Publishable
      * @ORM\ManyToOne(targetEntity="LKE\RemarkBundle\Entity\Emotion")
      * @ORM\JoinColumn(onDelete="SET NULL")
      * @JMS\Expose()
+     * @Assert\Valid()
      */
     private $emotion;
 

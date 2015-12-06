@@ -67,12 +67,14 @@ class Response implements Ownable, Publishable
      * @ORM\ManyToOne(targetEntity="LKE\UserBundle\Entity\User")
      * @ORM\JoinColumn(onDelete="CASCADE")
      * @JMS\Expose()
+     * @Assert\Valid()
      */
     private $author;
 
     /**
      * @ORM\ManyToOne(targetEntity="LKE\RemarkBundle\Entity\Remark")
      * @ORM\JoinColumn(onDelete="CASCADE")
+     * @Assert\Valid()
      */
     private $remark;
 
