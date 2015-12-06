@@ -5,6 +5,7 @@ namespace LKE\RemarkBundle\Service;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+// TODO Fusionner avec les autres GetXXX
 class GetRemark
 {
     private $doctrine;
@@ -16,7 +17,7 @@ class GetRemark
         $this->security = $security;
     }
 
-    public function getRemark($id)
+    public function getRemark($id, $user = null, $edit = false)
     {
         $remark = $this->getRepository()->find($id);
 
@@ -24,7 +25,8 @@ class GetRemark
             throw new NotFoundHttpException('Sorry remark id : ' + $id + ' not exist');
         }
 
-        if (!$this->security->canAccess($remark)) {
+        if ((!$edit && !$this->security->canRead($remark, $user)) ||
+            ($edit && !$this->security->canWrite($remark, $user))) {
             throw new AccessDeniedException();
         }
 

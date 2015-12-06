@@ -4,6 +4,8 @@ namespace LKE\RemarkBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
+use LKE\UserBundle\Interfaces\Ownable;
+use LKE\UserBundle\Interfaces\Publishable;
 
 /**
  * Response
@@ -13,7 +15,7 @@ use JMS\Serializer\Annotation as JMS;
  * @JMS\ExclusionPolicy("all")
  * @ORM\HasLifecycleCallbacks()
  */
-class Response
+class Response implements Ownable, Publishable
 {
     /**
      * @var integer
@@ -223,5 +225,15 @@ class Response
         $this->remark = $remark;
 
         return $this;
+    }
+
+    public function isPublished()
+    {
+        return (null !== $this->postedAt);
+    }
+
+    public function getOwner()
+    {
+        return $this->author;
     }
 }

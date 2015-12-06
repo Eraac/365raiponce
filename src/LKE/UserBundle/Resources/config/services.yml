@@ -1,4 +1,4 @@
 services:
-#    lke_user.example:
-#        class: LKE\UserBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    lke_user.access:
+        class: LKE\UserBundle\Service\Access
+        arguments: [@security.authorization_checker]

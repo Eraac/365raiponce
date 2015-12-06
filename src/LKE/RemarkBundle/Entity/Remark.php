@@ -4,6 +4,7 @@ namespace LKE\RemarkBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
+use LKE\UserBundle\Interfaces\Publishable;
 
 /**
  * Remark
@@ -13,7 +14,7 @@ use JMS\Serializer\Annotation as JMS;
  * @JMS\ExclusionPolicy("all")
  * @ORM\HasLifecycleCallbacks()
  */
-class Remark
+class Remark implements Publishable
 {
     /**
      * @var integer
@@ -304,5 +305,10 @@ class Remark
         $this->scaleEmotion = $scaleEmotion;
 
         return $this;
+    }
+
+    public function isPublished()
+    {
+        return (null !== $this->postedAt);
     }
 }

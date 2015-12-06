@@ -7,9 +7,9 @@ use LKE\RemarkBundle\Form\Type\ResponseType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use FOS\RestBundle\Controller\Annotations\View;
 
-// TODO Sécuriser lorsqu'on connecté ou non (à cause de this->getUser())
 class ResponseController extends Controller
 {
     /**
@@ -20,7 +20,7 @@ class ResponseController extends Controller
     {
         list($limit, $page) = $this->get('lke_core.paginator')->getBorne($request, 30);
 
-        $responses = $this->getRepository()->getResponsesByRemark($id, $this->getUser()->getId(), $limit, $page - 1);
+        $responses = $this->getRepository()->getResponsesByRemark($id, $this->getUserId(), $limit, $page - 1);
 
         return $responses;
     }
@@ -35,26 +35,28 @@ class ResponseController extends Controller
 
     /**
      * @View(serializerGroups={"Default"})
+     * @Security("has_role('IS_AUTHENTICATED_REMEMBERED')")
      */
     public function postRemarkResponseAction(Request $request, $id)
     {
+
         return $this->formResponse(new Response(), $request, "post", $id);
     }
 
     /**
      * @View(serializerGroups={"Default"})
+     * @Security("has_role('IS_AUTHENTICATED_REMEMBERED')")
      */
     public function patchResponseAction(Request $request, $id)
     {
-        $response = $this->get('lke_remark.get_response')->getResponse($id, $this->getUser());
-
-        // TODO check if can edit
+        $response = $this->get('lke_remark.get_response')->getResponse($id, $this->getUser(), true);
 
         return $this->formResponse($response, $request, "patch");
     }
 
     /**
      * @View(serializerGroups={"Default"})
+     * @Security("has_role('IS_AUTHENTICATED_REMEMBERED')")
      */
     public function deleteResponseAction($id)
     {
@@ -74,7 +76,7 @@ class ResponseController extends Controller
     {
         list($limit, $page) = $this->get('lke_core.paginator')->getBorne($request, 30);
 
-        $responses = $this->getRepository()->getMyResponses($this->getUser()->getId(), $limit, $page - 1);
+        $responses = $this->getRepository()->getMyResponses($this->getUserId(), $limit, $page - 1);
 
         return $responses;
     }
@@ -107,5 +109,12 @@ class ResponseController extends Controller
     private function getRepository()
     {
         return $this->getDoctrine()->getRepository("LKERemarkBundle:Response");
+    }
+
+    private function getUserId()
+    {
+        $user = $this->getUser();
+
+        return (is_null($user)) ? 0 : $user->getId();
     }
 }
