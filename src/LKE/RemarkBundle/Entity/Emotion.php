@@ -5,6 +5,7 @@ namespace LKE\RemarkBundle\Entity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Emotion
@@ -30,6 +31,8 @@ class Emotion
      *
      * @ORM\Column(name="name", type="string", length=30)
      * @JMS\Expose()
+     * @Assert\NotBlank()
+     * @Assert\Length(max = 30)
      */
     private $name;
 

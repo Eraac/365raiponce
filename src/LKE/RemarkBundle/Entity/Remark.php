@@ -4,6 +4,7 @@ namespace LKE\RemarkBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
+use Symfony\Component\Validator\Constraints as Assert;
 use LKE\UserBundle\Interfaces\Publishable;
 
 /**
@@ -32,6 +33,7 @@ class Remark implements Publishable
      * @ORM\Column(name="context", type="text")
      * @JMS\Expose()
      * @JMS\Groups({"detail-remark"})
+     * @Assert\NotBlank()
      */
     private $context;
 
@@ -40,6 +42,8 @@ class Remark implements Publishable
      *
      * @ORM\Column(name="sentence", type="string", length=140)
      * @JMS\Expose()
+     * @Assert\NotBlank()
+     * @Assert\Length(max = 140)
      */
     private $sentence;
 
@@ -85,6 +89,10 @@ class Remark implements Publishable
     /**
      * @ORM\Column(name="scale_emotion", type="smallint")
      * @JMS\Expose()
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 10
+     * )
      */
     private $scaleEmotion;
 

@@ -4,6 +4,7 @@ namespace LKE\RemarkBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
+use Symfony\Component\Validator\Constraints as Assert;
 use LKE\UserBundle\Interfaces\Ownable;
 use LKE\UserBundle\Interfaces\Publishable;
 
@@ -57,6 +58,8 @@ class Response implements Ownable, Publishable
      *
      * @ORM\Column(name="sentence", type="string", length=140)
      * @JMS\Expose()
+     * @Assert\NotBlank()
+     * @Assert\Length(max = 140)
      */
     private $sentence;
 
