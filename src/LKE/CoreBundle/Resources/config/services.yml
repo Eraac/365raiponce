@@ -5,3 +5,6 @@ services:
     lke_core.get_entity:
         class: LKE\CoreBundle\Service\GetEntity
         arguments: [@doctrine, @lke_user.access]
+
+    lke_core.parse_csv:
+        class: LKE\CoreBundle\Service\ParseCSV
