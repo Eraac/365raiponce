@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use LKE\RemarkBundle\Entity\Remark;
 use LKE\CoreBundle\Controller\CoreController;
 use LKE\RemarkBundle\Form\Type\RemarkEditType;
+use LKE\UserBundle\Service\Access;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 
