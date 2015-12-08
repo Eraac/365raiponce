@@ -237,7 +237,6 @@ class Remark implements PublishableInterface
     {
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
-        $this->postedAt = null;
     }
 
     /**
