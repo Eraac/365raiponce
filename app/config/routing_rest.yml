@@ -13,3 +13,8 @@ api_lke_admin:
     resource: "@LKEAdminBundle/Resources/config/routing.yml"
     name_prefix: api_admin_
     prefix: admin/
+
+api_preflight:
+    path: /preflight
+    defaults: { _controller: LKECoreBundle:Cors:preflight }
+    methods: ['OPTIONS']
