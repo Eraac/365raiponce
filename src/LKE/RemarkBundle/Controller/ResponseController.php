@@ -15,23 +15,29 @@ class ResponseController extends CoreController
 {
     /**
      *
-     * @View(serializerGroups={"Default"})
+     * @View(serializerGroups={"Default", "stats"})
      */
     public function getRemarkResponsesAction(Request $request, $id)
     {
         list($limit, $page) = $this->get('lke_core.paginator')->getBorne($request, 30);
 
-        $responses = $this->getRepository()->getResponsesByRemark($id, $this->getUserId(), $limit, $page - 1);
+        $responses = $this->getRepository()->getResponsesByRemarkComplet($id, $this->getUserId(), $limit, $page - 1);
+
+        $this->setStats($responses);
 
         return $responses;
     }
 
     /**
-     * @View(serializerGroups={"Default"})
+     * @View(serializerGroups={"Default", "stats"})
      */
     public function getResponseAction($id)
     {
-        return $this->getEntity($id);
+        $response = $this->getEntity($id);
+
+        $this->setStatsOne($response);
+
+        return $response;
     }
 
     /**
@@ -55,7 +61,6 @@ class ResponseController extends CoreController
     }
 
     /**
-     * @View(serializerGroups={"Default"})
      * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      */
     public function deleteResponseAction($id)
@@ -70,13 +75,15 @@ class ResponseController extends CoreController
     }
 
     /**
-     * @View(serializerGroups={"Default"})
+     * @View(serializerGroups={"Default", "stats"})
      */
     public function getMeResponsesAction(Request $request)
     {
         list($limit, $page) = $this->get('lke_core.paginator')->getBorne($request, 30);
 
         $responses = $this->getRepository()->getMyResponses($this->getUserId(), $limit, $page - 1);
+
+        $this->setStats($responses);
 
         return $responses;
     }
@@ -116,5 +123,22 @@ class ResponseController extends CoreController
         $user = $this->getUser();
 
         return (is_null($user)) ? 0 : $user->getId();
+    }
+
+    private function setStats($responses)
+    {
+        foreach ($responses as $response) {
+            $this->setStatsOne($response);
+        }
+    }
+
+    private function setStatsOne($response)
+    {
+        $repo = $this->getRepository();
+        $user = $this->getUser();
+
+        $userHasVote = $repo->userHasVote($response, $user);
+
+        $response->setUserHasVote($userHasVote);
     }
 }

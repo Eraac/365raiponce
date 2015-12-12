@@ -25,6 +25,23 @@ class ResponseRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function getResponsesByRemarkComplet($idRemark, $idUser, $limit, $page)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->leftJoin('r.votes', 'v')
+            ->join("r.author", "u")
+            ->addSelect('u')
+            ->addSelect('v')
+            ->where('r.remark = :idRemark')
+            ->andWhere('r.postedAt is not null OR r.author = :idAuthor')
+            ->setParameter('idRemark', $idRemark)
+            ->setParameter('idAuthor', $idUser)
+            ->setFirstResult($page * $limit)
+            ->setMaxResults($limit);
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function getMyResponses($idUser, $limit, $page)
     {
         $qb = $this->createQueryBuilder('r')
@@ -46,5 +63,31 @@ class ResponseRepository extends EntityRepository
             ->setMaxResults($limit);
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function userHasVote($response, $user)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->select('COUNT(r.id)')
+            ->join('r.votes', 'v')
+            ->where('r = :response')
+            ->andWhere('v.user = :user')
+            ->setParameters(array(
+                "response" => $response,
+                "user" => $user
+            ));
+
+        return (bool) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function countVote($response)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->select('COUNT(v.id)')
+            ->join('r.votes', 'v')
+            ->where('r = :response')
+            ->setParameter("response", $response);
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 }

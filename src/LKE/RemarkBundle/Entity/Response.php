@@ -80,6 +80,16 @@ class Response implements OwnableInterface, PublishableInterface
      */
     private $remark;
 
+    /**
+     * @ORM\OneToMany(targetEntity="LKE\VoteBundle\Entity\Vote", mappedBy="response")
+     */
+    private $votes;
+
+    /**
+     * @JMS\Groups({"stats"})
+     * @JMS\Expose()
+     */
+    private $userHasVote;
 
     /**
      * @JMS\VirtualProperty()
@@ -87,6 +97,15 @@ class Response implements OwnableInterface, PublishableInterface
     public function getRemarkId()
     {
         return $this->remark->getId();
+    }
+
+    /**
+     * @JMS\VirtualProperty()
+     * @JMS\Groups({"stats"})
+     */
+    public function getCountVote()
+    {
+        return count($this->votes);
     }
 
     /**
@@ -253,5 +272,64 @@ class Response implements OwnableInterface, PublishableInterface
     public function getOwner()
     {
         return $this->author;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->userHasVote = false;
+    }
+
+    /**
+     * Add votes
+     *
+     * @param \LKE\VoteBundle\Entity\Vote $votes
+     * @return Response
+     */
+    public function addVote(\LKE\VoteBundle\Entity\Vote $votes)
+    {
+        $this->votes[] = $votes;
+
+        return $this;
+    }
+
+    /**
+     * Remove votes
+     *
+     * @param \LKE\VoteBundle\Entity\Vote $votes
+     */
+    public function removeVote(\LKE\VoteBundle\Entity\Vote $votes)
+    {
+        $this->votes->removeElement($votes);
+    }
+
+    /**
+     * Get votes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getVotes()
+    {
+        return $this->votes;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserHasVote()
+    {
+        return $this->userHasVote;
+    }
+
+    /**
+     * @param mixed $userHasVote
+     */
+    public function setUserHasVote($userHasVote)
+    {
+        $this->userHasVote = $userHasVote;
+
+        return $this;
     }
 }
