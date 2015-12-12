@@ -49,7 +49,7 @@ class VoteController extends CoreController
         $repo = $em->getRepository($this->getRepositoryName());
         $vote = $repo->getVoteByUserAndResponse($response, $this->getUser());
 
-        $em->delete($vote);
+        $em->remove($vote);
         $em->flush();
 
         return new JsonResponse(array(), 204);

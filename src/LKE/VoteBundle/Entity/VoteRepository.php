@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class VoteRepository extends EntityRepository
 {
-    public function getVoteByUserAndReponse($response, $user)
+    public function getVoteByUserAndResponse($response, $user)
     {
         $qb = $this->createQueryBuilder('v')
                     ->where("v.response = :response")
@@ -23,5 +23,21 @@ class VoteRepository extends EntityRepository
                     ));
 
         return $qb->getQuery()->getSingleResult();
+    }
+
+    public function countVoteForUser($user)
+    {
+        $date = new \DateTime("now -24hours");
+
+        $qb = $this->createQueryBuilder('v')
+                ->select("COUNT(v.id)")
+                ->where('v.user = :user')
+                ->andWhere('v.createAt > :date')
+                ->setParameters(array(
+                    'user' => $user,
+                    'date' => $date
+                ));
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 }
