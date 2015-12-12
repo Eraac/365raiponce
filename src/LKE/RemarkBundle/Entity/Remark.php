@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
 use LKE\UserBundle\Interfaces\PublishableInterface;
+use Doctrine\Common\Collections\Criteria;
 
 /**
  * Remark
@@ -107,6 +108,21 @@ class Remark implements PublishableInterface
      * @JMS\Groups({"admin-remark"})
      */
     private $email;
+
+    /**
+     * @ORM\OneToMany(targetEntity="LKE\RemarkBundle\Entity\Response", mappedBy="remark")
+     */
+    private $responses;
+
+    /**
+     * @JMS\VirtualProperty()
+     */
+    public function countResponses()
+    {
+        $criteria = Criteria::create()->where(Criteria::expr()->neq("postedAt", null));
+
+        return count($this->responses->matching($criteria));
+    }
 
     /**
      * Get id
@@ -322,5 +338,46 @@ class Remark implements PublishableInterface
     public function isPublished()
     {
         return (null !== $this->postedAt);
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->responses = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add responses
+     *
+     * @param \LKE\RemarkBundle\Entity\Response $responses
+     * @return Remark
+     */
+    public function addResponse(\LKE\RemarkBundle\Entity\Response $responses)
+    {
+        $this->responses[] = $responses;
+
+        return $this;
+    }
+
+    /**
+     * Remove responses
+     *
+     * @param \LKE\RemarkBundle\Entity\Response $responses
+     */
+    public function removeResponse(\LKE\RemarkBundle\Entity\Response $responses)
+    {
+        $this->responses->removeElement($responses);
+    }
+
+    /**
+     * Get responses
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getResponses()
+    {
+        return $this->responses;
     }
 }

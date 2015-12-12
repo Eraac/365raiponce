@@ -73,7 +73,7 @@ class Response implements OwnableInterface, PublishableInterface
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="LKE\RemarkBundle\Entity\Remark")
+     * @ORM\ManyToOne(targetEntity="LKE\RemarkBundle\Entity\Remark", inversedBy="responses")
      * @ORM\JoinColumn(onDelete="CASCADE")
      * @Assert\Valid()
      * @Assert\NotNull()
