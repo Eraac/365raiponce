@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new LKE\CoreBundle\LKECoreBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new LKE\AdminBundle\LKEAdminBundle(),
+            new LKE\VoteBundle\LKEVoteBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

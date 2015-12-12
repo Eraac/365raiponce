@@ -13,3 +13,8 @@ api_lke_admin:
     resource: "@LKEAdminBundle/Resources/config/routing.yml"
     name_prefix: api_admin_
     prefix: admin/
+
+api_lke_vote:
+    type:     rest
+    resource: "@LKEVoteBundle/Resources/config/routing.yml"
+    name_prefix: api_

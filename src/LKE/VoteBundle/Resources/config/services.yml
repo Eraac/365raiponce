@@ -1,0 +1,3 @@
+services:
+    lke_vote.can_vote:
+        class: LKE\VoteBundle\Service\CanVote

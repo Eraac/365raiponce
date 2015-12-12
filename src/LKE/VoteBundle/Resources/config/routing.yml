@@ -1,0 +1,3 @@
+response:
+    type:     rest
+    resource: LKE\VoteBundle\Controller\VoteController
