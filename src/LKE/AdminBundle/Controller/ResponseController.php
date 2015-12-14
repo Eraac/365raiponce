@@ -23,6 +23,23 @@ class ResponseController extends CoreController
     }
 
     /**
+     * @View(serializerGroups={"Default", "detail-response"})
+     * @Post("/responses/{id}/unpublish")
+     */
+    public function postResponseUnpnpublishAction($id)
+    {
+        $response = $this->getEntity($id, Access::EDIT);
+
+        $response->setPostedAt(null);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($response);
+        $em->flush();
+
+        return $response;
+    }
+
+    /**
      * @View(serializerGroups={"Default", "admin-response"})
      * @Post("/responses/{id}/publish")
      */

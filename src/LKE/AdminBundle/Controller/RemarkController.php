@@ -27,6 +27,25 @@ class RemarkController extends CoreController
 
     /**
      * @View(serializerGroups={"Default", "detail-remark"})
+     * @Post("/remarks/{id}/unpublish")
+     */
+    public function postRemarkUnpublishAction($id)
+    {
+        $remark = $this->getEntity($id, Access::EDIT);
+
+        $remark->setPostedAt(null);
+
+        // TODO unpublish or remove comments too ?
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($remark);
+        $em->flush();
+
+        return $remark;
+    }
+
+    /**
+     * @View(serializerGroups={"Default", "detail-remark"})
      * @Post("/remarks/{id}/publish")
      */
     public function postRemarkPublishAction($id)
