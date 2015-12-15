@@ -5,6 +5,9 @@ namespace LKE\CoreBundle\Security;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManager;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter as BaseVoter;
+use LKE\UserBundle\Interfaces\PublishableInterface;
+use LKE\UserBundle\Interfaces\ReadAccessInterface;
+use LKE\UserBundle\Interfaces\OwnableInterface;
 
 class Voter extends BaseVoter
 {
