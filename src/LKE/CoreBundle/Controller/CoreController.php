@@ -7,7 +7,7 @@ use LKE\CoreBundle\Security\Voter;
 
 abstract class CoreController extends Controller
 {
-    protected function getEntity($id, $access = Voter::READ, array $options = array())
+    protected function getEntity($id, $access = Voter::VIEW, array $options = array())
     {
         $options = $this->getOptions($options);
 

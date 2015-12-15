@@ -19,7 +19,7 @@ class VoteController extends CoreController
      */
     public function postResponseVotesAction($id)
     {
-        $response = $this->getEntity($id, Voter::READ, ["repository" => "LKERemarkBundle:Response"]);
+        $response = $this->getEntity($id, Voter::VIEW, ["repository" => "LKERemarkBundle:Response"]);
         $user = $this->getUser();
 
         $canVote = $this->get("lke_vote.can_vote")->canVote($response, $user);
@@ -43,7 +43,7 @@ class VoteController extends CoreController
      */
     public function deleteResponseVotesAction($id)
     {
-        $response = $this->getEntity($id, Voter::READ, ["repository" => "LKERemarkBundle:Response"]);
+        $response = $this->getEntity($id, Voter::VIEW, ["repository" => "LKERemarkBundle:Response"]);
 
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository($this->getRepositoryName());

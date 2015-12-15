@@ -97,7 +97,7 @@ class ResponseController extends CoreController
         {
             if (!is_null($idRemark)) // Only pass one per response (on post)
             {
-                $remark = $this->getEntity($idRemark, Voter::READ, ["method" => "LKERemarkBundle:Remark"]);
+                $remark = $this->getEntity($idRemark, Voter::VIEW, ["method" => "LKERemarkBundle:Remark"]);
                 $response->setRemark($remark);
                 $response->setAuthor($this->getUser());
             }
