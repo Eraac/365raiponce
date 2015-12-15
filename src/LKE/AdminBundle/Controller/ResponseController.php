@@ -26,7 +26,7 @@ class ResponseController extends CoreController
      * @View(serializerGroups={"Default", "detail-response"})
      * @Post("/responses/{id}/unpublish")
      */
-    public function postResponseUnpnpublishAction($id)
+    public function postResponseUnpublishAction($id)
     {
         $response = $this->getEntity($id, Access::EDIT);
 
