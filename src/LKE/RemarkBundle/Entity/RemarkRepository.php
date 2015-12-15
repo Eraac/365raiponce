@@ -15,6 +15,12 @@ class RemarkRepository extends EntityRepository
     public function getPostedRemark($limit, $page)
     {
         $qb = $this->createQueryBuilder('r')
+            ->leftJoin('r.theme', 't')
+            ->leftJoin('r.emotion', 'e')
+            ->leftJoin('r.responses', 're')
+            ->addSelect('t')
+            ->addSelect('e')
+            ->addSelect('re')
             ->where('r.postedAt is not null')
             ->orderBy('r.postedAt', 'DESC')
             ->setMaxResults($limit)
