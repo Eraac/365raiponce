@@ -5,7 +5,7 @@ namespace LKE\RemarkBundle\Controller;
 use LKE\RemarkBundle\Entity\Remark;
 use LKE\RemarkBundle\Form\Type\RemarkType;
 use LKE\CoreBundle\Controller\CoreController;
-use LKE\UserBundle\Service\Access;
+use LKE\CoreBundle\Security\Voter;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -29,7 +29,7 @@ class RemarkController extends CoreController
      */
     public function getRemarkAction($id)
     {
-        return $this->getEntity($id, Access::READ);
+        return $this->getEntity($id, Voter::VIEW, ["method" => "getCompleteRemark"]);
     }
 
     /**

@@ -2,10 +2,10 @@
 
 namespace LKE\RemarkBundle\Controller;
 
-use LKE\UserBundle\Service\Access;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\View;
 use LKE\CoreBundle\Controller\CoreController;
+use LKE\CoreBundle\Security\Voter;
 
 class EmotionController extends CoreController
 {
@@ -26,7 +26,7 @@ class EmotionController extends CoreController
      */
     public function getEmotionAction($slug)
     {
-        return $this->getEntity($slug, Access::READ);
+        return $this->getEntity($slug, Voter::VIEW, ["method" => "findBySlug"]);
     }
 
     final protected function getRepositoryName()

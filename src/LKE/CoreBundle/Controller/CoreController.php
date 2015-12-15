@@ -3,20 +3,22 @@
 namespace LKE\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use LKE\UserBundle\Service\Access;
+use LKE\CoreBundle\Security\Voter;
 
 abstract class CoreController extends Controller
 {
-    protected function getEntity($id, $access = Access::READ, $repositoryName = null)
+    protected function getEntity($id, $access = Voter::READ, array $options = array())
     {
-        $repositoryName = (is_null($repositoryName)) ? $this->getRepositoryName() : $repositoryName;
+        $options = $this->getOptions($options);
 
-        return $this->get("lke_core.get_entity")->get($id, $repositoryName, $this->getUser(), $access);
+        return $this->get("lke_core.get_entity")->get($id, $access, $options);
     }
 
-    protected function getRepository()
+    protected function getRepository($name = null)
     {
-        return $this->getDoctrine()->getRepository($this->getRepositoryName());
+        $name = (is_null($name)) ? $this->getRepositoryName() : $name;
+
+        return $this->getDoctrine()->getRepository($name);
     }
 
     protected function getAllErrors($form)
@@ -33,6 +35,16 @@ abstract class CoreController extends Controller
         }
 
         return $errorsString;
+    }
+
+    private function getOptions(array $options)
+    {
+        $defaultOptions = [
+            "repository" => $this->getRepositoryName(),
+            "method" => "find"
+        ];
+
+        return array_merge($defaultOptions, $options);
     }
 
     abstract protected function getRepositoryName();

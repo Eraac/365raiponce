@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use LKE\CoreBundle\Controller\CoreController;
-use LKE\UserBundle\Service\Access;
+use LKE\CoreBundle\Security\Voter;
 use LKE\VoteBundle\Entity\Vote;
 
 class VoteController extends CoreController
@@ -19,7 +19,7 @@ class VoteController extends CoreController
      */
     public function postResponseVotesAction($id)
     {
-        $response = $this->getEntity($id, Access::READ, "LKERemarkBundle:Response");
+        $response = $this->getEntity($id, Voter::READ, ["repository" => "LKERemarkBundle:Response"]);
         $user = $this->getUser();
 
         $canVote = $this->get("lke_vote.can_vote")->canVote($response, $user);
@@ -43,7 +43,7 @@ class VoteController extends CoreController
      */
     public function deleteResponseVotesAction($id)
     {
-        $response = $this->getEntity($id, Access::READ, "LKERemarkBundle:Response");
+        $response = $this->getEntity($id, Voter::READ, ["repository" => "LKERemarkBundle:Response"]);
 
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository($this->getRepositoryName());

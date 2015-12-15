@@ -6,7 +6,7 @@ use LKE\RemarkBundle\Entity\Theme;
 use LKE\RemarkBundle\Form\Type\ThemeType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use LKE\UserBundle\Service\Access;
+use LKE\CoreBundle\Security\Voter;
 use LKE\CoreBundle\Controller\CoreController;
 use FOS\RestBundle\Controller\Annotations\View;
 
@@ -25,14 +25,14 @@ class ThemeController extends CoreController
      */
     public function patchThemesAction(Request $request, $slug)
     {
-        $theme = $this->getEntity($slug, Access::EDIT);
+        $theme = $this->getEntity($slug, Voter::EDIT, ["method" => "findBySlug"]);
 
         return $this->formTheme($theme, $request, "patch");
     }
 
     public function deleteThemeAction($slug)
     {
-        $theme = $this->getEntity($slug, Access::DELETE);
+        $theme = $this->getEntity($slug, Voter::DELETE, ["method" => "findBySlug"]);
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($theme);

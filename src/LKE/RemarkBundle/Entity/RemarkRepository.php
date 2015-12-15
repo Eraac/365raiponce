@@ -43,4 +43,17 @@ class RemarkRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function getCompleteRemark($id)
+    {
+        $qb = $this->createQueryBuilder('r')
+                ->leftJoin('r.theme', 't')
+                ->leftJoin('r.emotion', 'e')
+                ->addSelect('t')
+                ->addSelect('e')
+                ->where('r.id = :id')
+                ->setParameter('id', $id);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
 }

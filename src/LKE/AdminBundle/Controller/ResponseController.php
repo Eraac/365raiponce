@@ -4,7 +4,7 @@ namespace LKE\AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use LKE\CoreBundle\Controller\CoreController;
-use LKE\UserBundle\Service\Access;
+use LKE\CoreBundle\Security\Voter;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 
@@ -28,7 +28,7 @@ class ResponseController extends CoreController
      */
     public function postResponseUnpublishAction($id)
     {
-        $response = $this->getEntity($id, Access::EDIT);
+        $response = $this->getEntity($id, Voter::EDIT);
 
         $response->setPostedAt(null);
 
@@ -45,7 +45,7 @@ class ResponseController extends CoreController
      */
     public function postResponsePublishAction($id)
     {
-        $response = $this->getEntity($id, Access::EDIT);
+        $response = $this->getEntity($id, Voter::EDIT);
 
         $response->setPostedAt(new \DateTime());
 

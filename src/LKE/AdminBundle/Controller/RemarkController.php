@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use LKE\RemarkBundle\Entity\Remark;
 use LKE\CoreBundle\Controller\CoreController;
 use LKE\RemarkBundle\Form\Type\RemarkEditType;
-use LKE\UserBundle\Service\Access;
+use LKE\CoreBundle\Security\Voter;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 
@@ -31,7 +31,7 @@ class RemarkController extends CoreController
      */
     public function postRemarkUnpublishAction($id)
     {
-        $remark = $this->getEntity($id, Access::EDIT);
+        $remark = $this->getEntity($id, Voter::EDIT);
 
         $remark->setPostedAt(null);
 
@@ -50,7 +50,7 @@ class RemarkController extends CoreController
      */
     public function postRemarkPublishAction($id)
     {
-        $remark = $this->getEntity($id, Access::EDIT);
+        $remark = $this->getEntity($id, Voter::EDIT);
 
         $remark->setPostedAt(new \DateTime());
 
@@ -66,7 +66,7 @@ class RemarkController extends CoreController
      */
     public function patchRemarkAction(Request $request, $id)
     {
-        $remark = $this->getEntity($id, Access::EDIT);
+        $remark = $this->getEntity($id, Voter::EDIT);
 
         return $this->formRemark($remark, $request);
     }
@@ -91,7 +91,7 @@ class RemarkController extends CoreController
 
     public function deleteRemarkAction($id)
     {
-        $remark = $this->getEntity($id, Access::DELETE);
+        $remark = $this->getEntity($id, Voter::DELETE);
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($remark);

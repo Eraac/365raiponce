@@ -3,7 +3,7 @@
 namespace LKE\RemarkBundle\Controller;
 
 use LKE\CoreBundle\Controller\CoreController;
-use LKE\UserBundle\Service\Access;
+use LKE\CoreBundle\Security\Voter;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\View;
 
@@ -26,7 +26,7 @@ class ThemeController extends CoreController
      */
     public function getThemeAction($slug)
     {
-        return $this->getEntity($slug, Access::READ);
+        return $this->getEntity($slug, Voter::VIEW, ["method" => "findBySlug"]);
     }
 
     final protected function getRepositoryName()

@@ -2,19 +2,18 @@
 
 namespace LKE\RemarkBundle\Controller;
 
-use LKE\RemarkBundle\Entity\Response;
-use LKE\RemarkBundle\Form\Type\ResponseType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use LKE\UserBundle\Service\Access;
-use LKE\CoreBundle\Controller\CoreController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use FOS\RestBundle\Controller\Annotations\View;
+use LKE\CoreBundle\Security\Voter;
+use LKE\RemarkBundle\Entity\Response;
+use LKE\CoreBundle\Controller\CoreController;
+use LKE\RemarkBundle\Form\Type\ResponseType;
 
 class ResponseController extends CoreController
 {
     /**
-     *
      * @View(serializerGroups={"Default", "stats"})
      */
     public function getRemarkResponsesAction(Request $request, $id)
@@ -33,7 +32,7 @@ class ResponseController extends CoreController
      */
     public function getResponseAction($id)
     {
-        $response = $this->getEntity($id);
+        $response = $this->getEntity($id, Voter::VIEW, ["method" => "getResponseAndVotes"]);
 
         $this->setStatsOne($response);
 
@@ -55,7 +54,7 @@ class ResponseController extends CoreController
      */
     public function patchResponseAction(Request $request, $id)
     {
-        $response = $this->getEntity($id, ACCESS::EDIT);
+        $response = $this->getEntity($id, Voter::EDIT);
 
         return $this->formResponse($response, $request, "patch");
     }
@@ -65,7 +64,7 @@ class ResponseController extends CoreController
      */
     public function deleteResponseAction($id)
     {
-        $response = $this->getEntity($id, Access::DELETE);
+        $response = $this->getEntity($id, Voter::DELETE);
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($response);
@@ -98,7 +97,7 @@ class ResponseController extends CoreController
         {
             if (!is_null($idRemark)) // Only pass one per response (on post)
             {
-                $remark = $this->getEntity($idRemark, Access::READ, "LKERemarkBundle:Remark");
+                $remark = $this->getEntity($idRemark, Voter::READ, ["method" => "LKERemarkBundle:Remark"]);
                 $response->setRemark($remark);
                 $response->setAuthor($this->getUser());
             }
@@ -132,12 +131,12 @@ class ResponseController extends CoreController
         }
     }
 
-    private function setStatsOne($response)
+    private function setStatsOne(Response $response)
     {
         $repo = $this->getRepository();
         $user = $this->getUser();
 
-        $userHasVote = $repo->userHasVote($response, $user);
+        $userHasVote = $repo->userHasVote($response, $user); // TODO optimize (not use sql)
 
         $response->setUserHasVote($userHasVote);
     }

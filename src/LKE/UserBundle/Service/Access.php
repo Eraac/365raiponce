@@ -9,9 +9,9 @@ use LKE\UserBundle\Interfaces\ReadAccessInterface;
 
 class Access
 {
-    const READ = 1;
-    const EDIT = 2;
-    const DELETE = 3;
+    const VIEW = 'view';
+    const EDIT = 'edit';
+    const DELETE = 'delete';
 
     private $authorizationChecker;
 

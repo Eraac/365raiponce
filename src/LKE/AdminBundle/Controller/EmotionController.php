@@ -4,7 +4,7 @@ namespace LKE\AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use LKE\UserBundle\Service\Access;
+use LKE\CoreBundle\Security\Voter;
 use LKE\RemarkBundle\Entity\Emotion;
 use LKE\RemarkBundle\Form\Type\EmotionType;
 use LKE\CoreBundle\Controller\CoreController;
@@ -25,14 +25,14 @@ class EmotionController extends CoreController
      */
     public function patchEmotionsAction(Request $request, $slug)
     {
-        $emotion = $this->getEntity($slug, Access::EDIT);
+        $emotion = $this->getEntity($slug, Voter::EDIT, ["method" => "findBySlug"]);
 
         return $this->formEmotion($emotion, $request, "patch");
     }
 
     public function deleteEmotionAction($slug)
     {
-        $emotion = $this->getEntity($slug, Access::DELETE);
+        $emotion = $this->getEntity($slug, Voter::DELETE, ["method" => "findBySlug"]);
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($emotion);

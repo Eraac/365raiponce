@@ -65,6 +65,17 @@ class ResponseRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function getResponseAndVotes($id)
+    {
+        $qb = $this->createQueryBuilder('r')
+                ->leftJoin('r.votes', 'v')
+                ->addSelect('v')
+                ->where('r.id = :id')
+                ->setParameter('id', $id);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
     public function userHasVote($response, $user)
     {
         $qb = $this->createQueryBuilder('r')
