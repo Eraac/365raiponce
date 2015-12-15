@@ -1,4 +1,1 @@
-services:
-    lke_user.access:
-        class: LKE\UserBundle\Service\Access
-        arguments: [@security.authorization_checker]
+#services:
