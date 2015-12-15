@@ -61,7 +61,7 @@ class Voter extends BaseVoter
 
     protected function canEdit($entity, $user)
     {
-        return ($entity instanceof Publishable && !$entity->isPublished() && $this->isOwner($entity, $user));
+        return ($entity instanceof PublishableInterface && !$entity->isPublished() && $this->isOwner($entity, $user));
     }
 
     protected function canDelete($entity, $user)
