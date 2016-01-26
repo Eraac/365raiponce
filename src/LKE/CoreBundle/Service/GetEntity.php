@@ -25,7 +25,7 @@ class GetEntity
         $entity = (method_exists($repo, $method)) ? $repo->$method($id) : null;
 
         if (is_null($entity)) {
-            throw new NotFoundHttpException('Sorry ' . $options['repository'] . ' : ' + $id + ' not exist'); // TODO Monolog ?
+            throw new NotFoundHttpException('Sorry ' . $options['repository'] . ' : ' . $id . ' not exist'); // TODO Monolog ?
         }
 
         if (!$this->security->isGranted($access, $entity)) {
