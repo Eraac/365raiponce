@@ -51,7 +51,7 @@ class ResponseController extends CoreController
         $response->setRemark($remark);
         $response->setAuthor($this->getUser());
 
-        return $this->formResponse($response, $request, "post", $id);
+        return $this->formResponse($response, $request, "post");
     }
 
     /**
@@ -93,7 +93,7 @@ class ResponseController extends CoreController
         return $responses;
     }
 
-    private function formResponse(Response $response, Request $request, $method = "post", $idRemark = null)
+    private function formResponse(Response $response, Request $request, $method = "post")
     {
         $form = $this->createForm(new ResponseType(), $response, array("method" => $method));
 
