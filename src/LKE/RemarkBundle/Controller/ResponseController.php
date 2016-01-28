@@ -45,7 +45,13 @@ class ResponseController extends CoreController
      */
     public function postRemarkResponseAction(Request $request, $id)
     {
-        return $this->formResponse(new Response(), $request, "post", $id);
+        $response = new Response();
+
+        $remark = $this->getEntity($id, Voter::VIEW, ["repository" => "LKERemarkBundle:Remark"]);
+        $response->setRemark($remark);
+        $response->setAuthor($this->getUser());
+
+        return $this->formResponse($response, $request, "post", $id);
     }
 
     /**
@@ -95,13 +101,6 @@ class ResponseController extends CoreController
 
         if ($form->isValid())
         {
-            if (!is_null($idRemark)) // Only pass one per response (on post)
-            {
-                $remark = $this->getEntity($idRemark, Voter::VIEW, ["method" => "LKERemarkBundle:Remark"]);
-                $response->setRemark($remark);
-                $response->setAuthor($this->getUser());
-            }
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($response);
             $em->flush();
