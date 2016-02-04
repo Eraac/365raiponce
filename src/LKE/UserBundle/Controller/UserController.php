@@ -2,20 +2,32 @@
 
 namespace LKE\UserBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use LKE\CoreBundle\Controller\CoreController;
+use LKE\UserBundle\Entity\User;
+use LKE\UserBundle\Form\Type\UserType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\View;
 
-class UserController extends Controller
+class UserController extends CoreController
 {
+    /**
+     * @View(serializerGroups={"Default", "details-user"})
+     */
+    public function postUserAction(Request $request)
+    {
+        $userManager = $this->get("fos_user.user_manager");
+
+        return $this->formUser($userManager->createUser(), $request);
+    }
+
     /**
      * @View(serializerGroups={"Default", "details-user"})
      */
     public function getUsersAction()
     {
         $users = $this->getDoctrine()->getRepository('LKEUserBundle:User')->findAll();
-        
+
         return $users;
     }
 
@@ -45,7 +57,7 @@ class UserController extends Controller
 
         return $this->getUser();
     }
-    
+
     /**
      * @View(serializerGroups={"Default", "details-user"})
      */
@@ -56,7 +68,32 @@ class UserController extends Controller
         if(!is_object($user)){
           throw $this->createNotFoundException();
         }
-        
+
         return $user;
+    }
+
+    private function formUser(User $user, Request $request)
+    {
+        $form = $this->createForm(new UserType(), $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid())
+        {
+            $user->setEnabled(true);
+            $userManager = $this->get("fos_user.user_manager");
+            $userManager->updateUser($user);
+
+            $this->getDoctrine()->getManager()->flush();
+
+            return $user;
+        }
+
+        return new JsonResponse($this->getAllErrors($form), 400);
+    }
+
+    final protected function getRepositoryName()
+    {
+        return "LKEUserBundle:User";
     }
 }
