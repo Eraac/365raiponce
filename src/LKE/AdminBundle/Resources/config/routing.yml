@@ -13,3 +13,7 @@ admin_emotion:
 admin_response:
     type:     rest
     resource: LKE\AdminBundle\Controller\ResponseController
+
+admin_user:
+    type:     rest
+    resource: LKE\AdminBundle\Controller\UserController
