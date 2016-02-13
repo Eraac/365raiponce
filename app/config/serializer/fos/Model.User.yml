@@ -11,4 +11,5 @@ FOS\UserBundle\Model\User:
             groups : [details-user]
         email:
             expose: true
-
+        certificated:
+            expose: true
