@@ -12,7 +12,7 @@ use Doctrine\Common\Collections\Criteria;
  * Remark
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="LKE\RemarkBundle\Entity\RemarkRepository")
+ * @ORM\Entity(repositoryClass="LKE\RemarkBundle\Repository\RemarkRepository")
  * @JMS\ExclusionPolicy("all")
  * @ORM\HasLifecycleCallbacks()
  */

@@ -11,7 +11,7 @@ use LKE\UserBundle\Interfaces\OwnableInterface;
  * Vote
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="LKE\VoteBundle\Entity\VoteRepository")
+ * @ORM\Entity(repositoryClass="LKE\VoteBundle\Repository\VoteRepository")
  * @JMS\ExclusionPolicy("all")
  * @ORM\HasLifecycleCallbacks()
  */

@@ -12,7 +12,7 @@ use LKE\UserBundle\Interfaces\ReadAccessInterface;
  * Theme
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="LKE\RemarkBundle\Entity\ThemeRepository")
+ * @ORM\Entity(repositoryClass="LKE\RemarkBundle\Repository\ThemeRepository")
  * @JMS\ExclusionPolicy("all")
  */
 class Theme implements ReadAccessInterface

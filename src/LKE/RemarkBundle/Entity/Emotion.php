@@ -12,7 +12,7 @@ use LKE\UserBundle\Interfaces\ReadAccessInterface;
  * Emotion
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="LKE\RemarkBundle\Entity\EmotionRepository")
+ * @ORM\Entity(repositoryClass="LKE\RemarkBundle\Repository\EmotionRepository")
  * @JMS\ExclusionPolicy("all")
  */
 class Emotion implements ReadAccessInterface

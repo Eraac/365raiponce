@@ -12,7 +12,7 @@ use LKE\UserBundle\Interfaces\PublishableInterface;
  * Response
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="LKE\RemarkBundle\Entity\ResponseRepository")
+ * @ORM\Entity(repositoryClass="LKE\RemarkBundle\Repository\ResponseRepository")
  * @JMS\ExclusionPolicy("all")
  * @ORM\HasLifecycleCallbacks()
  */

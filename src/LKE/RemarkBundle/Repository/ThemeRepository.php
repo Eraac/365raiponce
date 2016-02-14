@@ -1,6 +1,6 @@
 <?php
 
-namespace LKE\RemarkBundle\Entity;
+namespace LKE\RemarkBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

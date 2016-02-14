@@ -1,6 +1,6 @@
 <?php
 
-namespace LKE\VoteBundle\Entity;
+namespace LKE\VoteBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
