@@ -33,7 +33,6 @@ class Remark implements PublishableInterface
      *
      * @ORM\Column(name="context", type="text")
      * @JMS\Expose()
-     * @JMS\Groups({"detail-remark"})
      * @Assert\NotBlank()
      */
     private $context;
