@@ -13,7 +13,7 @@ use FOS\RestBundle\Controller\Annotations\View;
 class RemarkController extends CoreController
 {
     /**
-     * @View(serializerGroups={"Default"})
+     * @View(serializerGroups={"Default", "admin-remark"})
      */
     public function getRemarksAction(Request $request)
     {
