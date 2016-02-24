@@ -9,12 +9,22 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use LKE\CoreBundle\Controller\CoreController;
 use LKE\CoreBundle\Security\Voter;
 use LKE\VoteBundle\Entity\Vote;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class VoteController extends CoreController
 {
     /**
      * @View(serializerGroups={"my-vote"})
      * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
+     * @param integer $id id of the response
+     * @ApiDoc(
+     *  section="Votes",
+     *  description="Vote for a response",
+     *  output={
+     *      "class"="LKE\VoteBundle\Entity\Vote",
+     *      "groups"={"my-vote"}
+     *  }
+     * )
      */
     public function postResponseVotesAction($id)
     {
@@ -39,6 +49,11 @@ class VoteController extends CoreController
 
     /**
      * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
+     * @param integer $id id of the response
+     * @ApiDoc(
+     *  section="Votes",
+     *  description="Delete vote",
+     * )
      */
     public function deleteResponseVotesAction($id)
     {
