@@ -8,12 +8,19 @@ use LKE\CoreBundle\Security\Voter;
 use LKE\RemarkBundle\Entity\Emotion;
 use LKE\RemarkBundle\Form\Type\EmotionType;
 use LKE\CoreBundle\Controller\CoreController;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations\View;
 
 class EmotionController extends CoreController
 {
     /**
      * @View(serializerGroups={"Default"})
+     * @ApiDoc(
+     *  section="Admin emotions",
+     *  description="Add an emotion",
+     *  input="LKE\RemarkBundle\Form\Type\EmotionType",
+     *  output="LKE\RemarkBundle\Entity\Emotion"
+     * )
      */
     public function postEmotionsAction(Request $request)
     {
@@ -22,6 +29,13 @@ class EmotionController extends CoreController
 
     /**
      * @View(serializerGroups={"Default"})
+     * @param string $slug slug of the emotion
+     * @ApiDoc(
+     *  section="Admin emotions",
+     *  description="Edit an emotion",
+     *  input="LKE\RemarkBundle\Form\Type\EmotionType",
+     *  output="LKE\RemarkBundle\Entity\Emotion"
+     * )
      */
     public function patchEmotionsAction(Request $request, $slug)
     {
@@ -30,6 +44,15 @@ class EmotionController extends CoreController
         return $this->formEmotion($emotion, $request, "patch");
     }
 
+    /**
+     * @param string $slug slug of the emotion
+     * @ApiDoc(
+     *  section="Admin emotions",
+     *  description="Delete an emotion"
+     * )
+     *
+     * @return JsonResponse
+     */
     public function deleteEmotionAction($slug)
     {
         $emotion = $this->getEntity($slug, Voter::DELETE, ["method" => "findBySlug"]);

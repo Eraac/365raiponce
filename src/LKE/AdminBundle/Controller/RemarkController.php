@@ -10,11 +10,20 @@ use LKE\RemarkBundle\Form\Type\RemarkEditType;
 use LKE\CoreBundle\Security\Voter;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class RemarkController extends CoreController
 {
     /**
      * @View(serializerGroups={"Default"})
+     * @ApiDoc(
+     *  section="Admin remarks",
+     *  description="List of unpublished remarks",
+     *  parameters={
+     *      {"name"="limit", "dataType"="integer", "required"=false, "description"="Number max of results"},
+     *      {"name"="page", "dataType"="integer", "required"=false, "description"="Page number"},
+     *  }
+     * )
      */
     public function getRemarksUnpublishedAction(Request $request)
     {
@@ -28,14 +37,21 @@ class RemarkController extends CoreController
     /**
      * @View(serializerGroups={"Default", "detail-remark"})
      * @Post("/remarks/{id}/unpublish")
+     * @param integer $id id of the remark
+     * @ApiDoc(
+     *  section="Admin remarks",
+     *  description="Unpublish a remark",
+     *  output={
+     *      "class"="LKE\RemarkBundle\Entity\Remark",
+     *      "groups"={"Default", "detail-remark"}
+     *  }
+     * )
      */
     public function postRemarkUnpublishAction($id)
     {
         $remark = $this->getEntity($id, Voter::EDIT);
 
         $remark->setPostedAt(null);
-
-        // TODO unpublish or remove comments too ?
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($remark);
@@ -47,6 +63,15 @@ class RemarkController extends CoreController
     /**
      * @View(serializerGroups={"Default", "detail-remark"})
      * @Post("/remarks/{id}/publish")
+     * @param integer $id id of the remark
+     * @ApiDoc(
+     *  section="Admin remarks",
+     *  description="Publish a remark",
+     *  output={
+     *      "class"="LKE\RemarkBundle\Entity\Remark",
+     *      "groups"={"Default", "detail-remark"}
+     *  }
+     * )
      */
     public function postRemarkPublishAction($id)
     {
@@ -63,6 +88,16 @@ class RemarkController extends CoreController
 
     /**
      * @View(serializerGroups={"Default", "detail-remark"})
+     * @param integer $id id of the remark
+     * @ApiDoc(
+     *  section="Admin remarks",
+     *  description="Edit a remark",
+     *  input="LKE\RemarkBundle\Form\Type\RemarkType",
+     *  output={
+     *      "class"="LKE\RemarkBundle\Entity\Remark",
+     *      "groups"={"Default", "detail-remark"}
+     *  }
+     * )
      */
     public function patchRemarkAction(Request $request, $id)
     {
@@ -89,6 +124,15 @@ class RemarkController extends CoreController
         return new JsonResponse($this->getAllErrors($form), 400);
     }
 
+    /**
+     * @param integer $id id of the remark
+     * @ApiDoc(
+     *  section="Admin remarks",
+     *  description="Delete a remark"
+     * )
+     *
+     * @return JsonResponse
+     */
     public function deleteRemarkAction($id)
     {
         $remark = $this->getEntity($id, Voter::DELETE);
