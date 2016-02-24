@@ -8,11 +8,21 @@ use LKE\UserBundle\Form\Type\UserType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\View;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class UserController extends CoreController
 {
     /**
      * @View(serializerGroups={"Default", "details-user"})
+     * @ApiDoc(
+     *  section="Users",
+     *  description="Create user",
+     *  input="LKE\UserBundle\Form\Type\UserType",
+     *  output={
+     *      "class"="LKE\UserBundle\Entity\User",
+     *      "groups"={"Default", "details-user"}
+     *  }
+     * )
      */
     public function postUserAction(Request $request)
     {
@@ -23,9 +33,14 @@ class UserController extends CoreController
 
     /**
      * @View(serializerGroups={"Default", "details-user"})
+     * @ApiDoc(
+     *  section="Users",
+     *  description="List users",
+     * )
      */
     public function getUsersAction()
     {
+        // TODO add pagination
         $users = $this->getDoctrine()->getRepository('LKEUserBundle:User')->findAll();
 
         return $users;
@@ -33,6 +48,14 @@ class UserController extends CoreController
 
     /**
      * @View(serializerGroups={"Default", "details-user"})
+     * @ApiDoc(
+     *  section="Users",
+     *  description="Get current user",
+     *  output={
+     *      "class"="LKE\UserBundle\Entity\User",
+     *      "groups"={"Default", "details-user"}
+     *  }
+     * )
      */
     public function getMeAction()
     {
@@ -41,6 +64,15 @@ class UserController extends CoreController
 
     /**
      * @View(serializerGroups={"Default", "details-user"})
+     * @ApiDoc(
+     *  section="Users",
+     *  description="Edit current user",
+     *  requirements={{"name"="password", "dataType"="string", "required"=true, "description"="The new password"}},
+     *  output={
+     *      "class"="LKE\UserBundle\Entity\User",
+     *      "groups"={"Default", "details-user"}
+     *  }
+     * )
      */
     public function patchMeAction(Request $request)
     {
@@ -60,13 +92,22 @@ class UserController extends CoreController
 
     /**
      * @View(serializerGroups={"Default", "details-user"})
+     * @param string $username name of the user
+     * @ApiDoc(
+     *  section="Users",
+     *  description="Get user profile",
+     *  output={
+     *      "class"="LKE\UserBundle\Entity\User",
+     *      "groups"={"Default", "details-user"}
+     *  }
+     * )
      */
     public function getUserAction($username)
     {
         $user = $this->getDoctrine()->getRepository('LKEUserBundle:User')->findOneByUsername($username);
 
         if(!is_object($user)){
-          throw $this->createNotFoundException();
+            throw $this->createNotFoundException();
         }
 
         return $user;
