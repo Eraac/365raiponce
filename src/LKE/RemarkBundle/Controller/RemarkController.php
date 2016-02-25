@@ -9,11 +9,20 @@ use LKE\CoreBundle\Security\Voter;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\View;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class RemarkController extends CoreController
 {
     /**
      * @View(serializerGroups={"Default", "admin-remark"})
+     * @ApiDoc(
+     *  section="Remarks",
+     *  description="Get list of remarks",
+     *  parameters={
+     *      {"name"="limit", "dataType"="integer", "required"=false, "description"="Number max of results"},
+     *      {"name"="page", "dataType"="integer", "required"=false, "description"="Page number"},
+     *  }
+     * )
      */
     public function getRemarksAction(Request $request)
     {
@@ -26,6 +35,15 @@ class RemarkController extends CoreController
 
     /**
      * @View(serializerGroups={"Default", "detail-remark"})
+     * @param integer $id id of the remark
+     * @ApiDoc(
+     *  section="Remarks",
+     *  description="Get one remark",
+     *  output={
+     *      "class"="LKE\RemarkBundle\Entity\Remark",
+     *      "groups"={"Default", "detail-remark"}
+     *  }
+     * )
      */
     public function getRemarkAction($id)
     {
@@ -34,23 +52,19 @@ class RemarkController extends CoreController
 
     /**
      * @View(serializerGroups={"Default", "detail-remark"})
+     * @ApiDoc(
+     *  section="Remarks",
+     *  description="Add a remark",
+     *  input="LKE\RemarkBundle\Form\Type\RemarkType",
+     *  output={
+     *      "class"="LKE\RemarkBundle\Entity\Remark",
+     *      "groups"={"Default", "detail-remark"}
+     *  }
+     * )
      */
     public function postRemarkAction(Request $request)
     {
         return $this->formRemark(new Remark(), $request, "post");
-    }
-
-    /**
-     * @View(serializerGroups={"Default"})
-     */
-    public function getMeRemarksAction(Request $request)
-    {
-        list($limit, $page) = $this->get('lke_core.paginator')->getBorne($request, 20);
-        $idUser = $this->getUser()->getId();
-
-        $remarks = $this->getRepository()->getUserRemarks($idUser, $limit, $page - 1);
-
-        return $remarks;
     }
 
     private function formRemark(Remark $remark, Request $request, $method = "post")

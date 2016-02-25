@@ -6,11 +6,20 @@ use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\View;
 use LKE\CoreBundle\Controller\CoreController;
 use LKE\CoreBundle\Security\Voter;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class EmotionController extends CoreController
 {
     /**
      * @View(serializerGroups={"Default"})
+     * @ApiDoc(
+     *  section="Emotions",
+     *  description="Get list of emotions",
+     *  parameters={
+     *      {"name"="limit", "dataType"="integer", "required"=false, "description"="Number max of results"},
+     *      {"name"="page", "dataType"="integer", "required"=false, "description"="Page number"},
+     *  }
+     * )
      */
     public function getEmotionsAction(Request $request)
     {
@@ -23,6 +32,15 @@ class EmotionController extends CoreController
 
     /**
      * @View(serializerGroups={"Default"})
+     * @param string $slug slug of the emotion
+     * @ApiDoc(
+     *  section="Emotions",
+     *  description="Get one emotion",
+     *  output={
+     *      "class"="LKE\RemarkBundle\Entity\Emotion",
+     *      "groups"={"Default"}
+     *  }
+     * )
      */
     public function getEmotionAction($slug)
     {

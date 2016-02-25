@@ -10,11 +10,21 @@ use LKE\CoreBundle\Security\Voter;
 use LKE\RemarkBundle\Entity\Response;
 use LKE\CoreBundle\Controller\CoreController;
 use LKE\RemarkBundle\Form\Type\ResponseType;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class ResponseController extends CoreController
 {
     /**
      * @View(serializerGroups={"Default", "stats"})
+     * @param integer $id id of the remark
+     * @ApiDoc(
+     *  section="Responses",
+     *  description="Get list of responses of one remark",
+     *  parameters={
+     *      {"name"="limit", "dataType"="integer", "required"=false, "description"="Number max of results"},
+     *      {"name"="page", "dataType"="integer", "required"=false, "description"="Page number"},
+     *  }
+     * )
      */
     public function getRemarkResponsesAction(Request $request, $id)
     {
@@ -29,6 +39,15 @@ class ResponseController extends CoreController
 
     /**
      * @View(serializerGroups={"Default", "stats"})
+     * @param integer $id id of the response
+     * @ApiDoc(
+     *  section="Responses",
+     *  description="Get one response",
+     *  output={
+     *      "class"="LKE\RemarkBundle\Entity\Response",
+     *      "groups"={"Default", "stats"}
+     *  }
+     * )
      */
     public function getResponseAction($id)
     {
@@ -42,6 +61,16 @@ class ResponseController extends CoreController
     /**
      * @View(serializerGroups={"Default"})
      * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
+     * @param integer $id id of the remark
+     * @ApiDoc(
+     *  section="Responses",
+     *  description="Add response",
+     *  input="LKE\RemarkBundle\Form\Type\ResponseType",
+     *  output={
+     *      "class"="LKE\RemarkBundle\Entity\Response",
+     *      "groups"={"Default"}
+     *  }
+     * )
      */
     public function postRemarkResponseAction(Request $request, $id)
     {
@@ -57,6 +86,16 @@ class ResponseController extends CoreController
     /**
      * @View(serializerGroups={"Default"})
      * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
+     * @param integer $id id of the response
+     * @ApiDoc(
+     *  section="Responses",
+     *  description="Edit response",
+     *  input="LKE\RemarkBundle\Form\Type\ResponseType",
+     *  output={
+     *      "class"="LKE\RemarkBundle\Entity\Response",
+     *      "groups"={"Default"}
+     *  }
+     * )
      */
     public function patchResponseAction(Request $request, $id)
     {
@@ -67,6 +106,11 @@ class ResponseController extends CoreController
 
     /**
      * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
+     * @param integer $id id of the response
+     * @ApiDoc(
+     *  section="Responses",
+     *  description="Delete response",
+     * )
      */
     public function deleteResponseAction($id)
     {
@@ -81,6 +125,10 @@ class ResponseController extends CoreController
 
     /**
      * @View(serializerGroups={"Default", "stats"})
+     * @ApiDoc(
+     *  section="Responses",
+     *  description="List of responses of the current user",
+     * )
      */
     public function getMeResponsesAction(Request $request)
     {

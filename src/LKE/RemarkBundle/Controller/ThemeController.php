@@ -6,11 +6,20 @@ use LKE\CoreBundle\Controller\CoreController;
 use LKE\CoreBundle\Security\Voter;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\View;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class ThemeController extends CoreController
 {
     /**
      * @View(serializerGroups={"Default"})
+     * @ApiDoc(
+     *  section="Themes",
+     *  description="Get list of themes",
+     *  parameters={
+     *      {"name"="limit", "dataType"="integer", "required"=false, "description"="Number max of results"},
+     *      {"name"="page", "dataType"="integer", "required"=false, "description"="Page number"},
+     *  }
+     * )
      */
     public function getThemesAction(Request $request)
     {
@@ -23,6 +32,15 @@ class ThemeController extends CoreController
 
     /**
      * @View(serializerGroups={"Default"})
+     * @param string $slug slug of the theme
+     * @ApiDoc(
+     *  section="Themes",
+     *  description="Get one theme",
+     *  output={
+     *      "class"="LKE\RemarkBundle\Entity\Theme",
+     *      "groups"={"Default"}
+     *  }
+     * )
      */
     public function getThemeAction($slug)
     {
