@@ -74,6 +74,8 @@ class Remark implements PublishableInterface
     private $updatedAt;
 
     /**
+     * @var LKE\RemarkBundle\Entity\Theme
+     *
      * @ORM\ManyToOne(targetEntity="LKE\RemarkBundle\Entity\Theme")
      * @ORM\JoinColumn(onDelete="SET NULL")
      * @JMS\Expose()
@@ -83,6 +85,8 @@ class Remark implements PublishableInterface
     private $theme;
 
     /**
+     * @var LKE\RemarkBundle\Entity\Emotion
+     *
      * @ORM\ManyToOne(targetEntity="LKE\RemarkBundle\Entity\Emotion")
      * @ORM\JoinColumn(onDelete="SET NULL")
      * @JMS\Expose()
@@ -92,6 +96,8 @@ class Remark implements PublishableInterface
     private $emotion;
 
     /**
+     * @var integer
+     *
      * @ORM\Column(name="scale_emotion", type="smallint")
      * @JMS\Expose()
      * @Assert\Range(
@@ -103,6 +109,8 @@ class Remark implements PublishableInterface
     private $scaleEmotion;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="email", type="string", length=140, nullable=true)
      * @JMS\Expose()
      * @JMS\Groups({"admin-remark"})

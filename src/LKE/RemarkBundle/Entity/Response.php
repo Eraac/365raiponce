@@ -64,6 +64,8 @@ class Response implements OwnableInterface, PublishableInterface
     private $sentence;
 
     /**
+     * @var LKE\UserBundle\Entity\User
+     *
      * @ORM\ManyToOne(targetEntity="LKE\UserBundle\Entity\User")
      * @ORM\JoinColumn(onDelete="CASCADE")
      * @JMS\Expose()
@@ -73,6 +75,8 @@ class Response implements OwnableInterface, PublishableInterface
     private $author;
 
     /**
+     * @var LKE\RemarkBundle\Entity\Remark
+     *
      * @ORM\ManyToOne(targetEntity="LKE\RemarkBundle\Entity\Remark", inversedBy="responses")
      * @ORM\JoinColumn(onDelete="CASCADE")
      * @Assert\Valid()

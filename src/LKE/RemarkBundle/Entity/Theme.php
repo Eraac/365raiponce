@@ -38,6 +38,10 @@ class Theme implements ReadAccessInterface
     private $name;
 
     /**
+     * Unique name (used in url)
+     *
+     * @var string
+     *
      * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(length=128, unique=true)
      * @JMS\Expose()
