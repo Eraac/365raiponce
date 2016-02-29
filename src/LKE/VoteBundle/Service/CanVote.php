@@ -28,7 +28,7 @@ class CanVote
 
     private function hasUseAllVoteToday(User $user)
     {
-        $countVoteToday = $this->doctrine->getRepository("LKEVoteBundle:Vote")->countVoteForUser($user);
+        $countVoteToday = $this->doctrine->getRepository("LKEVoteBundle:VoteResponse")->countVoteForUser($user);
 
         return $countVoteToday >= self::MAX_VOTE_PER_DAY;
     }

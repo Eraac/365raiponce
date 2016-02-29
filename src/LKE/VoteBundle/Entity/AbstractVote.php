@@ -10,12 +10,11 @@ use LKE\UserBundle\Interfaces\OwnableInterface;
 /**
  * Vote
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="LKE\VoteBundle\Repository\VoteRepository")
+ * @ORM\MappedSuperclass
  * @JMS\ExclusionPolicy("all")
  * @ORM\HasLifecycleCallbacks()
  */
-class Vote implements ReadAccessInterface, OwnableInterface
+abstract class AbstractVote implements ReadAccessInterface, OwnableInterface
 {
     /**
      * @var integer
@@ -36,11 +35,6 @@ class Vote implements ReadAccessInterface, OwnableInterface
     private $createAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="LKE\RemarkBundle\Entity\Response", inversedBy="votes")
-     */
-    private $response;
-
-    /**
      * @ORM\ManyToOne(targetEntity="LKE\UserBundle\Entity\User")
      */
     private $user;
@@ -55,12 +49,13 @@ class Vote implements ReadAccessInterface, OwnableInterface
     }
 
     /**
-     * @JMS\VirtualProperty()
-     * @JMS\Groups({"my-vote", "admin-vote"})
+     * Get id
+     *
+     * @return integer
      */
-    public function getResponseId()
+    public function getId()
     {
-        return $this->response->getId();
+        return $this->id;
     }
 
     /**
@@ -71,16 +66,6 @@ class Vote implements ReadAccessInterface, OwnableInterface
     public function prePersist()
     {
         $this->createAt = new \DateTime();
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
@@ -104,24 +89,6 @@ class Vote implements ReadAccessInterface, OwnableInterface
     public function getCreateAt()
     {
         return $this->createAt;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getResponse()
-    {
-        return $this->response;
-    }
-
-    /**
-     * @param mixed $remark
-     */
-    public function setResponse($response)
-    {
-        $this->response = $response;
-
-        return $this;
     }
 
     /**

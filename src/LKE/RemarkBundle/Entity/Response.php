@@ -85,7 +85,7 @@ class Response implements OwnableInterface, PublishableInterface
     private $remark;
 
     /**
-     * @ORM\OneToMany(targetEntity="LKE\VoteBundle\Entity\Vote", mappedBy="response")
+     * @ORM\OneToMany(targetEntity="LKE\VoteBundle\Entity\VoteResponse", mappedBy="response")
      */
     private $votes;
 

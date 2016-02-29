@@ -8,10 +8,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use LKE\CoreBundle\Controller\CoreController;
 use LKE\CoreBundle\Security\Voter;
-use LKE\VoteBundle\Entity\Vote;
+use LKE\VoteBundle\Entity\VoteResponse;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
-class VoteController extends CoreController
+class VoteResponseController extends CoreController
 {
     /**
      * @View(serializerGroups={"my-vote"})
@@ -37,7 +37,7 @@ class VoteController extends CoreController
             throw new AccessDeniedException(); // TODO Say why
         }
 
-        $vote = new Vote();
+        $vote = new VoteResponse();
         $vote->setResponse($response)->setUser($user);
 
         $em = $this->getDoctrine()->getManager();
@@ -71,6 +71,6 @@ class VoteController extends CoreController
 
     final protected function getRepositoryName()
     {
-        return "LKEVoteBundle:Vote";
+        return "LKEVoteBundle:VoteResponse";
     }
 }

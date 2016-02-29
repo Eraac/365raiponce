@@ -12,19 +12,6 @@ use Doctrine\ORM\EntityRepository;
  */
 class VoteRepository extends EntityRepository
 {
-    public function getVoteByUserAndResponse($response, $user)
-    {
-        $qb = $this->createQueryBuilder('v')
-                    ->where("v.response = :response")
-                    ->andWhere("v.user = :user")
-                    ->setParameters(array(
-                        "response" => $response,
-                        "user" => $user
-                    ));
-
-        return $qb->getQuery()->getSingleResult();
-    }
-
     public function countVoteForUser($user)
     {
         $date = new \DateTime("now -24hours");
