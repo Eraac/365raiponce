@@ -289,10 +289,10 @@ class Response implements OwnableInterface, PublishableInterface
     /**
      * Add votes
      *
-     * @param \LKE\VoteBundle\Entity\Vote $votes
+     * @param \LKE\VoteBundle\Entity\VoteResponse $votes
      * @return Response
      */
-    public function addVote(\LKE\VoteBundle\Entity\Vote $votes)
+    public function addVote(\LKE\VoteBundle\Entity\VoteResponse $votes)
     {
         $this->votes[] = $votes;
 
@@ -302,9 +302,9 @@ class Response implements OwnableInterface, PublishableInterface
     /**
      * Remove votes
      *
-     * @param \LKE\VoteBundle\Entity\Vote $votes
+     * @param \LKE\VoteBundle\Entity\VoteResponse $votes
      */
-    public function removeVote(\LKE\VoteBundle\Entity\Vote $votes)
+    public function removeVote(\LKE\VoteBundle\Entity\VoteResponse $votes)
     {
         $this->votes->removeElement($votes);
     }
