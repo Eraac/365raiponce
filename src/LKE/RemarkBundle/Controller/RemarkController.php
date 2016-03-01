@@ -71,6 +71,16 @@ class RemarkController extends CoreController
      */
     public function postRemarkAction(Request $request)
     {
+        $spamCheck = $this->get('sithous.antispam');
+
+        if(!$spamCheck->setType('public_protection')->verify())
+        {
+            return new JsonResponse(array(
+                'result'  => 'error',
+                'message' => $spamCheck->getErrorMessage()
+            ), 403);
+        }
+
         return $this->formRemark(new Remark(), $request, "post");
     }
 

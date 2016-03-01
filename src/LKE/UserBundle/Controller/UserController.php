@@ -26,6 +26,16 @@ class UserController extends CoreController
      */
     public function postUserAction(Request $request)
     {
+        $spamCheck = $this->get('sithous.antispam');
+
+        if(!$spamCheck->setType('public_protection')->verify())
+        {
+            return new JsonResponse(array(
+                'result'  => 'error',
+                'message' => $spamCheck->getErrorMessage()
+            ), 403);
+        }
+
         $userManager = $this->get("fos_user.user_manager");
 
         return $this->formUser($userManager->createUser(), $request);
