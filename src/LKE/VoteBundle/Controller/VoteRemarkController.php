@@ -68,7 +68,7 @@ class VoteRemarkController extends CoreController
      */
     public function deleteRemarkVotesAction(Request $request, $id)
     {
-        $remark = $this->getEntity($id, Voter::VIEW, ["repository" => "LKERemarkBundle:Remark"]);
+        $remark = $this->getEntity($id, Voter::DELETE, ["repository" => "LKERemarkBundle:Remark"]);
         $type = $this->getType($request);
 
         $em = $this->getDoctrine()->getManager();
