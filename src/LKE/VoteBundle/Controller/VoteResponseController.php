@@ -52,7 +52,7 @@ class VoteResponseController extends CoreController
      * @param integer $id id of the response
      * @ApiDoc(
      *  section="Votes",
-     *  description="Delete vote",
+     *  description="Delete vote for a reponse",
      * )
      */
     public function deleteResponseVotesAction($id)
