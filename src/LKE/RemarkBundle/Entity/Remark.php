@@ -123,6 +123,11 @@ class Remark implements PublishableInterface
     private $responses;
 
     /**
+     * @ORM\OneToMany(targetEntity="LKE\VoteBundle\Entity\VoteRemark", mappedBy="remark")
+     */
+    private $votes;
+
+    /**
      * @JMS\VirtualProperty()
      */
     public function countResponses()
@@ -387,5 +392,38 @@ class Remark implements PublishableInterface
     public function getResponses()
     {
         return $this->responses;
+    }
+
+    /**
+     * Add votes
+     *
+     * @param \LKE\VoteBundle\Entity\VoteRemark $votes
+     * @return Remark
+     */
+    public function addVote(\LKE\VoteBundle\Entity\VoteRemark $votes)
+    {
+        $this->votes[] = $votes;
+
+        return $this;
+    }
+
+    /**
+     * Remove votes
+     *
+     * @param \LKE\VoteBundle\Entity\VoteRemark $votes
+     */
+    public function removeVote(\LKE\VoteBundle\Entity\VoteRemark $votes)
+    {
+        $this->votes->removeElement($votes);
+    }
+
+    /**
+     * Get votes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getVotes()
+    {
+        return $this->votes;
     }
 }
