@@ -21,7 +21,7 @@ class VoteResponseController extends CoreController
      *  section="Votes",
      *  description="Vote for a response",
      *  output={
-     *      "class"="LKE\VoteBundle\Entity\Vote",
+     *      "class"="LKE\VoteBundle\Entity\VoteResponse",
      *      "groups"={"my-vote"}
      *  }
      * )
