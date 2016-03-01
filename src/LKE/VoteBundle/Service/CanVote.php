@@ -3,6 +3,7 @@
 namespace LKE\VoteBundle\Service;
 
 use LKE\RemarkBundle\Entity\Response;
+use LKE\RemarkBundle\Entity\Remark;
 use LKE\UserBundle\Entity\User;
 
 class CanVote
@@ -19,6 +20,11 @@ class CanVote
     public function canVote(Response $response, User $user)
     {
         return !$this->hasAlreadyVote($response, $user) && !$this->hasUseAllVoteToday($user);
+    }
+
+    public function canVoteForRemark(Remark $remark, User $user, $type)
+    {
+        return !$this->doctrine->getRepository("LKERemarkBundle:Remark")->userHasVote($remark, $user, $type);
     }
 
     private function hasAlreadyVote(Response $response, User $user)

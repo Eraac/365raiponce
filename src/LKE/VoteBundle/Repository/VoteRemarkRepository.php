@@ -12,4 +12,18 @@ use Doctrine\ORM\EntityRepository;
  */
 class VoteRemarkRepository extends EntityRepository
 {
+    public function getVoteByUserAndRemark($remark, $user, $type)
+    {
+        $qb = $this->createQueryBuilder('v')
+            ->where("v.remark = :remark")
+            ->andWhere("v.type =: type")
+            ->andWhere("v.user = :user")
+            ->setParameters(array(
+                "remark" => $remark,
+                "type" => $type,
+                "user" => $user
+            ));
+
+        return $qb->getQuery()->getSingleResult();
+    }
 }

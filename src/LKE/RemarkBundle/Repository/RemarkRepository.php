@@ -3,6 +3,8 @@
 namespace LKE\RemarkBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use LKE\RemarkBundle\Entity\Remark;
+use LKE\UserBundle\Entity\User;
 
 /**
  * RemarkRepository
@@ -50,5 +52,22 @@ class RemarkRepository extends EntityRepository
                 ->setParameter('id', $id);
 
         return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function userHasVote(Remark $remark, User $user, $type)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->select('COUNT(r.id)')
+            ->join('r.votes', 'v')
+            ->where('r = :remark')
+            ->andWhere('v.user = :user')
+            ->andWhere('v.type = :type')
+            ->setParameters(array(
+                "remark" => $remark,
+                "user" => $user,
+                "type" => $type
+            ));
+
+        return (bool) $qb->getQuery()->getSingleScalarResult();
     }
 }
