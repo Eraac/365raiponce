@@ -54,7 +54,7 @@ class RemarkRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    public function userHasVote(Remark $remark, User $user, $type)
+    public function userHasVote(Remark $remark, $user, $type)
     {
         $qb = $this->createQueryBuilder('r')
             ->select('COUNT(r.id)')

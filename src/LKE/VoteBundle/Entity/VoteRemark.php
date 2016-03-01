@@ -15,7 +15,7 @@ use LKE\RemarkBundle\Entity\Remark;
 class VoteRemark extends  AbstractVote
 {
     const IS_SEXIST = 0;
-    const ALREADY_LIVE = 1;
+    const ALREADY_LIVED = 1;
     const UNKNOWN = -1;
 
 

@@ -4,6 +4,7 @@ namespace LKE\RemarkBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
+use LKE\VoteBundle\Entity\VoteRemark;
 use Symfony\Component\Validator\Constraints as Assert;
 use LKE\UserBundle\Interfaces\PublishableInterface;
 use Doctrine\Common\Collections\Criteria;
@@ -128,6 +129,18 @@ class Remark implements PublishableInterface
     private $votes;
 
     /**
+     * @JMS\Groups({"stats"})
+     * @JMS\Expose()
+     */
+    private $userHasVoteForIsSexist;
+
+    /**
+     * @JMS\Groups({"stats"})
+     * @JMS\Expose()
+     */
+    private $userHasVoteForAlreadyLived;
+
+    /**
      * @JMS\VirtualProperty()
      */
     public function countResponses()
@@ -135,6 +148,28 @@ class Remark implements PublishableInterface
         $criteria = Criteria::create()->where(Criteria::expr()->neq("postedAt", null));
 
         return count($this->responses->matching($criteria));
+    }
+
+    /**
+     * @JMS\VirtualProperty()
+     * @JMS\Groups({"stats"})
+     */
+    public function getCountVoteIsSexist()
+    {
+        $criteria = Criteria::create()->where(Criteria::expr()->eq("type", VoteRemark::IS_SEXIST));
+
+        return count($this->votes->matching($criteria));
+    }
+
+    /**
+     * @JMS\VirtualProperty()
+     * @JMS\Groups({"stats"})
+     */
+    public function getCountVoteAlreadyLive()
+    {
+        $criteria = Criteria::create()->where(Criteria::expr()->eq("type", VoteRemark::ALREADY_LIVED));
+
+        return count($this->votes->matching($criteria));
     }
 
     /**
@@ -425,5 +460,41 @@ class Remark implements PublishableInterface
     public function getVotes()
     {
         return $this->votes;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getUserHasVoteForIsSexist()
+    {
+        return $this->userHasVoteForIsSexist;
+    }
+
+    /**
+     * @param boolean $userHasVoteForIsSexist
+     */
+    public function setUserHasVoteForIsSexist($userHasVoteForIsSexist)
+    {
+        $this->userHasVoteForIsSexist = $userHasVoteForIsSexist;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getUserHasVoteForAlreadyLived()
+    {
+        return $this->userHasVoteForAlreadyLived;
+    }
+
+    /**
+     * @param boolean $userHasVoteForAlreadyLived
+     */
+    public function setUserHasVoteForAlreadyLived($userHasVoteForAlreadyLived)
+    {
+        $this->userHasVoteForAlreadyLived = $userHasVoteForAlreadyLived;
+
+        return $this;
     }
 }

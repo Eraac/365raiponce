@@ -36,6 +36,10 @@ class VoteRemarkController extends CoreController
         $type = $this->getType($request);
         $user = $this->getUser();
 
+        if (VoteRemark::UNKNOWN === $type) {
+            return new JsonResponse([], 400);
+        }
+
         $canVote = $this->get("lke_vote.can_vote")->canVoteForRemark($remark, $user, $type);
 
         if (!$canVote) {
@@ -79,7 +83,13 @@ class VoteRemarkController extends CoreController
 
     private function getType(Request $request)
     {
-        return $request->request->getInt("type", VoteRemark::UNKNOWN);
+        $type = $request->request->getInt("type", VoteRemark::UNKNOWN);
+
+        if (!in_array($type, array(VoteRemark::IS_SEXIST, VoteRemark::ALREADY_LIVED))) {
+            return VoteRemark::UNKNOWN;
+        }
+
+        return $type;
     }
 
     final protected function getRepositoryName()

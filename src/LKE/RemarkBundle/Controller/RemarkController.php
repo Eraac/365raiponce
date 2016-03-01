@@ -6,6 +6,7 @@ use LKE\RemarkBundle\Entity\Remark;
 use LKE\RemarkBundle\Form\Type\RemarkType;
 use LKE\CoreBundle\Controller\CoreController;
 use LKE\CoreBundle\Security\Voter;
+use LKE\VoteBundle\Entity\VoteRemark;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -14,7 +15,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 class RemarkController extends CoreController
 {
     /**
-     * @View(serializerGroups={"Default", "admin-remark"})
+     * @View(serializerGroups={"Default", "admin-remark", "stats"})
      * @ApiDoc(
      *  section="Remarks",
      *  description="Get list of remarks",
@@ -30,24 +31,30 @@ class RemarkController extends CoreController
 
         $remarks = $this->getRepository()->getPostedRemark($limit, $page - 1);
 
+        $this->setStats($remarks);
+
         return $remarks;
     }
 
     /**
-     * @View(serializerGroups={"Default", "detail-remark"})
+     * @View(serializerGroups={"Default", "detail-remark", "stats"})
      * @param integer $id id of the remark
      * @ApiDoc(
      *  section="Remarks",
      *  description="Get one remark",
      *  output={
      *      "class"="LKE\RemarkBundle\Entity\Remark",
-     *      "groups"={"Default", "detail-remark"}
+     *      "groups"={"Default", "detail-remark", "stats"}
      *  }
      * )
      */
     public function getRemarkAction($id)
     {
-        return $this->getEntity($id, Voter::VIEW, ["method" => "getCompleteRemark"]);
+        $remark = $this->getEntity($id, Voter::VIEW, ["method" => "getCompleteRemark"]);
+
+        $this->setStatsOne($remark);
+
+        return $remark;
     }
 
     /**
@@ -88,5 +95,24 @@ class RemarkController extends CoreController
     final protected function getRepositoryName()
     {
         return "LKERemarkBundle:Remark";
+    }
+
+    private function setStats($remarks)
+    {
+        foreach ($remarks as $remark) {
+            $this->setStatsOne($remark);
+        }
+    }
+
+    private function setStatsOne(Remark $remark)
+    {
+        $repo = $this->getRepository();
+        $user = $this->getUser();
+
+        $userHasVoteForIsSexist = $repo->userHasVote($remark, $user, VoteRemark::IS_SEXIST); // TODO optimize (not use sql)
+        $userHasVoteForAlreadyLived = $repo->userHasVote($remark, $user, VoteRemark::ALREADY_LIVED); // TODO optimize (not use sql)
+
+        $remark->setUserHasVoteForIsSexist($userHasVoteForIsSexist)
+                ->setUserHasVoteForAlreadyLived($userHasVoteForAlreadyLived);
     }
 }
