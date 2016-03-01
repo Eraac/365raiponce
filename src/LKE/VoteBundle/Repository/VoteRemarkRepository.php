@@ -16,7 +16,7 @@ class VoteRemarkRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('v')
             ->where("v.remark = :remark")
-            ->andWhere("v.type =: type")
+            ->andWhere("v.type = :type")
             ->andWhere("v.user = :user")
             ->setParameters(array(
                 "remark" => $remark,
