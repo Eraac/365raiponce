@@ -10,23 +10,20 @@ class AppKernel extends Kernel
         $bundles = array(
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
-            new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
-            new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 	        new FOS\UserBundle\FOSUserBundle(),
-            new LKE\UserBundle\LKEUserBundle(),
-	        new JMS\SerializerBundle\JMSSerializerBundle(),
-	        new FOS\RestBundle\FOSRestBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Sithous\AntiSpamBundle\SithousAntiSpamBundle(),
             new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
+            new LKE\UserBundle\LKEUserBundle(),
             new LKE\RemarkBundle\LKERemarkBundle(),
             new LKE\CoreBundle\LKECoreBundle(),
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new LKE\AdminBundle\LKEAdminBundle(),
             new LKE\VoteBundle\LKEVoteBundle(),
-            new Sithous\AntiSpamBundle\SithousAntiSpamBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
@@ -34,6 +31,7 @@ class AppKernel extends Kernel
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
+            $bundles[] = new Symfony\Bundle\TwigBundle\TwigBundle();
             $bundles[] = new Nelmio\ApiDocBundle\NelmioApiDocBundle();
         }
 
