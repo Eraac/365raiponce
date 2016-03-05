@@ -12,5 +12,4 @@
 /web/config.php
 /app/var/jwt/*.pem
 Capfile
-/app/config/deploy.rb
-
+/app/config/*.rb
