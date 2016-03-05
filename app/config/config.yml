@@ -69,9 +69,18 @@ fos_rest:
     disable_csrf_role: IS_AUTHENTICATED_ANONYMOUSLY
     service:
         templating: ~
+    view:
+        view_response_listener: 'force'
+        formats:
+            xml: false
+            json : true
+        templating_formats:
+            html: false
+        force_redirects:
+            html: false
+        failed_validation: HTTP_BAD_REQUEST
     routing_loader:
         default_format: json
-        include_format: false
 
 lexik_jwt_authentication:
     private_key_path: %jwt_private_key_path%
