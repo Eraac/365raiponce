@@ -1,5 +1,5 @@
 {
-    "name": "kevinlabesse/rest.project",
+    "name": "365raiponce",
     "license": "proprietary",
     "description": "Cette application vise à recenser toutes les remarques sexistes faites aux femmes au travail mais surtout à proposer des réponses possibles dans ce type de situation. Car un homme qui fait une remarque dans la rue, on peut lui répondre vertement et le remettre à sa place. Dans le cadre de l'entreprise, c'est différent et les femmes sont plus souvent démunies.",
     "type": "project",
@@ -15,8 +15,6 @@
         "doctrine/orm": "~2.2,>=2.2.3,<2.5",
         "doctrine/dbal": "<2.5",
         "doctrine/doctrine-bundle": "~1.4",
-        "symfony/assetic-bundle": "~2.3",
-        "symfony/swiftmailer-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~4.0",
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
