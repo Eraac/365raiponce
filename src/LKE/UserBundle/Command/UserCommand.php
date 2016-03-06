@@ -13,6 +13,7 @@ class UserCommand extends ContainerAwareCommand
     const USERNAME = 2;
     const PASSWORD = 3;
     const ROLE = 4;
+    const CERTIF = 5;
 
     protected function configure()
     {
@@ -37,6 +38,7 @@ class UserCommand extends ContainerAwareCommand
             $user->setUsername($row[self::USERNAME]);
             $user->setPlainPassword($row[self::PASSWORD]);
             $user->addRole($row[self::ROLE]);
+            $user->setCertificated($row[self::CERTIF]);
             $user->setEnabled(true);
 
             $userManager->updateUser($user, false);
