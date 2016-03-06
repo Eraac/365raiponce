@@ -28,8 +28,7 @@ monolog:
             level:          debug
         swift:
             type:           swift_mailer
-            excluded_404s:  ["^/"]
             from_email:     "%mail_sender%"
             to_email:       ["%mail_developer%", "%mail_webmaster%"]
             subject:        "[ERROR] [365raiponce]"
-            level:          debug
+            level:          critical

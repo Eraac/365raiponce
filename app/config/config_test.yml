@@ -34,4 +34,4 @@ monolog:
             from_email:     "%mail_sender%"
             to_email:       "%mail_developer%"
             subject:        "[TESTING] [365raiponce]"
-            level:          debug
+            level:          critical
