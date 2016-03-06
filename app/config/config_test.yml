@@ -14,3 +14,23 @@ framework:
 
 web_profiler:
     toolbar: false
+
+monolog:
+    handlers:
+        main:
+            type: fingers_crossed
+            action_level: error
+            handler: grouped
+        grouped:
+            type: group
+            members: [streamed, swift]
+        streamed:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+        swift:
+            type: swift_mailer
+            from_email: "%mail_sender%"
+            to_email: "%mail_developer%"
+            subject: "[TESTING] [365raiponce]"
+            level: debug
