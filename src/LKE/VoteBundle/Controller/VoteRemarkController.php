@@ -43,7 +43,7 @@ class VoteRemarkController extends CoreController
         $canVote = $this->get("lke_vote.can_vote")->canVoteForRemark($remark, $user, $type);
 
         if (!$canVote) {
-            throw new AccessDeniedException(); // TODO Say why
+            throw new AccessDeniedException();
         }
 
         $vote = new VoteRemark();

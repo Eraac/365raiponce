@@ -34,7 +34,7 @@ class VoteResponseController extends CoreController
         $canVote = $this->get("lke_vote.can_vote")->canVote($response, $user);
 
         if (!$canVote) {
-            throw new AccessDeniedException(); // TODO Say why
+            throw new AccessDeniedException();
         }
 
         $vote = new VoteResponse();
