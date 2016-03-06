@@ -4,7 +4,7 @@ services:
 
     lke_core.get_entity:
         class: LKE\CoreBundle\Service\GetEntity
-        arguments: ['doctrine', '@security.authorization_checker']
+        arguments: ['@doctrine', '@security.authorization_checker']
 
     lke_core.parse_csv:
         class: LKE\CoreBundle\Service\ParseCSV
