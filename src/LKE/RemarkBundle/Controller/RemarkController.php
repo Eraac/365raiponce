@@ -119,8 +119,8 @@ class RemarkController extends CoreController
         $repo = $this->getRepository();
         $user = $this->getUser();
 
-        $userHasVoteForIsSexist = $repo->userHasVote($remark, $user, VoteRemark::IS_SEXIST); // TODO optimize (not use sql)
-        $userHasVoteForAlreadyLived = $repo->userHasVote($remark, $user, VoteRemark::ALREADY_LIVED); // TODO optimize (not use sql)
+        $userHasVoteForIsSexist = $repo->userHasVote($remark, $user, VoteRemark::IS_SEXIST);
+        $userHasVoteForAlreadyLived = $repo->userHasVote($remark, $user, VoteRemark::ALREADY_LIVED);
 
         $remark->setUserHasVoteForIsSexist($userHasVoteForIsSexist)
                 ->setUserHasVoteForAlreadyLived($userHasVoteForAlreadyLived);

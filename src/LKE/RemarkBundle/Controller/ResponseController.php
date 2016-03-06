@@ -183,7 +183,7 @@ class ResponseController extends CoreController
         $repo = $this->getRepository();
         $user = $this->getUser();
 
-        $userHasVote = $repo->userHasVote($response, $user); // TODO optimize (not use sql)
+        $userHasVote = $repo->userHasVote($response, $user);
 
         $response->setUserHasVote($userHasVote);
     }
