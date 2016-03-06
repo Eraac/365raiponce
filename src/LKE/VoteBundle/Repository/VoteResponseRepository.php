@@ -2,8 +2,6 @@
 
 namespace LKE\VoteBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
-
 /**
  * VoteResponseRepository
  *

@@ -4,7 +4,6 @@ namespace LKE\RemarkBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use LKE\RemarkBundle\Entity\Remark;
-use LKE\UserBundle\Entity\User;
 
 /**
  * RemarkRepository
