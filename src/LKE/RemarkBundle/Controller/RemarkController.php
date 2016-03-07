@@ -15,6 +15,19 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 class RemarkController extends CoreController
 {
     /**
+     * @ApiDoc(
+     *  section="Remarks",
+     *  description="Get count of published remark"
+     * )
+     */
+    public function getRemarksCountAction()
+    {
+        $count = $this->getRepository()->countPublishedRemark();
+
+        return array("count" => $count);
+    }
+
+    /**
      * @View(serializerGroups={"Default", "admin-remark", "stats"})
      * @ApiDoc(
      *  section="Remarks",

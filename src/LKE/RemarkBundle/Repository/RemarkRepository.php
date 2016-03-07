@@ -69,4 +69,22 @@ class RemarkRepository extends EntityRepository
 
         return (bool) $qb->getQuery()->getSingleScalarResult();
     }
+
+    public function countPublishedRemark()
+    {
+        $qb = $this->createQueryBuilder("r")
+                ->select("COUNT(r.id)")
+                ->where("r.postedAt is not null");
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function countUnpublishedRemark()
+    {
+        $qb = $this->createQueryBuilder("r")
+            ->select("COUNT(r.id)")
+            ->where("r.postedAt is null");
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }
