@@ -25,5 +25,6 @@ parameters:
     mail_webmaster: 'webmaster@domain.com'
     mail_sender:    'no-reply@domain.com'
 
+    backup_processor_type: 'zip'
     backup_directory: '/tmp'
     backup_password:  'azerty'

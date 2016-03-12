@@ -104,7 +104,7 @@ knp_gaufrette:
 
 dizda_cloud_backup:
     processor:
-        type: zip
+        type: %backup_processor_type%
         options:
             password: %backup_password%
     cloud_storages:
