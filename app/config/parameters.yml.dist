@@ -24,3 +24,6 @@ parameters:
     mail_developer: 'developer@domain.com'
     mail_webmaster: 'webmaster@domain.com'
     mail_sender:    'no-reply@domain.com'
+
+	backup_directory: '/tmp'
+	backup_password:  'azerty'

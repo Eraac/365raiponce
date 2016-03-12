@@ -26,7 +26,9 @@
         "jms/serializer-bundle": "^1.0",
         "lexik/jwt-authentication-bundle": "^1.1",
         "stof/doctrine-extensions-bundle": "^1.2",
-        "sithous/antispam-bundle": "1.0.*"
+        "sithous/antispam-bundle": "1.0.*",
+        "dizda/cloud-backup-bundle": "^3.2",
+        "knplabs/knp-gaufrette-bundle": "~0.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

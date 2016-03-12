@@ -20,6 +20,8 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Sithous\AntiSpamBundle\SithousAntiSpamBundle(),
             new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
+            new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
+            new Dizda\CloudBackupBundle\DizdaCloudBackupBundle(),
             new LKE\UserBundle\LKEUserBundle(),
             new LKE\RemarkBundle\LKERemarkBundle(),
             new LKE\CoreBundle\LKECoreBundle(),
