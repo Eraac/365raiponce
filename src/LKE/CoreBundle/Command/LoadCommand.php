@@ -25,18 +25,25 @@ class LoadCommand extends ContainerAwareCommand
 
         if ($force == "--force")
         {
-            $commands = array("doctrine:database:drop", "doctrine:database:create", "doctrine:schema:update",
-                              "load:users", "load:emotions", "load:themes", "load:remarks", "load:responses");
+            $commands = array(
+                "doctrine:database:drop"    => array("--force" => true),
+                "doctrine:database:create"  => array(),
+                "doctrine:schema:update"    => array("--force" => true),
+                "load:users"                => array(),
+                "load:emotions"             => array(),
+                "load:themes"               => array(),
+                "load:remarks"              => array(),
+                "load:responses"            => array(),
+                "load:antispam"             => array(),
+            );
 
-            $arguments = array(array('--force' => true),array(''),array('--force' => true),array(''),array(''),array(''),array(''),array(''),);
-
-            foreach($commands as $key => $command)
+            foreach($commands as $command => $options)
             {
                 $output->writeln("Run " . $command);
 
                 $cmd = $this->getApplication()->find($command);
 
-                $input = new ArrayInput($arguments[$key]);
+                $input = new ArrayInput($options);
 
                 $cmd->run($input, $output);
             }
