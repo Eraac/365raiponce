@@ -81,7 +81,6 @@ class Remark implements PublishableInterface
      * @ORM\JoinColumn(onDelete="SET NULL")
      * @JMS\Expose()
      * @Assert\Valid()
-     * @Assert\NotNull()
      */
     private $theme;
 
