@@ -57,13 +57,13 @@ class UserController extends CoreController
     }
 
     /**
-     * @View(serializerGroups={"Default", "details-user"})
+     * @View(serializerGroups={"Default", "details-user", "me"})
      * @ApiDoc(
      *  section="Users",
      *  description="Get current user",
      *  output={
      *      "class"="LKE\UserBundle\Entity\User",
-     *      "groups"={"Default", "details-user"}
+     *      "groups"={"Default", "details-user", "me"}
      *  }
      * )
      */
