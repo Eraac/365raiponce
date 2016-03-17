@@ -28,7 +28,7 @@ class RemarkController extends CoreController
     }
 
     /**
-     * @View(serializerGroups={"Default", "admin-remark", "stats"})
+     * @View(serializerGroups={"Default", "stats"})
      * @ApiDoc(
      *  section="Remarks",
      *  description="Get list of remarks",

@@ -28,7 +28,7 @@ class RemarkController extends CoreController
     }
 
     /**
-     * @View(serializerGroups={"Default"})
+     * @View(serializerGroups={"Default", "admin-remark"})
      * @ApiDoc(
      *  section="Admin remarks",
      *  description="List of unpublished remarks",
@@ -45,6 +45,24 @@ class RemarkController extends CoreController
         $remarks = $this->getRepository()->getUnpublishedRemark($limit, $page - 1);
 
         return $remarks;
+    }
+
+    /**
+     * @View(serializerGroups={"Default", "admin-remark"})
+     * @ApiDoc(
+     *  section="Remarks",
+     *  description="Get one remark with admin information",
+     *  output={
+     *      "class"="LKE\RemarkBundle\Entity\Remark",
+     *      "groups"={"Default", "admin-remark"}
+     *  }
+     * )
+     */
+    public function getRemarksAction($id)
+    {
+        $remark = $this->getEntity($id, Voter::VIEW, ["method" => "getCompleteRemark"]);
+
+        return $remark;
     }
 
     /**
