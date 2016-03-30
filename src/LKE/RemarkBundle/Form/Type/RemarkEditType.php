@@ -15,7 +15,7 @@ class RemarkEditType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->remove('email', 'email')
+            ->remove('email')
         ;
     }
     
