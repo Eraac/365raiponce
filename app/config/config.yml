@@ -47,8 +47,11 @@ fos_user:
     db_driver:     orm                       
     firewall_name: main                
     user_class:    LKE\UserBundle\Entity\User
+    from_email:
+        address:     "%mail_sender%"
+        sender_name: "%app_name%"
     service:
-        mailer: fos_user.mailer.noop
+        mailer: lke_user.mailer
 
 jms_serializer:
     metadata:
@@ -93,6 +96,7 @@ swiftmailer:
     host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
+    port:      "%mailer_port%"
     spool:     { type: memory }
 
 knp_gaufrette:

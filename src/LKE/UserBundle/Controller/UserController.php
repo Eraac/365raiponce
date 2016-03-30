@@ -5,13 +5,18 @@ namespace LKE\UserBundle\Controller;
 use LKE\CoreBundle\Controller\CoreController;
 use LKE\UserBundle\Entity\User;
 use LKE\UserBundle\Form\Type\UserType;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
+use FOS\UserBundle\Model\UserInterface;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class UserController extends CoreController
 {
+    const SESSION_EMAIL = 'fos_user_send_resetting_email/email';
+
     /**
      * @View(serializerGroups={"Default", "details-user"})
      * @ApiDoc(
@@ -30,10 +35,10 @@ class UserController extends CoreController
 
         if(!$spamCheck->setType('public_protection')->verify())
         {
-            return new JsonResponse(array(
+            return new JsonResponse([
                 'result'  => 'error',
                 'message' => $spamCheck->getErrorMessage()
-            ), 403);
+            ], 403);
         }
 
         $userManager = $this->get("fos_user.user_manager");
@@ -123,6 +128,84 @@ class UserController extends CoreController
         return $user;
     }
 
+    /**
+     * @Post("/forget-password")
+     * @ApiDoc(
+     *  section="Users",
+     *  description="Request new password",
+     *  parameters={
+     *      {"name"="mail", "dataType"="string", "required"=true, "description"="email account"},
+     *  }
+     * )
+     */
+    public function postForgetPasswordAction()
+    {
+        $email = $this->container->get('request')->request->get('email');
+
+        /** @var $user UserInterface */
+        $user = $this->container->get('fos_user.user_manager')->findUserByUsernameOrEmail($email);
+
+        if (null === $user) {
+            throw new NotFoundHttpException('Email ' . $email . ' not found');
+        }
+
+        if ($user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl'))) {
+            return new JsonResponse(['error' => 'password already requested'], 400);
+        }
+
+        if (null === $user->getConfirmationToken()) {
+            /** @var $tokenGenerator \FOS\UserBundle\Util\TokenGeneratorInterface */
+            $tokenGenerator = $this->container->get('fos_user.util.token_generator');
+            $user->setConfirmationToken($tokenGenerator->generateToken());
+        }
+
+        $this->container->get('session')->set(static::SESSION_EMAIL, $this->getObfuscatedEmail($user));
+        $this->container->get('fos_user.mailer')->sendResettingEmailMessage($user);
+        $user->setPasswordRequestedAt(new \DateTime());
+        $this->container->get('fos_user.user_manager')->updateUser($user);
+
+        return new JsonResponse([]);
+    }
+
+    /**
+     * @Post("/reset-password/{token}")
+     * @ApiDoc(
+     *  section="Users",
+     *  description="Reset user password",
+     *  requirements={
+     *      {"name"="token", "dataType"="string", "required"=true, "description"="token receive by email"},
+     *  },
+     *  parameters={
+     *      {"name"="password", "dataType"="string", "required"=true, "description"="the new password"},
+     *  }
+     * )
+     */
+    public function postResetPasswordAction($token)
+    {
+        /** @var User $user */
+        $user = $this->container->get('fos_user.user_manager')->findUserByConfirmationToken($token);
+
+        if (null === $user) {
+            throw new NotFoundHttpException('Token ' . $token . ' not found');
+        }
+
+        $newPassword = $this->container->get('request')->request->get('password');
+
+        if (empty($newPassword)) {
+            return new JsonResponse(['error' => 'new password can not be empty'], 400);
+        }
+
+        if (!$user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl'))) {
+            return new JsonResponse(['error' => 'request expired'], 400);
+        }
+
+        $user->setPlainPassword($newPassword);
+        $userManager = $this->get("fos_user.user_manager");
+        $userManager->updateUser($user);
+
+        return new JsonResponse([]);
+    }
+
     private function formUser(User $user, Request $request)
     {
         $form = $this->createForm(new UserType(), $user);
@@ -141,6 +224,25 @@ class UserController extends CoreController
         }
 
         return new JsonResponse($this->getAllErrors($form), 400);
+    }
+
+    /**
+     * Get the truncated email displayed when requesting the resetting.
+     *
+     * The default implementation only keeps the part following @ in the address.
+     *
+     * @param \FOS\UserBundle\Model\UserInterface $user
+     *
+     * @return string
+     */
+    protected function getObfuscatedEmail(UserInterface $user)
+    {
+        $email = $user->getEmail();
+        if (false !== $pos = strpos($email, '@')) {
+            $email = '...' . substr($email, $pos);
+        }
+
+        return $email;
     }
 
     final protected function getRepositoryName()

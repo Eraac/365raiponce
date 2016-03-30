@@ -1,0 +1,15 @@
+{% block subject %}
+    {% autoescape false %}
+    RESET PASSWORD
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+        {{ token }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {{ token }}
+{% endblock %}
