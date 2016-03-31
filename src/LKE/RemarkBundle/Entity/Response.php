@@ -47,6 +47,7 @@ class Response
      * @var \DateTime
      *
      * @ORM\Column(name="updatedAt", type="datetime")
+     * @JMS\Groups({"admin-response"})
      * @JMS\Expose()
      */
     private $updatedAt;
