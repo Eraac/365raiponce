@@ -4,8 +4,6 @@ namespace LKE\VoteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
-use LKE\UserBundle\Interfaces\ReadAccessInterface;
-use LKE\UserBundle\Interfaces\OwnableInterface;
 
 /**
  * Vote
@@ -14,7 +12,7 @@ use LKE\UserBundle\Interfaces\OwnableInterface;
  * @JMS\ExclusionPolicy("all")
  * @ORM\HasLifecycleCallbacks()
  */
-abstract class AbstractVote implements ReadAccessInterface, OwnableInterface
+abstract class AbstractVote
 {
     /**
      * @var integer

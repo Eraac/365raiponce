@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use LKE\VoteBundle\Entity\VoteRemark;
 use Symfony\Component\Validator\Constraints as Assert;
-use LKE\UserBundle\Interfaces\PublishableInterface;
 use Doctrine\Common\Collections\Criteria;
 
 /**
@@ -17,7 +16,7 @@ use Doctrine\Common\Collections\Criteria;
  * @JMS\ExclusionPolicy("all")
  * @ORM\HasLifecycleCallbacks()
  */
-class Remark implements PublishableInterface
+class Remark
 {
     /**
      * @var integer

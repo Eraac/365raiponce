@@ -5,8 +5,6 @@ namespace LKE\RemarkBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
-use LKE\UserBundle\Interfaces\OwnableInterface;
-use LKE\UserBundle\Interfaces\PublishableInterface;
 
 /**
  * Response
@@ -16,7 +14,7 @@ use LKE\UserBundle\Interfaces\PublishableInterface;
  * @JMS\ExclusionPolicy("all")
  * @ORM\HasLifecycleCallbacks()
  */
-class Response implements OwnableInterface, PublishableInterface
+class Response
 {
     /**
      * @var integer
@@ -277,6 +275,7 @@ class Response implements OwnableInterface, PublishableInterface
     {
         return $this->author;
     }
+
     /**
      * Constructor
      */

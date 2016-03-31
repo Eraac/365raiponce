@@ -5,9 +5,7 @@ namespace LKE\CoreBundle\Security;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManager;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter as BaseVoter;
-use LKE\UserBundle\Interfaces\PublishableInterface;
-use LKE\UserBundle\Interfaces\ReadAccessInterface;
-use LKE\UserBundle\Interfaces\OwnableInterface;
+use LKE\UserBundle\Entity\User;
 
 class Voter extends BaseVoter
 {
@@ -41,51 +39,43 @@ class Voter extends BaseVoter
             return true;
         }
 
-        switch($access)
-        {
-            case self::VIEW:
-                return $this->canView($entity, $user);
-            case self::EDIT:
-                return $this->canEdit($entity, $user);
-            case self::DELETE:
-                return $this->canDelete($entity, $user);
+        $user = $token->getUser();
+        $method = 'can' . ucfirst($access);
+
+        if (method_exists($this, $method)) {
+            return $this->$method($entity, $user);
         }
 
         throw new \LogicException('This code should not be reached!');
     }
 
-    protected function canView($entity, $user = null)
+    protected function canView($entity, $user)
     {
-        return $this->isFullyReadable($entity) || $this->isPublished($entity) || $this->isOwner($entity, $user);
+        return false;
     }
 
     protected function canEdit($entity, $user)
     {
-        return ($entity instanceof PublishableInterface && !$entity->isPublished() && $this->isOwner($entity, $user));
+        return false;
     }
 
     protected function canDelete($entity, $user)
     {
-        return $this->isOwner($entity, $user);
-    }
-
-    protected function isFullyReadable($entity)
-    {
-        return ($entity instanceof ReadAccessInterface);
-    }
-
-    protected function isPublished($entity)
-    {
-        return ($entity instanceof PublishableInterface && $entity->isPublished());
-    }
-
-    protected function isOwner($entity, $user)
-    {
-        return ($entity instanceof OwnableInterface && $entity->getOwner() === $user);
+        return false;
     }
 
     private function isAdmin($token)
     {
         return ($this->decisionManager->decide($token, array('ROLE_ADMIN')));
+    }
+
+    /**
+     * @param $owner User
+     * @param $currentUser User
+     * @return bool
+     */
+    protected function isOwner($owner, $currentUser)
+    {
+        return $owner->getId() === $currentUser->getId();
     }
 }
