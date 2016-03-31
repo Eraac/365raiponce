@@ -20,6 +20,6 @@ class VoteResponseRepository extends VoteRepository
                 "user" => $user
             ));
 
-        return $qb->getQuery()->getSingleResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 }

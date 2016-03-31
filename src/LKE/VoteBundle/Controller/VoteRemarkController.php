@@ -64,16 +64,27 @@ class VoteRemarkController extends CoreController
      * @ApiDoc(
      *  section="Votes",
      *  description="Delete vote for remark",
+     *  parameters={
+     *      {"name"="type", "dataType"="integer", "required"=true, "description"="0. c'est du sexisme, 1. j'ai déjà vécu ça"}
+     *  },
      * )
      */
     public function deleteRemarkVotesAction(Request $request, $id)
     {
-        $remark = $this->getEntity($id, Voter::DELETE, ["repository" => "LKERemarkBundle:Remark"]);
+        $remark = $this->getEntity($id, Voter::VIEW, ["repository" => "LKERemarkBundle:Remark"]);
         $type = $this->getType($request);
+
+        if (VoteRemark::UNKNOWN === $type) {
+            return new JsonResponse([], 400);
+        }
 
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository($this->getRepositoryName());
         $vote = $repo->getVoteByUserAndRemark($remark, $this->getUser(), $type);
+
+        if (is_null($vote)) {
+            return new JsonResponse([], 404);
+        }
 
         $em->remove($vote);
         $em->flush();

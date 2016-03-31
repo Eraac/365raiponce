@@ -24,6 +24,6 @@ class VoteRemarkRepository extends EntityRepository
                 "user" => $user
             ));
 
-        return $qb->getQuery()->getSingleResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 }
