@@ -57,11 +57,15 @@ class VoteResponseController extends CoreController
      */
     public function deleteResponseVotesAction($id)
     {
-        $response = $this->getEntity($id, Voter::DELETE, ["repository" => "LKERemarkBundle:Response"]);
+        $response = $this->getEntity($id, Voter::VIEW, ["repository" => "LKERemarkBundle:Response"]);
 
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository($this->getRepositoryName());
         $vote = $repo->getVoteByUserAndResponse($response, $this->getUser());
+
+        if (is_null($vote)) {
+            return new JsonResponse([], 204);
+        }
 
         $em->remove($vote);
         $em->flush();

@@ -83,7 +83,7 @@ class VoteRemarkController extends CoreController
         $vote = $repo->getVoteByUserAndRemark($remark, $this->getUser(), $type);
 
         if (is_null($vote)) {
-            return new JsonResponse([], 404);
+            return new JsonResponse([], 204);
         }
 
         $em->remove($vote);
