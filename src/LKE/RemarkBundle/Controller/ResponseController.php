@@ -30,9 +30,16 @@ class ResponseController extends CoreController
     {
         list($limit, $page) = $this->get('lke_core.paginator')->getBorne($request, 30);
 
-        $responses = $this->getRepository()->getResponsesByRemarkComplet($id, $this->getUserId(), $limit, $page - 1);
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $this->getRepository()->getQueryResponsesByRemarkComplet($id, $this->getUserId()),
+            $page,
+            $limit
+        );
 
-        $this->setStats($responses);
+        $responses = $pagination->getItems();
+
+        $this->setStats($pagination);
 
         return $responses;
     }

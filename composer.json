@@ -28,7 +28,8 @@
         "stof/doctrine-extensions-bundle": "^1.2",
         "sithous/antispam-bundle": "1.0.*",
         "dizda/cloud-backup-bundle": "^3.2",
-        "knplabs/knp-gaufrette-bundle": "~0.3"
+        "knplabs/knp-gaufrette-bundle": "~0.3",
+        "knplabs/knp-paginator-bundle": "^2.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

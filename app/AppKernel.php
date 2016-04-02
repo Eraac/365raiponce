@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
             new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new Dizda\CloudBackupBundle\DizdaCloudBackupBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new LKE\UserBundle\LKEUserBundle(),
             new LKE\RemarkBundle\LKERemarkBundle(),
             new LKE\CoreBundle\LKECoreBundle(),

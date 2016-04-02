@@ -27,6 +27,15 @@ class ResponseRepository extends EntityRepository
 
     public function getResponsesByRemarkComplet($idRemark, $idUser, $limit, $page)
     {
+        $qb = getQueryResponsesByRemarkComplet($idRemark, $idUser, $limit, $page)
+                ->setFirstResult($page * $limit)
+                ->setMaxResults($limit);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getQueryResponsesByRemarkComplet($idRemark, $idUser)
+    {
         $qb = $this->createQueryBuilder('r')
             ->leftJoin('r.votes', 'v')
             ->join("r.author", "u")
@@ -34,12 +43,11 @@ class ResponseRepository extends EntityRepository
             ->addSelect('v')
             ->where('r.remark = :idRemark')
             ->andWhere('r.postedAt is not null OR r.author = :idAuthor')
+            ->orderBy('r.postedAt')
             ->setParameter('idRemark', $idRemark)
-            ->setParameter('idAuthor', $idUser)
-            ->setFirstResult($page * $limit)
-            ->setMaxResults($limit);
+            ->setParameter('idAuthor', $idUser);
 
-        return $qb->getQuery()->getResult();
+        return $qb;
     }
 
     public function getMyResponses($idUser, $limit, $page)
