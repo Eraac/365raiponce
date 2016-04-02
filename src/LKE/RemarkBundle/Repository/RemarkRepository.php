@@ -15,6 +15,15 @@ class RemarkRepository extends EntityRepository
 {
     public function getPostedRemark($limit, $page)
     {
+        $qb = $this->queryPostedRemark()
+            ->setMaxResults($limit)
+            ->setFirstResult($page * $limit);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function queryPostedRemark()
+    {
         $qb = $this->createQueryBuilder('r')
             ->leftJoin('r.theme', 't')
             ->leftJoin('r.emotion', 'e')
@@ -23,21 +32,26 @@ class RemarkRepository extends EntityRepository
             ->addSelect('e')
             ->addSelect('re')
             ->where('r.postedAt is not null')
-            ->orderBy('r.postedAt', 'DESC')
+            ->orderBy('r.postedAt', 'DESC');
+
+        return $qb;
+    }
+
+    public function getUnpublishedRemark($limit, $page)
+    {
+        $qb = $this->queryUnpublishedRemark()
             ->setMaxResults($limit)
             ->setFirstResult($page * $limit);
 
         return $qb->getQuery()->getResult();
     }
 
-    public function getUnpublishedRemark($limit, $page)
+    public function queryUnpublishedRemark()
     {
         $qb = $this->createQueryBuilder('r')
-            ->where('r.postedAt is null')
-            ->setMaxResults($limit)
-            ->setFirstResult($page * $limit);
+            ->where('r.postedAt is null');
 
-        return $qb->getQuery()->getResult();
+        return $qb;
     }
 
     public function getCompleteRemark($id)

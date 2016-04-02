@@ -14,11 +14,18 @@ class EmotionRepository extends EntityRepository
 {
     public function getEmotions($limit, $page)
     {
-        $qb = $this->createQueryBuilder('e')
+        $qb = $this->queryEmotions()
                 ->setFirstResult($page * $limit)
                 ->setMaxResults($limit);
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function queryEmotions()
+    {
+        $qb = $this->createQueryBuilder('e');
+
+        return $qb;
     }
 
     public function findBySlug($slug)

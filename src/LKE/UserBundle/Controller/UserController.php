@@ -53,10 +53,18 @@ class UserController extends CoreController
      *  description="List users",
      * )
      */
-    public function getUsersAction()
+    public function getUsersAction(Request $request)
     {
-        // TODO add pagination
-        $users = $this->getDoctrine()->getRepository('LKEUserBundle:User')->findAll();
+        list($limit, $page) = $this->get('lke_core.paginator')->getBorne($request, 50);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $this->getRepository()->queryUsers(),
+            $page,
+            $limit
+        );
+
+        $users = $pagination->getItems();
 
         return $users;
     }

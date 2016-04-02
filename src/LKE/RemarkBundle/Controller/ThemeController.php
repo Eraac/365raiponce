@@ -23,9 +23,16 @@ class ThemeController extends CoreController
      */
     public function getThemesAction(Request $request)
     {
-        list($limit, $page) = $this->get('lke_core.paginator')->getBorne($request, 20);
+        list($limit, $page) = $this->get('lke_core.paginator')->getBorne($request, 50);
 
-        $themes = $this->getRepository()->getThemes($limit, $page - 1);
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $this->getRepository()->queryThemes(),
+            $page,
+            $limit
+        );
+
+        $themes = $pagination->getItems();
 
         return $themes;
     }

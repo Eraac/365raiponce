@@ -42,7 +42,14 @@ class RemarkController extends CoreController
     {
         list($limit, $page) = $this->get('lke_core.paginator')->getBorne($request, 20);
 
-        $remarks = $this->getRepository()->getPostedRemark($limit, $page - 1);
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $this->getRepository()->queryPostedRemark(),
+            $page,
+            $limit
+        );
+
+        $remarks = $pagination->getItems();
 
         $this->setStats($remarks);
 

@@ -23,9 +23,16 @@ class EmotionController extends CoreController
      */
     public function getEmotionsAction(Request $request)
     {
-        list($limit, $page) = $this->get('lke_core.paginator')->getBorne($request, 20);
+        list($limit, $page) = $this->get('lke_core.paginator')->getBorne($request, 50);
 
-        $emotions = $this->getRepository()->getEmotions($limit, $page - 1);
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $this->getRepository()->queryEmotions(),
+            $page,
+            $limit
+        );
+
+        $emotions = $pagination->getItems();
 
         return $emotions;
     }

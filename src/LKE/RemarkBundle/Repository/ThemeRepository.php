@@ -14,11 +14,18 @@ class ThemeRepository extends EntityRepository
 {
     public function getThemes($limit, $page)
     {
-        $qb = $this->createQueryBuilder('t')
+        $qb = $this->queryThemes()
             ->setMaxResults($limit)
             ->setFirstResult($page * $limit);
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function queryThemes()
+    {
+        $qb = $this->createQueryBuilder('t');
+
+        return $qb;
     }
 
     public function findBySlug($slug)

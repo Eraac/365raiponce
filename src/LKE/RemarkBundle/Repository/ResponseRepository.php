@@ -53,25 +53,39 @@ class ResponseRepository extends EntityRepository
 
     public function getMyResponses($idUser, $limit, $page)
     {
-        $qb = $this->createQueryBuilder('r')
-            ->andWhere('r.author = :idAuthor')
-            ->setParameter('idAuthor', $idUser)
+        $qb = $this->queryMyResponses($idUser)
             ->setFirstResult($page * $limit)
             ->setMaxResults($limit);
 
         return $qb->getQuery()->getResult();
     }
 
+    public function queryMyResponses($idUser)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->andWhere('r.author = :idAuthor')
+            ->setParameter('idAuthor', $idUser);
+
+        return $qb;
+    }
+
     public function getUnpublishedResponses($limit, $page)
+    {
+        $qb = $this->queryUnpublishedResponses()
+                ->setFirstResult($page * $limit)
+                ->setMaxResults($limit);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function queryUnpublishedResponses()
     {
         $qb = $this->createQueryBuilder('r')
             ->join('r.remark', 're')
             ->addSelect('re')
-            ->andWhere('r.postedAt is null')
-            ->setFirstResult($page * $limit)
-            ->setMaxResults($limit);
+            ->andWhere('r.postedAt is null');
 
-        return $qb->getQuery()->getResult();
+        return $qb;
     }
 
     public function getResponseAndVotes($id)
