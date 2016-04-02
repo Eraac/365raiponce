@@ -44,6 +44,7 @@ class ResponseRepository extends EntityRepository
             ->where('r.remark = :idRemark')
             ->andWhere('r.postedAt is not null OR r.author = :idAuthor')
             ->orderBy('r.postedAt')
+            ->addOrderBy('r.id')
             ->setParameter('idRemark', $idRemark)
             ->setParameter('idAuthor', $idUser);
 
