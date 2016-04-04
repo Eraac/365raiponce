@@ -34,6 +34,7 @@ abstract class AbstractVote
 
     /**
      * @ORM\ManyToOne(targetEntity="LKE\UserBundle\Entity\User")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $user;
 

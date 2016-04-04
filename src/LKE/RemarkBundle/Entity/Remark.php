@@ -74,7 +74,7 @@ class Remark
     private $updatedAt;
 
     /**
-     * @var LKE\RemarkBundle\Entity\Theme
+     * @var \LKE\RemarkBundle\Entity\Theme
      *
      * @ORM\ManyToOne(targetEntity="LKE\RemarkBundle\Entity\Theme")
      * @ORM\JoinColumn(onDelete="SET NULL")
@@ -84,7 +84,7 @@ class Remark
     private $theme;
 
     /**
-     * @var LKE\RemarkBundle\Entity\Emotion
+     * @var \LKE\RemarkBundle\Entity\Emotion
      *
      * @ORM\ManyToOne(targetEntity="LKE\RemarkBundle\Entity\Emotion")
      * @ORM\JoinColumn(onDelete="SET NULL")

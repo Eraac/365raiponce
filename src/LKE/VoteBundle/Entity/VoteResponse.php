@@ -15,6 +15,7 @@ class VoteResponse extends AbstractVote
 {
     /**
      * @ORM\ManyToOne(targetEntity="LKE\RemarkBundle\Entity\Response", inversedBy="votes")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $response;
 
