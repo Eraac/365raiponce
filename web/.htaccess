@@ -20,6 +20,16 @@ DirectoryIndex app.php
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+	RewriteCond %{REQUEST_METHOD} OPTIONS
+    RewriteCond %{REQUEST_URI} !=preflight
+    RewriteRule ^(.*)$ preflight [L]
+
+    <IfModule mod_headers.c>
+        Header set Access-Control-Allow-Origin "*"
+        Header set Access-Control-Allow-Methods "GET, POST, PATCH, DELETE, OPTIONS"
+        Header set Access-Control-Allow-Headers "Authorization, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, ContentType"
+    </IfModule>
+
     # Determine the RewriteBase automatically and set it as environment variable.
     # If you are using Apache aliases to do mass virtual hosting or installed the
     # project in a subdirectory, the base path will be prepended to allow proper
