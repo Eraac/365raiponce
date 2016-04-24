@@ -19,24 +19,29 @@ class CreateAntispamCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $identifier = "public_protection";
+        $identifiers = ["public_protection", "report_protection"];
 
         $em = $this->getContainer()->get("doctrine")->getManager();
+        $repo = $em->getRepository('SithousAntiSpamBundle:SithousAntiSpamType');
 
-        $antispam = $em->getRepository('SithousAntiSpamBundle:SithousAntiSpamType')->findOneById($identifier);
-
-        if (is_null($antispam))
+        foreach($identifiers as $identifier)
         {
-            $antispam = new SithousAntiSpamType();
-            $antispam->setId($identifier)
-                    ->setMaxCalls(10)
-                    ->setMaxTime(3600)
-                    ->setTrackIp(true)
-                    ->setTrackUser(false);
+            $antispam = $repo->findOneById($identifier);
 
-            $em->persist($antispam);
-            $em->flush();
+            if (is_null($antispam))
+            {
+                $antispam = new SithousAntiSpamType();
+                $antispam->setId($identifier)
+                        ->setMaxCalls(10)
+                        ->setMaxTime(3600)
+                        ->setTrackIp(true)
+                        ->setTrackUser(false);
+
+                $em->persist($antispam);
+            }
         }
+
+        $em->flush();
 
         $output->writeln("Antispam configured !");
     }

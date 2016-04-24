@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use FOS\RestBundle\Controller\Annotations\View;
 use LKE\CoreBundle\Security\Voter;
 use LKE\RemarkBundle\Entity\Response;
+use LKE\RemarkBundle\Entity\Report;
 use LKE\CoreBundle\Controller\CoreController;
 use LKE\RemarkBundle\Form\Type\ResponseType;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -153,6 +154,38 @@ class ResponseController extends CoreController
         $this->setStats($responses);
 
         return $responses;
+    }
+
+    /**!
+     * @View(serializerGroups={"Default"})
+     * @ApiDoc(
+     *  section="Responses",
+     *  description="Report inappropriate content",
+     * )
+     */
+    public function postResponsesReportAction($id)
+    {
+        $spamCheck = $this->get('sithous.antispam');
+
+        if(!$spamCheck->setType('report_protection')->verify())
+        {
+            return new JsonResponse([
+                'result'  => 'error',
+                'message' => $spamCheck->getErrorMessage()
+            ], 403);
+        }
+
+        /** @var Response $response */
+        $response = $this->getEntity($id);
+
+        $report = new Report();
+        $report->setResponse($response);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($report);
+        $em->flush();
+
+        return new JsonResponse([]);
     }
 
     private function formResponse(Response $response, Request $request, $method = "post")

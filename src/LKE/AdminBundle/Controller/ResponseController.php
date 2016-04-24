@@ -2,6 +2,7 @@
 
 namespace LKE\AdminBundle\Controller;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use LKE\CoreBundle\Controller\CoreController;
 use LKE\CoreBundle\Security\Voter;
@@ -88,6 +89,22 @@ class ResponseController extends CoreController
         $em->flush();
 
         return $response;
+    }
+
+    /**
+     * @ApiDoc(
+     *  section="Admin responses",
+     *  description="Get reported responses"
+     * )
+     */
+    public function getResponsesReportedAction()
+    {
+        /** @var \LKE\RemarkBundle\Repository\ReportRepository $repo */
+        $repo = $this->getDoctrine()->getRepository('LKERemarkBundle:Report');
+
+        $reports = $repo->getReportedResponses();
+
+        return new JsonResponse($reports);
     }
 
     final protected function getRepositoryName()
