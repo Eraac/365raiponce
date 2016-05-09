@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
             new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new Dizda\CloudBackupBundle\DizdaCloudBackupBundle(),
+            new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new LKE\UserBundle\LKEUserBundle(),
             new LKE\RemarkBundle\LKERemarkBundle(),
@@ -34,7 +35,6 @@ class AppKernel extends Kernel
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
-            $bundles[] = new Symfony\Bundle\TwigBundle\TwigBundle();
             $bundles[] = new Nelmio\ApiDocBundle\NelmioApiDocBundle();
         }
 
