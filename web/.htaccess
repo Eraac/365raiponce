@@ -20,7 +20,10 @@ DirectoryIndex app.php
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-	RewriteCond %{REQUEST_METHOD} OPTIONS
+    RewriteCond %{HTTP_HOST} 365raiponce\.fr [NC]
+    RewriteRule ^$ http://blog.365raiponce.fr/ [R=301,L]
+
+    RewriteCond %{REQUEST_METHOD} OPTIONS
     RewriteCond %{REQUEST_URI} !=preflight
     RewriteRule ^(.*)$ preflight [L]
 
