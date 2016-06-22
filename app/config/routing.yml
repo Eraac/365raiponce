@@ -4,7 +4,7 @@ api:
     prefix: /api
 
 api_login_check:
-   path: /login_check
+   path: /api/login_check
 
 api_preflight:
     path: /preflight
