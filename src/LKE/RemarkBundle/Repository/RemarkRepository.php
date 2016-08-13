@@ -4,6 +4,7 @@ namespace LKE\RemarkBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use LKE\RemarkBundle\Entity\Remark;
+use LKE\RemarkBundle\Entity\Theme;
 
 /**
  * RemarkRepository
@@ -100,5 +101,22 @@ class RemarkRepository extends EntityRepository
             ->where("r.postedAt is null");
 
         return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function queryPostedRemarkByTheme(Theme $theme)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->leftJoin('r.theme', 't')
+            ->leftJoin('r.emotion', 'e')
+            ->leftJoin('r.responses', 're')
+            ->addSelect('t')
+            ->addSelect('e')
+            ->addSelect('re')
+            ->where('r.postedAt is not null')
+            ->andWhere('r.theme = :theme')
+            ->setParameter('theme', $theme)
+            ->orderBy('r.postedAt', 'DESC');
+
+        return $qb;
     }
 }
