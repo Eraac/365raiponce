@@ -1,0 +1,26 @@
+sudo: required
+
+language: php
+php:
+    - 5.6
+
+services:
+  - docker
+
+script:
+  - composer install
+
+after_success:
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USER" -p="$DOCKER_PASS"
+  - export REPO=$DOCKER_USER/365raiponce
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - docker build -f Dockerfile -t $REPO:${TAG} .
+  - docker push $REPO
+
+notifications:
+  email:
+    -  kevin@labesse.me
+
+env:
+  global:
+    secure: "DdyoO4Q4WF9EeCEvQcopHTyyAC1sgMGj5LVdIEebG4xrvsgy0XxcClapmRLBHXmD8la8ULLbZtA5IBIDMzd7gX3c+yoNvpI0Th3e8CLPTJTGmfYba8eW2y1GNVXvVE0o2e4Dr8RAnkhVCu6SZajJsFPU2ANiiTr3duFlpa62e3FwzZ5ZKMOVeoiZwpDW1f+D7+9wixzpfQbjxoYpR2Cr91nRJ8VxYRgCllsRtgN1wUzKnDaqb1raO6Ii2cHByIe50Y9MtP171Od1jp9f9TlPmuAJeKfvXtlGuEuiJ+jlKjBI2aW/85pCsdlumAxuIPGCMxtjScQToZXQDDjDlhJD3NWRlQ05yogzLuz9vHAqw7JKby/AWzcOY5FrtZU12MaardeQcWOLQJJmMMHODfR4bGGL8c+PCwYGUHNvqAKHLWgFgOy14pDqYy14YysfgA3IuHqhmPGvyAsS0EJFecK5Ywy+BXaHV8zPSAUv42Uf8YsKC/lftdiJOHpilZmOGW8EAGcA94pNh0AL24XLo9T+xKkMnlCKQNAFe3mrnRd13r3dJmA5aAq3BZXHg7d344FccqCUzToUBkisoNmFTjLHaTWUDy/sIJbuNSgwb0MFGRMS3/LVaW5j8qBgUbiNyTLf/6gG90chRqrwv7jDeC+0IUn7dO5BTPzo7AQAqCGTTZY="
