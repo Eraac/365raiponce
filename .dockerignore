@@ -1,0 +1,6 @@
+.git/
+.gitignore
+*.md
+web/app_*.php
+web/config.php
+app/var/jwt
