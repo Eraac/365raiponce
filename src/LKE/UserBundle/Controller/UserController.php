@@ -154,7 +154,7 @@ class UserController extends CoreController
         $user = $this->container->get('fos_user.user_manager')->findUserByUsernameOrEmail($email);
 
         if (null === $user) {
-            throw new NotFoundHttpException('Email ' . $email . ' not found');
+            throw new NotFoundHttpException('Email "' . $email . '" not found');
         }
 
         if ($user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl'))) {

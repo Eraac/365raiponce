@@ -27,7 +27,7 @@ class Mailer implements MailerInterface
             'token' => $user->getConfirmationToken()
         );
 
-        $this->sendMessage($template, $context, $this->parameters['from_email']['confirmation'], $user->getEmail());
+        //$this->sendMessage($template, $context, $this->parameters['from_email']['confirmation'], $user->getEmail());
     }
 
     public function sendResettingEmailMessage(UserInterface $user)
@@ -51,20 +51,18 @@ class Mailer implements MailerInterface
     {
         $template = $this->twig->loadTemplate($templateName);
         $subject = $template->renderBlock('subject', $context);
-        $textBody = $template->renderBlock('body_text', $context);
-        $htmlBody = $template->renderBlock('body_html', $context);
+        $textBody = <<<EOT
+Bonjour,
+
+Voici votre token pour réinitialiser votre mot de passe : 
+EOT;
 
         $message = \Swift_Message::newInstance()
             ->setSubject($subject)
             ->setFrom($fromEmail)
-            ->setTo($toEmail);
-
-        if (!empty($htmlBody)) {
-            $message->setBody($htmlBody, 'text/html')
-                ->addPart($textBody, 'text/plain');
-        } else {
-            $message->setBody($textBody);
-        }
+            ->setTo($toEmail)
+            ->setBody($textBody . $context['token'])
+        ;
 
         $this->mailer->send($message);
     }
