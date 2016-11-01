@@ -32,13 +32,12 @@ class Mailer implements MailerInterface
 
     public function sendResettingEmailMessage(UserInterface $user)
     {
-        $template = $this->parameters['template']['resetting'];
-
         $context = array(
             'user' => $user,
             'token' => $user->getConfirmationToken()
         );
-        $this->sendMessage($template, $context, $this->parameters['from_email']['resetting'], $user->getEmail());
+
+        $this->sendMessage($context, $this->parameters['from_email']['resetting'], $user->getEmail());
     }
 
     /**
@@ -47,10 +46,9 @@ class Mailer implements MailerInterface
      * @param string $fromEmail
      * @param string $toEmail
      */
-    protected function sendMessage($templateName, $context, $fromEmail, $toEmail)
+    protected function sendMessage($context, $fromEmail, $toEmail)
     {
-        $template = $this->twig->loadTemplate($templateName);
-        $subject = $template->renderBlock('subject', $context);
+        $subject = "Demande de réinitialisation de mot de passe";
         $textBody = <<<EOT
 Bonjour,
 
