@@ -1,11 +1,9 @@
 imports:
     - { resource: config.yml }
 
-#framework:
-#    validation:
-#        cache: validator.mapping.cache.apc
-#    serializer:
-#        cache: serializer.mapping.cache.apc
+nelmio_api_doc:
+    cache:
+        enabled: true
 
 #doctrine:
 #    orm:
@@ -29,6 +27,6 @@ monolog:
         swift:
             type:           swift_mailer
             from_email:     "%mail_sender%"
-            to_email:       ["%mail_developer%", "%mail_webmaster%"]
-            subject:        "[ERROR] [365raiponce]"
-            level:          critical
+            to_email:       "%mail_admin%"
+            subject:        "[ERROR] %app_name%"
+            level:          debug

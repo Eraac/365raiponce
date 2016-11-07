@@ -1,0 +1,12 @@
+services:
+    core.abstract_filter:
+        class: CoreBundle\Filter\AbstractFilter
+        arguments: ['@translator.default']
+        abstract: true
+        public: false
+
+    core.log_request_filter:
+        class: CoreBundle\Filter\LogRequestFilter
+        parent: core.abstract_filter
+        arguments: ['@core.log_request_repository']
+        public: true

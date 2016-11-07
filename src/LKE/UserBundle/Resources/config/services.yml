@@ -1,9 +1,0 @@
-parameters:
-    fos_user.resetting.email.template: 'FOSUserBundle:Resetting:email.txt.twig'
-    fos_user.registration.confirmation.template: 'FOSUserBundle:Registration:email.txt.twig'
-
-services:
-    lke_user.mailer:
-        class: LKE\UserBundle\Service\Mailer
-        public: false
-        arguments: ['@mailer', '@twig', { template: { confirmation: '%fos_user.registration.confirmation.template%', resetting: '%fos_user.resetting.email.template%' }, from_email: { confirmation: '%fos_user.registration.confirmation.from_email%', resetting: '%fos_user.resetting.email.from_email%' } }]
