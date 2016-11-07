@@ -2,8 +2,9 @@ FROM busybox
 
 MAINTAINER Kévin Labesse kevin@labesse.me
 
-COPY . /var/www/symfony
+COPY . /var/www
 
-RUN chmod u+rws,g+rws,o+rws /var/www/symfony/app/cache /var/www/symfony/app/logs
+RUN chmod -R 777 /var/www/var/cache /var/www/var/logs
 
-VOLUME /var/www/symfony
+VOLUME /var/www
+
