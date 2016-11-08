@@ -10,3 +10,9 @@ services:
         parent: core.abstract_filter
         arguments: ['@core.log_request_repository']
         public: true
+
+    core.emotion_filter:
+        class: CoreBundle\Filter\EmotionFilter
+        parent: core.abstract_filter
+        arguments: ['@core.emotion_repository']
+        public: true

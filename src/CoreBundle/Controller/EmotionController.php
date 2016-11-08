@@ -36,7 +36,7 @@ class EmotionController extends AbstractApiController implements EmotionDocs
     public function cgetAction(Request $request) : PaginatedRepresentation
     {
         $qb = $this->getDoctrine()->getRepository('CoreBundle:Emotion')->qbFindAll();
-        $qb = $this->applyFilter('core.log_request_filter', $qb, $request);
+        $qb = $this->applyFilter('core.emotion_filter', $qb, $request);
 
         return $this->paginate($qb, $request);
     }
@@ -48,7 +48,7 @@ class EmotionController extends AbstractApiController implements EmotionDocs
      *
      * @Security("is_granted('view', emotion)")
      *
-     * @FOSRest\Get("/emotions/{emotion_id}")
+     * @FOSRest\Get("/emotions/{emotion_id}", requirements={"emotion_id"="\d+"})
      * @FOSRest\View()
      *
      * @ParamConverter("emotion", class="CoreBundle:Emotion", options={"id" = "emotion_id"})
@@ -93,7 +93,7 @@ class EmotionController extends AbstractApiController implements EmotionDocs
      *
      * @ParamConverter("emotion", class="CoreBundle:Emotion", options={"id" = "emotion_id"})
      *
-     * @FOSRest\Patch("/emotions/{emotion_id}")
+     * @FOSRest\Patch("/emotions/{emotion_id}", requirements={"emotion_id"="\d+"})
      * @FOSRest\View()
      */
     public function patchAction(Request $request, Emotion $emotion)
@@ -112,7 +112,7 @@ class EmotionController extends AbstractApiController implements EmotionDocs
      *
      * @ParamConverter("emotion", class="CoreBundle:Emotion", options={"id" = "emotion_id"})
      *
-     * @FOSRest\Delete("/emotions/{emotion_id}")
+     * @FOSRest\Delete("/emotions/{emotion_id}", requirements={"emotion_id"="\d+"})
      * @FOSRest\View()
      */
     public function deleteAction(Emotion $emotion)

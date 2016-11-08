@@ -19,4 +19,15 @@ class EmotionRepository extends AbstractRepository
     {
         return $this->createQueryBuilder('e');
     }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string|array $name
+     *
+     * @return QueryBuilder
+     */
+    public function filterByName(QueryBuilder $qb, $name) : QueryBuilder
+    {
+        return $this->filterBy($qb, 'name', $name);
+    }
 }
