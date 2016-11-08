@@ -13,4 +13,4 @@ CoreBundle\Entity\Theme:
             href:
                 route: api_get_theme
                 parameters:
-                    emotion_id: expr(object.getId())
+                    theme_id: expr(object.getId())
