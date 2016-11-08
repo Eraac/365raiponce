@@ -2,6 +2,8 @@
 
 namespace CoreBundle\Controller;
 
+use CoreBundle\Annotation\ApiDoc;
+use CoreBundle\Docs\EmotionDocs;
 use CoreBundle\Entity\Emotion;
 use CoreBundle\Form\EmotionType;
 use FOS\RestBundle\Controller\Annotations as FOSRest;
@@ -18,10 +20,12 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @FOSRest\Version("1.0")
  */
-class EmotionController extends AbstractApiController
+class EmotionController extends AbstractApiController implements EmotionDocs
 {
     /**
      * Return collection of Emotion
+     *
+     * @ApiDoc(EmotionDocs::CGET)
      *
      * @param Request $request
      *
@@ -40,6 +44,8 @@ class EmotionController extends AbstractApiController
     /**
      * Return the Emotion
      *
+     * @ApiDoc(EmotionDocs::GET)
+     *
      * @Security("is_granted('view', emotion)")
      *
      * @FOSRest\Get("/emotions/{emotion_id}")
@@ -56,6 +62,8 @@ class EmotionController extends AbstractApiController
 
     /**
      * Add an Emotion
+     *
+     * @ApiDoc(EmotionDocs::POST)
      *
      * @param Request $request
      *
@@ -75,6 +83,8 @@ class EmotionController extends AbstractApiController
     /**
      * Update an Emotion
      *
+     * @ApiDoc(EmotionDocs::PATCH)
+     *
      * @param Request $request
      *
      * @return object|\Symfony\Component\HttpFoundation\JsonResponse
@@ -93,6 +103,8 @@ class EmotionController extends AbstractApiController
 
     /**
      * Delete an Emotion
+     *
+     * @ApiDoc(EmotionDocs::DELETE)
      *
      * @param Emotion $emotion
      *

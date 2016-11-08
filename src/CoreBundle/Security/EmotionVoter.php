@@ -28,7 +28,7 @@ class EmotionVoter extends AbstractVoter
      */
     protected function canView(Emotion $emotion, TokenInterface $token) : bool
     {
-        return $this->isConnected($token);
+        return true;
     }
 
     /**

@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Emotion
 {
     /**
+     * Id of the emotion
+     *
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -21,6 +23,8 @@ class Emotion
     private $id;
 
     /**
+     * Name of the emotion
+     *
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=30, unique=true)
