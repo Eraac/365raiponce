@@ -1,0 +1,16 @@
+CoreBundle\Entity\Theme:
+    exclusion_policy: ALL
+
+    properties:
+        id:
+            expose: true
+        name:
+            expose: true
+
+    relations:
+        -
+            rel: self
+            href:
+                route: api_get_theme
+                parameters:
+                    emotion_id: expr(object.getId())

@@ -44,6 +44,8 @@ class EmotionController extends AbstractApiController implements EmotionDocs
     /**
      * Return the Emotion
      *
+     * @param Emotion $emotion
+     *
      * @ApiDoc(EmotionDocs::GET)
      *
      * @Security("is_granted('view', emotion)")
@@ -86,6 +88,7 @@ class EmotionController extends AbstractApiController implements EmotionDocs
      * @ApiDoc(EmotionDocs::PATCH)
      *
      * @param Request $request
+     * @param Emotion $emotion
      *
      * @return object|\Symfony\Component\HttpFoundation\JsonResponse
      *

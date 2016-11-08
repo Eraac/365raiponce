@@ -5,15 +5,15 @@ namespace CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Emotion
+ * Theme
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\EmotionRepository")
+ * @ORM\Entity(repositoryClass="CoreBundle\Repository\ThemeRepository")
  */
-class Emotion
+class Theme
 {
     /**
-     * Id of the emotion
+     * Id of the theme
      *
      * @var integer
      *
@@ -24,11 +24,11 @@ class Emotion
     private $id;
 
     /**
-     * Name of the emotion
+     * Name of the theme
      *
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=30, unique=true)
+     * @ORM\Column(name="name", type="string", length=30)
      */
     private $name;
 
@@ -38,7 +38,7 @@ class Emotion
      *
      * @return integer
      */
-    public function getId() : int
+    public function getId()
     {
         return $this->id;
     }
@@ -48,7 +48,7 @@ class Emotion
      *
      * @param string $name
      *
-     * @return Emotion
+     * @return Theme
      */
     public function setName(string $name)
     {

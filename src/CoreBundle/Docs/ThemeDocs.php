@@ -2,27 +2,27 @@
 
 namespace CoreBundle\Docs;
 
-use CoreBundle\Entity\Emotion;
-use CoreBundle\Form\EmotionType;
+use CoreBundle\Entity\Theme;
+use CoreBundle\Form\ThemeType;
 use Symfony\Component\HttpFoundation\Response;
 
-interface EmotionDocs extends Docs
+interface ThemeDocs extends Docs
 {
-    const SECTION = 'Emotion';
+    const SECTION = 'Theme';
     const HEADERS = Docs::AUTH_HEADERS;
 
     const DEFAULT_OUTPUT = [
-        'class'     => Emotion::class,
+        'class'     => Theme::class,
         'parsers'   => self::OUTPUT_PARSER,
     ];
 
     const DEFAULT_INPUT = [
-        'class'   => EmotionType::class,
+        'class'   => ThemeType::class,
         'parsers' => self::INPUT_PARSER,
     ];
 
     const DEFAULT_REQUIREMENTS = [
-        ['name' => 'emotion_id', 'dataType' => 'integer', 'description' => 'id of the emotion', 'requirement' => 'A valid emotion id']
+        ['name' => 'theme_id', 'dataType' => 'integer', 'description' => 'id of the theme', 'requirement' => 'A valid theme id']
     ];
 
     const DEFAULT = [
