@@ -82,7 +82,7 @@ class UserController extends AbstractUserController implements UserDocs
 
         $user = $userManager->createUser();
 
-        return $this->form($request, UserType::class, $user, Request::METHOD_POST);
+        return $this->form($request, UserType::class, $user, ['method' => Request::METHOD_POST]);
     }
 
     /**
@@ -109,7 +109,7 @@ class UserController extends AbstractUserController implements UserDocs
         $formType = $this->isGranted('ROLE_ADMIN') ?
             UserEditAdminType::class : UserEditType::class;
 
-        return $this->form($request, $formType, $u, Request::METHOD_PATCH);
+        return $this->form($request, $formType, $u, ['method' => Request::METHOD_PATCH]);
     }
 
     /**

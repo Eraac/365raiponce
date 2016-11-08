@@ -32,13 +32,13 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
      * @param Request $request
      * @param string $formType
      * @param object $entity
-     * @param string $method
+     * @param array $options
      *
      * @return object|JsonResponse|Form
      */
-    protected function form(Request $request, $formType, $entity, string $method)
+    protected function form(Request $request, $formType, $entity, array $options)
     {
-        $form = $this->createForm($formType, $entity, ['method' => $method]);
+        $form = $this->createForm($formType, $entity, $options);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
