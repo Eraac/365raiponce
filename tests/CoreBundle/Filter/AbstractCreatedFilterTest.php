@@ -2,10 +2,6 @@
 
 namespace Tests\CoreBundle\Filter;
 
-use Doctrine\ORM\QueryBuilder;
-use Tests\CoreBundle\Filter\AbstractFilterTest;
-use UserBundle\Repository\UserRepository;
-
 abstract class AbstractCreatedFilterTest extends AbstractFilterTest
 {
     /**

@@ -44,7 +44,6 @@ interface EmotionDocs extends Docs
         'statusCodes' => [
             Response::HTTP_OK           => self::HTTP_OK,
             Response::HTTP_BAD_REQUEST  => self::HTTP_BAD_REQUEST,
-            Response::HTTP_UNAUTHORIZED => self::HTTP_UNAUTHORIZED
         ],
         'filters' => [
             ['name' => 'filter[name]', 'dataType' => 'string', 'description' => 'Search by name'],
@@ -64,7 +63,6 @@ interface EmotionDocs extends Docs
         'statusCodes'  => [
             Response::HTTP_OK           => self::HTTP_OK,
             Response::HTTP_BAD_REQUEST  => self::HTTP_BAD_REQUEST,
-            Response::HTTP_UNAUTHORIZED => self::HTTP_UNAUTHORIZED,
             Response::HTTP_NOT_FOUND    => self::HTTP_NOT_FOUND,
         ],
     ];

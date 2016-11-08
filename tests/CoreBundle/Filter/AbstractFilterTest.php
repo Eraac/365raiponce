@@ -95,7 +95,7 @@ abstract class AbstractFilterTest extends WebTestCase
         try {
             $filter->applyFilter($qb, $criterias);
         } catch (InvalidFilterException $e) {
-            $this->assertTrue(false);
+            $this->assertTrue(false, $e->getMessage());
         }
 
         $this->assertTrue(true);
