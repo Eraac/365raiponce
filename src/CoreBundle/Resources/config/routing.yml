@@ -1,3 +1,7 @@
 log_request:
     type: rest
     resource: CoreBundle\Controller\LogRequestController
+
+emotion:
+    type: rest
+    resource: CoreBundle\Controller\EmotionController

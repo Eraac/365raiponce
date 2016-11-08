@@ -6,3 +6,9 @@ services:
         public: false
 #        tags:
 #            - { name: security.voter }
+
+    core.emotion_voter:
+        class: CoreBundle\Security\EmotionVoter
+        parent: core.base_voter
+        tags:
+            - { name: security.voter }
