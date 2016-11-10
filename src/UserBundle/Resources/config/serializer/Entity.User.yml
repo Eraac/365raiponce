@@ -8,6 +8,12 @@ UserBundle\Entity\User:
         confirmed:
             expose: true
             groups: [me, admin]
+        createdAt:
+            expose: true
+            groups: [me, admin]
+        updatedAt:
+            expose: true
+            groups: [me, admin]
 
     relations:
         -
