@@ -1,0 +1,67 @@
+CoreBundle\Entity\Remark:
+    exclusion_policy: ALL
+
+    properties:
+        id:
+            expose: true
+        context:
+            expose: true
+        sentence:
+            expose: true
+        postedAt:
+            expose: true
+        createdAt:
+            expose: true
+            groups: [my, admin]
+        updatedAt:
+            expose: true
+            groups: [admin]
+        theme:
+            expose: true
+        emotion:
+            expose: true
+        scaleEmotion:
+            expose: true
+        email:
+            expose: true
+            groups: [admin]
+
+#    relations:
+#       # links
+#        -
+#            rel: self
+#            href:
+#                route: api_get_remark
+#                parameters:
+#                    emotion_id: expr(object.getId())
+
+        # embedded
+        -
+            rel: count_published_responses
+            embedded:
+                content: expr(object.countPublishedResponses())
+            exclusion:
+                groups: [stats]
+
+        -
+            rel: count_unpublished_responses
+            embedded:
+                content: expr(object.countUnpublishedResponses())
+            exclusion:
+                groups: [admin] # ROLE_USER can see count of unpublished response ?
+
+        -
+            rel: count_vote_is_sexist
+            embedded:
+                content: expr(object.getCountVoteIsSexist())
+            exclusion:
+                groups: [stats]
+
+        -
+            rel: count_vote_already_lived
+            embedded:
+                content: expr(object.getCountVoteAlreadyLive())
+            exclusion:
+                groups: [stats]
+
+# TODO user has vote for ...

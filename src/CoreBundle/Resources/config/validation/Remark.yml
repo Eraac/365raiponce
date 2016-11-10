@@ -1,0 +1,22 @@
+CoreBundle\Entity\Remark:
+    properties:
+        context:
+            - NotBlank: ~
+            - Type: string
+
+        sentence:
+            - NotBlank: ~
+            - Type: string
+            - Length:
+                - max: 140
+
+        scaleEmotion:
+            - Type: integer
+            - Range:
+                - min: 1
+                - max: 10
+
+        email:
+            - Type: string
+            - Length:
+                - max: 140

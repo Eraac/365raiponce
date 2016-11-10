@@ -163,7 +163,7 @@ abstract class AbstractFilter
     }
 
     /**
-     * @param string $orderBy
+     * @param string $order
      *
      * @return bool
      */
