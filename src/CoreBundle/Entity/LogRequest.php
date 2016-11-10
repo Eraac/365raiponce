@@ -38,7 +38,7 @@ class LogRequest
      * @var string
      *
      * @ORM\Column(name="method", type="string",
-     *     columnDefinition="ENUM('HEAD', 'GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'PURGE', 'OPTIONS','TRACE', 'CONNECT', 'LINK', 'UNLINK', 'COPY', 'LOCK', 'UNLOCK')"
+     *     columnDefinition="ENUM('HEAD', 'GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'PURGE', 'OPTIONS', 'TRACE', 'CONNECT', 'LINK', 'UNLINK', 'COPY', 'LOCK', 'UNLOCK')"
      * )
      */
     private $method;
