@@ -94,18 +94,6 @@ class LogRequestRepository extends AbstractDateRepository
      */
     public function filterByUser(QueryBuilder $qb, $user) : QueryBuilder
     {
-        $alias = $this->getAlias($qb);
-
-        $qb->leftJoin($alias . 'user', 'u');
-
-        if (is_array($user)) {
-            $expr = $qb->expr()->in('u.id', ':user');
-        } else {
-            $expr = $qb->expr()->eq('u.id', ':user');
-        }
-
-        return $qb
-            ->andWhere($expr)
-            ->setParameter('user', $user);
+        return $this->filterByWithJoin($qb, 'user', $user, 'u');
     }
 }
