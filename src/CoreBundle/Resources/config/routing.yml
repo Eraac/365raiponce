@@ -9,3 +9,7 @@ emotion:
 theme:
     type: rest
     resource: CoreBundle\Controller\ThemeController
+
+remark:
+    type: rest
+    resource: CoreBundle\Controller\RemarkController

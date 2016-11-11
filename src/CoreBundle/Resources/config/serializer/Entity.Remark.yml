@@ -16,24 +16,20 @@ CoreBundle\Entity\Remark:
         updatedAt:
             expose: true
             groups: [admin]
-        theme:
-            expose: true
-        emotion:
-            expose: true
         scaleEmotion:
             expose: true
         email:
             expose: true
             groups: [admin]
 
-#    relations:
-#       # links
-#        -
-#            rel: self
-#            href:
-#                route: api_get_remark
-#                parameters:
-#                    emotion_id: expr(object.getId())
+    relations:
+       # links
+        -
+            rel: self
+            href:
+                route: api_get_remark
+                parameters:
+                    remark_id: expr(object.getId())
 
         # embedded
         -
@@ -48,7 +44,7 @@ CoreBundle\Entity\Remark:
             embedded:
                 content: expr(object.countUnpublishedResponses())
             exclusion:
-                groups: [admin] # ROLE_USER can see count of unpublished response ?
+                groups: [stats, admin]
 
         -
             rel: count_vote_is_sexist
@@ -63,5 +59,16 @@ CoreBundle\Entity\Remark:
                 content: expr(object.getCountVoteAlreadyLive())
             exclusion:
                 groups: [stats]
+
+        -
+            rel: theme
+            embedded:
+                content: expr(object.getTheme())
+
+        -
+            rel: emotion
+            embedded:
+                content: expr(object.getEmotion())
+
 
 # TODO user has vote for ...

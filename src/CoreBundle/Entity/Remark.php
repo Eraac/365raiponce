@@ -287,7 +287,7 @@ class Remark
     /**
      * @return integer
      */
-    public function getScaleEmotion() : integer
+    public function getScaleEmotion()
     {
         return $this->scaleEmotion;
     }
