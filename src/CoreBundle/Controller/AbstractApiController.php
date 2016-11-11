@@ -62,6 +62,10 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
             return new JsonResponse(['errors' => [$this->t('core.error.empty_json')]], JsonResponse::HTTP_BAD_REQUEST);
         }
 
+        if ('json' !== $request->getContentType()) {
+            return new JsonResponse(['errors' => [$this->t('core.error.bad_content_type')]], JsonResponse::HTTP_BAD_REQUEST);
+        }
+
         return $form;
     }
 
