@@ -7,6 +7,9 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class RemarkVoter extends AbstractVoter
 {
+    const PUBLISH = 'publish';
+    const UNPUBLISH = 'unpublish';
+
     /**
      * @param string $attribute
      * @param mixed $subject
@@ -15,7 +18,9 @@ class RemarkVoter extends AbstractVoter
      */
     protected function supports($attribute, $subject) : bool
     {
-        return parent::supports($attribute, $subject) && $subject instanceof Remark;
+        return
+            (parent::supports($attribute, $subject) || in_array($attribute, [self::PUBLISH, self::UNPUBLISH]))
+                && $subject instanceof Remark;
     }
 
     /**
@@ -53,6 +58,32 @@ class RemarkVoter extends AbstractVoter
      * @return bool
      */
     protected function canDelete(Remark $remark, TokenInterface $token) : bool
+    {
+        return $this->isAdmin($token);
+    }
+
+    /**
+     * Return true if current user can publish the $remark
+     *
+     * @param Remark $remark
+     * @param TokenInterface $token
+     *
+     * @return bool
+     */
+    protected function canPublish(Remark $remark, TokenInterface $token) : bool
+    {
+        return $this->isAdmin($token);
+    }
+
+    /**
+     * Return true if current user can unpublish the $remark
+     *
+     * @param Remark $remark
+     * @param TokenInterface $token
+     *
+     * @return bool
+     */
+    protected function canUnpublish(Remark $remark, TokenInterface $token) : bool
     {
         return $this->isAdmin($token);
     }

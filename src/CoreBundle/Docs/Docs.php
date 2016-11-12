@@ -53,4 +53,5 @@ interface Docs
     const HTTP_UNAUTHORIZED = 'Returned when authentication is required';
     const HTTP_FORBIDDEN    = 'Returned when you have not the necessary permissions for the resource';
     const HTTP_NOT_FOUND    = 'Returned when resource could not be found';
+    const HTTP_CONFLICT     = 'Returned when request could not be processed because of conflict in the request';
 }

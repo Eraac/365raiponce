@@ -128,4 +128,18 @@ interface RemarkDocs extends Docs
             Response::HTTP_NOT_FOUND    => self::HTTP_NOT_FOUND,
         ],
     ];
+
+    const PUBLISH = [
+        'default'       => self::DEFAULT_AUTH,
+        'requirements'  => self::DEFAULT_REQUIREMENTS,
+        'statusCodes'   => [
+            Response::HTTP_NO_CONTENT   => self::HTTP_NO_CONTENT,
+            Response::HTTP_UNAUTHORIZED => self::HTTP_UNAUTHORIZED,
+            Response::HTTP_FORBIDDEN    => self::HTTP_FORBIDDEN,
+            Response::HTTP_NOT_FOUND    => self::HTTP_NOT_FOUND,
+            Response::HTTP_CONFLICT     => self::HTTP_CONFLICT,
+        ]
+    ];
+
+    const UNPUBLISH = self::PUBLISH;
 }

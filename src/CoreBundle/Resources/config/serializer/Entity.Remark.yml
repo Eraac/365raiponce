@@ -31,6 +31,24 @@ CoreBundle\Entity\Remark:
                 parameters:
                     remark_id: expr(object.getId())
 
+        -
+            rel: publish
+            href:
+                route: api_post_remark_publish
+                parameters:
+                    remark_id: expr(object.getId())
+            exclusion:
+                groups: [admin]
+
+        -
+            rel: unpublish
+            href:
+                route: api_post_remark_unpublish
+                parameters:
+                    remark_id: expr(object.getId())
+            exclusion:
+                groups: [admin]
+
         # embedded
         -
             rel: count_published_responses

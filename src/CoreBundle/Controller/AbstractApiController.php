@@ -59,11 +59,11 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
     protected function formError(Request $request, Form $form)
     {
         if (empty(json_decode($request->getContent(), true))) {
-            return new JsonResponse(['errors' => [$this->t('core.error.empty_json')]], JsonResponse::HTTP_BAD_REQUEST);
+            return $this->createJsonError('core.error.empty_json', JsonResponse::HTTP_BAD_REQUEST);
         }
 
         if ('json' !== $request->getContentType()) {
-            return new JsonResponse(['errors' => [$this->t('core.error.bad_content_type')]], JsonResponse::HTTP_BAD_REQUEST);
+            return $this->createJsonError('core.error.bad_content_type', JsonResponse::HTTP_BAD_REQUEST);
         }
 
         return $form;
@@ -188,5 +188,23 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
         }
 
         return $qb;
+    }
+
+    /**
+     * Shortcup return JsonResponse error
+     *
+     * @param string $message
+     * @param int    $statusCode
+     * @param array  $parameters
+     * @param string $domain
+     *
+     * @return JsonResponse
+     */
+    public function createJsonError(string $message, int $statusCode, array $parameters = [], string $domain = 'messages') : JsonResponse
+    {
+        return new JsonResponse(
+            ['errors' => [$this->t($message, $parameters, $domain)]],
+            $statusCode
+        );
     }
 }

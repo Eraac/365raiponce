@@ -8,3 +8,6 @@ core:
         wrong_filter: "Une erreur est survenue sur les filtres"
         filter:
             timestamp: "La valeur %timestamp% n'est pas un timestamp valide"
+        remark:
+            already_published: "Cette remarque a déjà été publiée"
+            unpublished_yet: "Cette remarque n'est pas publiée"

@@ -171,7 +171,7 @@ class UserController extends AbstractUserController implements UserDocs
         $email = $request->request->get('email');
 
         if (is_null($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return new JsonResponse(['error' => $this->t('user.error.forget_password.wrong_email')], JsonResponse::HTTP_BAD_REQUEST);
+            return $this->createJsonError('user.error.forget_password.wrong_email', JsonResponse::HTTP_BAD_REQUEST);
         }
 
         /** @var $user User */
@@ -184,7 +184,7 @@ class UserController extends AbstractUserController implements UserDocs
         }
 
         if ($user->isPasswordRequestNonExpired($this->getParameter('fos_user.resetting.token_ttl'))) {
-            return new JsonResponse(['error' => $this->t('resetting.password_already_requested', [], 'FOSUserBundle')], JsonResponse::HTTP_BAD_REQUEST);
+            return $this->createJsonError('resetting.password_already_requested', JsonResponse::HTTP_BAD_REQUEST, [], 'FOSUserBundle');
         }
 
         if (null === $user->getConfirmationToken()) {
@@ -218,7 +218,7 @@ class UserController extends AbstractUserController implements UserDocs
         $user = $this->findUserByToken($token);
 
         if (!$user->isPasswordRequestNonExpired($this->getParameter('fos_user.resetting.token_ttl'))) {
-            return new JsonResponse(['error' => $this->t('resetting.password_request_expired')], JsonResponse::HTTP_GONE);
+            return $this->createJsonError('resetting.password_request_expired', JsonResponse::HTTP_GONE);
         }
 
         $form = $this->createForm(UserEditType::class, $user, ['method' => Request::METHOD_POST]);

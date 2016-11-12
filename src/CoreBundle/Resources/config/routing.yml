@@ -13,3 +13,7 @@ theme:
 remark:
     type: rest
     resource: CoreBundle\Controller\RemarkController
+
+remark_remark:
+    type: rest
+    resource: CoreBundle\Controller\Remark\RemarkController
