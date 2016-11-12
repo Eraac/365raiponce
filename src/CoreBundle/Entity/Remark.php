@@ -19,6 +19,8 @@ class Remark
     use TimestampableEntity;
     
     /**
+     * Id of the remark
+     *
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -28,6 +30,8 @@ class Remark
     private $id;
 
     /**
+     * Context of the sentence
+     *
      * @var string
      *
      * @ORM\Column(name="context", type="text")
@@ -35,6 +39,8 @@ class Remark
     private $context;
 
     /**
+     * The sentence that is sexist
+     *
      * @var string
      *
      * @ORM\Column(name="sentence", type="string", length=140)
@@ -42,6 +48,8 @@ class Remark
     private $sentence;
 
     /**
+     * Publish date of the remark
+     *
      * @var \DateTime
      *
      * @ORM\Column(name="postedAt", type="datetime", nullable=true)
@@ -49,6 +57,8 @@ class Remark
     private $postedAt;
 
     /**
+     * Theme associate with the remark
+     *
      * @var Theme
      *
      * @ORM\ManyToOne(targetEntity="Theme")
@@ -57,6 +67,8 @@ class Remark
     private $theme;
 
     /**
+     * Emotion feel by the person
+     *
      * @var Emotion
      *
      * @ORM\ManyToOne(targetEntity="Emotion")
@@ -65,6 +77,8 @@ class Remark
     private $emotion;
 
     /**
+     * How much person feel the emotion (from 1 (a bit) to 10 (a lot))
+     *
      * @var integer
      *
      * @ORM\Column(name="scale_emotion", type="smallint")
@@ -72,6 +86,8 @@ class Remark
     private $scaleEmotion;
 
     /**
+     * Email of the person
+     *
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=140, nullable=true)

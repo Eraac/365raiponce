@@ -3,7 +3,7 @@
 namespace CoreBundle\Controller;
 
 use CoreBundle\Annotation\ApiDoc;
-//use CoreBundle\Docs\RemarkDocs;
+use CoreBundle\Docs\RemarkDocs;
 use CoreBundle\Entity\Remark;
 use CoreBundle\Form\RemarkType;
 use CoreBundle\Form\RemarkEditType;
@@ -21,12 +21,12 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @FOSRest\Version("1.0")
  */
-class RemarkController extends AbstractApiController //implements RemarkDocs
+class RemarkController extends AbstractApiController implements RemarkDocs
 {
     /**
      * Return collection of Remark
      *
-     * ApiDoc(RemarkDocs::CGET)
+     * @ApiDoc(RemarkDocs::CGET)
      *
      * @param Request $request
      *
@@ -45,7 +45,7 @@ class RemarkController extends AbstractApiController //implements RemarkDocs
     /**
      * Return collection of unpublished Remark
      *
-     * ApiDoc(RemarkDocs::CGET_UNPUBLISHED)
+     * @ApiDoc(RemarkDocs::CGET_UNPUBLISHED)
      *
      * @param Request $request
      *
@@ -68,7 +68,7 @@ class RemarkController extends AbstractApiController //implements RemarkDocs
      *
      * @param Remark $remark
      *
-     * ApiDoc(RemarkDocs::GET)
+     * @ApiDoc(RemarkDocs::GET)
      *
      * @Security("is_granted('view', remark)")
      *
@@ -87,7 +87,7 @@ class RemarkController extends AbstractApiController //implements RemarkDocs
     /**
      * Add an Remark
      *
-     * ApiDoc(RemarkDocs::POST)
+     * @ApiDoc(RemarkDocs::POST)
      *
      * @param Request $request
      *
@@ -105,7 +105,7 @@ class RemarkController extends AbstractApiController //implements RemarkDocs
     /**
      * Update an Remark
      *
-     * ApiDoc(RemarkDocs::PATCH)
+     * @ApiDoc(RemarkDocs::PATCH)
      *
      * @param Request $request
      * @param Remark $remark
@@ -127,7 +127,7 @@ class RemarkController extends AbstractApiController //implements RemarkDocs
     /**
      * Delete an Remark
      *
-     * ApiDoc(RemarkDocs::DELETE)
+     * @ApiDoc(RemarkDocs::DELETE)
      *
      * @param Remark $remark
      *
