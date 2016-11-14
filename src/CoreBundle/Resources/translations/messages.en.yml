@@ -7,7 +7,8 @@ core:
         invalid_order: "Order %order% isn't valid"
         wrong_filter: "Something is wrong with the filter"
         filter:
-            timestamp: "Value %timestamp% isn't a valid timestamp"
+            timestamp: "Value %number% isn't a valid timestamp"
+            number: "Value %number% isn't a valid number"
         remark:
             already_published: "This remark was already published"
             unpublished_yet: "This remark is not unpublished yet"

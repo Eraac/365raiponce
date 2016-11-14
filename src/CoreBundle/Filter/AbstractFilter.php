@@ -157,7 +157,12 @@ abstract class AbstractFilter
     {
         $method = $this->getMappingValidate();
 
-        if (isset($method[$key]) && is_callable($method[$key])) {
+        if (isset($method[$key])) {
+
+            assert(is_callable($method[$key]), new \LogicException(
+                sprintf('method for validate %s doesn\'t exist !', $key)
+            ));
+
             call_user_func($method[$key], $value);
         }
     }
@@ -181,5 +186,37 @@ abstract class AbstractFilter
     protected function t(string $message, array $parameters = []) : string
     {
         return $this->translator->trans($message, $parameters);
+    }
+
+    /**
+     * @param $number
+     * @param string $error
+     *
+     * @throws InvalidFilterException
+     */
+    protected function validateNumber($number, string $error = 'core.error.filter.number')
+    {
+        // filter_var with this filter return number if is good, and 0 is a good int
+        // ... so without '=== false', will get false instead of true for 0
+
+        if (is_array($number)) {
+            foreach ($number as $num) {
+                $valid = !(filter_var($num, FILTER_VALIDATE_INT) === false);
+
+                if (!$valid) {
+                    throw new InvalidFilterException(
+                        $this->t($error, ['%number%' => $num])
+                    );
+                }
+            }
+        } else {
+            $valid = !(filter_var($number, FILTER_VALIDATE_INT) === false);
+
+            if (!$valid) {
+                throw new InvalidFilterException(
+                    $this->t($error, ['%number%' => $number])
+                );
+            }
+        }
     }
 }

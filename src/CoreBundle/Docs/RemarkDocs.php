@@ -84,9 +84,9 @@ interface RemarkDocs extends Docs
         'requirements' => self::DEFAULT_REQUIREMENTS,
         'statusCodes'  => [
             Response::HTTP_OK           => self::HTTP_OK,
-            Response::HTTP_NOT_FOUND    => self::HTTP_NOT_FOUND,
             Response::HTTP_UNAUTHORIZED => self::HTTP_UNAUTHORIZED,
             Response::HTTP_FORBIDDEN    => self::HTTP_FORBIDDEN,
+            Response::HTTP_NOT_FOUND    => self::HTTP_NOT_FOUND,
         ],
     ];
 
@@ -97,8 +97,6 @@ interface RemarkDocs extends Docs
         'statusCodes' => [
             Response::HTTP_CREATED      => self::HTTP_CREATED,
             Response::HTTP_BAD_REQUEST  => self::HTTP_BAD_REQUEST,
-            Response::HTTP_UNAUTHORIZED => self::HTTP_UNAUTHORIZED,
-            Response::HTTP_FORBIDDEN    => self::HTTP_FORBIDDEN,
         ],
     ];
 

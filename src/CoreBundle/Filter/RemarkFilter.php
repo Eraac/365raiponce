@@ -33,6 +33,8 @@ class RemarkFilter extends AbstractUpdatedFilter
             [
                 self::POSTED_BEFORE => [$this, 'validateTimestamp'],
                 self::POSTED_AFTER  => [$this, 'validateTimestamp'],
+                'emotion' => [$this, 'validateNumber'],
+                'theme' => [$this, 'validateNumber'],
             ]
         );
     }

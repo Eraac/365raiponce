@@ -95,7 +95,7 @@ class RemarkRepository extends AbstractDateRepository
      */
     public function orderByPostedAt(QueryBuilder $qb, string $orderBy, string $order) : QueryBuilder
     {
-        $this->applyOrder($qb, 'postedAt', $order);
+        return $this->applyOrder($qb, 'postedAt', $order);
     }
 
     /**
@@ -107,7 +107,7 @@ class RemarkRepository extends AbstractDateRepository
      */
     public function orderByScaleEmotion(QueryBuilder $qb, string $orderBy, string $order) : QueryBuilder
     {
-        $this->applyOrder($qb, 'scaleEmotion', $order);
+        return $this->applyOrder($qb, 'scaleEmotion', $order);
     }
 
     /**
@@ -123,7 +123,7 @@ class RemarkRepository extends AbstractDateRepository
 
         $this->safeLeftJoin($qb, 'emotion', $alias);
 
-        $this->applyOrder($qb, 'name', $order, $alias);
+        return $this->applyOrder($qb, 'name', $order, $alias);
     }
 
     /**
@@ -139,6 +139,6 @@ class RemarkRepository extends AbstractDateRepository
 
         $this->safeLeftJoin($qb, 'theme', $alias);
 
-        $this->applyOrder($qb, 'name', $order, $alias);
+        return $this->applyOrder($qb, 'name', $order, $alias);
     }
 }

@@ -113,7 +113,7 @@ abstract class AbstractFilterTest extends WebTestCase
                 $fail = $this->filterHasFailed($filter, $qb, [$criteria => $value]);
 
                 $this->assertTrue($fail, sprintf(
-                    'filter: %s | value: %s', $criteria, is_array($value) ? explode('[&]', $value) : $value
+                    'filter: %s | value: %s', $criteria, is_array($value) ? implode('[&]', $value) : $value
                 ));
             }
         }

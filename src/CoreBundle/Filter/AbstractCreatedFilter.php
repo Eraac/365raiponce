@@ -39,19 +39,9 @@ abstract class AbstractCreatedFilter extends AbstractFilter
 
     /**
      * @param $timestamp
-     *
-     * @throws InvalidFilterException
      */
     protected function validateTimestamp($timestamp)
     {
-        // filter_var with this filter return number if is good, and 0 is a good int
-        // ... so without '=== false', will get false instead of true for 0
-        $valid = !(filter_var($timestamp, FILTER_VALIDATE_INT) === false);
-
-        if (!$valid) {
-            throw new InvalidFilterException(
-                $this->t('core.error.filter')
-            );
-        }
+        $this->validateNumber($timestamp, 'core.error.filter.timestamp');
     }
 }

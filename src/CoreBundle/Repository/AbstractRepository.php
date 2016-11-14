@@ -53,7 +53,7 @@ abstract class AbstractRepository extends EntityRepository
     {
         $alias = $this->getAlias($qb);
 
-        $this->safeLeftJoin($qb, $alias . $attribute, $aliasJoin);
+        $this->safeLeftJoin($qb, $attribute, $aliasJoin);
 
         if (is_array($value)) {
             $expr = $qb->expr()->in($aliasJoin . '.' . $attributeJoin, ':' . $attribute);

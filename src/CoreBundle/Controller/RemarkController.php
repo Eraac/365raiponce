@@ -133,7 +133,7 @@ class RemarkController extends AbstractApiController implements RemarkDocs
      *
      * @Security("is_granted('delete', remark)")
      *
-     * @ParamConverter("emotion", class="CoreBundle:Emotion", options={"id" = "emotion_id"})
+     * @ParamConverter("remark", class="CoreBundle:Remark", options={"id" = "remark_id"})
      *
      * @FOSRest\Delete("/remarks/{remark_id}", requirements={"remark_id"="\d+"})
      * @FOSRest\View()
