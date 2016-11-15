@@ -28,3 +28,9 @@ services:
         parent: core.abstract_filter
         arguments: ['@core.remark_repository']
         public: true
+
+    core.response_filter:
+        class: CoreBundle\Filter\ResponseFilter
+        parent: core.abstract_filter
+        arguments: ['@core.response_repository']
+        public: true

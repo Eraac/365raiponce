@@ -69,7 +69,7 @@ abstract class AbstractVoter extends BaseVoter
 
     /**
      * @param TokenInterface $token
-     * @param array $role
+     * @param array $roles
      *
      * @return bool
      */
@@ -112,5 +112,18 @@ abstract class AbstractVoter extends BaseVoter
         $user = $token->getUser();
 
         return ($user instanceof User) ? $user : null;
+    }
+
+    /**
+     * @param TokenInterface $token
+     * @param User           $user
+     *
+     * @return bool
+     */
+    protected function isOwner(TokenInterface $token, User $user) : bool
+    {
+        $currentUser = $this->getUserFromToken($token);
+
+        return !is_null($currentUser) && $currentUser->getId() === $user->getId();
     }
 }

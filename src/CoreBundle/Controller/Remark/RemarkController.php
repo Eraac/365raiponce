@@ -7,7 +7,6 @@ use CoreBundle\Controller\AbstractApiController;
 use CoreBundle\Docs\RemarkDocs;
 use CoreBundle\Entity\Remark;
 use FOS\RestBundle\Controller\Annotations as FOSRest;
-//use Hateoas\Representation\PaginatedRepresentation;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\JsonResponse;

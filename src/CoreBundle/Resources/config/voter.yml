@@ -24,3 +24,9 @@ services:
         parent: core.base_voter
         tags:
             - { name: security.voter }
+
+    core.response_voter:
+        class: CoreBundle\Security\ResponseVoter
+        parent: core.base_voter
+        tags:
+            - { name: security.voter }

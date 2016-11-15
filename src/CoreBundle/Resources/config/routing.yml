@@ -14,6 +14,18 @@ remark:
     type: rest
     resource: CoreBundle\Controller\RemarkController
 
+response:
+    type: rest
+    resource: CoreBundle\Controller\ResponseController
+
+response_response:
+    type: rest
+    resource: CoreBundle\Controller\Response\ResponseController
+
 remark_remark:
     type: rest
     resource: CoreBundle\Controller\Remark\RemarkController
+
+remark_response:
+    type: rest
+    resource: CoreBundle\Controller\Remark\ResponseController

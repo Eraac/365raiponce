@@ -12,3 +12,6 @@ core:
         remark:
             already_published: "Cette remarque a déjà été publiée"
             unpublished_yet: "Cette remarque n'est pas publiée"
+        response:
+            already_published: "Cette réponse a déjà été publiée"
+            unpublished_yet: "Cette réponse n'est pas publiée"

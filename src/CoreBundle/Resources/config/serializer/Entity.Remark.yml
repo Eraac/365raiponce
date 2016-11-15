@@ -32,6 +32,13 @@ CoreBundle\Entity\Remark:
                     remark_id: expr(object.getId())
 
         -
+            rel: responses
+            href:
+                route: api_get_remark_responses
+                parameters:
+                    remark_id: expr(object.getId())
+
+        -
             rel: publish
             href:
                 route: api_post_remark_publish

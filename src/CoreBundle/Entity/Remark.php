@@ -95,7 +95,7 @@ class Remark
     private $email;
 
     /**
-     * ORM\OneToMany(targetEntity="Response", mappedBy="remark")
+     * @ORM\OneToMany(targetEntity="Response", mappedBy="remark")
      */
     private $responses;
 
@@ -366,7 +366,7 @@ class Remark
      *
      * @return ArrayCollection
      */
-    public function getResponses() : ArrayCollection
+    public function getResponses()
     {
         return $this->responses;
     }

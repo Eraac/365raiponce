@@ -9,6 +9,13 @@ class RemarkVoter extends AbstractVoter
 {
     const PUBLISH = 'publish';
     const UNPUBLISH = 'unpublish';
+    const READ_PUBLISHED_RESPONSE = 'viewPublishedResponses';
+    const ADD_RESPONSE = 'addResponse';
+
+    const ATTRIBUTES = [
+        self::PUBLISH, self::UNPUBLISH, self::READ_PUBLISHED_RESPONSE,
+        self::ADD_RESPONSE
+    ];
 
     /**
      * @param string $attribute
@@ -19,7 +26,7 @@ class RemarkVoter extends AbstractVoter
     protected function supports($attribute, $subject) : bool
     {
         return
-            (parent::supports($attribute, $subject) || in_array($attribute, [self::PUBLISH, self::UNPUBLISH]))
+            (parent::supports($attribute, $subject) || in_array($attribute, self::ATTRIBUTES))
                 && $subject instanceof Remark;
     }
 
@@ -86,5 +93,31 @@ class RemarkVoter extends AbstractVoter
     protected function canUnpublish(Remark $remark, TokenInterface $token) : bool
     {
         return $this->isAdmin($token);
+    }
+
+    /**
+     * Return true if current user can read publish response of the $remark
+     *
+     * @param Remark         $remark
+     * @param TokenInterface $token
+     *
+     * @return bool
+     */
+    protected function canViewPublishedResponses(Remark $remark, TokenInterface $token) : bool
+    {
+        return $remark->isPublished();
+    }
+
+    /**
+     * Return true if current user can add response to the $remark
+     *
+     * @param Remark         $remark
+     * @param TokenInterface $token
+     *
+     * @return bool
+     */
+    protected function canAddResponse(Remark $remark, TokenInterface $token) : bool
+    {
+        return $remark->isPublished() && $this->isConnected($token);
     }
 }
