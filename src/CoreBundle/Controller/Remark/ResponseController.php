@@ -4,7 +4,7 @@ namespace CoreBundle\Controller\Remark;
 
 use CoreBundle\Annotation\ApiDoc;
 use CoreBundle\Controller\AbstractApiController;
-//use CoreBundle\Docs\ResponseDocs;
+use CoreBundle\Docs\ResponseDocs;
 use CoreBundle\Entity\Remark;
 use CoreBundle\Entity\Response;
 use CoreBundle\Form\ResponseType;
@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @FOSRest\Version("1.0")
  */
-class ResponseController extends AbstractApiController //implements ResponseDocs
+class ResponseController extends AbstractApiController implements ResponseDocs
 {
     /**
      * Return collection of response for a remark
@@ -32,7 +32,7 @@ class ResponseController extends AbstractApiController //implements ResponseDocs
      *
      * @return PaginatedRepresentation
      *
-     * ApiDoc(ResponseDocs::CGET)
+     * @ApiDoc(ResponseDocs::CGET)
      *
      * @Security("is_granted('viewPublishedResponses', remark)")
      *
@@ -57,7 +57,7 @@ class ResponseController extends AbstractApiController //implements ResponseDocs
      *
      * @return object|JsonResponse
      *
-     * ApiDoc(ResponseDocs::POST)
+     * @ApiDoc(ResponseDocs::POST)
      *
      * @Security("is_granted('addResponse', remark)")
      *

@@ -3,7 +3,7 @@
 namespace CoreBundle\Controller;
 
 use CoreBundle\Annotation\ApiDoc;
-//use CoreBundle\Docs\ResponseDocs;
+use CoreBundle\Docs\ResponseDocs;
 use CoreBundle\Entity\Response;
 use CoreBundle\Form\ResponseType;
 use FOS\RestBundle\Controller\Annotations as FOSRest;
@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @FOSRest\Version("1.0")
  */
-class ResponseController extends AbstractApiController //implements ResponseDocs
+class ResponseController extends AbstractApiController implements ResponseDocs
 {
     /**
      * Return collection of unpublished response
@@ -29,7 +29,7 @@ class ResponseController extends AbstractApiController //implements ResponseDocs
      *
      * @return PaginatedRepresentation
      *
-     * ApiDoc(ResponseDocs::CGET_UNPUBLISHED)
+     * @ApiDoc(ResponseDocs::CGET_UNPUBLISHED)
      *
      * @Security("has_role('ROLE_ADMIN')")
      *
@@ -50,7 +50,7 @@ class ResponseController extends AbstractApiController //implements ResponseDocs
      *
      * @return Response
      *
-     * ApiDoc(ResponseDocs::GET)
+     * @ApiDoc(ResponseDocs::GET)
      *
      * @Security("is_granted('view', response)")
      *
@@ -72,7 +72,7 @@ class ResponseController extends AbstractApiController //implements ResponseDocs
      *
      * @return object|JsonResponse
      *
-     * ApiDoc(ResponseDocs::PATCH)
+     * @ApiDoc(ResponseDocs::PATCH)
      *
      * @Security("is_granted('edit', response)")
      *
@@ -93,7 +93,7 @@ class ResponseController extends AbstractApiController //implements ResponseDocs
      *
      * @return object|JsonResponse
      *
-     * ApiDoc(ResponseDocs::DELETE)
+     * @ApiDoc(ResponseDocs::DELETE)
      *
      * @Security("is_granted('delete', response)")
      *

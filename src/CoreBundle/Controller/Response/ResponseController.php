@@ -4,7 +4,7 @@ namespace CoreBundle\Controller\Response;
 
 use CoreBundle\Annotation\ApiDoc;
 use CoreBundle\Controller\AbstractApiController;
-//use CoreBundle\Docs\ResponseDocs;
+use CoreBundle\Docs\ResponseDocs;
 use CoreBundle\Entity\Response;
 use FOS\RestBundle\Controller\Annotations as FOSRest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -18,12 +18,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  *
  * @FOSRest\Version("1.0")
  */
-class ResponseController extends AbstractApiController //implements ResponseDocs
+class ResponseController extends AbstractApiController implements ResponseDocs
 {
     /**
      * Publish a response
      *
-     * ApiDoc(ResponseDocs::PUBLISH)
+     * @ApiDoc(ResponseDocs::PUBLISH)
      *
      * @param Response $response
      *
@@ -52,7 +52,7 @@ class ResponseController extends AbstractApiController //implements ResponseDocs
     /**
      * Unpublish a response
      *
-     * ApiDoc(ResponseDocs::UNPUBLISH)
+     * @ApiDoc(ResponseDocs::UNPUBLISH)
      *
      * @param Response $response
      *
