@@ -64,7 +64,7 @@ class ResponseControllerTest extends AbstractControllerTest
 
         self::$id = $this->getResponseContent('id');
 
-        // TODO test l'auto publish
+        $this->assertNotNull($this->getResponseContent('posted_at'));
     }
 
     public function testPostBadRequest()

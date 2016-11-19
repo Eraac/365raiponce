@@ -20,6 +20,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
 
         $user1 = new User();
         $user1
+            ->setConfirmed(true)
             ->setUsername('user1')
             ->setEmail('user1@localhost.tld')
             ->setPlainPassword('userpass')
