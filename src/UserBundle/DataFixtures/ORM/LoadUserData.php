@@ -2,11 +2,11 @@
 
 namespace UserBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\{AbstractFixture, OrderedFixtureInterface};
 use Doctrine\Common\Persistence\ObjectManager;
 use UserBundle\Entity\User;
 
-class LoadUserData implements FixtureInterface
+class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -37,5 +37,19 @@ class LoadUserData implements FixtureInterface
         $manager->persist($user2);
 
         $manager->flush();
+
+        $this->setReference('user-admin', $userAdmin);
+        $this->setReference('user-1', $user1);
+        $this->setReference('user-2', $user2);
+    }
+
+    /**
+     * Get the order of this fixture
+     *
+     * @return integer
+     */
+    public function getOrder()
+    {
+        return 0;
     }
 }

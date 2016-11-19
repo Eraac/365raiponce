@@ -33,8 +33,8 @@ class RemarkControllerTest extends AbstractControllerTest
         $remark
             ->setContext("Context")
             ->setSentence("Sexist !")
-            ->setTheme($themeRepo->find(1))
-            ->setEmotion($emotionRepo->find(1))
+            ->setTheme($themeRepo->find(self::THEME_ID))
+            ->setEmotion($emotionRepo->find(self::EMOTION_ID))
             ->setScaleEmotion(5)
             ->setPostedAt(new \DateTime())
         ;
@@ -57,8 +57,8 @@ class RemarkControllerTest extends AbstractControllerTest
         $params = [
             "context" => "Je suis le contexte",
             "sentence" => "Je suis la phrase super sexiste",
-            "theme" => 1,
-            "emotion" => 1,
+            "theme" => self::THEME_ID,
+            "emotion" => self::EMOTION_ID,
             "scaleEmotion" => 5,
             "email" => "fake@email.com",
         ];
@@ -74,7 +74,7 @@ class RemarkControllerTest extends AbstractControllerTest
             "context" => "Je suis le contexte",
             "sentence" => "Je suis la phrase super sexiste",
             "theme" => 0,
-            "emotion" => 1,
+            "emotion" => self::EMOTION_ID,
             "scaleEmotion" => 5
         ];
 

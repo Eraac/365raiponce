@@ -56,6 +56,7 @@ interface ResponseDocs extends Docs
         'statusCodes' => [
             SFResponse::HTTP_OK           => self::HTTP_OK,
             SFResponse::HTTP_BAD_REQUEST  => self::HTTP_BAD_REQUEST,
+            SFResponse::HTTP_NOT_FOUND    => self::HTTP_NOT_FOUND,
         ],
         'requirements'  => self::REMARK_REQUIREMENTS,
         'filters'       => self::FILTERS,

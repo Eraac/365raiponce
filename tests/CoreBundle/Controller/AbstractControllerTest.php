@@ -12,8 +12,17 @@ abstract class AbstractControllerTest extends WebTestCase
     const USER1 = ['id' => 2, 'username' => 'user1', 'email' => 'user1@localhost.tld', 'password' => 'userpass'];
     const USER2 = ['id' => 3, 'username' => 'user2', 'email' => 'user2@localhost.tld', 'password' => 'userpass'];
 
-    const CLIENT_ID = '1_123';
+    const CLIENT_ID     = '1_123';
     const CLIENT_SECRET = '456';
+
+    const REMARK_PUBLISHED_ID   = 1;
+    const REMARK_UNPUBLISHED_ID = 2;
+
+    const RESPONSE_PUBLISHED_ID     = 1;
+    const RESPONSE_UNPUBLISHED_ID   = 2;
+
+    const THEME_ID      = 1;
+    const EMOTION_ID    = 1;
 
     const API_VERSION = '1.0';
 
@@ -163,5 +172,13 @@ abstract class AbstractControllerTest extends WebTestCase
         }
 
         return ['HTTP_AUTHORIZATION' => 'Bearer ' . $response['access_token']];
+    }
+
+    /**
+     * @return array
+     */
+    protected function getHeaderAdmin() : array
+    {
+        return $this->getHeaderConnect(self::ADMIN['username'], self::ADMIN['password']);
     }
 }

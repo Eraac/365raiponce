@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\CoreBundle\Controller\Remark;
+namespace Tests\CoreBundle\Controller\Response;
 
 use CoreBundle\Entity\Remark;
 use CoreBundle\Repository\EmotionRepository;
@@ -9,54 +9,25 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Tests\CoreBundle\Controller\AbstractControllerTest;
 
-class RemarkControllerTest extends AbstractControllerTest
+class ResponseControllerTest extends AbstractControllerTest
 {
-    const PREFIX_URL = '/remarks';
-
-    private static $id = 0;
-
-    // === SETUP ===
-    public static function setUpBeforeClass()
-    {
-        $container = static::createClient()->getContainer();
-
-        /** @var EntityManager $em */
-        $em = $container->get('doctrine.orm.entity_manager');
-
-        /** @var ThemeRepository $themeRepo */
-        $themeRepo = $container->get('core.theme_repository');
-
-        /** @var EmotionRepository $emotionRepo */
-        $emotionRepo = $container->get('core.emotion_repository');
-
-        $remark = new Remark();
-        $remark
-            ->setContext("Context")
-            ->setSentence("Sexist !")
-            ->setTheme($themeRepo->find(self::THEME_ID))
-            ->setEmotion($emotionRepo->find(self::EMOTION_ID))
-            ->setScaleEmotion(5)
-        ;
-
-        $em->persist($remark);
-        $em->flush();
-
-        self::$id = $remark->getId();
-    }
+    const PREFIX_URL = '/responses/';
+    const SUFFIX_URL_PUBLISH = '/publish';
+    const SUFFIX_URL_UNPUBLISH = '/unpublish';
 
     // === POST - PUBLISH ===
     public function testPostPublishSuccessful()
     {
         $headers = $this->getHeaderConnect(self::ADMIN['username'], self::ADMIN['password']);
 
-        $url = self::PREFIX_URL . '/' . self::$id . '/publish';
+        $url = self::PREFIX_URL . self::RESPONSE_UNPUBLISHED_ID . self::SUFFIX_URL_PUBLISH;
 
         $this->isSuccessful(Request::METHOD_POST, $url, [], $headers);
     }
 
     public function testPostPublishUnauthorized()
     {
-        $url = self::PREFIX_URL . '/' . self::$id . '/publish';
+        $url = self::PREFIX_URL . self::RESPONSE_UNPUBLISHED_ID . self::SUFFIX_URL_PUBLISH;
 
         $this->isUnauthorized(Request::METHOD_POST, $url);
     }
@@ -65,7 +36,7 @@ class RemarkControllerTest extends AbstractControllerTest
     {
         $headers = $this->getHeaderConnect(self::USER1['username'], self::USER1['password']);
 
-        $url = self::PREFIX_URL . '/' . self::$id . '/publish';
+        $url = self::PREFIX_URL . self::RESPONSE_UNPUBLISHED_ID . self::SUFFIX_URL_PUBLISH;
 
         $this->isForbidden(Request::METHOD_POST, $url, [], $headers);
     }
@@ -74,7 +45,7 @@ class RemarkControllerTest extends AbstractControllerTest
     {
         $headers = $this->getHeaderConnect(self::ADMIN['username'], self::ADMIN['password']);
 
-        $url = self::PREFIX_URL . '/1234/publish';
+        $url = self::PREFIX_URL . '9876543210' . self::SUFFIX_URL_PUBLISH;
 
         $this->isNotFound(Request::METHOD_POST, $url, [], $headers);
     }
@@ -83,7 +54,7 @@ class RemarkControllerTest extends AbstractControllerTest
     {
         $headers = $this->getHeaderConnect(self::ADMIN['username'], self::ADMIN['password']);
 
-        $url = self::PREFIX_URL . '/' . self::$id . '/publish';
+        $url = self::PREFIX_URL . self::RESPONSE_UNPUBLISHED_ID . self::SUFFIX_URL_PUBLISH;
 
         $this->isConflict(Request::METHOD_POST, $url, [], $headers);
     }
@@ -93,14 +64,14 @@ class RemarkControllerTest extends AbstractControllerTest
     {
         $headers = $this->getHeaderConnect(self::ADMIN['username'], self::ADMIN['password']);
 
-        $url = self::PREFIX_URL . '/' . self::$id . '/unpublish';
+        $url = self::PREFIX_URL . self::RESPONSE_UNPUBLISHED_ID . self::SUFFIX_URL_UNPUBLISH;
 
         $this->isSuccessful(Request::METHOD_POST, $url, [], $headers);
     }
 
     public function testPostUnpublishUnauthorized()
     {
-        $url = self::PREFIX_URL . '/' . self::$id . '/unpublish';
+        $url = self::PREFIX_URL . self::RESPONSE_UNPUBLISHED_ID . self::SUFFIX_URL_UNPUBLISH;
 
         $this->isUnauthorized(Request::METHOD_POST, $url);
     }
@@ -109,7 +80,7 @@ class RemarkControllerTest extends AbstractControllerTest
     {
         $headers = $this->getHeaderConnect(self::USER1['username'], self::USER1['password']);
 
-        $url = self::PREFIX_URL . '/' . self::$id . '/unpublish';
+        $url = self::PREFIX_URL . self::RESPONSE_UNPUBLISHED_ID . self::SUFFIX_URL_UNPUBLISH;
 
         $this->isForbidden(Request::METHOD_POST, $url, [], $headers);
     }
@@ -118,7 +89,7 @@ class RemarkControllerTest extends AbstractControllerTest
     {
         $headers = $this->getHeaderConnect(self::ADMIN['username'], self::ADMIN['password']);
 
-        $url = self::PREFIX_URL . '/1234/unpublish';
+        $url = self::PREFIX_URL . '9876543210' . self::SUFFIX_URL_UNPUBLISH;
 
         $this->isNotFound(Request::METHOD_POST, $url, [], $headers);
     }
@@ -127,7 +98,7 @@ class RemarkControllerTest extends AbstractControllerTest
     {
         $headers = $this->getHeaderConnect(self::ADMIN['username'], self::ADMIN['password']);
 
-        $url = self::PREFIX_URL . '/' . self::$id . '/unpublish';
+        $url = self::PREFIX_URL . self::RESPONSE_UNPUBLISHED_ID . self::SUFFIX_URL_UNPUBLISH;
 
         $this->isConflict(Request::METHOD_POST, $url, [], $headers);
     }

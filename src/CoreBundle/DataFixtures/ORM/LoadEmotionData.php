@@ -3,10 +3,10 @@
 namespace CoreBundle\DataFixtures\ORM;
 
 use CoreBundle\Entity\Emotion;
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\{AbstractFixture, OrderedFixtureInterface};
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadEmotionData implements FixtureInterface
+class LoadEmotionData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -16,5 +16,15 @@ class LoadEmotionData implements FixtureInterface
         $manager->persist($emotion);
 
         $manager->flush();
+
+        $this->setReference("emotion-1", $emotion);
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrder()
+    {
+        return 0;
     }
 }
