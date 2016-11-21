@@ -108,12 +108,12 @@ class Remark
     /**
      * @var bool
      */
-    private $userHasVoteSexist;
+    private $userHasVoteSexist = false;
 
     /**
      * @var bool
      */
-    private $userHasVoteLived;
+    private $userHasVoteLived = false;
 
 
     /**
@@ -342,8 +342,6 @@ class Remark
     {
         $this->responses = new ArrayCollection();
         $this->votes = new ArrayCollection();
-        $this->userHasVoteLived = false;
-        $this->userHasVoteSexist = false;
     }
 
     /**

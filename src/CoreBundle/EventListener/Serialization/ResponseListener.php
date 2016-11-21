@@ -44,7 +44,7 @@ class ResponseListener implements EventSubscriberInterface
         /** @var User|null $user */
         $user = $this->token->getToken()->getUser();
 
-        if (!is_null($user)) {
+        if ($user instanceof User) {
             $response->setUserHasVote(
                 $this->repository->userHasVoteFor($response, $user)
             );

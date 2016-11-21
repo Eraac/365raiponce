@@ -64,7 +64,7 @@ class Response
     /**
      * @var bool
      */
-    private $userHasVote;
+    private $userHasVote = false;
 
     /**
      * Constructor
@@ -72,7 +72,6 @@ class Response
     public function __construct()
     {
         $this->votes = new ArrayCollection();
-        $this->userHasVote = false;
     }
 
     /**

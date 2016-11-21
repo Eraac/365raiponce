@@ -45,7 +45,7 @@ class RemarkListener implements EventSubscriberInterface
         /** @var User|null $user */
         $user = $this->token->getToken()->getUser();
 
-        if (!is_null($user)) {
+        if ($user instanceof User) {
             $remark->setUserHasVote(
                 $this->repository->userHasVoteFor($remark, $user, VoteRemark::IS_SEXIST),
                 $this->repository->userHasVoteFor($remark, $user, VoteRemark::ALREADY_LIVED)
