@@ -2,3 +2,4 @@ core:
     error:
         invalid_boolean: "This value isn't a valid boolean"
         already_vote_response: "You have already vote for this response"
+        already_vote_remark: "You have already vote for this"

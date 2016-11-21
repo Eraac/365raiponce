@@ -7,14 +7,16 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class RemarkVoter extends AbstractVoter
 {
-    const PUBLISH = 'publish';
-    const UNPUBLISH = 'unpublish';
-    const READ_PUBLISHED_RESPONSE = 'viewPublishedResponses';
-    const ADD_RESPONSE = 'addResponse';
+    const PUBLISH                   = 'publish';
+    const UNPUBLISH                 = 'unpublish';
+    const READ_PUBLISHED_RESPONSE   = 'viewPublishedResponses';
+    const ADD_RESPONSE              = 'addResponse';
+    const VOTE                      = 'vote';
+    const UNVOTE                    = 'unvote';
 
     const ATTRIBUTES = [
         self::PUBLISH, self::UNPUBLISH, self::READ_PUBLISHED_RESPONSE,
-        self::ADD_RESPONSE
+        self::ADD_RESPONSE, self::VOTE, self::UNVOTE
     ];
 
     /**
@@ -119,5 +121,31 @@ class RemarkVoter extends AbstractVoter
     protected function canAddResponse(Remark $remark, TokenInterface $token) : bool
     {
         return $remark->isPublished() && $this->isConnected($token);
+    }
+
+    /**
+     * Return true if current user can vote to the $remark
+     *
+     * @param Remark         $remark
+     * @param TokenInterface $token
+     *
+     * @return bool
+     */
+    protected function canVote(Remark $remark, TokenInterface $token) : bool
+    {
+        return $remark->isPublished() && $this->isConnected($token);
+    }
+
+    /**
+     * Return true if current user can unvote to the $remark
+     *
+     * @param Remark         $remark
+     * @param TokenInterface $token
+     *
+     * @return bool
+     */
+    protected function canUnvote(Remark $remark, TokenInterface $token) : bool
+    {
+        return $this->canVote($remark, $token);
     }
 }

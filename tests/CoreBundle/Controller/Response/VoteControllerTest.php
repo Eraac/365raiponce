@@ -2,10 +2,6 @@
 
 namespace Tests\CoreBundle\Controller\Response;
 
-use CoreBundle\Entity\Remark;
-use CoreBundle\Repository\EmotionRepository;
-use CoreBundle\Repository\ThemeRepository;
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Tests\CoreBundle\Controller\AbstractControllerTest;
 

@@ -217,6 +217,10 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
      */
     public function createRawJsonError($message, int $statusCode) : JsonResponse
     {
+        if (!is_array($message)) {
+            $message = [$message];
+        }
+
         return new JsonResponse(
             ['errors' => $message],
             $statusCode

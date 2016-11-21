@@ -1,5 +1,6 @@
 core:
     error:
+        invalid_type_vote: "Le type de vote doit-être un type valide"
         bad_content_type: "Le Content-Type n'est pas correct"
         empty_json: "Le JSON ne peut pas être vide"
         invalid_filter: "Le filtre %filter% n'est pas valide"

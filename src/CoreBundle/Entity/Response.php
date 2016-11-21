@@ -57,7 +57,7 @@ class Response
     private $remark;
 
     /**
-     * @ORM\OneToMany(targetEntity="VoteResponse", mappedBy="response")
+     * @ORM\OneToMany(targetEntity="VoteResponse", mappedBy="response", fetch="EAGER")
      */
     private $votes;
 
@@ -75,7 +75,7 @@ class Response
      */
     public function getCountVote() : int
     {
-        return count($this->votes);
+        return $this->votes->count();
     }
 
     /**

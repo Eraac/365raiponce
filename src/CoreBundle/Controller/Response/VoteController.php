@@ -29,14 +29,14 @@ class VoteController extends AbstractApiController implements VoteDocs
      *
      * @param Response $response
      *
-     * @return JsonResponse|null
+     * @return JsonResponse|VoteResponse
      *
      * @ApiDoc(VoteDocs::VOTE_RESPONSE)
      *
      * @Security("is_granted('vote', response)")
      *
      * @FOSRest\Post("/responses/{response_id}/votes", requirements={"response_id"="\d+"})
-     * @FOSRest\View()
+     * @FOSRest\View(statusCode=JsonResponse::HTTP_CREATED)
      *
      * @ParamConverter("response", class="CoreBundle:Response", options={"id" = "response_id"})
      */
@@ -59,6 +59,8 @@ class VoteController extends AbstractApiController implements VoteDocs
         $em = $this->getManager();
         $em->persist($vote);
         $em->flush();
+
+        return $vote;
     }
 
     /**
@@ -66,7 +68,8 @@ class VoteController extends AbstractApiController implements VoteDocs
      *
      * @param Response $response
      *
-     * @return NotFoundHttpException|null
+     * @return null
+     * @throws NotFoundHttpException
      *
      * @ApiDoc(VoteDocs::UNVOTE_RESPONSE)
      *

@@ -33,3 +33,7 @@ remark_remark:
 remark_response:
     type: rest
     resource: CoreBundle\Controller\Remark\ResponseController
+
+remark_vote:
+    type: rest
+    resource: CoreBundle\Controller\Remark\VoteController

@@ -3,6 +3,7 @@
 namespace CoreBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 //use CoreBundle\Entity\VoteRemark;
 // use Doctrine\Common\Collections\Criteria;
@@ -95,12 +96,12 @@ class Remark
     private $email;
 
     /**
-     * @ORM\OneToMany(targetEntity="Response", mappedBy="remark")
+     * @ORM\OneToMany(targetEntity="Response", mappedBy="remark", fetch="EAGER")
      */
     private $responses;
 
     /**
-     * ORM\OneToMany(targetEntity="VoteRemark", mappedBy="remark")
+     * @ORM\OneToMany(targetEntity="VoteRemark", mappedBy="remark", fetch="EAGER")
      */
     private $votes;
 
@@ -112,11 +113,10 @@ class Remark
      */
     public function countPublishedResponses() : int
     {
-        // TODO re-implement (and find way to cache it)
-        /*$criteria = Criteria::create()->where(Criteria::expr()->neq("postedAt", null));
+        // TODO optimize
+        $criteria = Criteria::create()->where(Criteria::expr()->neq("postedAt", null));
 
-        return count($this->responses->matching($criteria));*/
-        return 0;
+        return $this->responses->matching($criteria)->count();
     }
 
     /**
@@ -126,11 +126,10 @@ class Remark
      */
     public function countUnpublishedResponses() : int
     {
-        // TODO implement (and find way to cache it)
-        /*$criteria = Criteria::create()->where(Criteria::expr()->eq("postedAt", null));
+        // TODO optimize
+        $criteria = Criteria::create()->where(Criteria::expr()->eq("postedAt", null));
 
-        return count($this->responses->matching($criteria));*/
-        return 0;
+        return $this->responses->matching($criteria)->count();
     }
 
     /**
@@ -140,11 +139,10 @@ class Remark
      */
     public function getCountVoteIsSexist() : int
     {
-        // TODO re-implement (and find way to cache it)
-        /*$criteria = Criteria::create()->where(Criteria::expr()->eq("type", VoteRemark::IS_SEXIST));
+        // TODO optimize
+        $criteria = Criteria::create()->where(Criteria::expr()->eq("type", VoteRemark::IS_SEXIST));
 
-        return count($this->votes->matching($criteria));*/
-        return 0;
+        return $this->votes->matching($criteria)->count();
     }
 
     /**
@@ -154,11 +152,10 @@ class Remark
      */
     public function getCountVoteAlreadyLive() : int
     {
-        // TODO re-implement (and find way to cache it)
-        /*$criteria = Criteria::create()->where(Criteria::expr()->eq("type", VoteRemark::ALREADY_LIVED));
+        // TODO optimize
+        $criteria = Criteria::create()->where(Criteria::expr()->eq("type", VoteRemark::ALREADY_LIVED));
 
-        return count($this->votes->matching($criteria));*/
-        return 0;
+        return $this->votes->matching($criteria)->count();
     }
 
     /**
@@ -344,22 +341,22 @@ class Remark
      *
      * @return Remark
      */
-    /*public function addResponse(Response $response)
+    public function addResponse(Response $response)
     {
         $this->responses[] = $response;
 
         return $this;
-    }*/
+    }
 
     /**
      * Remove response
      *
      * @param Response $response
      */
-    /*public function removeResponse(Response $response)
+    public function removeResponse(Response $response)
     {
         $this->responses->removeElement($response);
-    }*/
+    }
 
     /**
      * Get responses
@@ -378,22 +375,22 @@ class Remark
      *
      * @return Remark
      */
-    /*public function addVote(VoteRemark $vote)
+    public function addVote(VoteRemark $vote)
     {
         $this->votes[] = $vote;
 
         return $this;
-    }*/
+    }
 
     /**
      * Remove votes
      *
      * @param VoteRemark $vote
      */
-    /*public function removeVote(VoteRemark $vote)
+    public function removeVote(VoteRemark $vote)
     {
-        $this->votes->removeElement($votes);
-    }*/
+        $this->votes->removeElement($vote);
+    }
 
     /**
      * Get votes
