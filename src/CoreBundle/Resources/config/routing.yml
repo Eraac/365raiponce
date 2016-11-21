@@ -22,6 +22,10 @@ response_response:
     type: rest
     resource: CoreBundle\Controller\Response\ResponseController
 
+response_vote:
+    type: rest
+    resource: CoreBundle\Controller\Response\VoteController
+
 remark_remark:
     type: rest
     resource: CoreBundle\Controller\Remark\RemarkController

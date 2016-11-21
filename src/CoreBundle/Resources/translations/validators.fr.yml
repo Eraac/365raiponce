@@ -1,3 +1,4 @@
 core:
     error:
         invalid_boolean: "Cette valeur n'est pas un boolean valide"
+        already_vote_response: "Vous avez déjà voté pour cette réponse"

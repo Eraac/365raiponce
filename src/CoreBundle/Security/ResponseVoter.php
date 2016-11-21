@@ -9,6 +9,12 @@ class ResponseVoter extends AbstractVoter
 {
     const PUBLISH = 'publish';
     const UNPUBLISH = 'unpublish';
+    const VOTE = 'vote';
+    const UNVOTE = 'unvote';
+
+    const ATTRIBUTES = [
+        self::PUBLISH, self::UNPUBLISH, self::VOTE, self::UNVOTE
+    ];
 
     /**
      * @param string $attribute
@@ -19,7 +25,7 @@ class ResponseVoter extends AbstractVoter
     protected function supports($attribute, $subject) : bool
     {
         return
-            (parent::supports($attribute, $subject) || in_array($attribute, [self::PUBLISH, self::UNPUBLISH]))
+            (parent::supports($attribute, $subject) || in_array($attribute, self::ATTRIBUTES))
                 && $subject instanceof Response;
     }
 
@@ -86,5 +92,31 @@ class ResponseVoter extends AbstractVoter
     protected function canUnpublish(Response $response, TokenInterface $token) : bool
     {
         return $this->isAdmin($token);
+    }
+
+    /**
+     * Return true if user can vote for the $response
+     *
+     * @param Response       $response
+     * @param TokenInterface $token
+     *
+     * @return bool
+     */
+    protected function canVote(Response $response, TokenInterface $token) : bool
+    {
+        return $this->isConnected($token) && $response->isPublished();
+    }
+
+    /**
+     * Return true if user can unvote for the $response
+     *
+     * @param Response       $response
+     * @param TokenInterface $token
+     *
+     * @return bool
+     */
+    protected function canUnvote(Response $response, TokenInterface $token) : bool
+    {
+        return $this->canVote($response, $token);
     }
 }

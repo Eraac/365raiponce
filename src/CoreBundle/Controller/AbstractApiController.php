@@ -191,7 +191,7 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
     }
 
     /**
-     * Shortcup return JsonResponse error
+     * Shortcut return JsonResponse error
      *
      * @param string $message
      * @param int    $statusCode
@@ -202,8 +202,23 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
      */
     public function createJsonError(string $message, int $statusCode, array $parameters = [], string $domain = 'messages') : JsonResponse
     {
+        $message = $this->t($message, $parameters, $domain);
+
+        return $this->createRawJsonError($message, $statusCode);
+    }
+
+    /**
+     * Shortcut return JsonResponse error without translating
+     *
+     * @param string|array $message
+     * @param int $statusCode
+     *
+     * @return JsonResponse
+     */
+    public function createRawJsonError($message, int $statusCode) : JsonResponse
+    {
         return new JsonResponse(
-            ['errors' => [$this->t($message, $parameters, $domain)]],
+            ['errors' => $message],
             $statusCode
         );
     }

@@ -57,7 +57,7 @@ class Response
     private $remark;
 
     /**
-     * ORM\OneToMany(targetEntity="VoteResponse", mappedBy="response")
+     * @ORM\OneToMany(targetEntity="VoteResponse", mappedBy="response")
      */
     private $votes; // TODO re-implement
 
@@ -188,30 +188,30 @@ class Response
      * @param VoteResponse $vote
      * @return Response
      */
-    /*public function addVote(VoteResponse $vote)
+    public function addVote(VoteResponse $vote)
     {
         $this->votes[] = $vote;
 
         return $this;
-    }*/
+    }
 
     /**
      * Remove votes
      *
      * @param VoteResponse $vote
      */
-   /* public function removeVote(VoteResponse $vote)
+    public function removeVote(VoteResponse $vote)
     {
         $this->votes->removeElement($vote);
-    }*/
+    }
 
     /**
      * Get votes
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    /*public function getVotes()
+    public function getVotes()
     {
         return $this->votes;
-    }*/
+    }
 }
