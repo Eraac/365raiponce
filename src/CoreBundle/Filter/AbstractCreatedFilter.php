@@ -2,8 +2,6 @@
 
 namespace CoreBundle\Filter;
 
-use CoreBundle\Exception\InvalidFilterException;
-
 abstract class AbstractCreatedFilter extends AbstractFilter
 {
     const UPDATED_BEFORE = 'created_before';

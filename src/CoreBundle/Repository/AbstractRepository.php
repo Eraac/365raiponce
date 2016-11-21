@@ -51,8 +51,6 @@ abstract class AbstractRepository extends EntityRepository
      */
     public function filterByWithJoin(QueryBuilder $qb, string $attribute, $value, string $aliasJoin, string $attributeJoin = 'id') : QueryBuilder
     {
-        $alias = $this->getAlias($qb);
-
         $this->safeLeftJoin($qb, $attribute, $aliasJoin);
 
         if (is_array($value)) {

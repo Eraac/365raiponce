@@ -5,8 +5,6 @@ namespace CoreBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
-//use CoreBundle\Entity\VoteRemark;
-// use Doctrine\Common\Collections\Criteria;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
