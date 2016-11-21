@@ -95,5 +95,12 @@ CoreBundle\Entity\Remark:
             embedded:
                 content: expr(object.getEmotion())
 
+        -
+            rel: user_has_vote_for_is_sexist
+            embedded:
+                content: expr(object.isUserHasVoteSexist())
 
-# TODO user has vote for ...
+        -
+            rel: user_has_vote_for_already_lived
+            embedded:
+                content: expr(object.isUserHasVoteLived())

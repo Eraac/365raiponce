@@ -1,6 +1,6 @@
 <?php
 
-namespace CoreBundle\EventListener;
+namespace CoreBundle\EventListener\Doctrine;
 
 use CoreBundle\Entity\Response;
 use Doctrine\ORM\Event\LifecycleEventArgs;

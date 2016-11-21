@@ -105,6 +105,16 @@ class Remark
      */
     private $votes;
 
+    /**
+     * @var bool
+     */
+    private $userHasVoteSexist;
+
+    /**
+     * @var bool
+     */
+    private $userHasVoteLived;
+
 
     /**
      * Return the number of response
@@ -332,6 +342,8 @@ class Remark
     {
         $this->responses = new ArrayCollection();
         $this->votes = new ArrayCollection();
+        $this->userHasVoteLived = false;
+        $this->userHasVoteSexist = false;
     }
 
     /**
@@ -400,5 +412,35 @@ class Remark
     public function getVotes() : ArrayCollection
     {
         return $this->votes;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isUserHasVoteSexist() : bool
+    {
+        return $this->userHasVoteSexist;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isUserHasVoteLived() : bool
+    {
+        return $this->userHasVoteLived;
+    }
+
+    /**
+     * @param boolean $userHasVoteSexist
+     * @param boolean $userHasVoteLived
+     *
+     * @return Remark
+     */
+    public function setUserHasVote(bool $userHasVoteSexist, bool $userHasVoteLived) : Remark
+    {
+        $this->userHasVoteSexist = $userHasVoteSexist;
+        $this->userHasVoteLived  = $userHasVoteLived;
+
+        return $this;
     }
 }

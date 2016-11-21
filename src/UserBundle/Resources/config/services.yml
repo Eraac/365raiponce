@@ -18,8 +18,8 @@ services:
             - '@twig'
             - { base_url_confirmation: '%base_url_confirmation%' }
 
-    user.user_listener:
-        class: UserBundle\EventListener\UserListener
+    user.user_doctrine_listener:
+        class: UserBundle\EventListener\Doctrine\UserListener
         arguments:
             - '@service_container'
         tags:

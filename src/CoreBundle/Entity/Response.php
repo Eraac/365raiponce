@@ -61,6 +61,10 @@ class Response
      */
     private $votes;
 
+    /**
+     * @var bool
+     */
+    private $userHasVote;
 
     /**
      * Constructor
@@ -68,6 +72,7 @@ class Response
     public function __construct()
     {
         $this->votes = new ArrayCollection();
+        $this->userHasVote = false;
     }
 
     /**
@@ -214,5 +219,25 @@ class Response
     public function getVotes()
     {
         return $this->votes;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isUserHasVote() : bool
+    {
+        return $this->userHasVote;
+    }
+
+    /**
+     * @param boolean $userHasVote
+     *
+     * @return Response
+     */
+    public function setUserHasVote(bool $userHasVote) : Response
+    {
+        $this->userHasVote = $userHasVote;
+
+        return $this;
     }
 }

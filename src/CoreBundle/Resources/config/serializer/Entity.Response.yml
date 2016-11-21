@@ -64,5 +64,7 @@ CoreBundle\Entity\Response:
             embedded:
                 content: expr(object.getAuthor().getUsername())
 
-
-# TODO user has vote for ...
+        -
+            rel: user_has_vote
+            embedded:
+                content: expr(object.isUserHasVote())

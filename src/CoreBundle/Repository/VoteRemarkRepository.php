@@ -2,6 +2,9 @@
 
 namespace CoreBundle\Repository;
 
+use CoreBundle\Entity\Remark;
+use UserBundle\Entity\User;
+
 /**
  * VoteRemarkRepository
  *
@@ -10,5 +13,32 @@ namespace CoreBundle\Repository;
  */
 class VoteRemarkRepository extends AbstractDateRepository
 {
+    /**
+     * @param Remark $remark
+     * @param User   $user
+     * @param int    $type
+     *
+     * @return bool
+     */
+    public function userHasVoteFor(Remark $remark, User $user, int $type) : bool
+    {
+        $qb = $this->createQueryBuilder('v');
 
+        $expr = $qb->expr()->count('v.id');
+
+        $qb->select($expr)
+            ->where(
+                'v.user = :user',
+                'v.remark = :remark',
+                'v.type = :type'
+            )
+            ->setParameters([
+                'user' => $user,
+                'remark' => $remark,
+                'type' => $type
+            ])
+        ;
+
+        return (bool) $qb->getQuery()->getSingleScalarResult();
+    }
 }

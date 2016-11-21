@@ -1,6 +1,6 @@
 <?php
 
-namespace UserBundle\EventListener;
+namespace UserBundle\EventListener\Doctrine;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
