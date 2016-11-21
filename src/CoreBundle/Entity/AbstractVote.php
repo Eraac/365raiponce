@@ -3,14 +3,12 @@
 namespace CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation as JMS;
 use UserBundle\Entity\User;
 
 /**
  * AbstractVote
  *
  * @ORM\MappedSuperclass
- * @JMS\ExclusionPolicy("all")
  * @ORM\HasLifecycleCallbacks()
  */
 abstract class AbstractVote
@@ -28,8 +26,6 @@ abstract class AbstractVote
      * @var \DateTime
      *
      * @ORM\Column(name="createAt", type="datetime")
-     * @JMS\Expose()
-     * @JMS\Groups({"my-vote"})
      */
     private $createAt;
 
@@ -98,15 +94,10 @@ abstract class AbstractVote
      *
      * @return AbstractVote
      */
-    public function setUser($user)
+    public function setUser(User $user)
     {
         $this->user = $user;
 
         return $this;
-    }
-
-    public function getOwner()
-    {
-        return $this->user;
     }
 }

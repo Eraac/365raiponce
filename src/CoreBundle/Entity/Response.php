@@ -59,7 +59,7 @@ class Response
     /**
      * @ORM\OneToMany(targetEntity="VoteResponse", mappedBy="response")
      */
-    private $votes; // TODO re-implement
+    private $votes;
 
 
     /**
@@ -70,10 +70,11 @@ class Response
         $this->votes = new ArrayCollection();
     }
 
-    public function getCountVote()
+    /**
+     * @return int
+     */
+    public function getCountVote() : int
     {
-        // TODO re-implement
-        return 0;
         return count($this->votes);
     }
 
