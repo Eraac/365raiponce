@@ -79,6 +79,12 @@ class RemarkControllerTest extends AbstractControllerTest
         ];
 
         $this->isBadRequest(Request::METHOD_POST, self::PREFIX_URL, $params);
+
+        unset($params['emotion']);
+
+        $params['theme'] = 1;
+
+        $this->isBadRequest(Request::METHOD_POST, self::PREFIX_URL, $params);
     }
 
     // === GET ===

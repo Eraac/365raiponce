@@ -20,3 +20,9 @@ CoreBundle\Entity\Remark:
             - Type: string
             - Length:
                 max: 140
+
+        theme:
+            - NotNull: ~
+
+        emotion:
+            - NotNull: ~
