@@ -5,16 +5,7 @@ CoreBundle\Entity\Report:
         id:
             expose: true
 
-# TODO add count
     relations:
-        # link
-#        -
-#            rel: delete
-#            href:
-#                route: api_delete_report
-#                parameters:
-#                    report_id: expr(object.getId())
-
         # embedded
         -
             rel: response
