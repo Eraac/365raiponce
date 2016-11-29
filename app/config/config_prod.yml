@@ -5,11 +5,11 @@ nelmio_api_doc:
     cache:
         enabled: true
 
-#doctrine:
-#    orm:
-#        metadata_cache_driver: apc
-#        result_cache_driver: apc
-#        query_cache_driver: apc
+doctrine:
+    orm:
+        metadata_cache_driver: redis
+        query_cache_driver: redis
+#        result_cache_driver: redis
 
 monolog:
     handlers:
@@ -30,3 +30,20 @@ monolog:
             to_email:       "%mail_admin%"
             subject:        "[ERROR] %app_name%"
             level:          debug
+
+snc_redis:
+    clients:
+        default:
+            type: predis
+            alias: default
+            dsn: redis://%redis_host%:%redis_port%/%redis_index%
+    doctrine:
+        metadata_cache:
+            client: default
+            entity_manager: default
+        query_cache:
+            client: default
+            entity_manager: default
+#        result_cache:
+#            client: default
+#            entity_manager: default

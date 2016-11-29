@@ -8,6 +8,10 @@ parameters:
     database_user:     root
     database_password: ~
 
+    redis_host: 127.0.0.1
+    redis_port: 6379
+    redis_index: 0
+
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
     mailer_user:       ~
