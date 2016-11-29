@@ -184,4 +184,30 @@ class ResponseControllerTest extends AbstractControllerTest
 
         $this->isNotFound(Request::METHOD_DELETE, $url, [], $headers);
     }
+
+    // === CGET - REPORTED ===
+    public function testCGetReportedSuccessful()
+    {
+        $headers = $this->getHeaderAdmin();
+
+        $url = self::PREFIX_URL . '/reported';
+
+        $this->isSuccessful(Request::METHOD_GET, $url, [], $headers);
+    }
+
+    public function testCGetReportedUnauthorized()
+    {
+        $url = self::PREFIX_URL . '/reported';
+
+        $this->isUnauthorized(Request::METHOD_GET, $url);
+    }
+
+    public function testCGetReportedForbidden()
+    {
+        $headers = $this->getHeaderConnect(self::USER1['username'], self::USER1['password']);
+
+        $url = self::PREFIX_URL . '/reported';
+
+        $this->isForbidden(Request::METHOD_GET, $url, [], $headers);
+    }
 }

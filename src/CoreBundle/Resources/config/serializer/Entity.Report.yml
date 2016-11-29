@@ -1,0 +1,22 @@
+CoreBundle\Entity\Report:
+    exclusion_policy: ALL
+
+    properties:
+        id:
+            expose: true
+
+# TODO add count
+    relations:
+        # link
+#        -
+#            rel: delete
+#            href:
+#                route: api_delete_report
+#                parameters:
+#                    report_id: expr(object.getId())
+
+        # embedded
+        -
+            rel: response
+            embedded:
+                content: expr(object.getResponse())

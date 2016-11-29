@@ -33,12 +33,33 @@ class ResponseController extends AbstractApiController implements ResponseDocs
      *
      * @Security("has_role('ROLE_ADMIN')")
      *
-     * @FOSRest\View(serializerGroups={"Default", "stats"})
+     * @FOSRest\View(serializerGroups={"Default"})
      */
     public function cgetUnpublishedAction(Request $request) : PaginatedRepresentation
     {
         $qb = $this->getDoctrine()->getRepository('CoreBundle:Response')->qbFindAllUnpublished();
         $qb = $this->applyFilter('core.response_filter', $qb, $request);
+
+        return $this->paginate($qb, $request);
+    }
+
+    /**
+     * Return collection of reported response
+     *
+     * @param Request $request
+     *
+     * @return PaginatedRepresentation
+     *
+     * @ApiDoc(ResponseDocs::CGET_REPORTED)
+     *
+     * @Security("has_role('ROLE_ADMIN')")
+     *
+     * @FOSRest\View(serializerGroups={"Default"})
+     */
+    public function cgetReportedAction(Request $request) : PaginatedRepresentation
+    {
+        $qb = $this->getDoctrine()->getRepository('CoreBundle:Report')->qbFindAll();
+        $qb = $this->applyFilter('core.report_filter', $qb, $request);
 
         return $this->paginate($qb, $request);
     }
@@ -55,7 +76,7 @@ class ResponseController extends AbstractApiController implements ResponseDocs
      * @Security("is_granted('view', response)")
      *
      * @FOSRest\Get("/responses/{response_id}", requirements={"response_id"="\d+"})
-     * @FOSRest\View(serializerGroups={"Default", "stats"})
+     * @FOSRest\View(serializerGroups={"Default", "stats", "info"})
      *
      * @ParamConverter("response", class="CoreBundle:Response", options={"id" = "response_id"})
      */
@@ -77,7 +98,7 @@ class ResponseController extends AbstractApiController implements ResponseDocs
      * @Security("is_granted('edit', response)")
      *
      * @FOSRest\Patch("/responses/{response_id}", requirements={"response_id"="\d+"})
-     * @FOSRest\View(serializerGroups={"Default", "stats"})
+     * @FOSRest\View(serializerGroups={"Default", "stats", "info"})
      *
      * @ParamConverter("response", class="CoreBundle:Response", options={"id" = "response_id"})
      */

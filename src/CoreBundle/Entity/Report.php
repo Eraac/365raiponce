@@ -9,7 +9,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  * Report
  *
  * @ORM\Table()
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="CoreBundle\Repository\ReportRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class Report

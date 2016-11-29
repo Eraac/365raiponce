@@ -219,4 +219,12 @@ abstract class AbstractFilter
             }
         }
     }
+
+    /**
+     * @param $timestamp
+     */
+    protected function validateTimestamp($timestamp)
+    {
+        $this->validateNumber($timestamp, 'core.error.filter.timestamp');
+    }
 }

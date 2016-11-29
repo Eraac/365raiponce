@@ -37,7 +37,7 @@ class ResponseController extends AbstractApiController implements ResponseDocs
      * @Security("is_granted('viewPublishedResponses', remark)")
      *
      * @FOSRest\Get("/remarks/{remark_id}/responses", requirements={"remark_id"="\d+"}, name="get_remark_responses", options={"method_prefix" = false})
-     * @FOSRest\View(serializerGroups={"Default", "stats"})
+     * @FOSRest\View(serializerGroups={"Default", "stats", "info"})
      *
      * @ParamConverter("remark", class="CoreBundle:Remark", options={"id" = "remark_id"})
      */

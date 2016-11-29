@@ -74,6 +74,24 @@ interface ResponseDocs extends Docs
         'filters' => self::FILTERS,
     ];
 
+    const CGET_REPORTED = [
+        'default'       => self::DEFAULT_AUTH,
+        'output'        => self::DEFAULT_OUTPUT,
+        'statusCodes'   => [
+            SFResponse::HTTP_OK           => self::HTTP_OK,
+            SFResponse::HTTP_BAD_REQUEST  => self::HTTP_BAD_REQUEST,
+            SFResponse::HTTP_UNAUTHORIZED => self::HTTP_UNAUTHORIZED,
+            SFResponse::HTTP_FORBIDDEN    => self::HTTP_FORBIDDEN,
+        ],
+        'filters' => [
+            ['name' => 'filter[reported_before]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}', 'description' => 'Search by posted date'],
+            ['name' => 'filter[reported_after]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}', 'description' => 'Search by posted date'],
+            ['name' => 'filter[response]', 'dataType' => 'integer', 'description' => 'Search by response (id)'],
+            ['name' => 'filter[_order][reported_at]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by date fo the report'],
+            ['name' => 'filter[_order][response]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by response'],
+        ]
+    ];
+
     const GET = [
         'default'      => self::DEFAULT,
         'output'       => self::DEFAULT_OUTPUT,

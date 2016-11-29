@@ -77,14 +77,4 @@ abstract class AbstractDateRepository extends AbstractRepository
 
         return $qb;
     }
-
-    /**
-     * @param int|string $timestamp
-     *
-     * @return bool|\DateTime
-     */
-    protected function dateFromTimestamp($timestamp)
-    {
-        return \DateTime::createFromFormat('U', $timestamp);
-    }
 }

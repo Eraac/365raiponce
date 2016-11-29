@@ -94,4 +94,14 @@ abstract class AbstractRepository extends EntityRepository
             $qb->leftJoin($alias . $attribute, $aliasJoin);
         }
     }
+
+    /**
+     * @param int|string $timestamp
+     *
+     * @return bool|\DateTime
+     */
+    protected function dateFromTimestamp($timestamp)
+    {
+        return \DateTime::createFromFormat('U', $timestamp);
+    }
 }

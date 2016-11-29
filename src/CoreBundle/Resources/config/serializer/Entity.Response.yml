@@ -68,3 +68,5 @@ CoreBundle\Entity\Response:
             rel: user_has_vote
             embedded:
                 content: expr(object.isUserHasVote())
+            exclusion:
+                groups: [info]
