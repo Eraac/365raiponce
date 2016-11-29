@@ -134,3 +134,10 @@ stof_doctrine_extensions:
     orm:
         default:
             timestampable: true
+
+snc_redis:
+    clients:
+        default:
+            type: predis
+            alias: default
+            dsn: redis://%redis_host%:%redis_port%/%redis_index%
