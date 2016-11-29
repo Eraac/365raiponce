@@ -6,7 +6,7 @@ use CoreBundle\Filter\AbstractFilter;
 use CoreBundle\Repository\ResponseRepository;
 use Doctrine\ORM\QueryBuilder;
 
-class ReportFilterTest extends AbstractFilter
+class ReportFilterTest extends AbstractFilterTest
 {
     protected function getFilter() : AbstractFilter
     {
