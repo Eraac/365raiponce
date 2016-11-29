@@ -138,4 +138,15 @@ interface ResponseDocs extends Docs
     ];
 
     const UNPUBLISH = self::PUBLISH;
+
+    const REPORT = [
+        'default'       => self::DEFAULT,
+        'requirements'  => self::RESPONSE_REQUIREMENTS,
+        'statusCodes'   => [
+            SFResponse::HTTP_NO_CONTENT   => self::HTTP_NO_CONTENT,
+            SFResponse::HTTP_UNAUTHORIZED => self::HTTP_UNAUTHORIZED,
+            SFResponse::HTTP_FORBIDDEN    => self::HTTP_FORBIDDEN,
+            SFResponse::HTTP_NOT_FOUND    => self::HTTP_NOT_FOUND,
+        ]
+    ];
 }

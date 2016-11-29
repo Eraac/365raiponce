@@ -5,6 +5,7 @@ namespace CoreBundle\Controller\Response;
 use CoreBundle\Annotation\ApiDoc;
 use CoreBundle\Controller\AbstractApiController;
 use CoreBundle\Docs\ResponseDocs;
+use CoreBundle\Entity\Report;
 use CoreBundle\Entity\Response;
 use FOS\RestBundle\Controller\Annotations as FOSRest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -75,6 +76,30 @@ class ResponseController extends AbstractApiController implements ResponseDocs
 
         $em = $this->getManager();
         $em->persist($response);
+        $em->flush();
+    }
+
+    /**
+     * Report inappropriate content
+     *
+     * @ApiDoc(ResponseDocs::REPORT)
+     *
+     * @param Response $response
+     *
+     * @Security("is_granted('report', response)")
+     *
+     * @FOSRest\Post("/responses/{response_id}/report", requirements={"response_id"="\d+"})
+     * @FOSRest\View()
+     *
+     * @ParamConverter("response", class="CoreBundle:Response", options={"id" = "response_id"})
+     */
+    public function postReportAction(Response $response)
+    {
+        $report = new Report();
+        $report->setResponse($response);
+
+        $em = $this->getManager();
+        $em->persist($report);
         $em->flush();
     }
 }

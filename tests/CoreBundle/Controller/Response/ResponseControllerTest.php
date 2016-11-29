@@ -14,6 +14,7 @@ class ResponseControllerTest extends AbstractControllerTest
     const PREFIX_URL = '/responses/';
     const SUFFIX_URL_PUBLISH = '/publish';
     const SUFFIX_URL_UNPUBLISH = '/unpublish';
+    const SUFFIX_URL_REPORT = '/report';
 
     // === POST - PUBLISH ===
     public function testPostPublishSuccessful()
@@ -101,5 +102,36 @@ class ResponseControllerTest extends AbstractControllerTest
         $url = self::PREFIX_URL . self::RESPONSE_UNPUBLISHED_ID . self::SUFFIX_URL_UNPUBLISH;
 
         $this->isConflict(Request::METHOD_POST, $url, [], $headers);
+    }
+
+    // === POST - REPORT ===
+    public function testPostReportSuccessful()
+    {
+        $url = self::PREFIX_URL . self::RESPONSE_PUBLISHED_ID . self::SUFFIX_URL_REPORT;
+
+        $this->isSuccessful(Request::METHOD_POST, $url);
+    }
+
+    public function testPostReportUnauthorized()
+    {
+        $url = self::PREFIX_URL . self::RESPONSE_UNPUBLISHED_ID . self::SUFFIX_URL_REPORT;
+
+        $this->isUnauthorized(Request::METHOD_POST, $url);
+    }
+
+    public function testPostReportForbidden()
+    {
+        $headers = $this->getHeaderConnect(self::USER2['username'], self::USER2['password']);
+
+        $url = self::PREFIX_URL . self::RESPONSE_UNPUBLISHED_ID . self::SUFFIX_URL_REPORT;
+
+        $this->isForbidden(Request::METHOD_POST, $url, [], $headers);
+    }
+
+    public function testPostReportNotFound()
+    {
+        $url = self::PREFIX_URL . '9876543210' . self::SUFFIX_URL_REPORT;
+
+        $this->isNotFound(Request::METHOD_POST, $url);
     }
 }

@@ -7,13 +7,14 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class ResponseVoter extends AbstractVoter
 {
-    const PUBLISH = 'publish';
+    const PUBLISH   = 'publish';
     const UNPUBLISH = 'unpublish';
-    const VOTE = 'vote';
-    const UNVOTE = 'unvote';
+    const VOTE      = 'vote';
+    const UNVOTE    = 'unvote';
+    const REPORT    = 'report';
 
     const ATTRIBUTES = [
-        self::PUBLISH, self::UNPUBLISH, self::VOTE, self::UNVOTE
+        self::PUBLISH, self::UNPUBLISH, self::VOTE, self::UNVOTE, self::REPORT
     ];
 
     /**
@@ -118,5 +119,18 @@ class ResponseVoter extends AbstractVoter
     protected function canUnvote(Response $response, TokenInterface $token) : bool
     {
         return $this->canVote($response, $token);
+    }
+
+    /**
+     * Return true if user can report the $response
+     *
+     * @param Response       $response
+     * @param TokenInterface $token
+     *
+     * @return bool
+     */
+    protected function canReport(Response $response, TokenInterface $token) : bool
+    {
+        return $this->canView($response, $token);
     }
 }
