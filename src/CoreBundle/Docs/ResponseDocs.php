@@ -47,6 +47,13 @@ interface ResponseDocs extends Docs
         ['name' => 'filter[posted_before]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}', 'description' => 'Search by posted date'],
         ['name' => 'filter[posted_after]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}', 'description' => 'Search by posted date'],
         ['name' => 'filter[remark]', 'dataType' => 'integer', 'description' => 'Search by remark (id)'],
+        self::FILTER_CREATED_BEFORE,
+        self::FILTER_CREATED_AFTER,
+        self::FILTER_UPDATED_BEFORE,
+        self::FILTER_UPDATED_AFTER,
+        self::ORDER_ID,
+        ['name' => 'filter[_order][posted_at]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by publication date'],
+        ['name' => 'filter[_order][remark]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by remark'],
     ];
 
 

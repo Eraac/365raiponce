@@ -28,7 +28,7 @@ interface Docs
     ];
 
     // Filter
-    const FILTER_ID               = ['name' => 'filter[_order][id]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by id'];
+    const ORDER_ID                = ['name' => 'filter[_order][id]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by id'];
     const FILTER_PAGINATION_PAGE  = ['name' => Paginator::PAGE,  'dataType' => 'integer', 'description' => 'Page of the collection',  'default' => '1'];
     const FILTER_PAGINATION_LIMIT = ['name' => Paginator::LIMIT, 'dataType' => 'integer', 'description' => 'Limit ot items per page', 'default' => Paginator::DEFAULT_LIMIT];
     const FILTER_CREATED_BEFORE   = ['name' => 'filter[created_before]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}'];

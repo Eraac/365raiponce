@@ -44,7 +44,7 @@ interface EmotionDocs extends Docs
         ],
         'filters' => [
             ['name' => 'filter[name]', 'dataType' => 'string', 'description' => 'Search by name'],
-            ['name' => 'filter[_order][id]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by id'],
+            self::ORDER_ID,
             ['name' => 'filter[_order][name]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by name'],
             self::FILTER_PAGINATION_PAGE,
             self::FILTER_PAGINATION_LIMIT,
