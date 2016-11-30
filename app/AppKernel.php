@@ -26,8 +26,11 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
-            new Snc\RedisBundle\SncRedisBundle(),
         ];
+
+        if ('prod' === $this->getEnvironment()) {
+            $bundles[] = new Snc\RedisBundle\SncRedisBundle();
+        }
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
@@ -35,7 +38,7 @@ class AppKernel extends Kernel
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
         }
 
-        if ("dev" === $this->getEnvironment()) {
+        if ('dev' === $this->getEnvironment()) {
             $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
         }

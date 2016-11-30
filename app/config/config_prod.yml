@@ -32,6 +32,11 @@ monolog:
             level:          debug
 
 snc_redis:
+    clients:
+        default:
+            type: predis
+            alias: default
+            dsn: redis://%redis_host%:%redis_port%/%redis_index%
     doctrine:
         metadata_cache:
             client: default
