@@ -7,6 +7,7 @@ php:
 services:
   - mysql
   - docker
+  - redis-server
 
 install:
   - sudo rm -Rf /var/lib/apt/lists/*
