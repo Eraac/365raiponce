@@ -4,6 +4,7 @@ namespace CoreBundle\Repository;
 
 use CoreBundle\Entity\Remark;
 use Doctrine\ORM\QueryBuilder;
+use UserBundle\Entity\User;
 
 /**
  * ResponseRepository
@@ -43,6 +44,19 @@ class ResponseRepository extends AbstractDateRepository
         return $this
             ->createQueryBuilder('r')
             ->where('r.postedAt IS NULL');
+    }
+
+    /**
+     * @param User $user
+     *
+     * @return QueryBuilder
+     */
+    public function qbFindAllByUser(User $user) : QueryBuilder
+    {
+        return $this
+            ->createQueryBuilder('r')
+            ->where('r.author = :user')
+            ->setParameter('user', $user);
     }
 
     /**

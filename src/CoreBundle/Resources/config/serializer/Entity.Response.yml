@@ -9,7 +9,6 @@ CoreBundle\Entity\Response:
         sentence:
             expose: true
 
-
     relations:
         # links
         -

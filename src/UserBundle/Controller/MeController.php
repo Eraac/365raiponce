@@ -4,7 +4,9 @@ namespace UserBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations as FOSRest;
 use CoreBundle\Annotation\ApiDoc;
+use Hateoas\Representation\PaginatedRepresentation;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use UserBundle\Docs\MeDocs;
 
@@ -19,6 +21,24 @@ use UserBundle\Docs\MeDocs;
  */
 class MeController extends AbstractUserController implements MeDocs
 {
+    /**
+     * Return collection of response of the user
+     *
+     * @return PaginatedRepresentation
+     *
+     * @ApiDoc(MeDocs::CGET_RESPONSES)
+     *
+     * @FOSRest\Get("/me/responses")
+     * @FOSRest\View(serializerGroups={"Default", "stats", "info"})
+     */
+    public function cgetResponsesAction(Request $request) : PaginatedRepresentation
+    {
+        $qb = $this->getDoctrine()->getRepository('CoreBundle:Response')->qbFindAllByUser($this->getUser());
+        $qb = $this->applyFilter('core.response_filter', $qb, $request);
+
+        return $this->paginate($qb, $request);
+    }
+
     /**
      * Return the current user
      *

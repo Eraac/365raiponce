@@ -30,6 +30,14 @@ interface MeDocs extends Docs
         'headers'        => self::HEADERS,
     ];
 
+    const CGET_RESPONSES = [
+        'default' => self::DEFAULT,
+        'output' => [
+            'class' => Response::class,
+            'parsers' => self::OUTPUT_PARSER,
+            'groups' => ['Default', 'stats', 'info']
+        ]
+    ];
 
     const GET = [
         'default' => self::DEFAULT,
