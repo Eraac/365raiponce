@@ -88,4 +88,20 @@ class MeControllerTest extends AbstractControllerTest
     {
         $this->isUnauthorized(Request::METHOD_DELETE, self::PREFIX_URL);
     }
+
+    // === CGET - RESPONSE ===
+    public function testCGetResponseSuccessful()
+    {
+        $header = $this->getHeaderConnect(self::USER1['username'], self::USER1['password']);
+        $url = self::PREFIX_URL . '/responses';
+
+        $this->isSuccessful(Request::METHOD_GET, $url, [], $header);
+    }
+
+    public function testCGetResponseUnauthorized()
+    {
+        $url = self::PREFIX_URL . '/responses';
+
+        $this->isSuccessful(Request::METHOD_GET, $url);
+    }
 }
