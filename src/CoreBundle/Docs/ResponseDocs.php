@@ -54,6 +54,8 @@ interface ResponseDocs extends Docs
         self::ORDER_ID,
         ['name' => 'filter[_order][posted_at]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by publication date'],
         ['name' => 'filter[_order][remark]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by remark'],
+        self::FILTER_PAGINATION_PAGE,
+        self::FILTER_PAGINATION_LIMIT,
     ];
 
 
@@ -96,6 +98,8 @@ interface ResponseDocs extends Docs
             ['name' => 'filter[response]', 'dataType' => 'integer', 'description' => 'Search by response (id)'],
             ['name' => 'filter[_order][reported_at]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by date fo the report'],
             ['name' => 'filter[_order][response]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by response'],
+            self::FILTER_PAGINATION_PAGE,
+            self::FILTER_PAGINATION_LIMIT,
         ]
     ];
 
