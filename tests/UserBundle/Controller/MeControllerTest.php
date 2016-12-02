@@ -102,6 +102,6 @@ class MeControllerTest extends AbstractControllerTest
     {
         $url = self::PREFIX_URL . '/responses';
 
-        $this->isSuccessful(Request::METHOD_GET, $url);
+        $this->isUnauthorized(Request::METHOD_GET, $url);
     }
 }

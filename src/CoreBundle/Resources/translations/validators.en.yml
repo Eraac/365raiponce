@@ -1,5 +1,7 @@
 core:
     error:
         invalid_boolean: "This value isn't a valid boolean"
+        invalid_timestamp: "This value isn't a valid date"
         already_vote_response: "You have already vote for this response"
         already_vote_remark: "You have already vote for this"
+        start_at_greater_than_end_at: "This value should be less than end date"

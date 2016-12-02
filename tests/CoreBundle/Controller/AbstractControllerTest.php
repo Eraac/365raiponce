@@ -21,6 +21,9 @@ abstract class AbstractControllerTest extends WebTestCase
     const RESPONSE_PUBLISHED_ID     = 1;
     const RESPONSE_UNPUBLISHED_ID   = 2;
 
+    const NEWS_CURRENT  = 1;
+    const NEWS_OVER     = 2;
+
     const THEME_ID      = 1;
     const EMOTION_ID    = 1;
 

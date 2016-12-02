@@ -30,3 +30,9 @@ services:
         parent: core.base_voter
         tags:
             - { name: security.voter }
+
+    core.news_voter:
+        class: CoreBundle\Security\NewsVoter
+        parent: core.base_voter
+        tags:
+            - { name: security.voter }

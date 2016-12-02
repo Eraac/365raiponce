@@ -18,6 +18,10 @@ response:
     type: rest
     resource: CoreBundle\Controller\ResponseController
 
+news:
+    type: rest
+    resource: CoreBundle\Controller\NewsController
+
 response_response:
     type: rest
     resource: CoreBundle\Controller\Response\ResponseController
