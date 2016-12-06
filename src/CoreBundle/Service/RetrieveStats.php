@@ -37,6 +37,7 @@ class RetrieveStats
      *
      * @param EntityManager $em
      * @param RequestStack  $requestStack
+     * @param Translator $translator
      */
     public function __construct(EntityManager $em, RequestStack $requestStack, Translator $translator)
     {
