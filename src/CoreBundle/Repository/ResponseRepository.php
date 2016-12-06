@@ -129,4 +129,44 @@ class ResponseRepository extends AbstractDateRepository
 
         return $this->applyOrder($qb, 'id', $order, $alias);
     }
+
+    /**
+     * @param \DateTime $from
+     * @param \DateTime $to
+     *
+     * @return int
+     */
+    public function countPublished(\DateTime $from, \DateTime $to) : int
+    {
+        $qb = $this->count('r');
+
+        $qb
+            ->where($qb->expr()->isNotNull('r.postedAt'))
+            ->andWhere('r.postedAt > :from', 'r.postedAt < :to')
+            ->setParameters([
+                'from' => $from,
+                'to' => $to
+            ])
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @param \DateTime $from
+     * @param \DateTime $to
+     *
+     * @return int
+     */
+    public function countUnpublished(\DateTime $from, \DateTime $to) : int
+    {
+        $qb = $this->count('r');
+
+        $this
+            ->filterByPeriod($qb, $from, $to)
+            ->andWhere($qb->expr()->isNull('r.postedAt'))
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }

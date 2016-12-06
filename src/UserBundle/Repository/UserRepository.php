@@ -25,4 +25,19 @@ class UserRepository extends AbstractDateRepository
     {
         return $this->filterBy($qb, 'username', $username);
     }
+
+    /**
+     * @param \DateTime $from
+     * @param \DateTime $to
+     *
+     * @return int
+     */
+    public function countAll(\DateTime $from, \DateTime $to) : int
+    {
+        $qb = $this->count('u');
+
+        $qb = $this->filterByPeriod($qb, $from, $to);
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }

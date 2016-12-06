@@ -25,9 +25,9 @@ abstract class AbstractVote
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createAt", type="datetime")
+     * @ORM\Column(type="datetime")
      */
-    private $createAt;
+    private $createdAt;
 
     /**
      * @var User
@@ -54,19 +54,19 @@ abstract class AbstractVote
      */
     public function prePersist()
     {
-        $this->createAt = new \DateTime();
+        $this->createdAt = new \DateTime();
     }
 
     /**
-     * Set createAt
+     * Set createdAt
      *
-     * @param \DateTime $createAt
+     * @param \DateTime $createdAt
      *
      * @return AbstractVote
      */
-    public function setCreateAt($createAt)
+    public function setCreatedAt($createdAt)
     {
-        $this->createAt = $createAt;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -76,9 +76,9 @@ abstract class AbstractVote
      *
      * @return \DateTime
      */
-    public function getCreateAt()
+    public function getCreatedAt()
     {
-        return $this->createAt;
+        return $this->createdAt;
     }
 
     /**

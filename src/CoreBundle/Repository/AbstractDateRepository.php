@@ -77,4 +77,24 @@ abstract class AbstractDateRepository extends AbstractRepository
 
         return $qb;
     }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param \DateTime    $from
+     * @param \DateTime    $to
+     *
+     * @return QueryBuilder
+     */
+    protected function filterByPeriod(QueryBuilder $qb, \DateTime $from, \DateTime $to) : QueryBuilder
+    {
+        $alias = $this->getAlias($qb);
+
+        return $qb
+            ->where($alias . 'createdAt > :from', $alias . 'createdAt < :to')
+            ->setParameters([
+                'from' => $from,
+                'to' => $to
+            ])
+        ;
+    }
 }

@@ -37,4 +37,5 @@ security:
             stateless:  true
             anonymous:  true
 
-#    access_control:
+    access_control:
+        - { path: ^/stats, roles: ROLE_ADMIN }

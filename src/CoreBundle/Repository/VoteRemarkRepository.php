@@ -41,4 +41,25 @@ class VoteRemarkRepository extends AbstractDateRepository
 
         return (bool) $qb->getQuery()->getSingleScalarResult();
     }
+
+    /**
+     * @param \DateTime $from
+     * @param \DateTime $to
+     * @param int       $type
+     *
+     * @return int
+     */
+    public function countAll(\DateTime $from, \DateTime $to, int $type) : int
+    {
+        $qb = $this->count('v');
+
+        $qb = $this->filterByPeriod($qb, $from, $to);
+
+        $qb
+            ->andWhere('v.type = :type')
+            ->setParameter('type', $type)
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }

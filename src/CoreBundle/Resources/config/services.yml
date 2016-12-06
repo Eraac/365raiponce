@@ -23,3 +23,10 @@ services:
             - '@nelmio_api_doc.doc_comment_extractor'
         tags:
             - { name: nelmio_api_doc.extractor.parser, priority: 2 }
+
+    core.retrieve_stats:
+        class: CoreBundle\Service\RetrieveStats
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@request_stack'
+            - '@translator.default'

@@ -104,4 +104,18 @@ abstract class AbstractRepository extends EntityRepository
     {
         return \DateTime::createFromFormat('U', $timestamp);
     }
+
+    /**
+     * @param string $alias
+     *
+     * @return QueryBuilder
+     */
+    protected function count(string $alias) : QueryBuilder
+    {
+        $qb = $this->createQueryBuilder($alias);
+
+        $qb->select($qb->expr()->count($alias));
+
+        return $qb;
+    }
 }
