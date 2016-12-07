@@ -103,18 +103,20 @@ class RetrieveStats
     {
         $request = $this->requestStack->getCurrentRequest();
 
-        $fromTimestamp = $request->query->get($key);
+        $filters = $request->query->get('filter');
 
-        $from = is_null($fromTimestamp) ?
+        $timestamp = isset($filters[$key]) ? $filters[$key] : null;
+
+        $date = is_null($timestamp) ?
             new \DateTime($default) :
-            \DateTime::createFromFormat('U', $fromTimestamp);
+            \DateTime::createFromFormat('U', $timestamp);
 
-        if (false === $from) {
+        if (false === $date) {
             throw new InvalidFilterException(
-                $this->translator->trans('core.error.filter.timestamp', ['%number%' => $fromTimestamp])
+                $this->translator->trans('core.error.filter.timestamp', ['%number%' => $timestamp])
             );
         }
 
-        return $from;
+        return $date;
     }
 }

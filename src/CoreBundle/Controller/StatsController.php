@@ -3,7 +3,7 @@
 namespace CoreBundle\Controller;
 
 use CoreBundle\Annotation\ApiDoc;
-//use CoreBundle\Docs\StatsDocs;
+use CoreBundle\Docs\StatsDocs;
 use CoreBundle\Service\RetrieveStats;
 use FOS\RestBundle\Controller\Annotations as FOSRest;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,12 +15,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  *
  * @FOSRest\Version("1.0")
  */
-class StatsController extends AbstractApiController// implements StatsDocs
+class StatsController extends AbstractApiController implements StatsDocs
 {
     /**
      * Get stats of the application
      *
-     * ApiDoc(StatsDocs::GET)
+     * @ApiDoc(StatsDocs::GET)
      *
      * @return JsonResponse
      *
