@@ -4,8 +4,8 @@ namespace CoreBundle\Filter;
 
 abstract class AbstractCreatedFilter extends AbstractFilter
 {
-    const UPDATED_BEFORE = 'created_before';
-    const UPDATED_AFTER  = 'created_after';
+    const CREATED_BEFORE = 'created_before';
+    const CREATED_AFTER  = 'created_after';
 
     /**
      * @inheritdoc
@@ -15,8 +15,8 @@ abstract class AbstractCreatedFilter extends AbstractFilter
         return array_merge(
             parent::getMapping(),
             [
-                self::UPDATED_BEFORE => [$this->repo, 'filterByCreatedBefore'],
-                self::UPDATED_AFTER  => [$this->repo, 'filterByCreatedAfter'],
+                self::CREATED_BEFORE => [$this->repo, 'filterByCreatedBefore'],
+                self::CREATED_AFTER  => [$this->repo, 'filterByCreatedAfter'],
             ]
         );
     }
@@ -29,8 +29,8 @@ abstract class AbstractCreatedFilter extends AbstractFilter
         return array_merge(
             parent::getMappingValidate(),
             [
-                self::UPDATED_BEFORE => [$this, 'validateTimestamp'],
-                self::UPDATED_AFTER  => [$this, 'validateTimestamp'],
+                self::CREATED_BEFORE => [$this, 'validateTimestamp'],
+                self::CREATED_AFTER  => [$this, 'validateTimestamp'],
             ]
         );
     }
