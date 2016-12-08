@@ -150,12 +150,7 @@ abstract class AbstractDateRepository extends AbstractRepository
     {
         $alias = $this->getAlias($qb);
 
-        $qb
-            ->addSelect('YEAR(' . $alias . 'createdAt) AS year_created')
-            ->addGroupBy('year_created')
-        ;
-
-        return $qb;
+        return $this->groupBy($qb, 'YEAR(' . $alias . 'createdAt)', 'created_year');
     }
 
     /**
@@ -168,12 +163,7 @@ abstract class AbstractDateRepository extends AbstractRepository
     {
         $alias = $this->getAlias($qb);
 
-        $qb
-            ->addSelect('MONTH(' . $alias . 'createdAt) AS month_created')
-            ->addGroupBy('month_created')
-        ;
-
-        return $qb;
+        return $this->groupBy($qb, 'MONTH(' . $alias . 'createdAt)', 'created_month');
     }
 
     /**
@@ -186,9 +176,14 @@ abstract class AbstractDateRepository extends AbstractRepository
     {
         $alias = $this->getAlias($qb);
 
+        return $this->groupBy($qb, 'DAY(' . $alias . 'createdAt)', 'created_day');
+    }
+
+    public function groupBy(QueryBuilder $qb, string $select, string $alias) : QueryBuilder
+    {
         $qb
-            ->addSelect('DAY(' . $alias . 'createdAt) AS day_created')
-            ->addGroupBy('day_created')
+            ->addSelect($select . ' AS ' . $alias)
+            ->addGroupBy($alias)
         ;
 
         return $qb;
