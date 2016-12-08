@@ -29,7 +29,7 @@ class Response
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="postedAt", type="datetime", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $postedAt;
 
