@@ -51,8 +51,8 @@ class RetrieveStats
      */
     public function stats() : array
     {
-        $from   = $this->getDatetimeInRequest('after', 'now -30days');
-        $to     = $this->getDatetimeInRequest('before', 'now');
+        $from   = $this->getDatetimeInRequest('to', 'now -30days');
+        $to     = $this->getDatetimeInRequest('from', 'now');
 
         /** @var RemarkRepository $remarkRepo */
         $remarkRepo = $this->getRepository('CoreBundle:Remark');

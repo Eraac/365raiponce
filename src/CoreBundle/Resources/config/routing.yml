@@ -45,3 +45,7 @@ remark_vote:
 stats:
     type: rest
     resource: CoreBundle\Controller\StatsController
+
+stats_remark:
+    type: rest
+    resource: CoreBundle\Controller\Stats\RemarkController

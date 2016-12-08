@@ -110,12 +110,26 @@ abstract class AbstractRepository extends EntityRepository
      *
      * @return QueryBuilder
      */
-    protected function count(string $alias) : QueryBuilder
+    public function count(string $alias) : QueryBuilder
     {
         $qb = $this->createQueryBuilder($alias);
 
-        $qb->select($qb->expr()->count($alias));
-
+        $qb->select($qb->expr()->count($alias) . ' AS nb');
+        
         return $qb;
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string       $orderBy
+     * @param string       $order
+     *
+     * @return QueryBuilder
+     */
+    public function orderByCount(QueryBuilder $qb, string $orderBy, string $order) : QueryBuilder
+    {
+        $alias = 'nb';
+
+        return $this->applyOrder($qb, '', $order, $alias);
     }
 }

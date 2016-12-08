@@ -2,7 +2,7 @@
 
 namespace Tests\CoreBundle\Filter;
 
-abstract class AbstractUpdatedFilterTest extends AbstractFilterTest
+abstract class AbstractUpdatedFilterTest extends AbstractCreatedFilterTest
 {
     /**
      * @inheritDoc

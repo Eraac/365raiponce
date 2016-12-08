@@ -97,4 +97,100 @@ abstract class AbstractDateRepository extends AbstractRepository
             ])
         ;
     }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string       $orderBy
+     * @param string       $order
+     *
+     * @return QueryBuilder
+     */
+    public function orderByCreatedYear(QueryBuilder $qb, string $orderBy, string $order) : QueryBuilder
+    {
+        $alias = $this->getAlias($qb);
+
+        return $qb->orderBy('YEAR(' . $alias . 'createdAt)', $order);
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string       $orderBy
+     * @param string       $order
+     *
+     * @return QueryBuilder
+     */
+    public function orderByCreatedMonth(QueryBuilder $qb, string $orderBy, string $order) : QueryBuilder
+    {
+        $alias = $this->getAlias($qb);
+
+        return $qb->orderBy('MONTH(' . $alias . 'createdAt)', $order);
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string       $orderBy
+     * @param string       $order
+     *
+     * @return QueryBuilder
+     */
+    public function orderByCreatedDay(QueryBuilder $qb, string $orderBy, string $order) : QueryBuilder
+    {
+        $alias = $this->getAlias($qb);
+
+        return $qb->orderBy('DAY(' . $alias . 'createdAt)', $order);
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string       $groupBy
+     *
+     * @return QueryBuilder
+     */
+    public function groupByCreatedYear(QueryBuilder $qb, string $groupBy) : QueryBuilder
+    {
+        $alias = $this->getAlias($qb);
+
+        $qb
+            ->addSelect('YEAR(' . $alias . 'createdAt) AS year_created')
+            ->addGroupBy('year_created')
+        ;
+
+        return $qb;
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string       $groupBy
+     *
+     * @return QueryBuilder
+     */
+    public function groupByCreatedMonth(QueryBuilder $qb, string $groupBy) : QueryBuilder
+    {
+        $alias = $this->getAlias($qb);
+
+        $qb
+            ->addSelect('MONTH(' . $alias . 'createdAt) AS month_created')
+            ->addGroupBy('month_created')
+        ;
+
+        return $qb;
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string       $groupBy
+     *
+     * @return QueryBuilder
+     */
+    public function groupByCreatedDay(QueryBuilder $qb, string $groupBy) : QueryBuilder
+    {
+        $alias = $this->getAlias($qb);
+
+        $qb
+            ->addSelect('DAY(' . $alias . 'createdAt) AS day_created')
+            ->addGroupBy('day_created')
+        ;
+
+        return $qb;
+    }
 }

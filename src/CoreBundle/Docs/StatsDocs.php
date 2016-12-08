@@ -25,8 +25,8 @@ interface StatsDocs extends Docs
             Response::HTTP_FORBIDDEN    => self::HTTP_FORBIDDEN,
         ],
         'filters' => [
-            ['name' => 'filter[before]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}', 'description' => 'Filter result by date (only content will be created before this date)'],
-            ['name' => 'filter[after]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}', 'description' => 'Filter result by date (only content will be created after this date)'],
+            ['name' => 'filter[from]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}', 'description' => 'Filter result by date (only content will be created after this date)'],
+            ['name' => 'filter[to]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}', 'description' => 'Filter result by date (only content will be created before this date)'],
         ],
     ];
 }
