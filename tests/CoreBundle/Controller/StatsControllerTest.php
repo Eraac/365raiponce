@@ -20,7 +20,7 @@ class StatsControllerTest extends AbstractControllerTest
     {
         $headers = $this->getHeaderAdmin();
 
-        $query = '?filter[before]=not-a-number';
+        $query = '?filter[from]=not-a-number';
 
         $this->isBadRequest(Request::METHOD_GET, self::PREFIX_URL . $query, [], $headers);
     }

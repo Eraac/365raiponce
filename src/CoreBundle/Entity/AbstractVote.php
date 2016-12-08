@@ -72,7 +72,7 @@ abstract class AbstractVote
     }
 
     /**
-     * Get createAt
+     * Get createdAt
      *
      * @return \DateTime
      */
