@@ -82,6 +82,8 @@ abstract class AbstractStatsFilter extends AbstractFilter
             $groupsBy = [$groupsBy];
         }
 
+        $groupsBy = array_unique($groupsBy);
+
         foreach ($groupsBy as $groupBy) {
 
             $method = isset($mappingGroupsBy[$groupBy]) ? $mappingGroupsBy[$groupBy] : null;

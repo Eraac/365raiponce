@@ -123,7 +123,7 @@ class RemarkRepository extends AbstractDateRepository
 
         $this->safeLeftJoin($qb, 'emotion', $alias);
 
-        return $this->applyOrder($qb, 'name', $order, $alias);
+        return $this->applyOrder($qb, '.name', $order, $alias);
     }
 
     /**
@@ -139,7 +139,7 @@ class RemarkRepository extends AbstractDateRepository
 
         $this->safeLeftJoin($qb, 'theme', $alias);
 
-        return $this->applyOrder($qb, 'name', $order, $alias);
+        return $this->applyOrder($qb, '.name', $order, $alias);
     }
 
     /**

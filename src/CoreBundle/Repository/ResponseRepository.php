@@ -127,7 +127,7 @@ class ResponseRepository extends AbstractDateRepository
 
         $this->safeLeftJoin($qb, 'remark', $alias);
 
-        return $this->applyOrder($qb, 'id', $order, $alias);
+        return $this->applyOrder($qb, '.id', $order, $alias);
     }
 
     /**
