@@ -43,8 +43,10 @@ class NewsRepository extends AbstractDateRepository
      */
     public function filterByStartedBefore(QueryBuilder $qb, $timestamp) : QueryBuilder
     {
+        $alias = $this->getAlias($qb);
+
         $qb
-            ->andWhere('n.startAt < :started_before')
+            ->andWhere($alias . 'startAt < :started_before')
             ->setParameter('started_before', $this->dateFromTimestamp($timestamp))
         ;
 
@@ -59,8 +61,10 @@ class NewsRepository extends AbstractDateRepository
      */
     public function filterByStartedAfter(QueryBuilder $qb, $timestamp) : QueryBuilder
     {
+        $alias = $this->getAlias($qb);
+
         $qb
-            ->andWhere('r.startedAt > :started_after')
+            ->andWhere($alias . 'startAt > :started_after')
             ->setParameter('started_after', $this->dateFromTimestamp($timestamp))
         ;
 
@@ -75,8 +79,10 @@ class NewsRepository extends AbstractDateRepository
      */
     public function filterByEndedBefore(QueryBuilder $qb, $timestamp) : QueryBuilder
     {
+        $alias = $this->getAlias($qb);
+
         $qb
-            ->andWhere('n.endAt < :ended_before')
+            ->andWhere($alias . 'endAt < :ended_before')
             ->setParameter('ended_before', $this->dateFromTimestamp($timestamp))
         ;
 
@@ -91,8 +97,10 @@ class NewsRepository extends AbstractDateRepository
      */
     public function filterByEndedAfter(QueryBuilder $qb, $timestamp) : QueryBuilder
     {
+        $alias = $this->getAlias($qb);
+
         $qb
-            ->andWhere('r.endAt > :ended_after')
+            ->andWhere($alias . 'endAt > :ended_after')
             ->setParameter('ended_after', $this->dateFromTimestamp($timestamp))
         ;
 
