@@ -21,7 +21,7 @@ class RemarkController extends AbstractApiController implements StatsDocs
     /**
      * Get stats about remark of the application
      *
-     * ApiDoc(StatsDocs::GET_REMARK)
+     * @ApiDoc(StatsDocs::GET_REMARK)
      *
      * @return JsonResponse
      *
