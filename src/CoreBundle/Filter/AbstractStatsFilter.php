@@ -34,13 +34,10 @@ abstract class AbstractStatsFilter extends AbstractFilter
      */
     protected function getMappingValidate() : array
     {
-        return array_merge(
-            parent::getMappingValidate(),
-            [
-                self::CREATED_BEFORE => [$this, 'validateTimestamp'],
-                self::CREATED_AFTER  => [$this, 'validateTimestamp'],
-            ]
-        );
+        return [
+            self::CREATED_BEFORE => [$this, 'validateTimestamp'],
+            self::CREATED_AFTER  => [$this, 'validateTimestamp'],
+        ];
     }
 
     /**

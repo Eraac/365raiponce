@@ -22,9 +22,6 @@ interface StatsDocs extends Docs
         Response::HTTP_FORBIDDEN    => self::HTTP_FORBIDDEN,
     ];
 
-    const FILTER_CREATED_BEFORE = ['name' => 'filter[created_before]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}', 'description' => 'Filter result by date (only content will be created after this date)'];
-    const FILTER_CREATED_AFTER  = ['name' => 'filter[created_after]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}', 'description' => 'Filter result by date (only content will be created before this date)'];
-
     const ORDER_CREATED_YEAR  = ['name' => 'filter[_order][created_year]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by created year'];
     const ORDER_CREATED_MONTH = ['name' => 'filter[_order][created_month]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by created month'];
     const ORDER_CREATED_DAY   = ['name' => 'filter[_order][created_day]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by created day'];
@@ -44,7 +41,7 @@ interface StatsDocs extends Docs
         ],
     ];
 
-    const REMARKS = [
+    const GET_REMARKS = [
         'default' => self::DEFAULT,
         'statusCodes' => self::DEFAULT_STATUS_CODES,
         'filters' => [

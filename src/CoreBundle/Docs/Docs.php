@@ -31,8 +31,8 @@ interface Docs
     const ORDER_ID                = ['name' => 'filter[_order][id]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by id'];
     const FILTER_PAGINATION_PAGE  = ['name' => Paginator::PAGE,  'dataType' => 'integer', 'description' => 'Page of the collection',  'default' => '1'];
     const FILTER_PAGINATION_LIMIT = ['name' => Paginator::LIMIT, 'dataType' => 'integer', 'description' => 'Limit ot items per page', 'default' => Paginator::DEFAULT_LIMIT];
-    const FILTER_CREATED_BEFORE   = ['name' => 'filter[created_before]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}'];
-    const FILTER_CREATED_AFTER    = ['name' => 'filter[created_after]',  'dataType' => 'integer', 'pattern' => '{unix timestamp}'];
+    const FILTER_CREATED_BEFORE   = ['name' => 'filter[created_before]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}', 'description' => 'Filter content by creation date'];
+    const FILTER_CREATED_AFTER    = ['name' => 'filter[created_after]',  'dataType' => 'integer', 'pattern' => '{unix timestamp}', 'description' => 'Filter content by creation date'];
     const FILTER_UPDATED_BEFORE   = ['name' => 'filter[updated_before]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}'];
     const FILTER_UPDATED_AFTER    = ['name' => 'filter[updated_after]',  'dataType' => 'integer', 'pattern' => '{unix timestamp}'];
 
