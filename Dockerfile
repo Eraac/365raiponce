@@ -4,7 +4,6 @@ MAINTAINER Kévin Labesse kevin@labesse.me
 
 COPY . /var/www
 
-RUN chown -R www-data:www-data /var/www/var/cache /var/www/var/logs /var/www/var/sessions
+RUN chown -R www-data:www-data /var/www
 
 VOLUME /var/www
-
