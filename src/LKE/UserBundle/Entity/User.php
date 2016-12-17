@@ -28,7 +28,7 @@ class User extends BaseUser
     /**
      * @var boolean
      *
-     * @ORM\Column(name="certificated", type="boolean", length=1, options={"default"=0})
+     * @ORM\Column(name="confirmed", type="boolean", length=1, options={"default"=0})
      */
     private $certificated;
 

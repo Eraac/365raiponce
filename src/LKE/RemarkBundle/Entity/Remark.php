@@ -50,7 +50,7 @@ class Remark
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="postedAt", type="datetime", nullable=true)
+     * @ORM\Column(name="posted_at", type="datetime", nullable=true)
      * @JMS\Expose()
      */
     private $postedAt;
@@ -58,7 +58,7 @@ class Remark
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdAt", type="datetime")
+     * @ORM\Column(name="created_at", type="datetime")
      * @JMS\Expose()
      * @JMS\Groups({"admin-remark"})
      */
@@ -67,7 +67,7 @@ class Remark
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updatedAt", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime")
      * @JMS\Expose()
      */
     private $updatedAt;
