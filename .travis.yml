@@ -21,8 +21,6 @@ before_script:
 script:
   - make test
   - SYMFONY_ENV=prod composer install --no-dev --optimize-autoloader
-  - rm -rf var/cache/*
-  - SYMFONY_ENV=prod bin/console cache:warmup
 
 after_success:
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USER" -p="$DOCKER_PASS"
