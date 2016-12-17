@@ -11,12 +11,12 @@ ALTER TABLE `user`
 ALTER TABLE `remark`
   CHANGE createdAt created_at DATETIME NOT NULL,
   CHANGE updatedAt updated_at DATETIME NOT NULL,
-  CHANGE postedAt posted_at DATETIME NOT NULL;
+  CHANGE postedAt posted_at DATETIME;
 
 ALTER TABLE `response`
   CHANGE createdAt created_at DATETIME NOT NULL,
   CHANGE updatedAt updated_at DATETIME NOT NULL,
-  CHANGE postedAt posted_at DATETIME NOT NULL;
+  CHANGE postedAt posted_at DATETIME;
 
 ALTER TABLE `report` CHANGE reportedAt reported_at DATETIME NOT NULL;
 
