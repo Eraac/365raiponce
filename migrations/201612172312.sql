@@ -6,14 +6,14 @@ ALTER TABLE vote_response CHANGE createAt created_at DATETIME NOT NULL;
 ALTER TABLE `user`
   ADD created_at DATETIME NOT NULL DEFAULT NOW(),
   ADD updated_at DATETIME NOT NULL DEFAULT NOW() ON UPDATE NOW(),
-  CHANGE certificated confirmed TINYINT(1) DEFAULT '0' NOT NULL;
+  CHANGE certificated confirmed TINYINT(1) DEFAULT '0' NOT NULL
+  CHANGE COLUMN expired expired TINYINT(1) NULL DEFAULT NULL,
+  CHANGE COLUMN credentials_expired credentials_expired TINYINT(1) NULL DEFAULT NULL;
 
 ALTER TABLE `remark`
   CHANGE createdAt created_at DATETIME NOT NULL,
   CHANGE updatedAt updated_at DATETIME NOT NULL,
-  CHANGE postedAt posted_at DATETIME
-  CHANGE COLUMN expired expired TINYINT(1) NULL DEFAULT NULL,
-  CHANGE COLUMN credentials_expired credentials_expired TINYINT(1) NULL DEFAULT NULL;
+  CHANGE postedAt posted_at DATETIME;
 
 ALTER TABLE `response`
   CHANGE createdAt created_at DATETIME NOT NULL,
