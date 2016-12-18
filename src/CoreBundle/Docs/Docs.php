@@ -35,6 +35,13 @@ interface Docs
     const FILTER_CREATED_AFTER    = ['name' => 'filter[created_after]',  'dataType' => 'integer', 'pattern' => '{unix timestamp}', 'description' => 'Filter content by creation date'];
     const FILTER_UPDATED_BEFORE   = ['name' => 'filter[updated_before]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}'];
     const FILTER_UPDATED_AFTER    = ['name' => 'filter[updated_after]',  'dataType' => 'integer', 'pattern' => '{unix timestamp}'];
+    const FILTER_POSTED_BEFORE    = ['name' => 'filter[posted_before]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}', 'description' => 'Search by posted date'];
+    const FILTER_POSTED_AFTER     = ['name' => 'filter[posted_after]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}', 'description' => 'Search by posted date'];
+    const FILTER_EMOTION          = ['name' => 'filter[emotion]', 'dataType' => 'integer', 'description' => 'Search by emotion (id)'];
+    const FILTER_THEME            = ['name' => 'filter[theme]', 'dataType' => 'integer', 'description' => 'Search by theme (id)'];
+
+    const ORDER_EMOTION           = ['name' => 'filter[_order][emotion]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by emotion'];
+    const ORDER_THEME             = ['name' => 'filter[_order][theme]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by theme'];
 
     // Parser
     const OUTPUT_PARSER = [

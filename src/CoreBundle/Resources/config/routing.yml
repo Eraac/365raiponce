@@ -46,6 +46,6 @@ stats:
     type: rest
     resource: CoreBundle\Controller\StatsController
 
-stats_remark:
+stats_stats:
     type: rest
-    resource: CoreBundle\Controller\Stats\RemarkController
+    resource: CoreBundle\Controller\Stats\StatsController

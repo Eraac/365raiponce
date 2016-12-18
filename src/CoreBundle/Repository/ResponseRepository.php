@@ -61,34 +61,34 @@ class ResponseRepository extends AbstractPostedRepository
 
     /**
      * @param QueryBuilder $qb
-     * @param int|string   $timestamp
+     * @param int|array    $emotion
      *
      * @return QueryBuilder
      */
-    public function filterByPostedBefore(QueryBuilder $qb, $timestamp) : QueryBuilder
+    public function filterByEmotion(QueryBuilder $qb, $emotion) : QueryBuilder
     {
-        $qb
-            ->andWhere('r.postedAt < :posted_before')
-            ->setParameter('posted_before', $this->dateFromTimestamp($timestamp))
-        ;
+        $alias = 'e';
 
-        return $qb;
+        $this->safeLeftJoin($qb, 'remark', 're');
+        $this->safeLeftJoin($qb, 'emotion', $alias, 're.');
+
+        return $this->getEqOrIn($qb, $emotion, $alias . '.id', 'emotion');
     }
 
     /**
      * @param QueryBuilder $qb
-     * @param int|string   $timestamp
+     * @param int|array    $theme
      *
      * @return QueryBuilder
      */
-    public function filterByPostedAfter(QueryBuilder $qb, $timestamp) : QueryBuilder
+    public function filterByTheme(QueryBuilder $qb, $theme) : QueryBuilder
     {
-        $qb
-            ->andWhere('r.postedAt > :posted_after')
-            ->setParameter('posted_after', $this->dateFromTimestamp($timestamp))
-        ;
+        $alias = 't';
 
-        return $qb;
+        $this->safeLeftJoin($qb, 'remark', 're');
+        $this->safeLeftJoin($qb, 'theme', $alias, 're.');
+
+        return $this->getEqOrIn($qb, $theme, $alias . '.id', 'theme');
     }
 
     /**
@@ -100,6 +100,17 @@ class ResponseRepository extends AbstractPostedRepository
     public function filterByRemark(QueryBuilder $qb, $remark) : QueryBuilder
     {
         return $this->filterByWithJoin($qb, 'remark', $remark, 're');
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param int|array    $author
+     *
+     * @return QueryBuilder
+     */
+    public function filterByAuthor(QueryBuilder $qb, $author) : QueryBuilder
+    {
+        return $this->filterByWithJoin($qb, 'author', $author, 'a');
     }
 
     /**
@@ -128,6 +139,56 @@ class ResponseRepository extends AbstractPostedRepository
         $this->safeLeftJoin($qb, 'remark', $alias);
 
         return $this->applyOrder($qb, '.id', $order, $alias);
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string       $orderBy
+     * @param string       $order
+     *
+     * @return QueryBuilder
+     */
+    public function orderByAuthor(QueryBuilder $qb, string $orderBy, string $order) : QueryBuilder
+    {
+        $alias = 'a';
+
+        $this->safeLeftJoin($qb, 'author', $alias);
+
+        return $this->applyOrder($qb, '.username', $order, $alias);
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string       $orderBy
+     * @param string       $order
+     *
+     * @return QueryBuilder
+     */
+    public function orderByEmotion(QueryBuilder $qb, string $orderBy, string $order) : QueryBuilder
+    {
+        $alias = 'e';
+
+        $this->safeLeftJoin($qb, 'remark', 're');
+        $this->safeLeftJoin($qb, 'emotion', $alias, 're.');
+
+        return $this->applyOrder($qb, '.name', $order, $alias);
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string       $orderBy
+     * @param string       $order
+     *
+     * @return QueryBuilder
+     */
+    public function orderByTheme(QueryBuilder $qb, string $orderBy, string $order) : QueryBuilder
+    {
+        $alias = 't';
+
+        $this->safeLeftJoin($qb, 'remark', 're');
+        $this->safeLeftJoin($qb, 'theme', $alias, 're.');
+
+        return $this->applyOrder($qb, '.name', $order, $alias);
     }
 
     /**
@@ -168,5 +229,59 @@ class ResponseRepository extends AbstractPostedRepository
         ;
 
         return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string       $groupBy
+     *
+     * @return QueryBuilder
+     */
+    public function groupByEmotion(QueryBuilder $qb, string $groupBy) : QueryBuilder
+    {
+        $this->safeLeftJoin($qb, 'remark', 're');
+        $this->safeLeftJoin($qb, 'emotion', 'e', 're.');
+
+        return $this->groupBy($qb, 'e.id', 'emotion_id');
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string       $groupBy
+     *
+     * @return QueryBuilder
+     */
+    public function groupByTheme(QueryBuilder $qb, string $groupBy) : QueryBuilder
+    {
+        $this->safeLeftJoin($qb, 'remark', 're');
+        $this->safeLeftJoin($qb, 'theme', 't', 're.');
+
+        return $this->groupBy($qb, 't.id', 'theme_id');
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string       $groupBy
+     *
+     * @return QueryBuilder
+     */
+    public function groupByRemark(QueryBuilder $qb, string $groupBy) : QueryBuilder
+    {
+        $this->safeLeftJoin($qb, 'remark', 're');
+
+        return $this->groupBy($qb, 're.id', 'remark_id');
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string       $groupBy
+     *
+     * @return QueryBuilder
+     */
+    public function groupByAuthor(QueryBuilder $qb, string $groupBy) : QueryBuilder
+    {
+        $this->safeLeftJoin($qb, 'author', 'a');
+
+        return $this->groupBy($qb, 'a.id', 'author_id');
     }
 }

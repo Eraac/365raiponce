@@ -44,8 +44,8 @@ interface ResponseDocs extends Docs
     ];
 
     const FILTERS = [
-        ['name' => 'filter[posted_before]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}', 'description' => 'Search by posted date'],
-        ['name' => 'filter[posted_after]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}', 'description' => 'Search by posted date'],
+        self::FILTER_POSTED_BEFORE,
+        self::FILTER_POSTED_AFTER,
         ['name' => 'filter[remark]', 'dataType' => 'integer', 'description' => 'Search by remark (id)'],
         self::FILTER_CREATED_BEFORE,
         self::FILTER_CREATED_AFTER,

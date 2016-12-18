@@ -16,22 +16,42 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @FOSRest\Version("1.0")
  */
-class RemarkController extends AbstractApiController implements StatsDocs
+class StatsController extends AbstractApiController implements StatsDocs
 {
     /**
      * Get stats about remark of the application
+     *
+     * @param Request $request
      *
      * @ApiDoc(StatsDocs::GET_REMARKS)
      *
      * @return JsonResponse
      *
-     * @FOSRest\Get("/stats/remarks")
      * @FOSRest\View()
      */
-    public function getStatsAction(Request $request)
+    public function getRemarksAction(Request $request) : JsonResponse
     {
         $qb = $this->getDoctrine()->getRepository('CoreBundle:Remark')->count('r');
         $qb = $this->applyFilter('core.stats.remark_filter', $qb, $request);
+
+        return new JsonResponse($qb->getQuery()->getArrayResult());
+    }
+
+    /**
+     * Get stats about response of the application
+     *
+     * @param Request $request
+     *
+     * @ApiDoc(StatsDocs::GET_RESPONSES)
+     *
+     * @return JsonResponse
+     *
+     * @FOSRest\View()
+     */
+    public function getResponsesAction(Request $request) : JsonResponse
+    {
+        $qb = $this->getDoctrine()->getRepository('CoreBundle:Response')->count('r');
+        $qb = $this->applyFilter('core.stats.response_filter', $qb, $request);
 
         return new JsonResponse($qb->getQuery()->getArrayResult());
     }

@@ -19,6 +19,27 @@ abstract class AbstractRepository extends EntityRepository
 
     /**
      * @param QueryBuilder $qb
+     * @param string|array $value
+     * @param string       $x
+     * @param string       $y
+     *
+     * @return QueryBuilder
+     */
+    protected function getEqOrIn(QueryBuilder $qb, $value, string $x, string $y) : QueryBuilder
+    {
+        if (is_array($value)) {
+            $expr = $qb->expr()->in($x, ':' . $y);
+        } else {
+            $expr = $qb->expr()->eq($x, ':' . $y);
+        }
+
+        return $qb
+            ->andWhere($expr)
+            ->setParameter($y, $value);
+    }
+
+    /**
+     * @param QueryBuilder $qb
      * @param string       $attribute
      * @param string|array $value
      *
@@ -83,13 +104,14 @@ abstract class AbstractRepository extends EntityRepository
      * @param QueryBuilder $qb
      * @param string       $attribute
      * @param string       $aliasJoin
+     * @param string       $usingAlias
      */
-    protected function safeLeftJoin(QueryBuilder $qb, string $attribute, string $aliasJoin)
+    protected function safeLeftJoin(QueryBuilder $qb, string $attribute, string $aliasJoin, string $usingAlias = null)
     {
         $aliases = $qb->getAllAliases();
 
         if (!in_array($aliasJoin, $aliases)) {
-            $alias = $this->getAlias($qb);
+            $alias = $usingAlias ?? $this->getAlias($qb);
 
             $qb->leftJoin($alias . $attribute, $aliasJoin);
         }
