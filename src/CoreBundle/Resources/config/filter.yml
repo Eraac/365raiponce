@@ -58,3 +58,9 @@ services:
         parent: core.abstract_filter
         arguments: ['@core.response_repository']
         public: true
+
+    core.stats.vote_remark_filter:
+        class: CoreBundle\Filter\Stats\VoteRemarkFilter
+        parent: core.abstract_filter
+        arguments: ['@core.vote_remark_repository']
+        public: true

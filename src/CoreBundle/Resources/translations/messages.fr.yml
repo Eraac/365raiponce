@@ -12,6 +12,7 @@ core:
             timestamp_array: "Le timestamp doit avoir qu'un seul paramètre par clé"
             timestamp: "La valeur %number% n'est pas un timestamp valide"
             number: "La valeur %number% n'est pas un nombre valide"
+            type: "Le type %type% n'est pas un type valide"
         remark:
             already_published: "Cette remarque a déjà été publiée"
             unpublished_yet: "Cette remarque n'est pas publiée"

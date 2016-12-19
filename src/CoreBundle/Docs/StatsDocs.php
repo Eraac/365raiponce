@@ -2,6 +2,7 @@
 
 namespace CoreBundle\Docs;
 
+use CoreBundle\Entity\VoteRemark;
 use Symfony\Component\HttpFoundation\Response;
 
 interface StatsDocs extends Docs
@@ -14,6 +15,7 @@ interface StatsDocs extends Docs
         'authentication' => true,
         'resource'       => true,
         'headers'        => self::HEADERS,
+        'statusCodes'    => self::DEFAULT_STATUS_CODES,
     ];
 
     const DEFAULT_STATUS_CODES = [
@@ -42,7 +44,6 @@ interface StatsDocs extends Docs
 
     const GET = [
         'default' => self::DEFAULT,
-        'statusCodes'  => self::DEFAULT_STATUS_CODES,
         'filters' => [
             ['name' => 'filter[from]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}', 'description' => 'Filter result by date (only content will be created after this date)'],
             ['name' => 'filter[to]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}', 'description' => 'Filter result by date (only content will be created before this date)'],
@@ -51,7 +52,6 @@ interface StatsDocs extends Docs
 
     const GET_REMARKS = [
         'default'       => self::DEFAULT,
-        'statusCodes'   => self::DEFAULT_STATUS_CODES,
         'filters'       => [
             self::FILTER_CREATED_BEFORE,
             self::FILTER_CREATED_AFTER,
@@ -81,7 +81,6 @@ interface StatsDocs extends Docs
 
     const GET_RESPONSES = [
         'default'       => self::DEFAULT,
-        'statusCodes'   => self::DEFAULT_STATUS_CODES,
         'filters'       => [
             self::FILTER_CREATED_BEFORE,
             self::FILTER_CREATED_AFTER,
@@ -89,7 +88,7 @@ interface StatsDocs extends Docs
             self::FILTER_POSTED_AFTER,
             self::FILTER_EMOTION,
             self::FILTER_THEME,
-            ['name' => 'filter[remark]', 'dataType' => 'integer', 'description' => 'Search by remark (id)'],
+            self::FILTER_REMARK,
             ['name' => 'filter[author]', 'dataType' => 'integer', 'description' => 'Search by author (id)'],
             self::ORDER_CREATED_YEAR,
             self::ORDER_CREATED_MONTH,
@@ -98,7 +97,7 @@ interface StatsDocs extends Docs
             self::ORDER_POSTED_MONTH,
             self::ORDER_POSTED_DAY,
             self::ORDER_EMOTION,
-            ['name' => 'filter[_order][remark]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by remark'],
+            self::ORDER_REMARK,
             ['name' => 'filter[_order][author]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by author (username)'],
             self::ORDER_THEME,
             self::ORDER_COUNT,
@@ -117,7 +116,6 @@ interface StatsDocs extends Docs
 
     const GET_USERS = [
         'default'       => self::DEFAULT,
-        'statusCodes'   => self::DEFAULT_STATUS_CODES,
         'filters'       => [
             self::FILTER_CREATED_BEFORE,
             self::FILTER_CREATED_AFTER,
@@ -128,6 +126,36 @@ interface StatsDocs extends Docs
             self::GROUP_CREATED_YEAR,
             self::GROUP_CREATED_MONTH,
             self::GROUP_CREATED_DAY,
+        ]
+    ];
+
+    const GET_VOTE_REMARKS = [
+        'default'       => self::DEFAULT,
+        'filters'       => [
+            self::FILTER_CREATED_BEFORE,
+            self::FILTER_CREATED_AFTER,
+            self::FILTER_EMOTION,
+            self::FILTER_THEME,
+            self::FILTER_REMARK,
+            ['name' => 'filter[type]', 'pattern' => '(0|1)', 'dataType' => 'integer', 'description' => 'Search by type (ref to vote_remarks)'],
+            ['name' => 'filter[voter]', 'dataType' => 'integer', 'description' => 'Search by user id'],
+            self::ORDER_CREATED_YEAR,
+            self::ORDER_CREATED_MONTH,
+            self::ORDER_CREATED_DAY,
+            self::ORDER_COUNT,
+            self::ORDER_EMOTION,
+            self::ORDER_THEME,
+            self::ORDER_REMARK,
+            ['name' => 'filter[_order][type]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by type (ref to vote_remarks)'],
+            ['name' => 'filter[_order][voter]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by voter (username)'],
+            self::GROUP_CREATED_YEAR,
+            self::GROUP_CREATED_MONTH,
+            self::GROUP_CREATED_DAY,
+            self::GROUP_EMOTION,
+            self::GROUP_THEME,
+            ['name' => 'filter[_group][]=remark', 'description' => 'Group by remark'],
+            ['name' => 'filter[_group][]=type', 'description' => 'Group by type'],
+            ['name' => 'filter[_group][]=voter', 'description' => 'Group by user'],
         ]
     ];
 }

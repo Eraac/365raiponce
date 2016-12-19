@@ -69,8 +69,27 @@ class StatsController extends AbstractApiController implements StatsDocs
      */
     public function getUsersAction(Request $request) : JsonResponse
     {
-        $qb = $this->getDoctrine()->getRepository('UserBundle:User')->count('r');
+        $qb = $this->getDoctrine()->getRepository('UserBundle:User')->count('u');
         $qb = $this->applyFilter('user.stats.user_filter', $qb, $request);
+
+        return new JsonResponse($qb->getQuery()->getArrayResult());
+    }
+
+    /**
+     * Get stats about users of the application
+     *
+     * @param Request $request
+     *
+     * @ApiDoc(StatsDocs::GET_USERS)
+     *
+     * @return JsonResponse
+     *
+     * @FOSRest\View()
+     */
+    public function getVotesRemarksAction(Request $request) : JsonResponse
+    {
+        $qb = $this->getDoctrine()->getRepository('CoreBundle:VoteRemark')->count('v');
+        $qb = $this->applyFilter('core.stats.vote_remark_filter', $qb, $request);
 
         return new JsonResponse($qb->getQuery()->getArrayResult());
     }

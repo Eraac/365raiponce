@@ -7,11 +7,11 @@ use CoreBundle\Repository\RemarkRepository;
 use Doctrine\ORM\QueryBuilder;
 use Tests\CoreBundle\Filter\AbstractStatsFilterTest;
 
-class RemarkFilterTest extends AbstractStatsFilterTest
+class VoteRemarkFilterTest extends AbstractStatsFilterTest
 {
     protected function getFilter() : AbstractFilter
     {
-        return $this->get('core.stats.remark_filter');
+        return $this->get('core.stats.vote_remark_filter');
     }
 
     /**
@@ -20,7 +20,7 @@ class RemarkFilterTest extends AbstractStatsFilterTest
     protected function getQueryBuilder() : QueryBuilder
     {
         /** @var RemarkRepository $repo */
-        $repo = $this->get('core.remark_repository');
+        $repo = $this->get('core.vote_remark_repository');
 
         return $repo->count('r');
     }
@@ -32,7 +32,7 @@ class RemarkFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getCriterias(),
-            ['posted_before', 'posted_after', 'emotion', 'theme']
+            ['emotion', 'theme', 'remark', 'type', 'voter']
         );
     }
 
@@ -43,7 +43,7 @@ class RemarkFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getGoodValueCriterias(),
-            [65432, 987654321, 3, [4, 2]]
+            [65432, 987654321, [4, 2], 1, 1]
         );
     }
 
@@ -54,7 +54,7 @@ class RemarkFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getBadValueCriterias(),
-            ['not', 'a', 'number', 'oups']
+            ['not', 'a', 'number', 3, 'admin']
         );
     }
 
@@ -65,7 +65,7 @@ class RemarkFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getOrderBy(),
-            ['posted_year', 'posted_month', 'posted_day', 'emotion', 'theme']
+            ['emotion', 'theme', 'remark', 'type', 'voter']
         );
     }
 
@@ -73,7 +73,7 @@ class RemarkFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getGoodValueOrderBy(),
-            ['DESC', 'DESC', 'ASC', 'DESC', 'ASC']
+            ['DESC', 'DESC', 'ASC', 'DESC', 'DESC']
         );
     }
 
@@ -84,7 +84,7 @@ class RemarkFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getBadValueOrderBy(),
-            ['B', 'E', 'U', 'R', 'K', 'O']
+            ['B', 'E', 'U', 'R', 'K']
         );
     }
 
@@ -94,7 +94,7 @@ class RemarkFilterTest extends AbstractStatsFilterTest
     protected function getGroupBy() : array
     {
         return [
-            'posted_year', 'posted_month', 'posted_day', 'emotion', 'theme'
+            'emotion', 'theme', 'remark', 'type', 'voter'
         ];
     }
 }

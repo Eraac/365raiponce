@@ -68,7 +68,7 @@ class ResponseFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getOrderBy(),
-            ['posted_year', 'posted_month', 'posted_day', 'emotion', 'remark', 'author']
+            ['posted_year', 'posted_month', 'posted_day', 'theme', 'emotion', 'remark', 'author']
         );
     }
 
@@ -76,7 +76,7 @@ class ResponseFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getGoodValueOrderBy(),
-            ['DESC', 'DESC', 'ASC', 'DESC', 'ASC', 'ASC']
+            ['DESC', 'DESC', 'ASC', 'DESC', 'ASC', 'ASC', 'DESC']
         );
     }
 
@@ -87,7 +87,7 @@ class ResponseFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getBadValueOrderBy(),
-            ['B', 'E', 'U', 'R', 'K', 'K', 'O']
+            ['B', 'E', 'U', 'R', 'K', 'K', 'O', 'K']
         );
     }
 

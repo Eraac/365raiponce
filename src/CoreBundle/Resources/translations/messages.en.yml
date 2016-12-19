@@ -12,6 +12,7 @@ core:
             timestamp_array: "Timestamp should have one parameter by key"
             timestamp: "Value %number% isn't a valid timestamp"
             number: "Value %number% isn't a valid number"
+            type: "Type %type% isn't a valid type"
         remark:
             already_published: "This remark was already published"
             unpublished_yet: "This remark is not unpublished yet"

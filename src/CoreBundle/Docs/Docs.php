@@ -39,9 +39,11 @@ interface Docs
     const FILTER_POSTED_AFTER     = ['name' => 'filter[posted_after]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}', 'description' => 'Search by posted date'];
     const FILTER_EMOTION          = ['name' => 'filter[emotion]', 'dataType' => 'integer', 'description' => 'Search by emotion (id)'];
     const FILTER_THEME            = ['name' => 'filter[theme]', 'dataType' => 'integer', 'description' => 'Search by theme (id)'];
+    const FILTER_REMARK           = ['name' => 'filter[remark]', 'dataType' => 'integer', 'description' => 'Search by remark (id)'];
 
     const ORDER_EMOTION           = ['name' => 'filter[_order][emotion]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by emotion'];
     const ORDER_THEME             = ['name' => 'filter[_order][theme]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by theme'];
+    const ORDER_REMARK            = ['name' => 'filter[_order][remark]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by remark'];
 
     // Parser
     const OUTPUT_PARSER = [
