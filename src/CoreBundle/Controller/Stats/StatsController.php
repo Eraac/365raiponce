@@ -55,4 +55,23 @@ class StatsController extends AbstractApiController implements StatsDocs
 
         return new JsonResponse($qb->getQuery()->getArrayResult());
     }
+
+    /**
+     * Get stats about users of the application
+     *
+     * @param Request $request
+     *
+     * @ApiDoc(StatsDocs::GET_USERS)
+     *
+     * @return JsonResponse
+     *
+     * @FOSRest\View()
+     */
+    public function getUsersAction(Request $request) : JsonResponse
+    {
+        $qb = $this->getDoctrine()->getRepository('UserBundle:User')->count('r');
+        $qb = $this->applyFilter('user.stats.user_filter', $qb, $request);
+
+        return new JsonResponse($qb->getQuery()->getArrayResult());
+    }
 }

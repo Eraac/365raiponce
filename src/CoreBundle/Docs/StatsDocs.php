@@ -28,8 +28,8 @@ interface StatsDocs extends Docs
     const ORDER_POSTED_YEAR   = ['name' => 'filter[_order][posted_year]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by posted year'];
     const ORDER_POSTED_MONTH  = ['name' => 'filter[_order][posted_month]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by posted month'];
     const ORDER_POSTED_DAY    = ['name' => 'filter[_order][posted_day]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by posted day'];
+    const ORDER_COUNT         = ['name' => 'filter[_order][count]', 'pattern' => '(ASC|DESC)', 'description' => 'Order result by count'];
 
-    const GROUP_COUNT         = ['name' => 'filter[_group][count]', 'pattern' => '(ASC|DESC)', 'description' => 'Order result by count'];
     const GROUP_CREATED_YEAR  = ['name' => 'filter[_group][]=created_year', 'description' => 'Group by created year'];
     const GROUP_CREATED_MONTH = ['name' => 'filter[_group][]=created_month', 'description' => 'Group by created month'];
     const GROUP_CREATED_DAY   = ['name' => 'filter[_group][]=created_day', 'description' => 'Group by created day'];
@@ -67,7 +67,7 @@ interface StatsDocs extends Docs
             self::ORDER_POSTED_DAY,
             self::ORDER_EMOTION,
             self::ORDER_THEME,
-            self::GROUP_COUNT,
+            self::ORDER_COUNT,
             self::GROUP_CREATED_YEAR,
             self::GROUP_CREATED_MONTH,
             self::GROUP_CREATED_DAY,
@@ -101,7 +101,7 @@ interface StatsDocs extends Docs
             ['name' => 'filter[_order][remark]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by remark'],
             ['name' => 'filter[_order][author]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by author (username)'],
             self::ORDER_THEME,
-            self::GROUP_COUNT,
+            self::ORDER_COUNT,
             self::GROUP_CREATED_YEAR,
             self::GROUP_CREATED_MONTH,
             self::GROUP_CREATED_DAY,
@@ -112,6 +112,22 @@ interface StatsDocs extends Docs
             self::GROUP_THEME,
             ['name' => 'filter[_group][]=remark', 'description' => 'Group by remark'],
             ['name' => 'filter[_group][]=author', 'description' => 'Group by author'],
+        ]
+    ];
+
+    const GET_USERS = [
+        'default'       => self::DEFAULT,
+        'statusCodes'   => self::DEFAULT_STATUS_CODES,
+        'filters'       => [
+            self::FILTER_CREATED_BEFORE,
+            self::FILTER_CREATED_AFTER,
+            self::ORDER_CREATED_YEAR,
+            self::ORDER_CREATED_MONTH,
+            self::ORDER_CREATED_DAY,
+            self::ORDER_COUNT,
+            self::GROUP_CREATED_YEAR,
+            self::GROUP_CREATED_MONTH,
+            self::GROUP_CREATED_DAY,
         ]
     ];
 }
