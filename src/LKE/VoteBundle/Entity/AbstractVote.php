@@ -26,7 +26,7 @@ abstract class AbstractVote
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createAt", type="datetime")
+     * @ORM\Column(name="created_at", type="datetime")
      * @JMS\Expose()
      * @JMS\Groups({"my-vote"})
      */

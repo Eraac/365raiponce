@@ -24,7 +24,7 @@ class Report
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="reportedAt", type="datetime")
+     * @ORM\Column(name="reported_at", type="datetime")
      */
     private $reportedAt;
 
