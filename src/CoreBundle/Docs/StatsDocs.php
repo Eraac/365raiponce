@@ -158,4 +158,37 @@ interface StatsDocs extends Docs
             ['name' => 'filter[_group][]=voter', 'description' => 'Group by user'],
         ]
     ];
+
+    const GET_VOTE_RESPONSES = [
+        'default'       => self::DEFAULT,
+        'filters'       => [
+            self::FILTER_CREATED_BEFORE,
+            self::FILTER_CREATED_AFTER,
+            self::FILTER_EMOTION,
+            self::FILTER_THEME,
+            self::FILTER_REMARK,
+            ['name' => 'filter[response]', 'dataType' => 'integer', 'description' => 'Search by response'],
+            ['name' => 'filter[voter]', 'dataType' => 'integer', 'description' => 'Search by user id (user has voted)'],
+            ['name' => 'filter[receiver]', 'dataType' => 'integer', 'description' => 'Search by user id (user has receive the vote)'],
+            self::ORDER_CREATED_YEAR,
+            self::ORDER_CREATED_MONTH,
+            self::ORDER_CREATED_DAY,
+            self::ORDER_COUNT,
+            self::ORDER_EMOTION,
+            self::ORDER_THEME,
+            self::ORDER_REMARK,
+            ['name' => 'filter[_order][response]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by response'],
+            ['name' => 'filter[_order][voter]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by voter (username)'],
+            ['name' => 'filter[_order][receiver]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by user has receive the vote (username)'],
+            self::GROUP_CREATED_YEAR,
+            self::GROUP_CREATED_MONTH,
+            self::GROUP_CREATED_DAY,
+            self::GROUP_EMOTION,
+            self::GROUP_THEME,
+            ['name' => 'filter[_group][]=remark', 'description' => 'Group by remark'],
+            ['name' => 'filter[_group][]=response', 'description' => 'Group by response'],
+            ['name' => 'filter[_group][]=voter', 'description' => 'Group by voter'],
+            ['name' => 'filter[_group][]=receiver', 'description' => 'Group by receiver'],
+        ]
+    ];
 }

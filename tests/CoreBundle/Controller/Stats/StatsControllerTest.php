@@ -9,10 +9,11 @@ class StatsControllerTest extends AbstractControllerTest
 {
     const PREFIX_URL = '/stats';
 
-    const URL_REMARKS       = self::PREFIX_URL . '/remarks';
-    const URL_RESPONSES     = self::PREFIX_URL . '/responses';
-    const URL_USERS         = self::PREFIX_URL . '/users';
-    const URL_VOTES_REMARKS = self::PREFIX_URL . '/votes/remarks';
+    const URL_REMARKS        = self::PREFIX_URL . '/remarks';
+    const URL_RESPONSES      = self::PREFIX_URL . '/responses';
+    const URL_USERS          = self::PREFIX_URL . '/users';
+    const URL_VOTES_REMARKS  = self::PREFIX_URL . '/votes/remarks';
+    const URL_VOTES_RESPONSE = self::PREFIX_URL . '/votes/responses';
 
    // === GET - REMARK ===
     public function testGetRemarkSuccessful()
@@ -92,5 +93,25 @@ class StatsControllerTest extends AbstractControllerTest
         $headers = $this->getHeaderConnect(self::USER1['username'], self::USER1['password']);
 
         $this->isForbidden(Request::METHOD_GET, self::URL_VOTES_REMARKS, [], $headers);
+    }
+
+    // === GET - VOTE_RESPONSE ===
+    public function testGetVoteResponseSuccessful()
+    {
+        $headers = $this->getHeaderAdmin();
+
+        $this->isSuccessful(Request::METHOD_GET, self::URL_VOTES_RESPONSE, [], $headers);
+    }
+
+    public function testGetVoteResponseUnauthorized()
+    {
+        $this->isUnauthorized(Request::METHOD_GET, self::URL_VOTES_RESPONSE);
+    }
+
+    public function testGetVoteResponseForbidden()
+    {
+        $headers = $this->getHeaderConnect(self::USER1['username'], self::USER1['password']);
+
+        $this->isForbidden(Request::METHOD_GET, self::URL_VOTES_RESPONSE, [], $headers);
     }
 }

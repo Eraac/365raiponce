@@ -76,11 +76,11 @@ class StatsController extends AbstractApiController implements StatsDocs
     }
 
     /**
-     * Get stats about users of the application
+     * Get stats about votes on remark of the application
      *
      * @param Request $request
      *
-     * @ApiDoc(StatsDocs::GET_USERS)
+     * @ApiDoc(StatsDocs::GET_VOTE_REMARKS)
      *
      * @return JsonResponse
      *
@@ -90,6 +90,25 @@ class StatsController extends AbstractApiController implements StatsDocs
     {
         $qb = $this->getDoctrine()->getRepository('CoreBundle:VoteRemark')->count('v');
         $qb = $this->applyFilter('core.stats.vote_remark_filter', $qb, $request);
+
+        return new JsonResponse($qb->getQuery()->getArrayResult());
+    }
+
+    /**
+     * Get stats about votes on response of the application
+     *
+     * @param Request $request
+     *
+     * @ApiDoc(StatsDocs::GET_VOTE_RESPONSES)
+     *
+     * @return JsonResponse
+     *
+     * @FOSRest\View()
+     */
+    public function getVotesResponsesAction(Request $request) : JsonResponse
+    {
+        $qb = $this->getDoctrine()->getRepository('CoreBundle:VoteResponse')->count('v');
+        $qb = $this->applyFilter('core.stats.vote_response_filter', $qb, $request);
 
         return new JsonResponse($qb->getQuery()->getArrayResult());
     }
