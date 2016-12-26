@@ -66,6 +66,16 @@ abstract class AbstractStatsFilter extends AbstractFilter
     }
 
     /**
+     * @inheritdoc
+     */
+    public function applyFilter(QueryBuilder $qb, array $criterias) : QueryBuilder
+    {
+        $this->validateOrderBy($criterias);
+
+        parent::applyFilter($qb, $criterias);
+    }
+
+    /**
      * @param QueryBuilder  $qb
      * @param string|array  $groupsBy
      *
@@ -99,5 +109,28 @@ abstract class AbstractStatsFilter extends AbstractFilter
         }
 
         return $qb;
+    }
+
+    /**
+     * @param array $criterias
+     *
+     * @throws InvalidFilterException
+     */
+    private function validateOrderBy(array $criterias)
+    {
+        if (!array_key_exists('_order', $criterias) || !array_key_exists('_group', $criterias)) {
+            return;
+        }
+
+        $orders = $criterias['_order'];
+        $groups = $criterias['_group'];
+
+        $diffs = array_diff_key($orders, $groups);
+
+        if (!empty($diffs)) {
+            throw new InvalidFilterException(
+                $this->t('core.error.miss_group_by', ['%fields%' => implode(', ', array_keys($diffs))])
+            );
+        }
     }
 }

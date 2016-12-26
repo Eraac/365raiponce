@@ -8,6 +8,7 @@ core:
         invalid_order_by: "Le tri par %order_by% n'est pas valide"
         invalid_order: "L'ordre par %order% n'est pas valide"
         wrong_filter: "Une erreur est survenue sur les filtres"
+        miss_group_by: "Impossible d'ordonner les résultats sans les grouper pour : %fields%"
         filter:
             timestamp_array: "Le timestamp doit avoir qu'un seul paramètre par clé"
             timestamp: "La valeur %number% n'est pas un timestamp valide"

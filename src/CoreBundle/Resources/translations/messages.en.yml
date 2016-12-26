@@ -8,6 +8,7 @@ core:
         invalid_order_by: "Sort by %order_by% isn't valid"
         invalid_order: "Order %order% isn't valid"
         wrong_filter: "Something is wrong with the filter"
+        miss_group_by: "Impossible to order result without group for : %fields%"
         filter:
             timestamp_array: "Timestamp should have one parameter by key"
             timestamp: "Value %number% isn't a valid timestamp"
