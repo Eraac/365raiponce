@@ -72,7 +72,7 @@ abstract class AbstractStatsFilter extends AbstractFilter
     {
         $this->validateOrderBy($criterias);
 
-        parent::applyFilter($qb, $criterias);
+        return parent::applyFilter($qb, $criterias);
     }
 
     /**
