@@ -51,8 +51,8 @@ class RetrieveStats
      */
     public function stats() : array
     {
-        $from   = $this->getDatetimeInRequest('to', 'now -30days');
-        $to     = $this->getDatetimeInRequest('from', 'now');
+        $from   = $this->getDatetimeInRequest('from', 'now -30days');
+        $to     = $this->getDatetimeInRequest('to', 'now');
 
         /** @var RemarkRepository $remarkRepo */
         $remarkRepo = $this->getRepository('CoreBundle:Remark');
@@ -73,7 +73,7 @@ class RetrieveStats
             "count_remarks_publish"        => $remarkRepo->countPublished($from, $to),
             "count_remarks_unpublish"      => $remarkRepo->countUnpublished($from, $to),
             "count_reponses_publish"       => $responseRepo->countPublished($from, $to),
-            "count_response_unpublish"     => $responseRepo->countPublished($from, $to),
+            "count_response_unpublish"     => $responseRepo->countUnpublished($from, $to),
             "count_users"                  => $userRepo->countAll($from, $to),
             "count_votes_remarks_sexist"   => $voteRemarkRepo->countAll($from, $to, VoteRemark::IS_SEXIST),
             "count_votes_remarks_lived"    => $voteRemarkRepo->countAll($from, $to, VoteRemark::ALREADY_LIVED),
