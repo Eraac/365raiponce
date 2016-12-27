@@ -93,8 +93,9 @@ class RemarkFilterTest extends AbstractStatsFilterTest
      */
     protected function getGroupBy() : array
     {
-        return [
-            'posted_year', 'posted_month', 'posted_day', 'emotion', 'theme'
-        ];
+        return array_merge(
+            parent::getGroupBy(),
+            ['posted_year', 'posted_month', 'posted_day', 'emotion', 'theme']
+        );
     }
 }

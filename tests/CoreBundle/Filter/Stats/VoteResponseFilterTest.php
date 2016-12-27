@@ -93,8 +93,9 @@ class VoteResponseFilterTest extends AbstractStatsFilterTest
      */
     protected function getGroupBy() : array
     {
-        return [
-            'emotion', 'theme', 'remark', 'response', 'voter', 'receiver'
-        ];
+        return array_merge(
+            parent::getGroupBy(),
+            ['emotion', 'theme', 'remark', 'response', 'voter', 'receiver']
+        );
     }
 }

@@ -118,18 +118,16 @@ abstract class AbstractStatsFilter extends AbstractFilter
      */
     private function validateOrderBy(array $criterias)
     {
-        if (!array_key_exists('_order', $criterias) || !array_key_exists('_group', $criterias)) {
-            return;
-        }
+        $orders = $criterias['_order'] ?? [];
+        $groups = $criterias['_group'] ?? [];
 
-        $orders = $criterias['_order'];
-        $groups = $criterias['_group'];
+        unset($orders['count']);
 
-        $diffs = array_diff_key($orders, $groups);
+        $diffs = array_diff(array_keys($orders), $groups);
 
         if (!empty($diffs)) {
             throw new InvalidFilterException(
-                $this->t('core.error.miss_group_by', ['%fields%' => implode(', ', array_keys($diffs))])
+                $this->t('core.error.miss_group_by', ['%fields%' => implode(', ', $diffs)])
             );
         }
     }
