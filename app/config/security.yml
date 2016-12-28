@@ -41,3 +41,4 @@ security:
 
     access_control:
         - { path: ^/stats, roles: ROLE_ADMIN }
+        - { path: ^/exports, roles: ROLE_ADMIN }

@@ -56,7 +56,8 @@ interface Docs
 
     // Status code
     const HTTP_OK           = 'Returned when is successful';
-    const HTTP_CREATED      = 'Returned when resource is create';
+    const HTTP_CREATED      = 'Returned when request has been fulfilled, resulting in the creation of a new resource';
+    const HTTP_ACCEPTED     = 'Returned when request has been accepted for processing, but the processing has not been completed';
     const HTTP_NO_CONTENT   = 'Returned when is successful but no content is returned';
     const HTTP_BAD_REQUEST  = 'Returned when one or more parameters are invalid';
     const HTTP_UNAUTHORIZED = 'Returned when authentication is required';

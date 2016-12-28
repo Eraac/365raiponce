@@ -49,3 +49,7 @@ stats:
 stats_stats:
     type: rest
     resource: CoreBundle\Controller\Stats\StatsController
+
+export:
+    type: rest
+    resource: CoreBundle\Controller\ExportController

@@ -39,3 +39,9 @@ services:
         arguments: ['@security.token_storage', '@core.vote_remark_repository']
         tags:
             - { name: jms_serializer.event_subscriber }
+
+    core.delayed_event_dispatcher:
+        class: CoreBundle\Event\Dispatcher\DelayedEventDispatcher
+        arguments: ['@event_dispatcher']
+        tags:
+            - { name: kernel.event_listener, event: kernel.terminate, method: setReady, priority: 255 }

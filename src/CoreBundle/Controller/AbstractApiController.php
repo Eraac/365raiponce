@@ -2,6 +2,7 @@
 
 namespace CoreBundle\Controller;
 
+use CoreBundle\Event\Dispatcher\DelayedEventDispatcher;
 use CoreBundle\Exception\InvalidFilterException;
 use CoreBundle\Filter\AbstractFilter;
 use CoreBundle\Service\Paginator;
@@ -131,6 +132,20 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
     {
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
+
+        $dispatcher->dispatch($name, $event);
+    }
+
+    /**
+     * Dispatch an event on kernel.terminate
+     *
+     * @param string $name
+     * @param Event  $event
+     */
+    protected function delayedDispatch(string $name, Event $event)
+    {
+        /** @var DelayedEventDispatcher $dispatcher */
+        $dispatcher = $this->get('core.delayed_event_dispatcher');
 
         $dispatcher->dispatch($name, $event);
     }

@@ -30,3 +30,9 @@ user:
         forget_password:
             wrong_email: 'Email is not valid'
             not_found: "Username does not exist"
+
+export_users:
+    email:
+        subject: "Users export"
+        message: |
+            Your export has been finish. You can find it as an attachment of this email

@@ -30,3 +30,15 @@ services:
             - '@doctrine.orm.entity_manager'
             - '@request_stack'
             - '@translator.default'
+
+    core.array_to_csv:
+        class: CoreBundle\Service\ArrayToCsv
+
+    core.export_users:
+        class: CoreBundle\Service\ExportUsers
+        arguments:
+            - '@user.user_repository'
+            - '@user.mailer'
+            - '@core.array_to_csv'
+        tags:
+            - { name: kernel.event_listener, event: core.export.users, method: onExport }

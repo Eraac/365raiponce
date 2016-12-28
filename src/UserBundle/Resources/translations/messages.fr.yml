@@ -30,3 +30,9 @@ user:
         forget_password:
             wrong_email: "L'email d'utilisateur n'est pas valide"
             not_found: "Le nom d'utilisateur n'existe pas"
+
+export_users:
+    email:
+        subject: "Export des utilisateurs"
+        message: |
+            Votre export est terminé. Vous pouvez le trouver en pièce jointe.

@@ -16,6 +16,17 @@ class UserRepository extends AbstractDateRepository
     }
 
     /**
+     * @return array
+     */
+    public function exportUsers() : array
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('u.username', 'u.email');
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    /**
      * @param QueryBuilder $qb
      * @param string|array $username
      *

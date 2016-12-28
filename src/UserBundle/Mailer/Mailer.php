@@ -55,11 +55,25 @@ class Mailer implements MailerInterface
     }
 
     /**
+     * @param string $to
+     * @param string $filename
+     */
+    public function sendExportUsers(string $to, string $filename)
+    {
+        $template = "UserBundle:Export:users.txt.twig";
+
+        $attachment = \Swift_Attachment::fromPath($filename)->setFilename('users.csv');
+
+        $this->sendMessage($template, [], $to, $attachment);
+    }
+
+    /**
      * @param string $templateName
      * @param array  $context
      * @param string $toEmail
+     * @param \Swift_Attachment $attachment
      */
-    protected function sendMessage($templateName, $context, $toEmail)
+    protected function sendMessage($templateName, $context, $toEmail, \Swift_Attachment $attachment = null)
     {
         $template = $this->twig->loadTemplate($templateName);
         $subject  = $template->renderBlock('subject', $context);
@@ -69,6 +83,10 @@ class Mailer implements MailerInterface
         $message = \Swift_Message::newInstance()
             ->setSubject($subject)
             ->setTo($toEmail);
+
+        if ($attachment) {
+            $message->attach($attachment);
+        }
 
         if (!empty($htmlBody)) {
             $message->setBody($htmlBody, 'text/html')
