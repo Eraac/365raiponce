@@ -5,8 +5,9 @@ namespace CoreBundle\Controller\Stats;
 use CoreBundle\Annotation\ApiDoc;
 use CoreBundle\Controller\AbstractApiController;
 use CoreBundle\Docs\StatsDocs;
+use CoreBundle\Service\Paginator;
+use Doctrine\ORM\QueryBuilder;
 use FOS\RestBundle\Controller\Annotations as FOSRest;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -25,16 +26,16 @@ class StatsController extends AbstractApiController implements StatsDocs
      *
      * @ApiDoc(StatsDocs::GET_REMARKS)
      *
-     * @return JsonResponse
+     * @return array
      *
      * @FOSRest\View()
      */
-    public function getRemarksAction(Request $request) : JsonResponse
+    public function getRemarksAction(Request $request) : array
     {
         $qb = $this->getDoctrine()->getRepository('CoreBundle:Remark')->count('r');
         $qb = $this->applyFilter('core.stats.remark_filter', $qb, $request);
 
-        return new JsonResponse($qb->getQuery()->getArrayResult());
+        return $this->paginateStats($qb, $request);
     }
 
     /**
@@ -44,16 +45,16 @@ class StatsController extends AbstractApiController implements StatsDocs
      *
      * @ApiDoc(StatsDocs::GET_RESPONSES)
      *
-     * @return JsonResponse
+     * @return array
      *
      * @FOSRest\View()
      */
-    public function getResponsesAction(Request $request) : JsonResponse
+    public function getResponsesAction(Request $request) : array
     {
         $qb = $this->getDoctrine()->getRepository('CoreBundle:Response')->count('r');
         $qb = $this->applyFilter('core.stats.response_filter', $qb, $request);
 
-        return new JsonResponse($qb->getQuery()->getArrayResult());
+        return $this->paginateStats($qb, $request);
     }
 
     /**
@@ -63,16 +64,16 @@ class StatsController extends AbstractApiController implements StatsDocs
      *
      * @ApiDoc(StatsDocs::GET_USERS)
      *
-     * @return JsonResponse
+     * @return array
      *
      * @FOSRest\View()
      */
-    public function getUsersAction(Request $request) : JsonResponse
+    public function getUsersAction(Request $request) : array
     {
         $qb = $this->getDoctrine()->getRepository('UserBundle:User')->count('u');
         $qb = $this->applyFilter('user.stats.user_filter', $qb, $request);
 
-        return new JsonResponse($qb->getQuery()->getArrayResult());
+        return $this->paginateStats($qb, $request);
     }
 
     /**
@@ -82,16 +83,16 @@ class StatsController extends AbstractApiController implements StatsDocs
      *
      * @ApiDoc(StatsDocs::GET_VOTE_REMARKS)
      *
-     * @return JsonResponse
+     * @return array
      *
      * @FOSRest\View()
      */
-    public function getVotesRemarksAction(Request $request) : JsonResponse
+    public function getVotesRemarksAction(Request $request) : array
     {
         $qb = $this->getDoctrine()->getRepository('CoreBundle:VoteRemark')->count('v');
         $qb = $this->applyFilter('core.stats.vote_remark_filter', $qb, $request);
 
-        return new JsonResponse($qb->getQuery()->getArrayResult());
+        return $this->paginateStats($qb, $request);
     }
 
     /**
@@ -101,15 +102,29 @@ class StatsController extends AbstractApiController implements StatsDocs
      *
      * @ApiDoc(StatsDocs::GET_VOTE_RESPONSES)
      *
-     * @return JsonResponse
+     * @return array
      *
      * @FOSRest\View()
      */
-    public function getVotesResponsesAction(Request $request) : JsonResponse
+    public function getVotesResponsesAction(Request $request) : array
     {
         $qb = $this->getDoctrine()->getRepository('CoreBundle:VoteResponse')->count('v');
         $qb = $this->applyFilter('core.stats.vote_response_filter', $qb, $request);
 
-        return new JsonResponse($qb->getQuery()->getArrayResult());
+        return $this->paginateStats($qb, $request);
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param Request $request
+     *
+     * @return array
+     */
+    private function paginateStats(QueryBuilder $qb, Request $request) : array
+    {
+        /** @var Paginator $paginator */
+        $paginator = $this->get('core.paginator');
+
+        return $paginator->paginateStats($qb, $request);
     }
 }

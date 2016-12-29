@@ -40,6 +40,28 @@ class Paginator
     }
 
     /**
+     * @param QueryBuilder $qb
+     * @param Request      $request
+     *
+     * @return array
+     */
+    public function paginateStats(QueryBuilder $qb, Request $request) : array
+    {
+        $criterias = $request->query->all();
+
+        $limit = $this->getLimitPerPage($criterias, 0);
+
+        if ($limit) {
+            $qb
+                ->setMaxResults($limit)
+                ->setFirstResult($limit * ($this->getPage($criterias) - 1))
+            ;
+        }
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    /**
      * @param array $criterias
      *
      * @return integer
@@ -54,17 +76,18 @@ class Paginator
 
     /**
      * @param array $criterias
+     * @param int   $default
      *
      * @return integer
      */
-    private function getLimitPerPage(array $criterias) : int
+    private function getLimitPerPage(array $criterias, int $default = self::DEFAULT_LIMIT) : int
     {
-        $limit = $criterias[self::LIMIT] ?? self::DEFAULT_LIMIT;
+        $limit = $criterias[self::LIMIT] ?? $default;
 
         // avoid negative number
-        $limit = $limit >= 1 ? $limit : self::DEFAULT_LIMIT;
+        $limit = $limit >= 1 ? $limit : $default;
 
         // avoid too large limit
-        return $limit > self::HARD_LIMIT_PER_PAGE ? self::DEFAULT_LIMIT : $limit;
+        return $limit > self::HARD_LIMIT_PER_PAGE ? $default : $limit;
     }
 }
