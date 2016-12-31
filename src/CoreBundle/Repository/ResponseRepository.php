@@ -60,6 +60,19 @@ class ResponseRepository extends AbstractPostedRepository
     }
 
     /**
+     * @param User $user
+     *
+     * @return QueryBuilder
+     */
+    public function qbFindAllUnpublishedByUser(User $user) : QueryBuilder
+    {
+        return $this
+            ->createQueryBuilder('r')
+            ->where('r.author = :user', 'r.postedAt IS NULL')
+            ->setParameter('user', $user);
+    }
+
+    /**
      * @param QueryBuilder $qb
      * @param int|array    $emotion
      *

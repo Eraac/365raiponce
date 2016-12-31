@@ -33,7 +33,25 @@ class MeController extends AbstractUserController implements MeDocs
      */
     public function cgetResponsesAction(Request $request) : PaginatedRepresentation
     {
-        $qb = $this->getDoctrine()->getRepository('CoreBundle:Response')->qbFindAllByUser($this->getUser());
+        $qb = $this->getRepository('CoreBundle:Response')->qbFindAllByUser($this->getUser());
+        $qb = $this->applyFilter('core.response_filter', $qb, $request);
+
+        return $this->paginate($qb, $request);
+    }
+
+    /**
+     * Return collection of unpublished response of the user
+     *
+     * @return PaginatedRepresentation
+     *
+     * @ApiDoc(MeDocs::CGET_RESPONSES_UNPUBLISHED)
+     *
+     * @FOSRest\Get("/me/responses/unpublished")
+     * @FOSRest\View(serializerGroups={"Default"})
+     */
+    public function cgetResponsesUnpublishedAction(Request $request)
+    {
+        $qb = $this->getRepository('CoreBundle:Response')->qbFindAllUnpublishedByUser($this->getUser());
         $qb = $this->applyFilter('core.response_filter', $qb, $request);
 
         return $this->paginate($qb, $request);

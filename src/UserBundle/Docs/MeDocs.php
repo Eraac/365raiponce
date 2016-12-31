@@ -39,6 +39,8 @@ interface MeDocs extends Docs
         ]
     ];
 
+    const CGET_RESPONSES_UNPUBLISHED = self::CGET_RESPONSES;
+
     const GET = [
         'default' => self::DEFAULT,
         'output'  => self::DEFAULT_OUTPUT,

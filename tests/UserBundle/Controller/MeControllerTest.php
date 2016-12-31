@@ -104,4 +104,20 @@ class MeControllerTest extends AbstractControllerTest
 
         $this->isUnauthorized(Request::METHOD_GET, $url);
     }
+
+    // === CGET - RESPONSE UNPUBLISHED ===
+    public function testCGetResponseUnpublishedSuccessful()
+    {
+        $header = $this->getHeaderConnect(self::USER1['username'], self::USER1['password']);
+        $url = self::PREFIX_URL . '/responses/unpublished';
+
+        $this->isSuccessful(Request::METHOD_GET, $url, [], $header);
+    }
+
+    public function testCGetResponseUnpublishedUnauthorized()
+    {
+        $url = self::PREFIX_URL . '/responses/unpublished';
+
+        $this->isUnauthorized(Request::METHOD_GET, $url);
+    }
 }
