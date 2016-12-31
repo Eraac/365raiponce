@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  *
  * @package CoreBundle\Controller\Response
  *
- * @FOSRest\Version("1.0")
+ * @FOSRest\Version(AbstractApiController::ALL_API_VERSIONS)
  */
 class VoteController extends AbstractApiController implements VoteDocs
 {

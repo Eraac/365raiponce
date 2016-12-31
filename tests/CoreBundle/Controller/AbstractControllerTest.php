@@ -2,6 +2,7 @@
 
 namespace Tests\CoreBundle\Controller;
 
+use CoreBundle\Controller\AbstractApiController;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,7 +28,7 @@ abstract class AbstractControllerTest extends WebTestCase
     const THEME_ID      = 1;
     const EMOTION_ID    = 1;
 
-    const API_VERSION = '1.0';
+    const API_VERSION = AbstractApiController::VERSION_1_0;
 
     /**
      * @var \Symfony\Bundle\FrameworkBundle\Client

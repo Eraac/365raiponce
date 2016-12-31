@@ -19,6 +19,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AbstractApiController extends FOSRestController implements ClassResourceInterface
 {
+    const VERSION_1_0 = '1.0';
+
+    const ALL_API_VERSIONS = [self::VERSION_1_0];
+
     /**
      * @return Object|ObjectManager
      */

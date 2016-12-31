@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  *
  * @package CoreBundle\Controller
  *
- * @FOSRest\Version("1.0")
+ * @FOSRest\Version(AbstractApiController::ALL_API_VERSIONS)
  */
 class StatsController extends AbstractApiController implements StatsDocs
 {

@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @package CoreBundle\Controller
  *
- * @FOSRest\Version("1.0")
+ * @FOSRest\Version(AbstractApiController::ALL_API_VERSIONS)
  */
 class RemarkController extends AbstractApiController implements RemarkDocs
 {
