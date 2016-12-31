@@ -53,3 +53,7 @@ stats_stats:
 export:
     type: rest
     resource: CoreBundle\Controller\ExportController
+
+import:
+    type: rest
+    resource: CoreBundle\Controller\ImportController
