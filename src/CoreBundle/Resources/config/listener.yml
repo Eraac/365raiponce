@@ -28,6 +28,12 @@ services:
         tags:
             - { name: doctrine.orm.entity_listener, entity: CoreBundle\Entity\Response, event: prePersist, method: prePersistHandler }
 
+    core.remark_doctrine_listener:
+        class: CoreBundle\EventListener\Doctrine\RemarkListener
+        arguments: ['@core.delayed_event_dispatcher']
+        tags:
+            - { name: doctrine.orm.entity_listener, entity: CoreBundle\Entity\Remark, event: preUpdate, method: preUpdateHandler }
+
     core.response_serialization_listener:
         class: CoreBundle\EventListener\Serialization\ResponseListener
         arguments: ['@security.token_storage', '@core.vote_response_repository']
@@ -45,3 +51,9 @@ services:
         arguments: ['@event_dispatcher']
         tags:
             - { name: kernel.event_listener, event: kernel.terminate, method: setReady, priority: 255 }
+
+    core.remark_published_listener:
+        class: CoreBundle\EventListener\RemarkPublishedListener
+        arguments: ['@core.client.twitter', '@core.client.facebook', '%base_url_remark%']
+        tags:
+            - { name: kernel.event_listener, event: core.published.remark, method: onRemarkPublished }

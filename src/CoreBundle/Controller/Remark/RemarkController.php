@@ -6,6 +6,7 @@ use CoreBundle\Annotation\ApiDoc;
 use CoreBundle\Controller\AbstractApiController;
 use CoreBundle\Docs\RemarkDocs;
 use CoreBundle\Entity\Remark;
+use CoreBundle\Service\Facebook;
 use FOS\RestBundle\Controller\Annotations as FOSRest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;

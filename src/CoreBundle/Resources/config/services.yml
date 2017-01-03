@@ -42,3 +42,23 @@ services:
             - '@core.array_to_csv'
         tags:
             - { name: kernel.event_listener, event: core.export.users, method: onExport }
+
+    core.client.twitter:
+        class: CoreBundle\Service\Twitter
+        arguments:
+            - '@logger'
+            - '%twitter_consumer_key%'
+            - '%twitter_consumer_secret%'
+            - '%twitter_token%'
+            - '%twitter_token_secret%'
+            - '%twitter_enable%'
+
+    core.client.facebook:
+        class: CoreBundle\Service\Facebook
+        arguments:
+            - '@logger'
+            - '%facebook_page_id%'
+            - '%facebook_app_id%'
+            - '%facebook_token%'
+            - '%facebook_secret%'
+            - '%facebook_enable%'

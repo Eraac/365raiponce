@@ -13,8 +13,20 @@ parameters:
     mailer_encryption: null
     mail_sender: no-reply@symfony.local
     mail_admin: contact@symfony.local
+    twitter_consumer_key: ""
+    twitter_consumer_secret: ""
+    twitter_token: ""
+    twitter_token_secret: ""
+    twitter_enable: false
+    # Facebook
+    facebook_page_id: ""
+    facebook_app_id: ""
+    facebook_token: ""
+    facebook_secret: ""
+    facebook_enable: false
     secret: 965436407b8b3ac3d595e96d85b5fa06c90973f9
     cors_allow_origin: '*'
     app_name: 365raiponce
-    base_url_confirmation: 'http://localhost?token='
+    base_url_confirmation: "http://localhost?token="
+    base_url_remark: "http://localhost/remarks/"
     enable_log_request: false
