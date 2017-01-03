@@ -31,7 +31,7 @@ class RemarkListener
      */
     public function preUpdateHandler(Remark $remark, PreUpdateEventArgs $event)
     {
-        if (is_null($event->getOldValue('postedAt'))) {
+        if ($event->hasChangedField('postedAt') && is_null($event->getOldValue('postedAt'))) {
             /** @var Remark $remark */
             $remark = $event->getObject();
 
