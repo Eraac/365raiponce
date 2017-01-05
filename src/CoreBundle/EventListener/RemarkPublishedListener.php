@@ -10,7 +10,7 @@ use CoreBundle\Service\Twitter;
 class RemarkPublishedListener
 {
     // https://github.com/heyupdate/emoji/blob/master/src/Index/CompiledIndex.php
-    const GIFT_HEART = "\u{1f49d}";
+    const GIFT_HEART = "\u{1f496}";
 
     /**
      * @var string
