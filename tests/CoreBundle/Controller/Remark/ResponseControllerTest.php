@@ -40,6 +40,12 @@ class ResponseControllerTest extends AbstractControllerTest
         $url = self::PREFIX_URL . self::REMARK_PUBLISHED_ID . '/responses';
 
         $this->isSuccessful(Request::METHOD_GET, $url);
+
+        $embedded = $this->getResponseContent('_embedded');
+
+        if (array_key_exists(0, $embedded['items'][0])) {
+            $this->assertNotNull($embedded['items'][0]['posted_at']);
+        }
     }
 
     public function testCGetNotFound()

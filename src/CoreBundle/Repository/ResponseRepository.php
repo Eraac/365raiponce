@@ -32,7 +32,7 @@ class ResponseRepository extends AbstractPostedRepository
     public function qbFindAllPublishedInRemark(Remark $remark) : QueryBuilder
     {
         return $this->qbFindAllPublished()
-            ->where('r.remark = :remark')
+            ->andWhere('r.remark = :remark')
             ->setParameter('remark', $remark);
     }
 
