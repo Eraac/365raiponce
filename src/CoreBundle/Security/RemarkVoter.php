@@ -13,10 +13,11 @@ class RemarkVoter extends AbstractVoter
     const ADD_RESPONSE              = 'addResponse';
     const VOTE                      = 'vote';
     const UNVOTE                    = 'unvote';
+    const SHARE                     = 'share';
 
     const ATTRIBUTES = [
         self::PUBLISH, self::UNPUBLISH, self::READ_PUBLISHED_RESPONSE,
-        self::ADD_RESPONSE, self::VOTE, self::UNVOTE
+        self::ADD_RESPONSE, self::VOTE, self::UNVOTE, self::SHARE
     ];
 
     /**
@@ -147,5 +148,18 @@ class RemarkVoter extends AbstractVoter
     protected function canUnvote(Remark $remark, TokenInterface $token) : bool
     {
         return $this->canVote($remark, $token);
+    }
+
+    /**
+     * Return true if current user can share to the $remark
+     *
+     * @param Remark         $remark
+     * @param TokenInterface $token
+     *
+     * @return bool
+     */
+    protected function canShare(Remark $remark, TokenInterface $token) : bool
+    {
+        return $remark->isPublished() && $this->isConnected($token);
     }
 }

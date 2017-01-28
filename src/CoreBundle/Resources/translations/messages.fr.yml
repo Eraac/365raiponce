@@ -15,6 +15,7 @@ core:
             number: "La valeur %number% n'est pas un nombre valide"
             type: "Le type %type% n'est pas un type valide"
         remark:
+            already_shared: "Vous avez déjà partagé cette remarque"
             already_published: "Cette remarque a déjà été publiée"
             unpublished_yet: "Cette remarque n'est pas publiée"
         response:

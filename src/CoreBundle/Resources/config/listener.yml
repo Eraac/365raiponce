@@ -51,6 +51,7 @@ services:
             - { name: doctrine.orm.entity_listener, entity: CoreBundle\Entity\History\HistoryResponsePublished, event: prePersist, method: prePersistHandler }
             - { name: doctrine.orm.entity_listener, entity: CoreBundle\Entity\History\HistoryVoteRemark, event: prePersist, method: prePersistHandler }
             - { name: doctrine.orm.entity_listener, entity: CoreBundle\Entity\History\HistoryVoteResponse, event: prePersist, method: prePersistHandler }
+            - { name: doctrine.orm.entity_listener, entity: CoreBundle\Entity\History\HistoryShareRemark, event: prePersist, method: prePersistHandler }
 
     core.response_serialization_listener:
         class: CoreBundle\EventListener\Serialization\ResponseListener
@@ -92,3 +93,4 @@ services:
            - { name: kernel.event_listener, event: core.history.unpublish_response, method: onResponseUnpublished }
            - { name: kernel.event_listener, event: core.history.give_vote, method: onGiveVote }
            - { name: kernel.event_listener, event: core.history.receive_vote, method: onReceiveVote }
+           - { name: kernel.event_listener, event: core.history.share_remark, method: onShareRemark }

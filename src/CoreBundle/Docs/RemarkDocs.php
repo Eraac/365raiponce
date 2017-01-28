@@ -24,7 +24,7 @@ interface RemarkDocs extends Docs
     ];
 
     const DEFAULT_REQUIREMENTS = [
-        ['name' => 'remark_id', 'dataType' => 'integer', 'description' => 'id of the remark', 'requirement' => 'A valid remark id']
+        ['name' => 'remark_id', 'dataType' => 'integer', 'description' => 'id of the remark', 'requirement' => '\d+']
     ];
 
     const DEFAULT = [
@@ -144,4 +144,16 @@ interface RemarkDocs extends Docs
     ];
 
     const UNPUBLISH = self::PUBLISH;
+
+    const SHARE = [
+        'default' => self::DEFAULT_AUTH,
+        'requirements' => self::DEFAULT_REQUIREMENTS,
+        'statusCodes'   => [
+            Response::HTTP_ACCEPTED     => self::HTTP_ACCEPTED,
+            Response::HTTP_UNAUTHORIZED => self::HTTP_UNAUTHORIZED,
+            Response::HTTP_FORBIDDEN    => self::HTTP_FORBIDDEN,
+            Response::HTTP_NOT_FOUND    => self::HTTP_NOT_FOUND,
+            Response::HTTP_CONFLICT     => self::HTTP_CONFLICT,
+        ]
+    ];
 }

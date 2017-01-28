@@ -5,7 +5,9 @@ namespace CoreBundle\Controller\Remark;
 use CoreBundle\Annotation\ApiDoc;
 use CoreBundle\Controller\AbstractApiController;
 use CoreBundle\Docs\RemarkDocs;
+use CoreBundle\Entity\Action;
 use CoreBundle\Entity\Remark;
+use CoreBundle\Event\History\HistoryShareRemarkEvent;
 use CoreBundle\Service\Facebook;
 use FOS\RestBundle\Controller\Annotations as FOSRest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -77,5 +79,41 @@ class RemarkController extends AbstractApiController implements RemarkDocs
         $em = $this->getManager();
         $em->persist($remark);
         $em->flush();
+    }
+
+    /**
+     * Add in history trace of sharing remark
+     *
+     * @ApiDoc(RemarkDocs::SHARE)
+     *
+     * @param Remark $remark
+     *
+     * @return JsonResponse|null
+     *
+     * @Security("is_granted('share', remark)")
+     *
+     * @FOSRest\Post("/remarks/{remark_id}/share", requirements={"remark_id"="\d+"})
+     * @FOSRest\View()
+     *
+     * @ParamConverter("remark", class="CoreBundle:Remark", options={"id" = "remark_id"})
+     */
+    public function postShareAction(Remark $remark)
+    {
+        $repo = $this->getRepository('CoreBundle:History\HistoryShareRemark');
+
+        $history = $repo->findBy([
+            'user' => $this->getUser(),
+            'remark' => $remark
+        ]);
+
+        if ($history) {
+            return $this->createJsonError('core.error.remark.already_shared', JsonResponse::HTTP_CONFLICT);
+        }
+
+        $event = new HistoryShareRemarkEvent(Action::SHARE, $remark, $this->getUser());
+
+        $this->delayedDispatch(HistoryShareRemarkEvent::NAME, $event);
+
+        return new JsonResponse([], JsonResponse::HTTP_ACCEPTED);
     }
 }

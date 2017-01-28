@@ -88,6 +88,50 @@ class RemarkControllerTest extends AbstractControllerTest
         $this->isConflict(Request::METHOD_POST, $url, [], $headers);
     }
 
+    // === POST - SHARE ===
+    public function testPostShareSuccessful()
+    {
+        $headers = $this->getHeaderConnect(self::USER1['username'], self::USER1['password']);
+
+        $url = self::PREFIX_URL . '/' . self::REMARK_PUBLISHED_ID . '/share';
+
+        $this->isSuccessful(Request::METHOD_POST, $url, [], $headers);
+    }
+
+    public function testPostShareUnauthorized()
+    {
+        $url = self::PREFIX_URL . '/' . self::REMARK_PUBLISHED_ID . '/share';
+
+        $this->isUnauthorized(Request::METHOD_POST, $url);
+    }
+
+    public function testPostShareForbidden()
+    {
+        $headers = $this->getHeaderConnect(self::USER1['username'], self::USER1['password']);
+
+        $url = self::PREFIX_URL . '/' . self::REMARK_UNPUBLISHED_ID . '/share';
+
+        $this->isForbidden(Request::METHOD_POST, $url, [], $headers);
+    }
+
+    public function testPostShareNotFound()
+    {
+        $headers = $this->getHeaderConnect(self::USER1['username'], self::USER1['password']);
+
+        $url = self::PREFIX_URL . '/9876543210/share';
+
+        $this->isNotFound(Request::METHOD_POST, $url, [], $headers);
+    }
+
+    public function testPostShareConflict()
+    {
+        $headers = $this->getHeaderConnect(self::USER1['username'], self::USER1['password']);
+
+        $url = self::PREFIX_URL . '/' . self::REMARK_PUBLISHED_ID . '/share';
+
+        $this->isConflict(Request::METHOD_POST, $url, [], $headers);
+    }
+
     // === POST - UNPUBLISH ===
     public function testPostUnpublishSuccessful()
     {

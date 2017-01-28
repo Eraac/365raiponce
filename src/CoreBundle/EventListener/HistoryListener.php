@@ -6,7 +6,7 @@ use CoreBundle\Entity\{
     Action, History, VoteRemark, VoteResponse
 };
 use CoreBundle\Event\History\{
-    HistoryGiveVoteEvent, HistoryReceiveVoteEvent, HistoryResponsePublishedEvent, HistoryResponseUnpublishedEvent
+    HistoryGiveVoteEvent, HistoryReceiveVoteEvent, HistoryResponsePublishedEvent, HistoryResponseUnpublishedEvent, HistoryShareRemarkEvent
 };
 use CoreBundle\Repository\HistoryRepository;
 use Doctrine\ORM\EntityManager;
@@ -111,6 +111,25 @@ class HistoryListener
             ->setVote($vote)
             ->setUser($user)
             ->setAction($action)
+        ;
+
+        $this->persistHistory($history);
+    }
+
+    /**
+     * @param HistoryShareRemarkEvent $event
+     */
+    public function onShareRemark(HistoryShareRemarkEvent $event)
+    {
+        $user = $event->getUser();
+        $action = $this->getActionByName($event->getActionName());
+
+        $history = new History\HistoryShareRemark();
+
+        $history
+            ->setRemark($event->getRemark())
+            ->setAction($action)
+            ->setUser($user)
         ;
 
         $this->persistHistory($history);

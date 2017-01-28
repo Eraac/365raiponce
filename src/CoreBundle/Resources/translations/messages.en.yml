@@ -15,6 +15,7 @@ core:
             number: "Value %number% isn't a valid number"
             type: "Type %type% isn't a valid type"
         remark:
+            already_shared: "You have already share this remark"
             already_published: "This remark was already published"
             unpublished_yet: "This remark is not unpublished yet"
         response:

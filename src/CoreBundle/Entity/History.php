@@ -18,7 +18,8 @@ use UserBundle\Entity\User;
  *     "response_published" = "CoreBundle\Entity\History\HistoryResponsePublished",
  *     "vote_response"      = "CoreBundle\Entity\History\HistoryVoteResponse",
  *     "vote_remark"        = "CoreBundle\Entity\History\HistoryVoteRemark",
- *     "receive_vote"       = "CoreBundle\Entity\History\HistoryReceiveVote"
+ *     "receive_vote"       = "CoreBundle\Entity\History\HistoryReceiveVote",
+ *     "share_remark"       = "CoreBundle\Entity\History\HistoryShareRemark"
  * })
  */
 abstract class History
