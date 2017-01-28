@@ -42,3 +42,9 @@ services:
         parent: core.base_voter
         tags:
             - { name: security.voter }
+
+    core.action_voter:
+        class: CoreBundle\Security\ActionVoter
+        parent: core.base_voter
+        tags:
+            - { name: security.voter }

@@ -48,3 +48,8 @@ services:
         class: Doctrine\ORM\EntityRepository
         factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments: ['CoreBundle:Grade']
+
+    core.action_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments: ['CoreBundle:Action']
