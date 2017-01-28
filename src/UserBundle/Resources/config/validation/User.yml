@@ -8,5 +8,6 @@ UserBundle\Entity\User:
             - Type: string
         email:
             - Type: string
+            - Email: ~
         plainPassword:
             - Type: string

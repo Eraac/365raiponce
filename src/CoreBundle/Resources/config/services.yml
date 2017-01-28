@@ -62,3 +62,9 @@ services:
             - '%facebook_token%'
             - '%facebook_secret%'
             - '%facebook_enable%'
+
+    core.score_control:
+        class: CoreBundle\Service\ScoreControl
+        lazy: true # circular reference with Doctrine\HistoryListener
+        arguments:
+            - '@core.history_repository'

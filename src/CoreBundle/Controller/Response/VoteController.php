@@ -59,8 +59,6 @@ class VoteController extends AbstractApiController implements VoteDocs
         $em = $this->getManager();
         $em->persist($vote);
         $em->flush();
-
-        return $vote;
     }
 
     /**
