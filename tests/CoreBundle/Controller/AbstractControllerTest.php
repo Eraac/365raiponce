@@ -27,6 +27,7 @@ abstract class AbstractControllerTest extends WebTestCase
 
     const THEME_ID      = 1;
     const EMOTION_ID    = 1;
+    const GRADE_ID      = 1;
 
     const API_VERSION = AbstractApiController::VERSION_1_0;
 
