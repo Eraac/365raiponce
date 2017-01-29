@@ -59,9 +59,9 @@ CoreBundle\Entity\Response:
                 groups: [stats]
 
         -
-            rel: username
+            rel: user
             embedded:
-                content: expr(object.getAuthor().getUsername())
+                content: expr(object.getAuthor())
 
         -
             rel: user_has_vote
