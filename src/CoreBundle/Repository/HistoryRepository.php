@@ -15,6 +15,20 @@ use UserBundle\Entity\User;
 class HistoryRepository extends AbstractRepository
 {
     /**
+     * @var int
+     */
+    private $lifetimeCacheScore;
+
+
+    /**
+     * @param int $lifetime
+     */
+    public function setLifetimeCacheScore(int $lifetime)
+    {
+        $this->lifetimeCacheScore = $lifetime;
+    }
+
+    /**
      * @return QueryBuilder
      */
     public function qbFindAll() : QueryBuilder
@@ -71,5 +85,33 @@ class HistoryRepository extends AbstractRepository
         ;
 
         return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @param User $user
+     *
+     * @return int
+     */
+    public function countScoreForUser(User $user) : int
+    {
+        $qb = $this->createQueryBuilder('h');
+
+        $qb
+            ->select('SUM(a.point)')
+            ->leftJoin('h.action', 'a')
+            ->where(
+                $qb->expr()->eq('h.usedForScore', true),
+                $qb->expr()->eq('h.user', ':user')
+            )
+            ->setParameter('user', $user)
+        ;
+
+        $query = $qb->getQuery();
+
+        $query
+            ->useResultCache(true, $this->lifetimeCacheScore, 'score-user-' . $user->getId())
+        ;
+
+        return $query->getSingleScalarResult() ?? 0;
     }
 }

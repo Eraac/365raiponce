@@ -36,6 +36,11 @@ class User extends BaseUser
      */
     private $confirmed;
 
+    /**
+     * @var int
+     */
+    private $score;
+
 
     /**
      * @return boolean
@@ -53,6 +58,26 @@ class User extends BaseUser
     public function setConfirmed(bool $confirmed)
     {
         $this->confirmed = $confirmed;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getScore() : int
+    {
+        return $this->score;
+    }
+
+    /**
+     * @param int $score
+     *
+     * @return User
+     */
+    public function setScore(int $score) : User
+    {
+        $this->score = $score;
 
         return $this;
     }

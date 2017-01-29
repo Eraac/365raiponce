@@ -1,0 +1,6 @@
+services:
+    user.user_serialization_listener:
+        class: UserBundle\EventListener\Serialization\UserListener
+        arguments: ['@core.history_repository']
+        tags:
+            - { name: jms_serializer.event_subscriber }

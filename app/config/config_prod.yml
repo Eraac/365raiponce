@@ -9,7 +9,7 @@ doctrine:
     orm:
         metadata_cache_driver: redis
         query_cache_driver: redis
-#        result_cache_driver: redis
+        result_cache_driver: redis
 
 monolog:
     handlers:
@@ -44,6 +44,6 @@ snc_redis:
         query_cache:
             client: default
             entity_manager: default
-#        result_cache:
-#            client: default
-#            entity_manager: default
+        result_cache:
+            client: default
+            entity_manager: default

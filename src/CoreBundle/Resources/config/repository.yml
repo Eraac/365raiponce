@@ -58,3 +58,5 @@ services:
         class: Doctrine\ORM\EntityRepository
         factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments: ['CoreBundle:History']
+        calls:
+            - [setLifetimeCacheScore, ['%lifetime_cache_score%']]

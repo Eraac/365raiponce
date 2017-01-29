@@ -2,6 +2,7 @@ imports:
     - { resource: voter.yml }
     - { resource: repository.yml }
     - { resource: filter.yml }
+    - { resource: listener.yml }
 
 services:
     user.command.create_client:
