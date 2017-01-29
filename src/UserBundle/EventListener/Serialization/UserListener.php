@@ -33,8 +33,6 @@ class UserListener implements EventSubscriberInterface
         /** @var User $user */
         $user = $event->getObject();
 
-        dump($user->getId());
-
         $user->setScore($this->repository->countScoreForUser($user));
     }
 
