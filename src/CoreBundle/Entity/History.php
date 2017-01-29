@@ -45,7 +45,7 @@ abstract class History
     /**
      * @var Action
      *
-     * @ORM\ManyToOne(targetEntity="Action")
+     * @ORM\ManyToOne(targetEntity="Action", fetch="EAGER")
      */
     private $action;
 
@@ -134,4 +134,11 @@ abstract class History
     {
         return $this->user;
     }
+
+    /**
+     * Return day on when this happen
+     *
+     * @return \DateTime
+     */
+    abstract public function getDate() : \DateTime;
 }

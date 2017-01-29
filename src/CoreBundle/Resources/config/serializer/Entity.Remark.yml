@@ -89,18 +89,26 @@ CoreBundle\Entity\Remark:
             rel: theme
             embedded:
                 content: expr(object.getTheme())
+            exclusion:
+                groups: [meta]
 
         -
             rel: emotion
             embedded:
                 content: expr(object.getEmotion())
+            exclusion:
+                groups: [meta]
 
         -
             rel: user_has_vote_for_is_sexist
             embedded:
                 content: expr(object.isUserHasVoteSexist())
+            exclusion:
+                groups: [stats]
 
         -
             rel: user_has_vote_for_already_lived
             embedded:
                 content: expr(object.isUserHasVoteLived())
+            exclusion:
+                groups: [stats]

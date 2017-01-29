@@ -24,7 +24,7 @@ class HistoryShareRemark extends History
     /**
      * @return Remark
      */
-    public function getVote() : Remark
+    public function getRemark() : Remark
     {
         return $this->remark;
     }
@@ -39,5 +39,13 @@ class HistoryShareRemark extends History
         $this->remark = $remark;
 
         return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDate() : \DateTime
+    {
+        return $this->createdAt ?? new \DateTime();
     }
 }

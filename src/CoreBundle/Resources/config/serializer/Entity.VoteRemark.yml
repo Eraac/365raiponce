@@ -1,0 +1,13 @@
+CoreBundle\Entity\VoteRemark:
+    exclusion_policy: ALL
+
+    relations:
+        # embedded
+        -
+            rel: voter
+            embedded:
+                content: expr(object.getUser())
+        -
+            rel: remark
+            embedded:
+                content: expr(object.getRemark())

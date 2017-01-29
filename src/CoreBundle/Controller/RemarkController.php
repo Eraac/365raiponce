@@ -30,7 +30,7 @@ class RemarkController extends AbstractApiController implements RemarkDocs
      *
      * @param Request $request
      *
-     * @FOSRest\View(serializerGroups={"Default", "stats"})
+     * @FOSRest\View(serializerGroups={"Default", "stats", "meta"})
      *
      * @return PaginatedRepresentation
      */
@@ -49,7 +49,7 @@ class RemarkController extends AbstractApiController implements RemarkDocs
      *
      * @param Request $request
      *
-     * @FOSRest\View(serializerGroups={"Default", "stats"})
+     * @FOSRest\View(serializerGroups={"Default", "stats", "meta"})
      *
      * @Security("is_granted('ROLE_ADMIN')")
      *
@@ -73,7 +73,7 @@ class RemarkController extends AbstractApiController implements RemarkDocs
      * @Security("is_granted('view', remark)")
      *
      * @FOSRest\Get("/remarks/{remark_id}", requirements={"remark_id"="\d+"})
-     * @FOSRest\View(serializerGroups={"Default", "stats"})
+     * @FOSRest\View(serializerGroups={"Default", "stats", "meta"})
      *
      * @ParamConverter("remark", class="CoreBundle:Remark", options={"id" = "remark_id"})
      *
@@ -93,7 +93,7 @@ class RemarkController extends AbstractApiController implements RemarkDocs
      *
      * @return object|\Symfony\Component\HttpFoundation\JsonResponse
      *
-     * @FOSRest\View(serializerGroups={"Default", "stats", "my"}, statusCode=JsonResponse::HTTP_CREATED)
+     * @FOSRest\View(serializerGroups={"Default", "stats", "my", "meta"}, statusCode=JsonResponse::HTTP_CREATED)
      */
     public function postAction(Request $request)
     {
@@ -117,7 +117,7 @@ class RemarkController extends AbstractApiController implements RemarkDocs
      * @ParamConverter("remark", class="CoreBundle:Remark", options={"id" = "remark_id"})
      *
      * @FOSRest\Patch("/remarks/{remark_id}", requirements={"remark_id"="\d+"})
-     * @FOSRest\View(serializerGroups={"Default", "stats"})
+     * @FOSRest\View(serializerGroups={"Default", "stats", "meta"})
      */
     public function patchAction(Request $request, Remark $remark)
     {

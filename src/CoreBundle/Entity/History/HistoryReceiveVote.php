@@ -41,4 +41,12 @@ class HistoryReceiveVote extends History
 
         return $this;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDate() : \DateTime
+    {
+        return $this->vote->getCreatedAt();
+    }
 }

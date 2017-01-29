@@ -4,7 +4,7 @@ UserBundle\Entity\User:
     properties:
         id:
             expose: true
-            groups: [default, user-list, me]
+            groups: [Default, user-list, me]
         confirmed:
             expose: true
             groups: [me, admin]
@@ -23,4 +23,4 @@ UserBundle\Entity\User:
                 parameters:
                     user_id: expr(object.getId())
             exclusion:
-                groups: [default, user-list, me, admin]
+                groups: [Default, user-list, me, admin]

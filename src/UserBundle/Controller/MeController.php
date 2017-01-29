@@ -29,7 +29,7 @@ class MeController extends AbstractUserController implements MeDocs
      * @ApiDoc(MeDocs::CGET_RESPONSES)
      *
      * @FOSRest\Get("/me/responses")
-     * @FOSRest\View(serializerGroups={"Default", "stats", "info"})
+     * @FOSRest\View(serializerGroups={"Default", "stats", "info", "me"})
      */
     public function cgetResponsesAction(Request $request) : PaginatedRepresentation
     {
@@ -47,12 +47,32 @@ class MeController extends AbstractUserController implements MeDocs
      * @ApiDoc(MeDocs::CGET_RESPONSES_UNPUBLISHED)
      *
      * @FOSRest\Get("/me/responses/unpublished")
-     * @FOSRest\View(serializerGroups={"Default"})
+     * @FOSRest\View(serializerGroups={"Default", "me"})
      */
     public function cgetResponsesUnpublishedAction(Request $request)
     {
         $qb = $this->getRepository('CoreBundle:Response')->qbFindAllUnpublishedByUser($this->getUser());
         $qb = $this->applyFilter('core.response_filter', $qb, $request);
+
+        return $this->paginate($qb, $request);
+    }
+
+    /**
+     * Return collection of histories of the current user
+     *
+     * @param Request $request
+     *
+     * @return PaginatedRepresentation
+     *
+     * @ApiDoc(MeDocs::CGET_HISTORIES)
+     *
+     * @FOSRest\Get("/me/histories")
+     * @FOSRest\View(serializerGroups={"Default"})
+     */
+    public function cgetHistoriesAction(Request $request) : PaginatedRepresentation
+    {
+        $qb = $this->getRepository('CoreBundle:History')->qbFindAllByUser($this->getUser());
+        // todo $qb = $this->applyFilter('core.history_filter', $qb, $request);
 
         return $this->paginate($qb, $request);
     }

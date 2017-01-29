@@ -1,0 +1,9 @@
+CoreBundle\Entity\History\HistoryResponsePublished:
+    exclusion_policy: ALL
+
+    relations:
+        # embedded
+        -
+            rel: response
+            embedded:
+                content: expr(object.getResponse())

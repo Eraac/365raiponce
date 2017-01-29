@@ -25,18 +25,19 @@ class ScoreControl
     }
 
     /**
-     * @param User   $user
-     * @param Action $action
+     * @param User           $user
+     * @param Action         $action
+     * @param \DateTime|null $day
      *
      * @return bool
      */
-    public function hasReachedLimit(User $user, Action $action) : bool
+    public function hasReachedLimit(User $user, Action $action, \DateTime $day = null) : bool
     {
         if (is_null($action->getLimitPerDay())) {
             return false;
         }
 
-        $count = $this->historyRepository->countActionTodayForUser($action, $user);
+        $count = $this->historyRepository->countActionForUserAndDay($action, $user, $day ?? new \DateTime('today'));
 
         return $count >= $action->getLimitPerDay();
     }

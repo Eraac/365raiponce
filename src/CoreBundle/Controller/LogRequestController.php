@@ -26,7 +26,7 @@ class LogRequestController extends AbstractApiController
      * @param Request $request
      *
      * @FOSRest\Get("/log-requests")
-     * @FOSRest\View(serializerGroups={"Default", "default"})
+     * @FOSRest\View(serializerGroups={"Default"})
      *
      * @return PaginatedRepresentation
      */
@@ -42,7 +42,7 @@ class LogRequestController extends AbstractApiController
      * Return the LogRequest
      *
      * @FOSRest\Get("/log-requests/{log_request_id}")
-     * @FOSRest\View(serializerGroups={"default", "detail-logrequest"})
+     * @FOSRest\View(serializerGroups={"Default", "detail-logrequest"})
      *
      * @ParamConverter("logRequest", class="CoreBundle:LogRequest", options={"id" = "log_request_id"})
      *

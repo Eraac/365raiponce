@@ -65,3 +65,7 @@ grade:
 action:
     type: rest
     resource: CoreBundle\Controller\ActionController
+
+history:
+    type: rest
+    resource: CoreBundle\Controller\HistoryController

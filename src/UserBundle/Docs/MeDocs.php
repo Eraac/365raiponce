@@ -3,6 +3,7 @@
 namespace UserBundle\Docs;
 
 use CoreBundle\Docs\Docs;
+use CoreBundle\Entity\History;
 use Symfony\Component\HttpFoundation\Response;
 use UserBundle\Entity\User;
 use UserBundle\Form\UserEditType;
@@ -36,10 +37,28 @@ interface MeDocs extends Docs
             'class' => Response::class,
             'parsers' => self::OUTPUT_PARSER,
             'groups' => ['Default', 'stats', 'info']
-        ]
+        ],
+        'statusCodes' => [
+            Response::HTTP_OK           => self::HTTP_OK,
+            Response::HTTP_BAD_REQUEST  => self::HTTP_BAD_REQUEST,
+            Response::HTTP_UNAUTHORIZED => self::HTTP_UNAUTHORIZED
+        ],
     ];
 
     const CGET_RESPONSES_UNPUBLISHED = self::CGET_RESPONSES;
+
+    const CGET_HISTORIES = [
+        'default' => self::DEFAULT,
+        'output' => [
+            'class' => History::class,
+            'parsers' => self::OUTPUT_PARSER,
+        ],
+        'statusCodes' => [
+            Response::HTTP_OK           => self::HTTP_OK,
+            Response::HTTP_BAD_REQUEST  => self::HTTP_BAD_REQUEST,
+            Response::HTTP_UNAUTHORIZED => self::HTTP_UNAUTHORIZED
+        ],
+    ];
 
     const GET = [
         'default' => self::DEFAULT,

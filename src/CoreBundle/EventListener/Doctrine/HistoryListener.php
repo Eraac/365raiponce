@@ -30,7 +30,7 @@ class HistoryListener
      */
     public function prePersistHandler(History $history, LifecycleEventArgs $event)
     {
-        $hasReachedLimit = $this->scoreControl->hasReachedLimit($history->getUser(), $history->getAction());
+        $hasReachedLimit = $this->scoreControl->hasReachedLimit($history->getUser(), $history->getAction(), $history->getDate());
 
         $history->setUsedForScore(!$hasReachedLimit);
     }

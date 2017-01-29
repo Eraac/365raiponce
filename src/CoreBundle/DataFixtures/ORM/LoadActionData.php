@@ -29,7 +29,7 @@ class LoadActionData extends AbstractFixture implements OrderedFixtureInterface
 
             $manager->persist($ac);
 
-            $this->setReference('event-' . ($key + 1) , $ac);
+            $this->setReference('action-' . ($key + 1) , $ac);
         }
 
         $manager->flush();
