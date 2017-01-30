@@ -46,5 +46,6 @@ parameters:
     base_url_remark: http://localhost/remarks/
 
     enable_log_request: false
+    enable_history: false
 
     lifetime_cache_score: 600 # ten minutes

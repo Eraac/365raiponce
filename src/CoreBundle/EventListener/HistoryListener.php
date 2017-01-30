@@ -19,14 +19,20 @@ class HistoryListener
     private $em;
 
     /**
+     * @var boolean
+     */
+    private $isEnable;
+
+    /**
      * HistoryListener constructor.
      *
      * @param EntityManager $em
-     * @param ScoreControl $scoreControl
+     * @param boolean       $isEnable
      */
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em, bool $isEnable)
     {
         $this->em = $em;
+        $this->isEnable = $isEnable;
     }
 
     /**
@@ -34,6 +40,10 @@ class HistoryListener
      */
     public function onResponsePublished(HistoryResponsePublishedEvent $event)
     {
+        if (!$this->isEnable) {
+            return;
+        }
+
         $response = $event->getResponse();
         $author = $response->getAuthor();
         $action = $this->getActionByName($event->getActionName());
@@ -54,6 +64,10 @@ class HistoryListener
      */
     public function onResponseUnpublished(HistoryResponseUnpublishedEvent $event)
     {
+        if (!$this->isEnable) {
+            return;
+        }
+
         /** @var HistoryRepository $repo */
         $repo = $this->em->getRepository('CoreBundle:History\HistoryResponsePublished');
 
@@ -74,6 +88,10 @@ class HistoryListener
      */
     public function onGiveVote(HistoryGiveVoteEvent $event)
     {
+        if (!$this->isEnable) {
+            return;
+        }
+
         $vote = $event->getVote();
         $user = $vote->getUser();
         $action = $this->getActionByName($event->getActionName());
@@ -100,6 +118,10 @@ class HistoryListener
      */
     public function onReceiveVote(HistoryReceiveVoteEvent $event)
     {
+        if (!$this->isEnable) {
+            return;
+        }
+
         /** @var VoteResponse $vote */
         $vote = $event->getVote();
         $user = $vote->getResponse()->getAuthor();
@@ -121,6 +143,10 @@ class HistoryListener
      */
     public function onShareRemark(HistoryShareRemarkEvent $event)
     {
+        if (!$this->isEnable) {
+            return;
+        }
+
         $user = $event->getUser();
         $action = $this->getActionByName($event->getActionName());
 

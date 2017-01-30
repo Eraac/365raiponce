@@ -87,7 +87,7 @@ services:
 
     core.history_listener:
         class: CoreBundle\EventListener\HistoryListener
-        arguments: ['@doctrine.orm.entity_manager']
+        arguments: ['@doctrine.orm.entity_manager', '%enable_history%']
         tags:
            - { name: kernel.event_listener, event: core.history.publish_response, method: onResponsePublished }
            - { name: kernel.event_listener, event: core.history.unpublish_response, method: onResponseUnpublished }
