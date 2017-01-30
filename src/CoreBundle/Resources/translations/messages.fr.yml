@@ -14,6 +14,7 @@ core:
             timestamp: "La valeur %number% n'est pas un timestamp valide"
             number: "La valeur %number% n'est pas un nombre valide"
             type: "Le type %type% n'est pas un type valide"
+            boolean: "La valeur %value% doit-être 0 ou 1"
         remark:
             already_shared: "Vous avez déjà partagé cette remarque"
             already_published: "Cette remarque a déjà été publiée"

@@ -72,7 +72,7 @@ class MeController extends AbstractUserController implements MeDocs
     public function cgetHistoriesAction(Request $request) : PaginatedRepresentation
     {
         $qb = $this->getRepository('CoreBundle:History')->qbFindAllByUser($this->getUser());
-        // todo $qb = $this->applyFilter('core.history_filter', $qb, $request);
+        $qb = $this->applyFilter('core.history_filter', $qb, $request);
 
         return $this->paginate($qb, $request);
     }

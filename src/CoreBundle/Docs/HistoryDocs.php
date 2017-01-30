@@ -39,6 +39,16 @@ interface HistoryDocs extends Docs
         'filters' => [
             self::FILTER_PAGINATION_PAGE,
             self::FILTER_PAGINATION_LIMIT,
+            self::FILTER_CREATED_BEFORE,
+            self::FILTER_CREATED_AFTER,
+            self::FILTER_UPDATED_BEFORE,
+            self::FILTER_UPDATED_AFTER,
+            ['name' => 'filter[is_used_for_score]', 'pattern' => '(0|1)', 'description' => 'Search by used for score'],
+            ['name' => 'filter[action]', 'dataType' => 'integer', 'description' => 'Search by action (id)'],
+            ['name' => 'filter[user]', 'dataType' => 'integer', 'description' => 'Search by user (id)'],
+            ['name' => 'filter[_order][is_used_for_score]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by used for score'],
+            ['name' => 'filter[_order][action]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by action (id)'],
+            ['name' => 'filter[_order][user]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by user (username)'],
         ],
     ];
 

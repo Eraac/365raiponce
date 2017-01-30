@@ -37,7 +37,7 @@ class HistoryController extends AbstractApiController implements HistoryDocs
     public function cgetAction(Request $request) : PaginatedRepresentation
     {
         $qb = $this->getRepository('CoreBundle:History')->qbFindAll();
-        // todo $qb = $this->applyFilter('core.history_filter', $qb, $request);
+        $qb = $this->applyFilter('core.history_filter', $qb, $request);
 
         return $this->paginate($qb, $request);
     }

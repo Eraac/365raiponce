@@ -229,4 +229,18 @@ abstract class AbstractFilter
 
         $this->validateNumber($timestamp, 'core.error.filter.timestamp');
     }
+
+    /**
+     * @param $boolean
+     *
+     * @throws InvalidFilterException
+     */
+    protected function validateBoolean($boolean)
+    {
+        if (!in_array($boolean, ['0', '1'], true)) {
+            throw new InvalidFilterException(
+                $this->t('core.error.filter.boolean', ['%value%' => $boolean])
+            );
+        }
+    }
 }

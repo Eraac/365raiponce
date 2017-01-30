@@ -76,3 +76,9 @@ services:
         parent: core.abstract_filter
         arguments: ['@core.grade_repository']
         public: true
+
+    core.history_filter:
+        class: CoreBundle\Filter\HistoryFilter
+        parent: core.abstract_filter
+        arguments: ['@core.history_repository']
+        public: true
