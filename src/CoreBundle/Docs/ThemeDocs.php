@@ -22,7 +22,7 @@ interface ThemeDocs extends Docs
     ];
 
     const DEFAULT_REQUIREMENTS = [
-        ['name' => 'theme_id', 'dataType' => 'integer', 'description' => 'id of the theme', 'requirement' => 'A valid theme id']
+        ['name' => 'theme_id', 'dataType' => 'integer', 'description' => 'id of the theme', 'requirement' => '\d+']
     ];
 
     const DEFAULT = [

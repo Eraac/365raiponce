@@ -29,7 +29,7 @@ interface NewsDocs extends Docs
     ];
 
     const DEFAULT_REQUIREMENTS = [
-        ['name' => 'news_id', 'dataType' => 'integer', 'description' => 'id of the news', 'requirement' => 'A valid news id']
+        ['name' => 'news_id', 'dataType' => 'integer', 'description' => 'id of the news', 'requirement' => '\d+']
     ];
 
 

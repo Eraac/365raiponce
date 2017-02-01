@@ -22,11 +22,11 @@ interface ResponseDocs extends Docs
     ];
 
     const REMARK_REQUIREMENTS = [
-        ['name' => 'remark_id', 'dataType' => 'integer', 'description' => 'id of the remark', 'requirement' => 'A valid remark id']
+        ['name' => 'remark_id', 'dataType' => 'integer', 'description' => 'id of the remark', 'requirement' => '\d+']
     ];
 
     const RESPONSE_REQUIREMENTS = [
-        ['name' => 'response_id', 'dataType' => 'integer', 'description' => 'id of the response', 'requirement' => 'A valid response id']
+        ['name' => 'response_id', 'dataType' => 'integer', 'description' => 'id of the response', 'requirement' => '\d+']
     ];
 
     const DEFAULT = [

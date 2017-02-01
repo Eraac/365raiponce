@@ -11,11 +11,11 @@ interface VoteDocs extends Docs
     const HEADERS = Docs::AUTH_HEADERS;
 
     const DEFAULT_REQUIREMENTS_RESPONSE = [
-        ['name' => 'response_id', 'dataType' => 'integer', 'description' => 'id of the response', 'requirement' => 'A valid response id']
+        ['name' => 'response_id', 'dataType' => 'integer', 'description' => 'id of the response', 'requirement' => '\d+']
     ];
 
     const DEFAULT_REQUIREMENTS_REMARK = [
-        ['name' => 'remark_id', 'dataType' => 'integer', 'description' => 'id of the remark', 'requirement' => 'A valid remark id']
+        ['name' => 'remark_id', 'dataType' => 'integer', 'description' => 'id of the remark', 'requirement' => '\d+']
     ];
 
     const DEFAULT = [

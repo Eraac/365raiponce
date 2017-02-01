@@ -22,7 +22,7 @@ interface EmotionDocs extends Docs
     ];
 
     const DEFAULT_REQUIREMENTS = [
-        ['name' => 'emotion_id', 'dataType' => 'integer', 'description' => 'id of the emotion', 'requirement' => 'A valid emotion id']
+        ['name' => 'emotion_id', 'dataType' => 'integer', 'description' => 'id of the emotion', 'requirement' => '\d+']
     ];
 
     const DEFAULT = [

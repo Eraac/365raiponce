@@ -22,6 +22,8 @@ class Grade
     private $id;
 
     /**
+     * Name displayed near to username when you get it
+     *
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
@@ -29,6 +31,8 @@ class Grade
     private $name;
 
     /**
+     * Minimal score necessarily for get this grade
+     *
      * @var int
      *
      * @ORM\Column(name="score", type="integer", unique=true)

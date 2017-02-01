@@ -25,7 +25,7 @@ interface UserDocs extends Docs
     ];
 
     const DEFAULT_REQUIREMENTS = [
-        ['name' => 'user_id', 'dataType' => 'integer', 'description' => 'id of the user', 'requirement' => 'A valid user id']
+        ['name' => 'user_id', 'dataType' => 'integer', 'description' => 'id of the user', 'requirement' => '\d+']
     ];
 
     const DEFAULT = [

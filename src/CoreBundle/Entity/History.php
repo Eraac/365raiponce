@@ -36,6 +36,8 @@ abstract class History
     private $id;
 
     /**
+     * If this action in your history count for your total score (false in case you have exceeded limit per day)
+     *
      * @var boolean
      *
      * @ORM\Column(name="is_used_for_score", type="boolean")

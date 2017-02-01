@@ -32,6 +32,8 @@ class Action
     private $id;
 
     /**
+     * Point you get for this action
+     *
      * @var int
      *
      * @ORM\Column(name="point", type="integer")
@@ -39,7 +41,7 @@ class Action
     private $point;
 
     /**
-     * Limit per day you can get this event to your history, `null` is unlimited
+     * Limit per day you can get this action to your history, `null` is unlimited
      *
      * @var int
      *

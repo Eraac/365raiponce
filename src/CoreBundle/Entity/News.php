@@ -33,6 +33,8 @@ class News
     private $message;
 
     /**
+     * When the message starts broadcasting
+     *
      * @var \DateTime
      *
      * @ORM\Column(name="startAt", type="datetime")
@@ -40,6 +42,8 @@ class News
     private $startAt;
 
     /**
+     * When the message stops broadcasting
+     *
      * @var \DateTime
      *
      * @ORM\Column(name="endAt", type="datetime")

@@ -4,7 +4,8 @@ namespace UserBundle\Docs;
 
 use CoreBundle\Docs\Docs;
 use CoreBundle\Entity\History;
-use Symfony\Component\HttpFoundation\Response;
+use CoreBundle\Entity\Response;
+use Symfony\Component\HttpFoundation\Response as SFResponse;
 use UserBundle\Entity\User;
 use UserBundle\Form\UserEditType;
 
@@ -39,9 +40,9 @@ interface MeDocs extends Docs
             'groups' => ['Default', 'stats', 'info']
         ],
         'statusCodes' => [
-            Response::HTTP_OK           => self::HTTP_OK,
-            Response::HTTP_BAD_REQUEST  => self::HTTP_BAD_REQUEST,
-            Response::HTTP_UNAUTHORIZED => self::HTTP_UNAUTHORIZED
+            SFResponse::HTTP_OK           => self::HTTP_OK,
+            SFResponse::HTTP_BAD_REQUEST  => self::HTTP_BAD_REQUEST,
+            SFResponse::HTTP_UNAUTHORIZED => self::HTTP_UNAUTHORIZED
         ],
         'filters' => [
             self::FILTER_PAGINATION_PAGE,
@@ -58,9 +59,9 @@ interface MeDocs extends Docs
             'parsers' => self::OUTPUT_PARSER,
         ],
         'statusCodes' => [
-            Response::HTTP_OK           => self::HTTP_OK,
-            Response::HTTP_BAD_REQUEST  => self::HTTP_BAD_REQUEST,
-            Response::HTTP_UNAUTHORIZED => self::HTTP_UNAUTHORIZED
+            SFResponse::HTTP_OK           => self::HTTP_OK,
+            SFResponse::HTTP_BAD_REQUEST  => self::HTTP_BAD_REQUEST,
+            SFResponse::HTTP_UNAUTHORIZED => self::HTTP_UNAUTHORIZED
         ],
         'filters' => [
             self::FILTER_PAGINATION_PAGE,
@@ -81,8 +82,8 @@ interface MeDocs extends Docs
         'default' => self::DEFAULT,
         'output'  => self::DEFAULT_OUTPUT,
         'statusCodes' => [
-            Response::HTTP_OK           => self::HTTP_OK,
-            Response::HTTP_UNAUTHORIZED => self::HTTP_UNAUTHORIZED
+            SFResponse::HTTP_OK           => self::HTTP_OK,
+            SFResponse::HTTP_UNAUTHORIZED => self::HTTP_UNAUTHORIZED
         ],
     ];
 
@@ -91,17 +92,17 @@ interface MeDocs extends Docs
         'output'  => self::DEFAULT_OUTPUT,
         'input'   => self::DEFAULT_INPUT,
         'statusCodes' => [
-            Response::HTTP_OK           => self::HTTP_OK,
-            Response::HTTP_BAD_REQUEST  => self::HTTP_BAD_REQUEST,
-            Response::HTTP_UNAUTHORIZED => self::HTTP_UNAUTHORIZED
+            SFResponse::HTTP_OK           => self::HTTP_OK,
+            SFResponse::HTTP_BAD_REQUEST  => self::HTTP_BAD_REQUEST,
+            SFResponse::HTTP_UNAUTHORIZED => self::HTTP_UNAUTHORIZED
         ],
     ];
 
     const DELETE = [
         'default' => self::DEFAULT,
         'statusCodes' => [
-            Response::HTTP_NO_CONTENT   => self::HTTP_NO_CONTENT,
-            Response::HTTP_UNAUTHORIZED => self::HTTP_UNAUTHORIZED
+            SFResponse::HTTP_NO_CONTENT   => self::HTTP_NO_CONTENT,
+            SFResponse::HTTP_UNAUTHORIZED => self::HTTP_UNAUTHORIZED
         ],
     ];
 }
