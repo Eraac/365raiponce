@@ -40,7 +40,12 @@ class VoteRemarkRepository extends AbstractVoteRepository
             ])
         ;
 
-        return (bool) $qb->getQuery()->getSingleScalarResult();
+        $query = $qb
+            ->getQuery()
+            ->useResultCache(true, $this->lifetimeCacheVote, 'score-user-' . $user->getId())
+        ;
+
+        return (bool) $query->getSingleScalarResult();
     }
 
     /**

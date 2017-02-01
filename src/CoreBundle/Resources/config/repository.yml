@@ -28,11 +28,15 @@ services:
         class: Doctrine\ORM\EntityRepository
         factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments: ['CoreBundle:VoteResponse']
+        calls:
+            - [setLifetimeCacheVote, ['%lifetime_cache_vote%']]
 
     core.vote_remark_repository:
         class: Doctrine\ORM\EntityRepository
         factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments: ['CoreBundle:VoteRemark']
+        calls:
+            - [setLifetimeCacheVote, ['%lifetime_cache_vote%']]
 
     core.report_repository:
         class: Doctrine\ORM\EntityRepository

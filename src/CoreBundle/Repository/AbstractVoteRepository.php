@@ -7,6 +7,20 @@ use Doctrine\ORM\QueryBuilder;
 abstract class AbstractVoteRepository extends AbstractDateRepository
 {
     /**
+     * @var int Number of second keep in cache vote for one user
+     */
+    protected $lifetimeCacheVote;
+
+
+    /**
+     * @param int $lifetime
+     */
+    public function setLifetimeCacheVote(int $lifetime)
+    {
+        $this->lifetimeCacheVote = $lifetime;
+    }
+
+    /**
      * @param QueryBuilder $qb
      * @param int|array    $voter
      *

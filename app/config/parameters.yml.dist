@@ -49,3 +49,4 @@ parameters:
     enable_history: false
 
     lifetime_cache_score: 600 # ten minutes
+    lifetime_cache_vote: 600 # ten minutes
