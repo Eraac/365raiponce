@@ -17,19 +17,35 @@ monolog:
             type:           fingers_crossed
             action_level:   error
             handler:        grouped
+            excluded_404s:
+                - ^/
         grouped:
             type:           group
-            members:        [streamed, swift]
+            members:        [streamed, slack]
         streamed:
-            type:           stream
+            type:           rotating_file
+            max_files:      30
             path:           "%kernel.logs_dir%/%kernel.environment%.log"
             level:          debug
-        swift:
-            type:           swift_mailer
-            from_email:     "%mail_sender%"
-            to_email:       "%mail_admin%"
-            subject:        "[ERROR] %app_name%"
-            level:          debug
+        slack:
+            type:           slack
+            token:          "%slack_token%"
+            channel:        "%slack_channel%"
+            level:          warning
+
+        auth:
+            type:           rotating_file
+            max_files:      30
+            path:           "%kernel.logs_dir%/%kernel.environment%-auth.log"
+            level:          warning
+            channels:       security
+
+        doctrine:
+            type:           rotating_file
+            max_files:      30
+            path:           "%kernel.logs_dir%/%kernel.environment%-doctrine.log"
+            level:          warning
+            channels:       doctrine
 
 snc_redis:
     clients:

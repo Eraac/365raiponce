@@ -12,7 +12,6 @@ parameters:
     mailer_port: 25
     mailer_encryption: null
     mail_sender: no-reply@symfony.local
-    mail_admin: contact@symfony.local
     twitter_consumer_key: ""
     twitter_consumer_secret: ""
     twitter_token: ""
@@ -33,3 +32,5 @@ parameters:
     lifetime_cache_score: 600 # ten minutes
     lifetime_cache_vote: 600 # ten minutes
     enable_history: true
+    slack_token: ~
+    slack_channel: ~
