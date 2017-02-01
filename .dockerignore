@@ -12,4 +12,5 @@ Dockerfile
 .dockerignore
 var/cache/
 var/logs/
+var/sql/
 var/SymfonyRequirements.php
