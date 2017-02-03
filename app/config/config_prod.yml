@@ -13,20 +13,22 @@ doctrine:
 
 monolog:
     handlers:
-        main:
+        main_error:
             type:           fingers_crossed
             action_level:   error
-            handler:        grouped
+            handler:        streamed
             excluded_404s:
                 - ^/
-        grouped:
-            type:           group
-            members:        [streamed, slack]
         streamed:
             type:           rotating_file
             max_files:      30
             path:           "%kernel.logs_dir%/%kernel.environment%.log"
             level:          debug
+
+        main_critical:
+            type:           fingers_crossed
+            action_level:   critical
+            handler:        slack
         slack:
             type:           slack
             token:          "%slack_token%"

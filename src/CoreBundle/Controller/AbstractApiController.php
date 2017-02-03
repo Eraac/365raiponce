@@ -12,6 +12,7 @@ use Doctrine\ORM\QueryBuilder;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use Hateoas\Representation\PaginatedRepresentation;
+use Monolog\Logger;
 use Symfony\Component\Form\Form;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -203,6 +204,11 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
         } catch (InvalidFilterException $e) {
             throw $e;
         } catch (\Exception $e) {
+            /** @var Logger $monolog */
+            $monolog = $this->get('logger');
+
+            $monolog->critical($e->getMessage(), ['filters' => $request->query->get('filter', []), 'service' => $filter]);
+
             throw new InvalidFilterException(
                 $this->t('core.error.wrong_filter'), $e
             );
