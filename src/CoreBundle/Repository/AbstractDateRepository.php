@@ -80,6 +80,78 @@ abstract class AbstractDateRepository extends AbstractRepository
 
     /**
      * @param QueryBuilder $qb
+     * @param int|string   $year
+     *
+     * @return QueryBuilder
+     */
+    public function filterByCreatedYear(QueryBuilder $qb, $year) : QueryBuilder
+    {
+        $alias = $this->getAlias($qb);
+
+        if (is_array($year)) {
+            $predicate = $qb->expr()->in('YEAR(' . $alias . 'createdAt)', ':year');
+        } else {
+            $predicate = $qb->expr()->eq('YEAR(' . $alias . 'createdAt)', ':year');
+        }
+
+        $qb
+            ->andWhere($predicate)
+            ->setParameter('year', $year)
+        ;
+
+        return $qb;
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param int|string   $month
+     *
+     * @return QueryBuilder
+     */
+    public function filterByCreatedMonth(QueryBuilder $qb, $month) : QueryBuilder
+    {
+        $alias = $this->getAlias($qb);
+
+        if (is_array($month)) {
+            $predicate = $qb->expr()->in('MONTH(' . $alias . 'createdAt)', ':month');
+        } else {
+            $predicate = $qb->expr()->eq('MONTH(' . $alias . 'createdAt)', ':month');
+        }
+
+        $qb
+            ->andWhere($predicate)
+            ->setParameter('month', $month)
+        ;
+
+        return $qb;
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param int|string   $day
+     *
+     * @return QueryBuilder
+     */
+    public function filterByCreatedDay(QueryBuilder $qb, $day) : QueryBuilder
+    {
+        $alias = $this->getAlias($qb);
+
+        if (is_array($day)) {
+            $predicate = $qb->expr()->in('DAY(' . $alias . 'createdAt)', ':day');
+        } else {
+            $predicate = $qb->expr()->eq('DAY(' . $alias . 'createdAt)', ':day');
+        }
+
+        $qb
+            ->andWhere($predicate)
+            ->setParameter('day', $day)
+        ;
+
+        return $qb;
+    }
+
+    /**
+     * @param QueryBuilder $qb
      * @param \DateTime    $from
      * @param \DateTime    $to
      *

@@ -15,7 +15,7 @@ abstract class AbstractStatsFilterTest extends AbstractFilterTest
     protected function getCriterias() : array
     {
         return [
-            'created_before', 'created_after'
+            'created_before', 'created_after', 'created_year', 'created_month', 'created_day',
         ];
     }
 
@@ -25,7 +25,7 @@ abstract class AbstractStatsFilterTest extends AbstractFilterTest
     protected function getGoodValueCriterias() : array
     {
         return [
-            1234, 97654321
+            1234, 97654321, 2017, 1, 1
         ];
     }
 
@@ -35,7 +35,7 @@ abstract class AbstractStatsFilterTest extends AbstractFilterTest
     protected function getBadValueCriterias() : array
     {
         return [
-            'not', 'number'
+            'not', 'number', 'nope', 'number', 'again',
         ];
     }
 

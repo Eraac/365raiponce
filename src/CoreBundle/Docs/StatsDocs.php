@@ -24,6 +24,10 @@ interface StatsDocs extends Docs
         Response::HTTP_FORBIDDEN    => self::HTTP_FORBIDDEN,
     ];
 
+    const FILTER_CREATED_YEAR  = ['name' => 'filter[created_year]', 'dataType' => 'integer', 'pattern' => 'integer', 'description' => 'Filter content by creation year'];
+    const FILTER_CREATED_MONTH = ['name' => 'filter[created_month]', 'dataType' => 'integer', 'pattern' => 'integer', 'description' => 'Filter content by creation month'];
+    const FILTER_CREATED_DAY   = ['name' => 'filter[created_day]', 'dataType' => 'integer', 'pattern' => 'integer', 'description' => 'Filter content by creation day'];
+
     const ORDER_CREATED_YEAR  = ['name' => 'filter[_order][created_year]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by created year'];
     const ORDER_CREATED_MONTH = ['name' => 'filter[_order][created_month]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by created month'];
     const ORDER_CREATED_DAY   = ['name' => 'filter[_order][created_day]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by created day'];
@@ -57,6 +61,9 @@ interface StatsDocs extends Docs
             self::FILTER_CREATED_AFTER,
             self::FILTER_POSTED_BEFORE,
             self::FILTER_POSTED_AFTER,
+            self::FILTER_CREATED_YEAR,
+            self::FILTER_CREATED_MONTH,
+            self::FILTER_CREATED_DAY,
             self::FILTER_EMOTION,
             self::FILTER_THEME,
             self::ORDER_CREATED_YEAR,
@@ -86,6 +93,9 @@ interface StatsDocs extends Docs
             self::FILTER_CREATED_AFTER,
             self::FILTER_POSTED_BEFORE,
             self::FILTER_POSTED_AFTER,
+            self::FILTER_CREATED_YEAR,
+            self::FILTER_CREATED_MONTH,
+            self::FILTER_CREATED_DAY,
             self::FILTER_EMOTION,
             self::FILTER_THEME,
             self::FILTER_REMARK,
@@ -119,6 +129,9 @@ interface StatsDocs extends Docs
         'filters'       => [
             self::FILTER_CREATED_BEFORE,
             self::FILTER_CREATED_AFTER,
+            self::FILTER_CREATED_YEAR,
+            self::FILTER_CREATED_MONTH,
+            self::FILTER_CREATED_DAY,
             self::ORDER_CREATED_YEAR,
             self::ORDER_CREATED_MONTH,
             self::ORDER_CREATED_DAY,
@@ -134,6 +147,9 @@ interface StatsDocs extends Docs
         'filters'       => [
             self::FILTER_CREATED_BEFORE,
             self::FILTER_CREATED_AFTER,
+            self::FILTER_CREATED_YEAR,
+            self::FILTER_CREATED_MONTH,
+            self::FILTER_CREATED_DAY,
             self::FILTER_EMOTION,
             self::FILTER_THEME,
             self::FILTER_REMARK,
@@ -164,6 +180,9 @@ interface StatsDocs extends Docs
         'filters' => [
             self::FILTER_CREATED_BEFORE,
             self::FILTER_CREATED_AFTER,
+            self::FILTER_CREATED_YEAR,
+            self::FILTER_CREATED_MONTH,
+            self::FILTER_CREATED_DAY,
             self::FILTER_EMOTION,
             self::FILTER_THEME,
             self::FILTER_REMARK,
@@ -197,6 +216,9 @@ interface StatsDocs extends Docs
         'filters' => [
             self::FILTER_CREATED_BEFORE,
             self::FILTER_CREATED_AFTER,
+            self::FILTER_CREATED_YEAR,
+            self::FILTER_CREATED_MONTH,
+            self::FILTER_CREATED_DAY,
             ['name' => 'filter[user]', 'dataType' => 'integer', 'description' => 'Search by user'],
             ['name' => 'filter[action]', 'dataType' => 'integer', 'description' => 'Search by action'],
             ['name' => 'filter[is_used_for_score]', 'dataType' => 'integer', 'description' => 'Search by if used for score'],

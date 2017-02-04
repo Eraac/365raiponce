@@ -24,6 +24,9 @@ abstract class AbstractStatsFilter extends AbstractFilter
             [
                 self::CREATED_BEFORE => [$this->repo, 'filterByCreatedBefore'],
                 self::CREATED_AFTER  => [$this->repo, 'filterByCreatedAfter'],
+                self::YEAR           => [$this->repo, 'filterByCreatedYear'],
+                self::MONTH          => [$this->repo, 'filterByCreatedMonth'],
+                self::DAY            => [$this->repo, 'filterByCreatedDay'],
                 '_group'             => [$this, 'applyGroup'],
             ]
         );
@@ -37,6 +40,9 @@ abstract class AbstractStatsFilter extends AbstractFilter
         return [
             self::CREATED_BEFORE => [$this, 'validateTimestamp'],
             self::CREATED_AFTER  => [$this, 'validateTimestamp'],
+            self::YEAR           => [$this, 'validateNumber'],
+            self::MONTH          => [$this, 'validateNumber'],
+            self::DAY            => [$this, 'validateNumber'],
         ];
     }
 
