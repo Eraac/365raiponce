@@ -123,6 +123,10 @@ abstract class AbstractStatsFilter extends AbstractFilter
 
         unset($orders['count']);
 
+        if (!is_array($groups)) {
+            $groups = [$groups];
+        }
+
         $diffs = array_diff(array_keys($orders), $groups);
 
         if (!empty($diffs)) {

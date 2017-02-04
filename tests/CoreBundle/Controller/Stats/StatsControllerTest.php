@@ -14,6 +14,7 @@ class StatsControllerTest extends AbstractControllerTest
     const URL_USERS          = self::PREFIX_URL . '/users';
     const URL_VOTES_REMARKS  = self::PREFIX_URL . '/votes/remarks';
     const URL_VOTES_RESPONSE = self::PREFIX_URL . '/votes/responses';
+    const URL_SCORES         = self::PREFIX_URL . '/scores';
 
    // === GET - REMARK ===
     public function testGetRemarkSuccessful()
@@ -113,5 +114,25 @@ class StatsControllerTest extends AbstractControllerTest
         $headers = $this->getHeaderConnect(self::USER1['username'], self::USER1['password']);
 
         $this->isForbidden(Request::METHOD_GET, self::URL_VOTES_RESPONSE, [], $headers);
+    }
+
+    // === GET - SCORE ===
+    public function testGetScoreSuccessful()
+    {
+        $headers = $this->getHeaderAdmin();
+
+        $this->isSuccessful(Request::METHOD_GET, self::URL_SCORES, [], $headers);
+    }
+
+    public function testGetScoreUnauthorized()
+    {
+        $this->isUnauthorized(Request::METHOD_GET, self::URL_SCORES);
+    }
+
+    public function testGetScoreForbidden()
+    {
+        $headers = $this->getHeaderConnect(self::USER1['username'], self::USER1['password']);
+
+        $this->isForbidden(Request::METHOD_GET, self::URL_SCORES, [], $headers);
     }
 }

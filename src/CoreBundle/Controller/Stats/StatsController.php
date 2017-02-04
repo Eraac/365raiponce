@@ -115,6 +115,25 @@ class StatsController extends AbstractApiController implements StatsDocs
     }
 
     /**
+     * Get stats about score of the user
+     *
+     * @param Request $request
+     *
+     * @ApiDoc(StatsDocs::GET_SCORES)
+     *
+     * @return array
+     *
+     * @FOSRest\View()
+     */
+    public function getScoresAction(Request $request) : array
+    {
+        $qb = $this->getRepository('CoreBundle:History')->sumScore();
+        $qb = $this->applyFilter('core.stats.history_filter', $qb, $request);
+
+        return $this->paginateStats($qb, $request);
+    }
+
+    /**
      * @param QueryBuilder $qb
      * @param Request $request
      *

@@ -160,8 +160,8 @@ interface StatsDocs extends Docs
     ];
 
     const GET_VOTE_RESPONSES = [
-        'default'       => self::DEFAULT,
-        'filters'       => [
+        'default' => self::DEFAULT,
+        'filters' => [
             self::FILTER_CREATED_BEFORE,
             self::FILTER_CREATED_AFTER,
             self::FILTER_EMOTION,
@@ -189,6 +189,30 @@ interface StatsDocs extends Docs
             ['name' => 'filter[_group][]=response', 'description' => 'Group by response'],
             ['name' => 'filter[_group][]=voter', 'description' => 'Group by voter'],
             ['name' => 'filter[_group][]=receiver', 'description' => 'Group by receiver'],
+        ]
+    ];
+
+    const GET_SCORES = [
+        'default' => self::DEFAULT,
+        'filters' => [
+            self::FILTER_CREATED_BEFORE,
+            self::FILTER_CREATED_AFTER,
+            ['name' => 'filter[user]', 'dataType' => 'integer', 'description' => 'Search by user'],
+            ['name' => 'filter[action]', 'dataType' => 'integer', 'description' => 'Search by action'],
+            ['name' => 'filter[is_used_for_score]', 'dataType' => 'integer', 'description' => 'Search by if used for score'],
+            self::ORDER_CREATED_YEAR,
+            self::ORDER_CREATED_MONTH,
+            self::ORDER_CREATED_DAY,
+            self::ORDER_COUNT,
+            ['name' => 'filter[_order][user]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by user'],
+            ['name' => 'filter[_order][action]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by action'],
+            ['name' => 'filter[_order][is_used_for_score]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by if used for score'],
+            self::GROUP_CREATED_YEAR,
+            self::GROUP_CREATED_MONTH,
+            self::GROUP_CREATED_DAY,
+            ['name' => 'filter[_group][]=user', 'description' => 'Group by user'],
+            ['name' => 'filter[_group][]=action', 'description' => 'Group by action'],
+            ['name' => 'filter[_group][]=is_used_for_score', 'description' => 'Group by if used for score'],
         ]
     ];
 }

@@ -47,6 +47,18 @@ services:
         arguments: ['@core.news_repository']
         public: true
 
+    core.grade_filter:
+        class: CoreBundle\Filter\GradeFilter
+        parent: core.abstract_filter
+        arguments: ['@core.grade_repository']
+        public: true
+
+    core.history_filter:
+        class: CoreBundle\Filter\HistoryFilter
+        parent: core.abstract_filter
+        arguments: ['@core.history_repository']
+        public: true
+
     core.stats.remark_filter:
         class: CoreBundle\Filter\Stats\RemarkFilter
         parent: core.abstract_filter
@@ -71,14 +83,8 @@ services:
         arguments: ['@core.vote_response_repository']
         public: true
 
-    core.grade_filter:
-        class: CoreBundle\Filter\GradeFilter
-        parent: core.abstract_filter
-        arguments: ['@core.grade_repository']
-        public: true
-
-    core.history_filter:
-        class: CoreBundle\Filter\HistoryFilter
+    core.stats.history_filter:
+        class: CoreBundle\Filter\Stats\HistoryFilter
         parent: core.abstract_filter
         arguments: ['@core.history_repository']
         public: true

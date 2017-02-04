@@ -237,7 +237,7 @@ abstract class AbstractFilter
      */
     protected function validateBoolean($boolean)
     {
-        if (!in_array($boolean, ['0', '1'], true)) {
+        if (!in_array($boolean, ['0', '1'])) {
             throw new InvalidFilterException(
                 $this->t('core.error.filter.boolean', ['%value%' => $boolean])
             );

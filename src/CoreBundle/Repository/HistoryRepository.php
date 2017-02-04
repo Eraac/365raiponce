@@ -31,6 +31,20 @@ class HistoryRepository extends AbstractDateRepository
     /**
      * @return QueryBuilder
      */
+    public function sumScore() : QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('h');
+
+        $this->safeLeftJoin($qb, 'action', 'a');
+
+        $qb->select('SUM(a.point) AS nb');
+
+        return $qb;
+    }
+
+    /**
+     * @return QueryBuilder
+     */
     public function qbFindAll() : QueryBuilder
     {
         return $this->createQueryBuilder('h');
@@ -185,5 +199,44 @@ class HistoryRepository extends AbstractDateRepository
         $this->safeLeftJoin($qb, 'user', $alias);
 
         return $this->applyOrder($qb, '.username', $order, $alias);
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string       $groupBy
+     *
+     * @return QueryBuilder
+     */
+    public function groupByUser(QueryBuilder $qb, string $groupBy) : QueryBuilder
+    {
+        $this->safeLeftJoin($qb, 'user', 'u');
+
+        return $this->groupBy($qb, 'u.id', 'user_id');
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string       $groupBy
+     *
+     * @return QueryBuilder
+     */
+    public function groupByAction(QueryBuilder $qb, string $groupBy) : QueryBuilder
+    {
+        $this->safeLeftJoin($qb, 'action', 'a');
+
+        return $this->groupBy($qb, 'a.id', 'action_id');
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string       $groupBy
+     *
+     * @return QueryBuilder
+     */
+    public function groupByIsUsedForScore(QueryBuilder $qb, string $groupBy) : QueryBuilder
+    {
+        $alias = $this->getAlias($qb);
+
+        return $this->groupBy($qb, $alias . 'usedForScore', 'is_used_for_score');
     }
 }
