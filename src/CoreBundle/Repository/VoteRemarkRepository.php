@@ -4,6 +4,7 @@ namespace CoreBundle\Repository;
 
 use CoreBundle\Entity\Remark;
 use CoreBundle\Entity\VoteRemark;
+use CoreBundle\Service\KeyBuilder;
 use Doctrine\ORM\QueryBuilder;
 use UserBundle\Entity\User;
 
@@ -41,11 +42,9 @@ class VoteRemarkRepository extends AbstractVoteRepository
             ])
         ;
 
-        $key = $type == VoteRemark::IS_SEXIST ? 'is-sexist-' : 'already-lived-';
-
         $query = $qb
             ->getQuery()
-            ->useResultCache(true, $this->lifetimeCacheVoteUser, 'user-has-vote' . $key . 'remark-' . $remark->getId() . '-user-' . $user->getId())
+            ->useResultCache(true, $this->lifetimeCacheVoteUser, KeyBuilder::keyUserHasVoteForRemark($remark, $user, $type))
         ;
 
         return (bool) $query->getSingleScalarResult();
@@ -74,11 +73,9 @@ class VoteRemarkRepository extends AbstractVoteRepository
             ])
         ;
 
-        $key = $type == VoteRemark::IS_SEXIST ? 'is-sexist-' : 'already-lived-';
-
         $query = $qb
             ->getQuery()
-            ->useResultCache(true, $this->lifetimeCacheCountVote, 'count-vote-' . $key . $remark->getId())
+            ->useResultCache(true, $this->lifetimeCacheCountVote, KeyBuilder::keyCountVoteForRemark($remark, $type))
         ;
 
         return $query->getSingleScalarResult();

@@ -3,6 +3,7 @@
 namespace CoreBundle\Repository;
 
 use CoreBundle\Entity\Action;
+use CoreBundle\Service\KeyBuilder;
 use Doctrine\ORM\QueryBuilder;
 use UserBundle\Entity\User;
 
@@ -123,7 +124,7 @@ class HistoryRepository extends AbstractDateRepository
         $query = $qb->getQuery();
 
         $query
-            ->useResultCache(true, $this->lifetimeCacheScore, 'score-user-' . $user->getId())
+            ->useResultCache(true, $this->lifetimeCacheScore, KeyBuilder::keyScoreUser($user))
         ;
 
         return $query->getSingleScalarResult() ?? 0;

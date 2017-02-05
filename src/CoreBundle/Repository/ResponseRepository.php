@@ -3,6 +3,7 @@
 namespace CoreBundle\Repository;
 
 use CoreBundle\Entity\Remark;
+use CoreBundle\Service\KeyBuilder;
 use Doctrine\ORM\QueryBuilder;
 use UserBundle\Entity\User;
 
@@ -49,7 +50,7 @@ class ResponseRepository extends AbstractPostedRepository
 
         $query = $qb
             ->getQuery()
-            ->useResultCache(true, $this->lifetimeCacheCountResponse, 'count-published-response-' . $remark->getId())
+            ->useResultCache(true, $this->lifetimeCacheCountResponse, KeyBuilder::keyCountPublishedResponseForRemark($remark))
         ;
 
         return (bool) $query->getSingleScalarResult();
@@ -76,7 +77,7 @@ class ResponseRepository extends AbstractPostedRepository
 
         $query = $qb
             ->getQuery()
-            ->useResultCache(true, $this->lifetimeCacheCountResponse, 'count-unpublished-response-' . $remark->getId())
+            ->useResultCache(true, $this->lifetimeCacheCountResponse, KeyBuilder::keyCountUnpublishedResponseForRemark($remark))
         ;
 
         return (bool) $query->getSingleScalarResult();

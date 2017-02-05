@@ -3,6 +3,7 @@
 namespace CoreBundle\Repository;
 
 use CoreBundle\Entity\Response;
+use CoreBundle\Service\KeyBuilder;
 use Doctrine\ORM\QueryBuilder;
 use UserBundle\Entity\User;
 
@@ -39,7 +40,7 @@ class VoteResponseRepository extends AbstractVoteRepository
 
         $query = $qb
             ->getQuery()
-            ->useResultCache(true, $this->lifetimeCacheVoteUser, 'user-has-vote-response-' . $response->getId() . '-user-' . $user->getId())
+            ->useResultCache(true, $this->lifetimeCacheVoteUser, KeyBuilder::keyUserHasVoteForResponse($response, $user))
         ;
 
         return (bool) $query->getSingleScalarResult();
@@ -63,7 +64,7 @@ class VoteResponseRepository extends AbstractVoteRepository
 
         $query = $qb
             ->getQuery()
-            ->useResultCache(true, $this->lifetimeCacheCountVote, 'count-votes-response-' . $response->getId())
+            ->useResultCache(true, $this->lifetimeCacheCountVote, KeyBuilder::keyCountVoteForResponse($response))
         ;
 
         return $query->getSingleScalarResult();
