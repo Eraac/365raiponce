@@ -52,7 +52,7 @@ class HistoryController extends AbstractApiController implements HistoryDocs
      * @Security("is_granted('view', history)")
      *
      * @FOSRest\Get("/histories/{history_id}", requirements={"history_id"="\d+"})
-     * @FOSRest\View()
+     * @FOSRest\View(serializerGroups={"Default"})
      *
      * @ParamConverter("history", class="CoreBundle:History", options={"id" = "history_id"})
      *

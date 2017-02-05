@@ -69,7 +69,7 @@ CoreBundle\Entity\Remark:
             embedded:
                 content: expr(object.countUnpublishedResponses())
             exclusion:
-                groups: [stats, admin]
+                groups: [stats]
 
         -
             rel: count_vote_is_sexist
