@@ -60,7 +60,7 @@ class Remark
      *
      * @var Theme
      *
-     * @ORM\ManyToOne(targetEntity="Theme")
+     * @ORM\ManyToOne(targetEntity="Theme", fetch="EAGER")
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private $theme;
@@ -70,7 +70,7 @@ class Remark
      *
      * @var Emotion
      *
-     * @ORM\ManyToOne(targetEntity="Emotion")
+     * @ORM\ManyToOne(targetEntity="Emotion", fetch="EAGER")
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private $emotion;
@@ -94,12 +94,12 @@ class Remark
     private $email;
 
     /**
-     * @ORM\OneToMany(targetEntity="Response", mappedBy="remark", fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="Response", mappedBy="remark")
      */
     private $responses;
 
     /**
-     * @ORM\OneToMany(targetEntity="VoteRemark", mappedBy="remark", fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="VoteRemark", mappedBy="remark")
      */
     private $votes;
 
@@ -113,6 +113,26 @@ class Remark
      */
     private $userHasVoteLived = false;
 
+    /**
+     * @var int
+     */
+    private $countPublishedResponses;
+
+    /**
+     * @var int
+     */
+    private $countUnpublishedResponses;
+
+    /**
+     * @var int
+     */
+    private $countVoteSexist;
+
+    /**
+     * @var int
+     */
+    private $countVoteLived;
+
 
     /**
      * Return the number of response
@@ -121,10 +141,7 @@ class Remark
      */
     public function countPublishedResponses() : int
     {
-        // TODO optimize
-        $criteria = Criteria::create()->where(Criteria::expr()->neq("postedAt", null));
-
-        return $this->responses->matching($criteria)->count();
+        return $this->countPublishedResponses;
     }
 
     /**
@@ -134,10 +151,7 @@ class Remark
      */
     public function countUnpublishedResponses() : int
     {
-        // TODO optimize
-        $criteria = Criteria::create()->where(Criteria::expr()->eq("postedAt", null));
-
-        return $this->responses->matching($criteria)->count();
+        return $this->countUnpublishedResponses;
     }
 
     /**
@@ -147,10 +161,7 @@ class Remark
      */
     public function getCountVoteIsSexist() : int
     {
-        // TODO optimize
-        $criteria = Criteria::create()->where(Criteria::expr()->eq("type", VoteRemark::IS_SEXIST));
-
-        return $this->votes->matching($criteria)->count();
+        return $this->countVoteSexist;
     }
 
     /**
@@ -158,12 +169,9 @@ class Remark
      *
      * @return int
      */
-    public function getCountVoteAlreadyLive() : int
+    public function getCountVoteAlreadyLived() : int
     {
-        // TODO optimize
-        $criteria = Criteria::create()->where(Criteria::expr()->eq("type", VoteRemark::ALREADY_LIVED));
-
-        return $this->votes->matching($criteria)->count();
+        return $this->countVoteLived;
     }
 
     /**
@@ -436,6 +444,34 @@ class Remark
     {
         $this->userHasVoteSexist = $userHasVoteSexist;
         $this->userHasVoteLived  = $userHasVoteLived;
+
+        return $this;
+    }
+
+    /**
+     * @param int $countPublishedResponses
+     * @param int $countUnpublishedResponses
+     *
+     * @return Remark
+     */
+    public function setCountResponses(int $countPublishedResponses, int $countUnpublishedResponses) : Remark
+    {
+        $this->countPublishedResponses = $countPublishedResponses;
+        $this->countUnpublishedResponses = $countUnpublishedResponses;
+
+        return $this;
+    }
+
+    /**
+     * @param int $countVotesSexist
+     * @param int $countVotesLived
+     *
+     * @return Remark
+     */
+    public function setCountVotes(int $countVotesSexist, int $countVotesLived) : Remark
+    {
+        $this->countVoteSexist = $countVotesSexist;
+        $this->countVoteLived = $countVotesLived;
 
         return $this;
     }

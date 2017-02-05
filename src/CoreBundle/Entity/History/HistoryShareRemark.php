@@ -16,7 +16,7 @@ class HistoryShareRemark extends History
     /**
      * @var Remark
      *
-     * @ORM\ManyToOne(targetEntity="CoreBundle\Entity\Remark")
+     * @ORM\ManyToOne(targetEntity="CoreBundle\Entity\Remark", fetch="EAGER")
      * @ORM\JoinColumn(name="remark_id", onDelete="CASCADE")
      */
     private $remark;

@@ -81,7 +81,7 @@ CoreBundle\Entity\Remark:
         -
             rel: count_vote_already_lived
             embedded:
-                content: expr(object.getCountVoteAlreadyLive())
+                content: expr(object.getCountVoteAlreadyLived())
             exclusion:
                 groups: [stats]
 

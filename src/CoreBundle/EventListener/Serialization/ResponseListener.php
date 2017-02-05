@@ -49,6 +49,12 @@ class ResponseListener implements EventSubscriberInterface
                 $this->repository->userHasVoteFor($response, $user)
             );
         }
+
+        $groups = $event->getContext()->attributes->get('groups')->get();
+
+        if (in_array('stats', $groups)) {
+            $response->setCountVotes($this->repository->countVoteForResponse($response));
+        }
     }
 
     /**

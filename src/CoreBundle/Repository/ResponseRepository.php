@@ -15,12 +15,91 @@ use UserBundle\Entity\User;
 class ResponseRepository extends AbstractPostedRepository
 {
     /**
+     * @var int
+     */
+    private $lifetimeCacheCountResponse;
+
+
+    /**
+     * @param int $lifetimeCacheCountResponse
+     */
+    public function setLifetimeCacheCountResponse(int $lifetimeCacheCountResponse)
+    {
+        $this->lifetimeCacheCountResponse = $lifetimeCacheCountResponse;
+    }
+
+    /**
+     * @param Remark $remark
+     *
+     * @return int
+     */
+    public function countResponsePublishedForRemark(Remark $remark) : int
+    {
+        $qb = $this->createQueryBuilder('r');
+        $expr = $qb->expr();
+
+        $qb
+            ->select($expr->count('r.id'))
+            ->where(
+                $expr->eq('r.remark', ':remark'),
+                $expr->isNotNull('r.postedAt')
+            )
+            ->setParameter('remark', $remark)
+        ;
+
+        $query = $qb
+            ->getQuery()
+            ->useResultCache(true, $this->lifetimeCacheCountResponse, 'count-published-response-' . $remark->getId())
+        ;
+
+        return (bool) $query->getSingleScalarResult();
+    }
+
+    /**
+     * @param Remark $remark
+     *
+     * @return int
+     */
+    public function countResponseUnpublishedForRemark(Remark $remark) : int
+    {
+        $qb = $this->createQueryBuilder('r');
+        $expr = $qb->expr();
+
+        $qb
+            ->select($expr->count('r.id'))
+            ->where(
+                $expr->eq('r.remark', ':remark'),
+                $expr->isNull('r.postedAt')
+            )
+            ->setParameter('remark', $remark)
+        ;
+
+        $query = $qb
+            ->getQuery()
+            ->useResultCache(true, $this->lifetimeCacheCountResponse, 'count-unpublished-response-' . $remark->getId())
+        ;
+
+        return (bool) $query->getSingleScalarResult();
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    public function qbFindAll() : QueryBuilder
+    {
+        return $this
+            ->createQueryBuilder('r')
+            ->leftJoin('r.author', 'a')
+            ->addSelect('a');
+    }
+
+    /**
      * @return QueryBuilder
      */
     public function qbFindAllPublished() : QueryBuilder
     {
         return $this
-            ->createQueryBuilder('r')
+            ->qbFindAll()
             ->where('r.postedAt IS NOT NULL');
     }
 
@@ -31,7 +110,7 @@ class ResponseRepository extends AbstractPostedRepository
      */
     public function qbFindAllPublishedInRemark(Remark $remark) : QueryBuilder
     {
-        return $this->qbFindAllPublished()
+        return $this->qbFindAll()
             ->andWhere('r.remark = :remark')
             ->setParameter('remark', $remark);
     }
@@ -42,7 +121,7 @@ class ResponseRepository extends AbstractPostedRepository
     public function qbFindAllUnpublished() : QueryBuilder
     {
         return $this
-            ->createQueryBuilder('r')
+            ->qbFindAll()
             ->where('r.postedAt IS NULL');
     }
 
@@ -54,7 +133,7 @@ class ResponseRepository extends AbstractPostedRepository
     public function qbFindAllByUser(User $user) : QueryBuilder
     {
         return $this
-            ->createQueryBuilder('r')
+            ->qbFindAll()
             ->where('r.author = :user')
             ->setParameter('user', $user);
     }
@@ -67,7 +146,7 @@ class ResponseRepository extends AbstractPostedRepository
     public function qbFindAllUnpublishedByUser(User $user) : QueryBuilder
     {
         return $this
-            ->createQueryBuilder('r')
+            ->qbFindAll()
             ->where('r.author = :user', 'r.postedAt IS NULL')
             ->setParameter('user', $user);
     }

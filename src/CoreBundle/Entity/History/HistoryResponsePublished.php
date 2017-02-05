@@ -16,7 +16,7 @@ class HistoryResponsePublished extends History
     /**
      * @var Response
      *
-     * @ORM\ManyToOne(targetEntity="CoreBundle\Entity\Response")
+     * @ORM\ManyToOne(targetEntity="CoreBundle\Entity\Response", fetch="EAGER")
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $response;

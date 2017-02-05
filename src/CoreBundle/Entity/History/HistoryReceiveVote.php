@@ -16,7 +16,7 @@ class HistoryReceiveVote extends History
     /**
      * @var VoteResponse
      *
-     * @ORM\ManyToOne(targetEntity="CoreBundle\Entity\VoteResponse")
+     * @ORM\ManyToOne(targetEntity="CoreBundle\Entity\VoteResponse", fetch="EAGER")
      * @ORM\JoinColumn(name="vote_response_id", onDelete="CASCADE")
      */
     private $vote;

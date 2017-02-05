@@ -16,7 +16,7 @@ class HistoryVoteRemark extends History
     /**
      * @var VoteRemark
      *
-     * @ORM\ManyToOne(targetEntity="CoreBundle\Entity\VoteRemark")
+     * @ORM\ManyToOne(targetEntity="CoreBundle\Entity\VoteRemark", fetch="EAGER")
      * @ORM\JoinColumn(name="vote_remark_id", onDelete="CASCADE")
      */
     private $vote;

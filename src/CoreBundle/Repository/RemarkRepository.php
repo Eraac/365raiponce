@@ -19,6 +19,10 @@ class RemarkRepository extends AbstractPostedRepository
     {
         return $this
             ->createQueryBuilder('r')
+            ->leftJoin('r.theme', 't')
+            ->leftJoin('r.emotion', 'e')
+            ->leftJoin('r.votes', 'v')
+            ->addSelect('t', 'e', 'v')
             ->where('r.postedAt IS NOT NULL');
     }
 
@@ -29,6 +33,10 @@ class RemarkRepository extends AbstractPostedRepository
     {
         return $this
             ->createQueryBuilder('r')
+            ->leftJoin('r.theme', 't')
+            ->leftJoin('r.emotion', 'e')
+            ->leftJoin('r.votes', 'v')
+            ->addSelect('t', 'e', 'v')
             ->where('r.postedAt IS NULL');
     }
 

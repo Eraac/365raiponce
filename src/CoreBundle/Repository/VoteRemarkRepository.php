@@ -3,6 +3,7 @@
 namespace CoreBundle\Repository;
 
 use CoreBundle\Entity\Remark;
+use CoreBundle\Entity\VoteRemark;
 use Doctrine\ORM\QueryBuilder;
 use UserBundle\Entity\User;
 
@@ -40,12 +41,47 @@ class VoteRemarkRepository extends AbstractVoteRepository
             ])
         ;
 
+        $key = $type == VoteRemark::IS_SEXIST ? 'is-sexist-' : 'already-lived-';
+
         $query = $qb
             ->getQuery()
-            ->useResultCache(true, $this->lifetimeCacheVote, 'score-user-' . $user->getId())
+            ->useResultCache(true, $this->lifetimeCacheVoteUser, 'user-has-vote' . $key . 'remark-' . $remark->getId() . '-user-' . $user->getId())
         ;
 
         return (bool) $query->getSingleScalarResult();
+    }
+
+    /**
+     * @param Remark $remark
+     * @param int    $type
+     *
+     * @return int
+     */
+    public function countVoteForRemark(Remark $remark, int $type) : int
+    {
+        $qb = $this->createQueryBuilder('v');
+        $expr = $qb->expr();
+
+        $qb
+            ->select($expr->count('v.id'))
+            ->where(
+                $expr->eq('v.remark', ':remark'),
+                $expr->eq('v.type', ':type')
+            )
+            ->setParameters([
+                'remark' => $remark,
+                'type'   => $type,
+            ])
+        ;
+
+        $key = $type == VoteRemark::IS_SEXIST ? 'is-sexist-' : 'already-lived-';
+
+        $query = $qb
+            ->getQuery()
+            ->useResultCache(true, $this->lifetimeCacheCountVote, 'count-vote-' . $key . $remark->getId())
+        ;
+
+        return $query->getSingleScalarResult();
     }
 
     /**

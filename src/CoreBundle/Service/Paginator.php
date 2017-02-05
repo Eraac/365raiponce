@@ -29,7 +29,7 @@ class Paginator
         $routeName = $request->get('_route');
         $criterias = $request->query->all();
 
-        $pager = new Pagerfanta(new DoctrineORMAdapter($qb, false, false));
+        $pager = new Pagerfanta(new DoctrineORMAdapter($qb, true, false));
 
         $pager->setMaxPerPage($this->getLimitPerPage($criterias))
               ->setCurrentPage($this->getPage($criterias));

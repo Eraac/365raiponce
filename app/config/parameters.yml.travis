@@ -30,7 +30,9 @@ parameters:
     base_url_remark: "http://localhost/remarks/"
     enable_log_request: false
     lifetime_cache_score: 600 # ten minutes
-    lifetime_cache_vote: 600 # ten minutes
+    lifetime_cache_vote_user: 600 # ten minutes
+    lifetime_cache_count_vote: 600 # ten minutes
+    lifetime_cache_count_response: 600 # ten minutes
     enable_history: true
     slack_token: "my-token"
     slack_channel: "my-channel"

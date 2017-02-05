@@ -4,6 +4,7 @@ namespace CoreBundle\EventListener\Serialization;
 
 use CoreBundle\Entity\Remark;
 use CoreBundle\Entity\VoteRemark;
+use CoreBundle\Repository\ResponseRepository;
 use CoreBundle\Repository\VoteRemarkRepository;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
@@ -20,18 +21,26 @@ class RemarkListener implements EventSubscriberInterface
     /**
      * @var VoteRemarkRepository
      */
-    private $repository;
+    private $voteRepository;
+
+    /**
+     * @var ResponseRepository
+     */
+    private $responseRepository;
+
 
     /**
      * ResponseListener constructor.
      *
      * @param TokenStorageInterface $token
-     * @param VoteRemarkRepository $repository
+     * @param VoteRemarkRepository  $voteRepository
+     * @param ResponseRepository    $responseRepository
      */
-    public function __construct(TokenStorageInterface $token, VoteRemarkRepository $repository)
+    public function __construct(TokenStorageInterface $token, VoteRemarkRepository $voteRepository, ResponseRepository $responseRepository)
     {
         $this->token = $token;
-        $this->repository = $repository;
+        $this->voteRepository = $voteRepository;
+        $this->responseRepository = $responseRepository;
     }
 
     /**
@@ -47,8 +56,22 @@ class RemarkListener implements EventSubscriberInterface
 
         if ($user instanceof User) {
             $remark->setUserHasVote(
-                $this->repository->userHasVoteFor($remark, $user, VoteRemark::IS_SEXIST),
-                $this->repository->userHasVoteFor($remark, $user, VoteRemark::ALREADY_LIVED)
+                $this->voteRepository->userHasVoteFor($remark, $user, VoteRemark::IS_SEXIST),
+                $this->voteRepository->userHasVoteFor($remark, $user, VoteRemark::ALREADY_LIVED)
+            );
+        }
+
+        $groups = $event->getContext()->attributes->get('groups')->get();
+
+        if (in_array('stats', $groups)) {
+            $remark->setCountResponses(
+                $this->responseRepository->countResponsePublishedForRemark($remark),
+                $this->responseRepository->countResponseUnpublishedForRemark($remark)
+            );
+
+            $remark->setCountVotes(
+                $this->voteRepository->countVoteForRemark($remark, VoteRemark::IS_SEXIST),
+                $this->voteRepository->countVoteForRemark($remark, VoteRemark::ALREADY_LIVED)
             );
         }
     }

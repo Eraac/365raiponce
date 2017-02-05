@@ -39,10 +39,34 @@ class VoteResponseRepository extends AbstractVoteRepository
 
         $query = $qb
             ->getQuery()
-            ->useResultCache(true, $this->lifetimeCacheVote, 'score-user-' . $user->getId())
+            ->useResultCache(true, $this->lifetimeCacheVoteUser, 'user-has-vote-response-' . $response->getId() . '-user-' . $user->getId())
         ;
 
         return (bool) $query->getSingleScalarResult();
+    }
+
+    /**
+     * @param Response $response
+     *
+     * @return int
+     */
+    public function countVoteForResponse(Response $response) : int
+    {
+        $qb = $this->createQueryBuilder('v');
+        $expr = $qb->expr();
+
+        $qb
+            ->select($expr->count('v.id'))
+            ->where($expr->eq('v.response', ':response'))
+            ->setParameter('response', $response)
+        ;
+
+        $query = $qb
+            ->getQuery()
+            ->useResultCache(true, $this->lifetimeCacheCountVote, 'count-votes-response-' . $response->getId())
+        ;
+
+        return $query->getSingleScalarResult();
     }
 
     /**

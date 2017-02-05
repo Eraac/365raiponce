@@ -43,7 +43,7 @@ class Response
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", fetch="EAGER")
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $author;
@@ -57,7 +57,7 @@ class Response
     private $remark;
 
     /**
-     * @ORM\OneToMany(targetEntity="VoteResponse", mappedBy="response", fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="VoteResponse", mappedBy="response")
      */
     private $votes;
 
@@ -65,6 +65,12 @@ class Response
      * @var bool
      */
     private $userHasVote = false;
+
+    /**
+     * @var int
+     */
+    private $countVotes;
+
 
     /**
      * Constructor
@@ -79,7 +85,7 @@ class Response
      */
     public function getCountVote() : int
     {
-        return $this->votes->count();
+        return $this->countVotes;
     }
 
     /**
@@ -236,6 +242,18 @@ class Response
     public function setUserHasVote(bool $userHasVote) : Response
     {
         $this->userHasVote = $userHasVote;
+
+        return $this;
+    }
+
+    /**
+     * @param int $countVotes
+     *
+     * @return Response
+     */
+    public function setCountVotes(int $countVotes) : Response
+    {
+        $this->countVotes = $countVotes;
 
         return $this;
     }

@@ -76,7 +76,7 @@ class ResponseController extends AbstractApiController implements ResponseDocs
      * @Security("is_granted('view', response)")
      *
      * @FOSRest\Get("/responses/{response_id}", requirements={"response_id"="\d+"})
-     * @FOSRest\View(serializerGroups={"Default", "stats", "info"})
+     * @FOSRest\View(serializerGroups={"Default", "stats"})
      *
      * @ParamConverter("response", class="CoreBundle:Response", options={"id" = "response_id"})
      */
@@ -98,7 +98,7 @@ class ResponseController extends AbstractApiController implements ResponseDocs
      * @Security("is_granted('edit', response)")
      *
      * @FOSRest\Patch("/responses/{response_id}", requirements={"response_id"="\d+"})
-     * @FOSRest\View(serializerGroups={"Default", "stats", "info"})
+     * @FOSRest\View(serializerGroups={"Default", "stats"})
      *
      * @ParamConverter("response", class="CoreBundle:Response", options={"id" = "response_id"})
      */

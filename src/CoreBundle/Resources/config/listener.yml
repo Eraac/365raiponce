@@ -61,7 +61,7 @@ services:
 
     core.remark_serialization_listener:
         class: CoreBundle\EventListener\Serialization\RemarkListener
-        arguments: ['@security.token_storage', '@core.vote_remark_repository']
+        arguments: ['@security.token_storage', '@core.vote_remark_repository', '@core.response_repository']
         tags:
             - { name: jms_serializer.event_subscriber }
 

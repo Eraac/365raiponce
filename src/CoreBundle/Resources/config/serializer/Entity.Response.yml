@@ -26,7 +26,7 @@ CoreBundle\Entity\Response:
                     remark_id: expr(object.getRemark().getId())
 
         -
-            rel: user
+            rel: author
             href:
                 route: api_get_user
                 parameters:
@@ -59,7 +59,7 @@ CoreBundle\Entity\Response:
                 groups: [stats]
 
         -
-            rel: user
+            rel: author
             embedded:
                 content: expr(object.getAuthor())
 
@@ -68,4 +68,4 @@ CoreBundle\Entity\Response:
             embedded:
                 content: expr(object.isUserHasVote())
             exclusion:
-                groups: [info]
+                groups: [stats]

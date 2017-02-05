@@ -9,15 +9,22 @@ abstract class AbstractVoteRepository extends AbstractDateRepository
     /**
      * @var int Number of second keep in cache vote for one user
      */
-    protected $lifetimeCacheVote;
+    protected $lifetimeCacheVoteUser;
+
+    /**
+     * @var int Number of second keep in cache count vote
+     */
+    protected $lifetimeCacheCountVote;
 
 
     /**
-     * @param int $lifetime
+     * @param int $lifetimeCacheVoteUser
+     * @param int $lifetimeCacheCountVote
      */
-    public function setLifetimeCacheVote(int $lifetime)
+    public function setLifetimeCache(int $lifetimeCacheVoteUser, int $lifetimeCacheCountVote)
     {
-        $this->lifetimeCacheVote = $lifetime;
+        $this->lifetimeCacheVoteUser = $lifetimeCacheVoteUser;
+        $this->lifetimeCacheCountVote = $lifetimeCacheCountVote;
     }
 
     /**
