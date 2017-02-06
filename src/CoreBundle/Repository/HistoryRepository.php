@@ -80,8 +80,12 @@ class HistoryRepository extends AbstractDateRepository
         $qb = $this->createQueryBuilder('h');
         $expr = $qb->expr();
 
-        $today    = $day->modify('today');
-        $tomorrow = $today->modify('tomorrow');
+        // Without clone, $day is pass by reference and persist($history) change created_at field
+        $today = clone $day;
+        $today->modify('today');
+
+        $tomorrow = clone $day;
+        $tomorrow->modify('tomorrow');
 
         $qb
             ->select($expr->count('h.id'))
