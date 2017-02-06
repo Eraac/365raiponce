@@ -38,10 +38,12 @@ services:
 
     core.vote_doctrine_listener:
         class: CoreBundle\EventListener\Doctrine\VoteListener
-        arguments: ['@event_dispatcher']
+        arguments: ['@event_dispatcher', '@snc_redis.default']
         tags:
             - { name: doctrine.orm.entity_listener, entity: CoreBundle\Entity\VoteRemark, event: prePersist, method: prePersistHandler }
             - { name: doctrine.orm.entity_listener, entity: CoreBundle\Entity\VoteResponse, event: prePersist, method: prePersistHandler }
+            - { name: doctrine.orm.entity_listener, entity: CoreBundle\Entity\VoteRemark, event: preRemove, method: preRemoveHandler }
+            - { name: doctrine.orm.entity_listener, entity: CoreBundle\Entity\VoteResponse, event: preRemove, method: preRemoveHandler }
 
     core.history_doctrine_listener:
         class: CoreBundle\EventListener\Doctrine\HistoryListener
