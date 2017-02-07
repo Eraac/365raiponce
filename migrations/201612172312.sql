@@ -8,7 +8,8 @@ ALTER TABLE `user`
   ADD updated_at DATETIME NOT NULL DEFAULT NOW() ON UPDATE NOW(),
   CHANGE certificated confirmed TINYINT(1) DEFAULT '0' NOT NULL,
   CHANGE COLUMN expired expired TINYINT(1) NULL DEFAULT NULL,
-  CHANGE COLUMN credentials_expired credentials_expired TINYINT(1) NULL DEFAULT NULL;
+  CHANGE COLUMN credentials_expired credentials_expired TINYINT(1) NULL DEFAULT NULL
+  CHANGE COLUMN locked locked TINYINT(1) DEFAULT 0;
 
 ALTER TABLE `remark`
   CHANGE createdAt created_at DATETIME NOT NULL,
