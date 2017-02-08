@@ -30,8 +30,10 @@ after_success:
   - docker push $REPO
 
 notifications:
-  email:
-    -  kevin@labesse.me
+  slack:
+    rooms:
+      - secure: "0U2Ow6PKJm/Vi6InKbWS9WFBbzbDVaEW4K2GUB6lCHmiPlljWjSk3FpsuyhSxmNlsgDnnqlKckZBVUXWJ/eBYfT9nBubS9+u1D8aLQR0kw7LMtoX7uQX4TxRsiqIpbGBgAKtQTTxrJcXds7isKWutxlhSejw297jV2GyOqLKaWfBvwVU3kbD2S0F/ipmfnQE5fXdd9pg7zihK+jYiHdIxjQIql5beyEL0Oc9LW9SbTfMHOeVnzMaMbiD57kH3DitEy0IPuvSYWN3AHAQH1zx7aqimowsyJu+G4mhtynCcB9iQ86vR57nZDtFXOUW/S/1PYjpwQ/WVXaUZcJFn9QUgpogefzuquW8yMMKH+PbDe3H4t4hAF/L8Njni7rKDXW1IHGiWd2Ewt66KLpw6WEHX5jGl7lmbgE0OoULHhuVqDUmVZVtDmJEC/p4PGqbZ36k8dmKAnDMmGbEyEskMt9UJt0gaAeSucVXFR0jx+GHHzWt588F1YSLy881J1Z7mFOwcFwDQXDSHmk2V0NxRgnPzDfYy5ydNLOMZ3UfrW/Brn2CuqabFAXrYqFY1WLT1KroKWi4bhOl2E8eWfXjjLCV1dy6pwKn9sIS8jtQi7x0mpl7GuQJaIWUb2fiTjyJe8iVsAKqODYPrpzJBvivZj97RkxPwHQKI6E2cwZyoxNhCmE="
+    on_success: always
 
 env:
   global:
