@@ -4,3 +4,12 @@ services:
         arguments: ['@core.history_repository']
         tags:
             - { name: jms_serializer.event_subscriber }
+
+    user.user_doctrine_listener:
+        class: UserBundle\EventListener\Doctrine\UserListener
+        lazy: true
+        arguments:
+            - '@user.mailer'
+            - '@fos_user.util.token_generator'
+        tags:
+            - { name: doctrine.orm.entity_listener, entity: UserBundle\Entity\User, event: prePersist, method: prePersistHandler }

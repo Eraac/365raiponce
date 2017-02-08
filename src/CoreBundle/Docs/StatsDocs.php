@@ -2,7 +2,6 @@
 
 namespace CoreBundle\Docs;
 
-use CoreBundle\Entity\VoteRemark;
 use Symfony\Component\HttpFoundation\Response;
 
 interface StatsDocs extends Docs

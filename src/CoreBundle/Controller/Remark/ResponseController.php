@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @package CoreBundle\Controller\Remark
  *
- * @FOSRest\Version("1.0")
+ * @FOSRest\Version(AbstractApiController::ALL_API_VERSIONS)
  */
 class ResponseController extends AbstractApiController implements ResponseDocs
 {

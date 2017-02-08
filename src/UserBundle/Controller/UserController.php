@@ -19,7 +19,7 @@ use UserBundle\Security\UserVoter;
 /**
  * Class UserController
  *
- * @FOSRest\Version("1.0")
+ * @FOSRest\Version(AbstractApiController::ALL_API_VERSIONS)
  *
  * @package UserBundle\Controller
  */

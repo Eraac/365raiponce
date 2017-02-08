@@ -19,13 +19,6 @@ services:
             - '@twig'
             - { base_url_confirmation: '%base_url_confirmation%' }
 
-    user.user_doctrine_listener:
-        class: UserBundle\EventListener\Doctrine\UserListener
-        arguments:
-            - '@service_container'
-        tags:
-            - { name: doctrine.orm.entity_listener, entity: UserBundle\Entity\User, event: prePersist, method: prePersistHandler }
-
     user.user_edit_admin_type:
         class: UserBundle\Form\UserEditAdminType
         arguments:

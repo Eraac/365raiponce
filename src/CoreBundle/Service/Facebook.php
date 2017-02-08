@@ -3,8 +3,6 @@
 namespace CoreBundle\Service;
 
 use Facebook\Exceptions\FacebookSDKException;
-use Facebook\FacebookApp;
-use Facebook\FacebookRequest;
 use Monolog\Logger;
 use Facebook\Facebook as FacebookClient;
 use Symfony\Component\HttpFoundation\Request;

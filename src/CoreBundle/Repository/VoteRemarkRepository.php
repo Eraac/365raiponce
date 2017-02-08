@@ -3,7 +3,6 @@
 namespace CoreBundle\Repository;
 
 use CoreBundle\Entity\Remark;
-use CoreBundle\Entity\VoteRemark;
 use CoreBundle\Service\KeyBuilder;
 use Doctrine\ORM\QueryBuilder;
 use UserBundle\Entity\User;

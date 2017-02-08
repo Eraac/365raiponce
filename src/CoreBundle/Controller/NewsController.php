@@ -8,10 +8,8 @@ use CoreBundle\Entity\News;
 use CoreBundle\Form\NewsType;
 use FOS\RestBundle\Controller\Annotations as FOSRest;
 use Hateoas\Representation\PaginatedRepresentation;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\{ParamConverter, Security};
+use Symfony\Component\HttpFoundation\{JsonResponse, Request};
 
 /**
  * Class NewsController

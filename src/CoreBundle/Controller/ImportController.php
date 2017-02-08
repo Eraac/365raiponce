@@ -50,7 +50,8 @@ class ImportController extends AbstractApiController implements ImportDocs
 
         foreach ($remarks as $remark) {
             $em->persist($remark);
-            $em->flush();
         }
+
+        $em->flush();
     }
 }

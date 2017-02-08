@@ -23,6 +23,11 @@ class BuildHistoryCommand extends ContainerAwareCommand
     private static $actions = [];
 
     /**
+     * @var EntityManager
+     */
+    private $em;
+
+    /**
      * {@inheritdoc}
      */
     protected function configure()
@@ -39,14 +44,14 @@ class BuildHistoryCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         /** @var EntityManager $em */
-        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+        $this->em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
         $this->loadAction();
-        $this->historyResponse($em);
-        $this->historyVoteRemark($em);
-        $this->historyVoteResponse($em);
+        $this->historyResponse();
+        $this->historyVoteRemark();
+        $this->historyVoteResponse();
 
-        $em->flush();
+        $this->em->flush();
     }
 
     /**
@@ -66,10 +71,8 @@ class BuildHistoryCommand extends ContainerAwareCommand
 
     /**
      * Create history for the response
-     *
-     * @param EntityManager $em
      */
-    private function historyResponse(EntityManager $em)
+    private function historyResponse()
     {
         /** @var ResponseRepository $responseRepo */
         $responseRepo = $this->getContainer()->get('core.response_repository');
@@ -89,27 +92,25 @@ class BuildHistoryCommand extends ContainerAwareCommand
                 ->setAction(self::$actions['publish_response'])
             ;
 
-            $em->persist($history);
+            $this->em->persist($history);
 
             $count++;
 
             if ($count > 50) {
-                $em->flush();
-                $em->clear('CoreBundle:History\HistoryResponsePublished');
+                $this->em->flush();
+                $this->em->clear('CoreBundle:History\HistoryResponsePublished');
                 $count = 0;
             }
         }
 
-        $em->flush();
-        $em->clear('CoreBundle:History\HistoryResponsePublished');
+        $this->em->flush();
+        $this->em->clear('CoreBundle:History\HistoryResponsePublished');
     }
 
     /**
      * Create history for all votes on remark
-     *
-     * @param EntityManager $em
      */
-    private function historyVoteRemark(EntityManager $em)
+    private function historyVoteRemark()
     {
         /** @var VoteRemarkRepository $voteRemarkRepo */
         $voteRemarkRepo = $this->getContainer()->get('core.vote_remark_repository');
@@ -129,25 +130,23 @@ class BuildHistoryCommand extends ContainerAwareCommand
                 ->setAction(self::$actions['give_vote'])
             ;
 
-            $em->persist($history);
+            $this->em->persist($history);
 
             if ($count > 50) {
-                $em->flush();
-                $em->clear('CoreBundle:VoteRemark');
+                $this->em->flush();
+                $this->em->clear('CoreBundle:VoteRemark');
                 $count = 0;
             }
         }
 
-        $em->flush();
-        $em->clear('CoreBundle:VoteRemark');
+        $this->em->flush();
+        $this->em->clear('CoreBundle:VoteRemark');
     }
 
     /**
      * Create history for all votes on response
-     *
-     * @param EntityManager $em
      */
-    private function historyVoteResponse(EntityManager $em)
+    private function historyVoteResponse()
     {
         /** @var VoteResponseRepository $voteRemarkRepo */
         $voteResponseRepo = $this->getContainer()->get('core.vote_response_repository');
@@ -176,17 +175,17 @@ class BuildHistoryCommand extends ContainerAwareCommand
                 ->setAction(self::$actions['receive_vote'])
             ;
 
-            $em->persist($historyGive);
-            $em->persist($historyReceive);
+            $this->em->persist($historyGive);
+            $this->em->persist($historyReceive);
 
             if ($count > 25) {
-                $em->flush();
-                $em->clear('CoreBundle:VoteResponse');
+                $this->em->flush();
+                $this->em->clear('CoreBundle:VoteResponse');
                 $count = 0;
             }
         }
 
-        $em->flush();
-        $em->clear('CoreBundle:VoteResponse');
+        $this->em->flush();
+        $this->em->clear('CoreBundle:VoteResponse');
     }
 }

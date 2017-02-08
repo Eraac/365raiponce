@@ -5,13 +5,10 @@ namespace CoreBundle\Controller\Remark;
 use CoreBundle\Annotation\ApiDoc;
 use CoreBundle\Controller\AbstractApiController;
 use CoreBundle\Docs\RemarkDocs;
-use CoreBundle\Entity\Action;
-use CoreBundle\Entity\Remark;
+use CoreBundle\Entity\{Action, Remark};
 use CoreBundle\Event\History\HistoryShareRemarkEvent;
-use CoreBundle\Service\Facebook;
 use FOS\RestBundle\Controller\Annotations as FOSRest;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\{Security, ParamConverter};
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
@@ -19,7 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  *
  * @package CoreBundle\Controller\Remark
  *
- * @FOSRest\Version("1.0")
+ * @FOSRest\Version(AbstractApiController::ALL_API_VERSIONS)
  */
 class RemarkController extends AbstractApiController implements RemarkDocs
 {
