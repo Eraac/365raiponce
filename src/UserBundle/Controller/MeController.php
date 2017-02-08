@@ -15,7 +15,7 @@ use UserBundle\Docs\MeDocs;
  *
  * @package UserBundle\Controller
  *
- * @FOSRest\Version(AbstractApiController::ALL_API_VERSIONS)
+ * @FOSRest\Version(AbstractUserController::ALL_API_VERSIONS)
  *
  * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
  */

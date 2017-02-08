@@ -9,6 +9,10 @@ use UserBundle\Entity\User;
 
 class AbstractUserController extends AbstractApiController
 {
+    // without redfined const MeController and UserController can not find const AbstractApiController::ALL_API_VERSIONS
+    // If you read this and you undestand why, feel free to explain me
+    const ALL_API_VERSIONS = AbstractApiController::ALL_API_VERSIONS;
+
     /**
      * Persist an entity
      *

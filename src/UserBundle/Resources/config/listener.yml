@@ -7,7 +7,6 @@ services:
 
     user.user_doctrine_listener:
         class: UserBundle\EventListener\Doctrine\UserListener
-        lazy: true
         arguments:
             - '@user.mailer'
             - '@fos_user.util.token_generator'

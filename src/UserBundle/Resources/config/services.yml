@@ -14,6 +14,7 @@ services:
 
     user.mailer:
         class: UserBundle\Mailer\Mailer
+        lazy: true
         arguments:
             - '@mailer'
             - '@twig'
