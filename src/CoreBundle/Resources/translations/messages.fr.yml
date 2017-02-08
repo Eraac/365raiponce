@@ -3,6 +3,7 @@ core:
         invalid_type_vote: "Le type de vote doit-être un type valide"
         bad_content_type: "Le Content-Type n'est pas correct"
         empty_json: "Le JSON ne peut pas être vide"
+        wrong_key_json: "Les clés du JSON ne correspondent pas avec le formulaire"
         invalid_filter: "Le filtre %filter% n'est pas valide"
         invalid_group_by: "Le groupement par %group_by% n'est pas valide"
         invalid_order_by: "Le tri par %order_by% n'est pas valide"
