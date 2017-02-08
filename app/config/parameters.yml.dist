@@ -53,5 +53,5 @@ parameters:
     lifetime_cache_count_response: 600 # ten minutes
 
     # slack monolog
-    slack_token: ""
-    slack_channel: ""
+    slack_token: "token-slack"
+    slack_channel: "channel-slack"

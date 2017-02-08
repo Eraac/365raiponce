@@ -20,10 +20,10 @@ class UserListener
     private $tokenGenerator;
 
 
-    public function __construct(MailerInterface $mailer/*, TokenGeneratorInterface $tokenGenerator*/)
+    public function __construct(MailerInterface $mailer, TokenGeneratorInterface $tokenGenerator)
     {
         $this->mailer = $mailer;
-        //$this->tokenGenerator = $tokenGenerator;
+        $this->tokenGenerator = $tokenGenerator;
     }
 
     public function prePersistHandler(User $user, LifecycleEventArgs $event)
