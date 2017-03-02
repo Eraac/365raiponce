@@ -1,0 +1,18 @@
+CoreBundle\Entity\Grade:
+    exclusion_policy: ALL
+
+    properties:
+        id:
+            expose: true
+        name:
+            expose: true
+        score:
+            expose: true
+
+    relations:
+        -
+            rel: self
+            href:
+                route: api_get_grade
+                parameters:
+                    grade_id: expr(object.getId())

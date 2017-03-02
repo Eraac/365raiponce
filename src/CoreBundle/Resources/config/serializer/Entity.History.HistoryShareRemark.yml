@@ -1,0 +1,9 @@
+CoreBundle\Entity\History\HistoryShareRemark:
+    exclusion_policy: ALL
+
+    relations:
+        # embedded
+        -
+            rel: remark
+            embedded:
+                content: expr(object.getRemark())

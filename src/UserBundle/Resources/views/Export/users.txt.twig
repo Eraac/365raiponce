@@ -1,0 +1,13 @@
+{% block subject %}
+    {% autoescape false %}
+        {{ 'export_users.email.subject'|trans() }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+        {{ 'export_users.email.message'|trans() }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}{% endblock %}

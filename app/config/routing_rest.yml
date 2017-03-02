@@ -1,20 +1,9 @@
-api_lke_user:
+api_core:
     type:     rest
-    resource: "@LKEUserBundle/Resources/config/routing.yml"
+    resource: "@CoreBundle/Resources/config/routing.yml"
     name_prefix: api_
 
-api_lke_remark:
+api_user:
     type:     rest
-    resource: "@LKERemarkBundle/Resources/config/routing.yml"
-    name_prefix: api_
-
-api_lke_admin:
-    type:     rest
-    resource: "@LKEAdminBundle/Resources/config/routing.yml"
-    name_prefix: api_admin_
-    prefix: admin/
-
-api_lke_vote:
-    type:     rest
-    resource: "@LKEVoteBundle/Resources/config/routing.yml"
+    resource: "@UserBundle/Resources/config/routing.yml"
     name_prefix: api_

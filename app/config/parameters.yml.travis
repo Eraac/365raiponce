@@ -1,0 +1,38 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: 365raiponce
+    database_user: root
+    database_password: ~
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    mailer_port: 25
+    mailer_encryption: null
+    mail_sender: no-reply@symfony.local
+    twitter_consumer_key: ""
+    twitter_consumer_secret: ""
+    twitter_token: ""
+    twitter_token_secret: ""
+    twitter_enable: false
+    # Facebook
+    facebook_page_id: ""
+    facebook_app_id: ""
+    facebook_token: ""
+    facebook_secret: ""
+    facebook_enable: false
+    secret: 965436407b8b3ac3d595e96d85b5fa06c90973f9
+    cors_allow_origin: '*'
+    app_name: 365raiponce
+    base_url_confirmation: "http://localhost?token="
+    base_url_remark: "http://localhost/remarks/"
+    enable_log_request: false
+    lifetime_cache_score: 600 # ten minutes
+    lifetime_cache_vote_user: 600 # ten minutes
+    lifetime_cache_count_vote: 600 # ten minutes
+    lifetime_cache_count_response: 600 # ten minutes
+    enable_history: true
+    slack_token: "my-token"
+    slack_channel: "my-channel"

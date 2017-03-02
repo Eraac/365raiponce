@@ -1,0 +1,21 @@
+CoreBundle\Entity\News:
+    exclusion_policy: ALL
+
+    properties:
+        id:
+            expose: true
+        message:
+            expose: true
+        startAt:
+            expose: true
+            groups: [admin]
+        endAt:
+            expose: true
+
+    relations:
+        -
+            rel: self
+            href:
+                route: api_get_news
+                parameters:
+                    news_id: expr(object.getId())

@@ -1,0 +1,56 @@
+services:
+    core.base_voter:
+        class: CoreBundle\Security\AbstractVoter
+        abstract: true
+        arguments: ['@security.access.decision_manager']
+        public: false
+#        tags:
+#            - { name: security.voter }
+
+    core.emotion_voter:
+        class: CoreBundle\Security\EmotionVoter
+        parent: core.base_voter
+        tags:
+            - { name: security.voter }
+
+    core.theme_voter:
+        class: CoreBundle\Security\ThemeVoter
+        parent: core.base_voter
+        tags:
+            - { name: security.voter }
+
+    core.remark_voter:
+        class: CoreBundle\Security\RemarkVoter
+        parent: core.base_voter
+        tags:
+            - { name: security.voter }
+
+    core.response_voter:
+        class: CoreBundle\Security\ResponseVoter
+        parent: core.base_voter
+        tags:
+            - { name: security.voter }
+
+    core.news_voter:
+        class: CoreBundle\Security\NewsVoter
+        parent: core.base_voter
+        tags:
+            - { name: security.voter }
+
+    core.grade_voter:
+        class: CoreBundle\Security\GradeVoter
+        parent: core.base_voter
+        tags:
+            - { name: security.voter }
+
+    core.action_voter:
+        class: CoreBundle\Security\ActionVoter
+        parent: core.base_voter
+        tags:
+            - { name: security.voter }
+
+    core.history_voter:
+        class: CoreBundle\Security\HistoryVoter
+        parent: core.base_voter
+        tags:
+            - { name: security.voter }

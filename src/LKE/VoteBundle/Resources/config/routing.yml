@@ -1,7 +1,0 @@
-response:
-    type:     rest
-    resource: LKE\VoteBundle\Controller\VoteResponseController
-
-remark:
-    type:     rest
-    resource: LKE\VoteBundle\Controller\VoteRemarkController

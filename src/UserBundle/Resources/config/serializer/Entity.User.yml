@@ -1,0 +1,28 @@
+UserBundle\Entity\User:
+    exclusion_policy: ALL
+
+    properties:
+        id:
+            expose: true
+            groups: [Default, user-list, me]
+        confirmed:
+            expose: true
+            groups: [me, admin]
+        createdAt:
+            expose: true
+            groups: [me, admin]
+        updatedAt:
+            expose: true
+            groups: [me, admin]
+        score:
+            expose: true
+
+    relations:
+        -
+            rel: self
+            href:
+                route: api_get_user
+                parameters:
+                    user_id: expr(object.getId())
+            exclusion:
+                groups: [Default, user-list, me, admin]

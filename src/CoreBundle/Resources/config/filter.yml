@@ -1,0 +1,90 @@
+services:
+    core.abstract_filter:
+        class: CoreBundle\Filter\AbstractFilter
+        arguments: ['@translator.default']
+        abstract: true
+        public: false
+
+    core.log_request_filter:
+        class: CoreBundle\Filter\LogRequestFilter
+        parent: core.abstract_filter
+        arguments: ['@core.log_request_repository']
+        public: true
+
+    core.emotion_filter:
+        class: CoreBundle\Filter\EmotionFilter
+        parent: core.abstract_filter
+        arguments: ['@core.emotion_repository']
+        public: true
+
+    core.theme_filter:
+        class: CoreBundle\Filter\ThemeFilter
+        parent: core.abstract_filter
+        arguments: ['@core.theme_repository']
+        public: true
+
+    core.remark_filter:
+        class: CoreBundle\Filter\RemarkFilter
+        parent: core.abstract_filter
+        arguments: ['@core.remark_repository']
+        public: true
+
+    core.response_filter:
+        class: CoreBundle\Filter\ResponseFilter
+        parent: core.abstract_filter
+        arguments: ['@core.response_repository']
+        public: true
+
+    core.report_filter:
+        class: CoreBundle\Filter\ReportFilter
+        parent: core.abstract_filter
+        arguments: ['@core.report_repository']
+        public: true
+
+    core.news_filter:
+        class: CoreBundle\Filter\NewsFilter
+        parent: core.abstract_filter
+        arguments: ['@core.news_repository']
+        public: true
+
+    core.grade_filter:
+        class: CoreBundle\Filter\GradeFilter
+        parent: core.abstract_filter
+        arguments: ['@core.grade_repository']
+        public: true
+
+    core.history_filter:
+        class: CoreBundle\Filter\HistoryFilter
+        parent: core.abstract_filter
+        arguments: ['@core.history_repository']
+        public: true
+
+    core.stats.remark_filter:
+        class: CoreBundle\Filter\Stats\RemarkFilter
+        parent: core.abstract_filter
+        arguments: ['@core.remark_repository']
+        public: true
+
+    core.stats.response_filter:
+        class: CoreBundle\Filter\Stats\ResponseFilter
+        parent: core.abstract_filter
+        arguments: ['@core.response_repository']
+        public: true
+
+    core.stats.vote_remark_filter:
+        class: CoreBundle\Filter\Stats\VoteRemarkFilter
+        parent: core.abstract_filter
+        arguments: ['@core.vote_remark_repository']
+        public: true
+
+    core.stats.vote_response_filter:
+        class: CoreBundle\Filter\Stats\VoteResponseFilter
+        parent: core.abstract_filter
+        arguments: ['@core.vote_response_repository']
+        public: true
+
+    core.stats.history_filter:
+        class: CoreBundle\Filter\Stats\HistoryFilter
+        parent: core.abstract_filter
+        arguments: ['@core.history_repository']
+        public: true

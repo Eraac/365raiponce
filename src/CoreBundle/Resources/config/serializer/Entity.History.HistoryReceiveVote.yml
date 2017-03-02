@@ -1,0 +1,9 @@
+CoreBundle\Entity\History\HistoryReceiveVote:
+    exclusion_policy: ALL
+
+    relations:
+        # embedded
+        -
+            rel: vote
+            embedded:
+                content: expr(object.getVote())

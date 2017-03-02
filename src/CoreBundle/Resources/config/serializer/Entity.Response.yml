@@ -1,0 +1,71 @@
+CoreBundle\Entity\Response:
+    exclusion_policy: ALL
+
+    properties:
+        id:
+            expose: true
+        postedAt:
+            expose: true
+        sentence:
+            expose: true
+
+    relations:
+        # links
+        -
+            rel: self
+            href:
+                route: api_get_response
+                parameters:
+                    response_id: expr(object.getId())
+
+        -
+            rel: remark
+            href:
+                route: api_get_remark
+                parameters:
+                    remark_id: expr(object.getRemark().getId())
+
+        -
+            rel: author
+            href:
+                route: api_get_user
+                parameters:
+                    user_id: expr(object.getAuthor().getId())
+
+        -
+            rel: publish
+            href:
+                route: api_post_response_publish
+                parameters:
+                    response_id: expr(object.getId())
+            exclusion:
+                groups: [admin]
+
+        -
+            rel: unpublish
+            href:
+                route: api_post_response_unpublish
+                parameters:
+                    response_id: expr(object.getId())
+            exclusion:
+                groups: [admin]
+
+        # embedded
+        -
+            rel: count_votes
+            embedded:
+                content: expr(object.getCountVote())
+            exclusion:
+                groups: [stats]
+
+        -
+            rel: author
+            embedded:
+                content: expr(object.getAuthor())
+
+        -
+            rel: user_has_vote
+            embedded:
+                content: expr(object.isUserHasVote())
+            exclusion:
+                groups: [stats]

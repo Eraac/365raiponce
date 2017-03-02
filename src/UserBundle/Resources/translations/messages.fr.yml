@@ -1,0 +1,38 @@
+registration:
+    email:
+        subject: "Bienvenue %username% !"
+        message: |
+            Bonjour %username% !
+
+            Pour valider votre compte utilisateur, merci de vous rendre sur %confirmation_url%
+
+            Cordialement,
+            L'équipe
+
+resetting:
+    email:
+        subject: "Réinitialisation de votre mot de passe"
+        message: |
+            Bonjour %username% !
+
+            Voici votre code pour réinitialiser votre mot de passe : %token%
+
+            Cordialement,
+            L'équipe
+    password_request_expired: "Votre requête a expirée"
+
+confirmation:
+    user:
+        not_found: "L'utilisateur avec le token de confirmation '%token%' n'existe pas"
+
+user:
+    error:
+        forget_password:
+            wrong_email: "L'email d'utilisateur n'est pas valide"
+            not_found: "Le nom d'utilisateur n'existe pas"
+
+export_users:
+    email:
+        subject: "Export des utilisateurs"
+        message: |
+            Votre export est terminé. Vous pouvez le trouver en pièce jointe.

@@ -1,0 +1,18 @@
+CoreBundle\Entity\News:
+    properties:
+        message:
+            - NotBlank: ~
+            - Type: string
+            - Length:
+                max: 255
+
+        startAt:
+            - NotNull: ~
+            - DateTime: ~
+
+        endAt:
+            - NotNull: ~
+            - DateTime: ~
+
+    constraints:
+        - Callback: startedLessThanEnded

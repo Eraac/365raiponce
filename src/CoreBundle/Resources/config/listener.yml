@@ -1,0 +1,98 @@
+services:
+    core.event.listener.extended_view_response:
+        class: CoreBundle\EventListener\ExtendedViewResponseListener
+        arguments:
+            - "@security.authorization_checker"
+            - "@core.manager.serializer_groups"
+        tags:
+            - { name: kernel.event_listener, event: kernel.view, method: onKernelView, priority: 101 }
+
+    core.event.listener.log_request:
+        class: CoreBundle\EventListener\LogRequestListener
+        arguments:
+            - "@logger"
+            - "@security.token_storage"
+            - "@doctrine.orm.entity_manager"
+            - "%enable_log_request%"
+        tags:
+            - { name: kernel.event_listener, event: kernel.terminate, method: onKernelTerminate, priority: -255 }
+
+    core.locale_listener:
+        class: CoreBundle\EventListener\LocaleListener
+        arguments: ['%kernel.default_locale%']
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 16 }
+
+    core.response_doctrine_listener:
+        class: CoreBundle\EventListener\Doctrine\ResponseListener
+        arguments: ['@event_dispatcher']
+        tags:
+            - { name: doctrine.orm.entity_listener, entity: CoreBundle\Entity\Response, event: prePersist, method: prePersistHandler }
+            - { name: doctrine.orm.entity_listener, entity: CoreBundle\Entity\Response, event: preUpdate, method: preUpdateHandler }
+
+    core.remark_doctrine_listener:
+        class: CoreBundle\EventListener\Doctrine\RemarkListener
+        arguments: ['@core.delayed_event_dispatcher']
+        tags:
+            - { name: doctrine.orm.entity_listener, entity: CoreBundle\Entity\Remark, event: preUpdate, method: preUpdateHandler }
+
+    core.vote_doctrine_listener:
+        class: CoreBundle\EventListener\Doctrine\VoteListener
+        arguments: ['@event_dispatcher', '@snc_redis.default']
+        tags:
+            - { name: doctrine.orm.entity_listener, entity: CoreBundle\Entity\VoteRemark, event: prePersist, method: prePersistHandler }
+            - { name: doctrine.orm.entity_listener, entity: CoreBundle\Entity\VoteResponse, event: prePersist, method: prePersistHandler }
+            - { name: doctrine.orm.entity_listener, entity: CoreBundle\Entity\VoteRemark, event: preRemove, method: preRemoveHandler }
+            - { name: doctrine.orm.entity_listener, entity: CoreBundle\Entity\VoteResponse, event: preRemove, method: preRemoveHandler }
+
+    core.history_doctrine_listener:
+        class: CoreBundle\EventListener\Doctrine\HistoryListener
+        arguments: ['@core.score_control']
+        tags:
+            - { name: doctrine.orm.entity_listener, entity: CoreBundle\Entity\History\HistoryReceiveVote, event: prePersist, method: prePersistHandler }
+            - { name: doctrine.orm.entity_listener, entity: CoreBundle\Entity\History\HistoryResponsePublished, event: prePersist, method: prePersistHandler }
+            - { name: doctrine.orm.entity_listener, entity: CoreBundle\Entity\History\HistoryVoteRemark, event: prePersist, method: prePersistHandler }
+            - { name: doctrine.orm.entity_listener, entity: CoreBundle\Entity\History\HistoryVoteResponse, event: prePersist, method: prePersistHandler }
+            - { name: doctrine.orm.entity_listener, entity: CoreBundle\Entity\History\HistoryShareRemark, event: prePersist, method: prePersistHandler }
+
+    core.response_serialization_listener:
+        class: CoreBundle\EventListener\Serialization\ResponseListener
+        arguments: ['@security.token_storage', '@core.vote_response_repository']
+        tags:
+            - { name: jms_serializer.event_subscriber }
+
+    core.remark_serialization_listener:
+        class: CoreBundle\EventListener\Serialization\RemarkListener
+        arguments: ['@security.token_storage', '@core.vote_remark_repository', '@core.response_repository']
+        tags:
+            - { name: jms_serializer.event_subscriber }
+
+    core.delayed_event_dispatcher:
+        class: CoreBundle\Event\Dispatcher\DelayedEventDispatcher
+        arguments: ['@event_dispatcher']
+        tags:
+            - { name: kernel.event_listener, event: kernel.terminate, method: setReady, priority: 255 }
+
+    core.remark_published_listener:
+        class: CoreBundle\EventListener\RemarkPublishedListener
+        arguments: ['@core.client.twitter', '@core.client.facebook', '%base_url_remark%']
+        tags:
+            - { name: kernel.event_listener, event: core.published.remark, method: onRemarkPublished }
+
+    core.action_listener:
+        class: CoreBundle\EventListener\ActionListener
+        arguments: ['@core.delayed_event_dispatcher']
+        tags:
+            - { name: kernel.event_listener, event: core.published.response, method: onResponsePublished }
+            - { name: kernel.event_listener, event: core.unpublished.response, method: onResponseUnpublished }
+            - { name: kernel.event_listener, event: core.new.vote, method: onNewVote }
+
+    core.history_listener:
+        class: CoreBundle\EventListener\HistoryListener
+        arguments: ['@doctrine.orm.entity_manager', '%enable_history%']
+        tags:
+           - { name: kernel.event_listener, event: core.history.publish_response, method: onResponsePublished }
+           - { name: kernel.event_listener, event: core.history.unpublish_response, method: onResponseUnpublished }
+           - { name: kernel.event_listener, event: core.history.give_vote, method: onGiveVote }
+           - { name: kernel.event_listener, event: core.history.receive_vote, method: onReceiveVote }
+           - { name: kernel.event_listener, event: core.history.share_remark, method: onShareRemark }
