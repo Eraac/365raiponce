@@ -13,4 +13,5 @@ Dockerfile
 var/cache/
 var/logs/
 var/sql/
+var/migrations/
 var/SymfonyRequirements.php
