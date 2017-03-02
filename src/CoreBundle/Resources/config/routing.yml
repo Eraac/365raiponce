@@ -1,0 +1,71 @@
+log_request:
+    type: rest
+    resource: CoreBundle\Controller\LogRequestController
+
+emotion:
+    type: rest
+    resource: CoreBundle\Controller\EmotionController
+
+theme:
+    type: rest
+    resource: CoreBundle\Controller\ThemeController
+
+remark:
+    type: rest
+    resource: CoreBundle\Controller\RemarkController
+
+response:
+    type: rest
+    resource: CoreBundle\Controller\ResponseController
+
+news:
+    type: rest
+    resource: CoreBundle\Controller\NewsController
+
+response_response:
+    type: rest
+    resource: CoreBundle\Controller\Response\ResponseController
+
+response_vote:
+    type: rest
+    resource: CoreBundle\Controller\Response\VoteController
+
+remark_remark:
+    type: rest
+    resource: CoreBundle\Controller\Remark\RemarkController
+
+remark_response:
+    type: rest
+    resource: CoreBundle\Controller\Remark\ResponseController
+
+remark_vote:
+    type: rest
+    resource: CoreBundle\Controller\Remark\VoteController
+
+stats:
+    type: rest
+    resource: CoreBundle\Controller\StatsController
+
+stats_stats:
+    type: rest
+    resource: CoreBundle\Controller\Stats\StatsController
+
+export:
+    type: rest
+    resource: CoreBundle\Controller\ExportController
+
+import:
+    type: rest
+    resource: CoreBundle\Controller\ImportController
+
+grade:
+    type: rest
+    resource: CoreBundle\Controller\GradeController
+
+action:
+    type: rest
+    resource: CoreBundle\Controller\ActionController
+
+history:
+    type: rest
+    resource: CoreBundle\Controller\HistoryController

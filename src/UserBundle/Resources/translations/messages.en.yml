@@ -1,0 +1,38 @@
+registration:
+    email:
+        subject: "Welcome %username%!"
+        message: |
+            Hello %username%!
+
+            To finish activating your account - please visit %confirmation_url%
+
+            Regards,
+            the Team.
+
+resetting:
+    email:
+        subject: "Reset Password"
+        message: |
+            Hello %username%!
+
+            To reset your password - please use this code: %token%
+
+            Regards,
+            the Team.
+    password_request_expired: "Your request has been expired"
+
+confirmation:
+    user:
+        not_found: "The user with confirmation token %token% does not exist"
+
+user:
+    error:
+        forget_password:
+            wrong_email: 'Email is not valid'
+            not_found: "Username does not exist"
+
+export_users:
+    email:
+        subject: "Users export"
+        message: |
+            Your export has been finish. You can find it as an attachment of this email

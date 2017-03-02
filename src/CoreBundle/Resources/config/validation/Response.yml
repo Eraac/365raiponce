@@ -1,0 +1,7 @@
+CoreBundle\Entity\Response:
+    properties:
+        sentence:
+            - NotBlank: ~
+            - Type: string
+            - Length:
+                max: 140

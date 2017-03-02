@@ -1,0 +1,10 @@
+CoreBundle\Entity\Emotion:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: name
+
+    properties:
+        name:
+            - NotBlank: ~
+            - Type: string
+            - Length:
+                max: 30

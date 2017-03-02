@@ -1,0 +1,28 @@
+imports:
+    - { resource: voter.yml }
+    - { resource: repository.yml }
+    - { resource: filter.yml }
+    - { resource: listener.yml }
+
+services:
+    user.command.create_client:
+        class: UserBundle\Command\CreateClientCommand
+        tags:
+            - { name: console.command }
+        arguments:
+            - '@fos_oauth_server.client_manager.default'
+
+    user.mailer:
+        class: UserBundle\Mailer\Mailer
+        lazy: true
+        arguments:
+            - '@mailer'
+            - '@twig'
+            - { base_url_confirmation: '%base_url_confirmation%' }
+
+    user.user_edit_admin_type:
+        class: UserBundle\Form\UserEditAdminType
+        arguments:
+            - "@security.token_storage"
+        tags:
+            - { name: form.type }

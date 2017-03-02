@@ -1,0 +1,9 @@
+CoreBundle\Entity\AbstractVote:
+    exclusion_policy: ALL
+
+    properties:
+        id:
+            expose: true
+            groups: [admin]
+        createdAt:
+            expose: true

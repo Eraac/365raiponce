@@ -1,0 +1,17 @@
+CoreBundle\Entity\VoteResponse:
+    exclusion_policy: ALL
+
+    relations:
+        # embedded
+        -
+            rel: voter
+            embedded:
+                content: expr(object.getUser())
+        -
+            rel: receiver
+            embedded:
+                content: expr(object.getResponse().getAuthor())
+        -
+            rel: response
+            embedded:
+                content: expr(object.getResponse())

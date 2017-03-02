@@ -1,0 +1,13 @@
+CoreBundle\Entity\Report:
+    exclusion_policy: ALL
+
+    properties:
+        id:
+            expose: true
+
+    relations:
+        # embedded
+        -
+            rel: response
+            embedded:
+                content: expr(object.getResponse())

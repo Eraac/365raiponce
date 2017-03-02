@@ -1,0 +1,39 @@
+CoreBundle\Entity\LogRequest:
+    exclusion_policy: ALL
+
+    properties:
+        id:
+            expose: true
+        route:
+            expose: true
+        method:
+            expose: true
+        path:
+            expose: true
+        query:
+            expose: true
+        content:
+            expose: true
+            groups: [detail-logrequest]
+        response:
+            expose: true
+            groups: [detail-logrequest]
+        status:
+            expose: true
+        ip:
+            expose: true
+        createdAt:
+            expose: true
+
+    relations:
+        -
+            rel: self
+            href:
+                route: api_get_log_request
+                parameters:
+                    log_request_id: expr(object.getId())
+
+        -
+            rel: user
+            embedded:
+                content: expr(object.getUser())

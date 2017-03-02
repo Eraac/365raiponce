@@ -1,0 +1,33 @@
+CoreBundle\Entity\History:
+    exclusion_policy: ALL
+
+    properties:
+        id:
+            expose: true
+        usedForScore:
+            expose: true
+
+    virtual_property:
+        getDay:
+            serialized_name: day
+
+    relations:
+        # links
+        -
+            rel: self
+            href:
+                route: api_get_history
+                parameters:
+                    history_id: expr(object.getId())
+
+        # embedded
+        -
+            rel: user
+            embedded:
+                content: expr(object.getUser())
+            exclusion:
+                groups: [admin]
+        -
+            rel: action
+            embedded:
+                content: expr(object.getAction())

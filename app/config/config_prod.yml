@@ -1,34 +1,62 @@
 imports:
     - { resource: config.yml }
 
-#framework:
-#    validation:
-#        cache: validator.mapping.cache.apc
-#    serializer:
-#        cache: serializer.mapping.cache.apc
+nelmio_api_doc:
+    cache:
+        enabled: true
 
-#doctrine:
-#    orm:
-#        metadata_cache_driver: apc
-#        result_cache_driver: apc
-#        query_cache_driver: apc
+doctrine:
+    orm:
+        metadata_cache_driver: redis
+        query_cache_driver: redis
+        result_cache_driver: redis
 
 monolog:
     handlers:
-        main:
+        main_error:
             type:           fingers_crossed
             action_level:   error
-            handler:        grouped
-        grouped:
-            type:           group
-            members:        [streamed, swift]
+            handler:        streamed
+            excluded_404s:
+                - ^/
         streamed:
-            type:           stream
+            type:           rotating_file
+            max_files:      30
             path:           "%kernel.logs_dir%/%kernel.environment%.log"
             level:          debug
-        swift:
-            type:           swift_mailer
-            from_email:     "%mail_sender%"
-            to_email:       ["%mail_developer%", "%mail_webmaster%"]
-            subject:        "[ERROR] [365raiponce]"
-            level:          critical
+
+        main_critical:
+            type:           fingers_crossed
+            action_level:   critical
+            handler:        slack
+        slack:
+            type:           slack
+            token:          "%slack_token%"
+            channel:        "%slack_channel%"
+            level:          warning
+
+        auth:
+            type:           rotating_file
+            max_files:      30
+            path:           "%kernel.logs_dir%/%kernel.environment%-auth.log"
+            level:          warning
+            channels:       security
+
+        doctrine:
+            type:           rotating_file
+            max_files:      30
+            path:           "%kernel.logs_dir%/%kernel.environment%-doctrine.log"
+            level:          warning
+            channels:       doctrine
+
+snc_redis:
+    doctrine:
+        metadata_cache:
+            client: default
+            entity_manager: default
+        query_cache:
+            client: default
+            entity_manager: default
+        result_cache:
+            client: default
+            entity_manager: default

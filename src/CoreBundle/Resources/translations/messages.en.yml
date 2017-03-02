@@ -1,0 +1,25 @@
+core:
+    error:
+        invalid_type_vote: "The type of vote must be a valid type"
+        bad_content_type: "The Content-Type isn't correct"
+        empty_json: "JSON can't be empty"
+        wrong_key_json: "Keys of the JSON does not matching with the form"
+        invalid_filter: "Filter %filter% isn't valid"
+        invalid_group_by: "Group by %group_by% ins't valid"
+        invalid_order_by: "Sort by %order_by% isn't valid"
+        invalid_order: "Order %order% isn't valid"
+        wrong_filter: "Something is wrong with the filter"
+        miss_group_by: "Impossible to order result without group for : %fields%"
+        filter:
+            timestamp_array: "Timestamp should have one parameter by key"
+            timestamp: "Value %number% isn't a valid timestamp"
+            number: "Value %number% isn't a valid number"
+            type: "Type %type% isn't a valid type"
+            boolean: "This value %value% should be 0 or 1"
+        remark:
+            already_shared: "You have already share this remark"
+            already_published: "This remark was already published"
+            unpublished_yet: "This remark is not unpublished yet"
+        response:
+            already_published: "This response was already published"
+            unpublished_yet: "This response is not unpublished yet"

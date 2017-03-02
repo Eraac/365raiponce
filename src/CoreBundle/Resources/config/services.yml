@@ -1,0 +1,70 @@
+imports:
+    - { resource: voter.yml }
+    - { resource: listener.yml }
+    - { resource: filter.yml }
+    - { resource: repository.yml }
+
+services:
+    core.manager.serializer_groups:
+        class: CoreBundle\Service\SerializerGroupsManager
+        arguments:
+            - "@request_stack"
+
+    core.paginator:
+        class: CoreBundle\Service\Paginator
+
+    core.custom_parser:
+        class: CoreBundle\Parser\Parser
+        public: false
+        arguments:
+            - '@nelmio_api_doc.parser.form_type_parser'
+            - '@nelmio_api_doc.parser.validation_parser'
+            - '@form.factory'
+            - '@nelmio_api_doc.doc_comment_extractor'
+        tags:
+            - { name: nelmio_api_doc.extractor.parser, priority: 2 }
+
+    core.retrieve_stats:
+        class: CoreBundle\Service\RetrieveStats
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@request_stack'
+            - '@translator.default'
+
+    core.array_to_csv:
+        class: CoreBundle\Service\ArrayToCsv
+
+    core.export_users:
+        class: CoreBundle\Service\ExportUsers
+        arguments:
+            - '@user.user_repository'
+            - '@user.mailer'
+            - '@core.array_to_csv'
+        tags:
+            - { name: kernel.event_listener, event: core.export.users, method: onExport }
+
+    core.client.twitter:
+        class: CoreBundle\Service\Twitter
+        arguments:
+            - '@logger'
+            - '%twitter_consumer_key%'
+            - '%twitter_consumer_secret%'
+            - '%twitter_token%'
+            - '%twitter_token_secret%'
+            - '%twitter_enable%'
+
+    core.client.facebook:
+        class: CoreBundle\Service\Facebook
+        arguments:
+            - '@logger'
+            - '%facebook_page_id%'
+            - '%facebook_app_id%'
+            - '%facebook_token%'
+            - '%facebook_secret%'
+            - '%facebook_enable%'
+
+    core.score_control:
+        class: CoreBundle\Service\ScoreControl
+        lazy: true # circular reference with Doctrine\HistoryListener
+        arguments:
+            - '@core.history_repository'

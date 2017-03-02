@@ -1,0 +1,12 @@
+services:
+    user.user_filter:
+        class: UserBundle\Filter\UserFilter
+        parent: core.abstract_filter
+        arguments: ['@user.user_repository']
+        public: true
+
+    user.stats.user_filter:
+        class: UserBundle\Filter\Stats\UserFilter
+        parent: core.abstract_filter
+        arguments: ['@user.user_repository']
+        public: true

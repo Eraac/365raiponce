@@ -2,33 +2,56 @@
 # Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
 # http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
-    app_name: myapp
-
     database_host:     127.0.0.1
     database_port:     ~
     database_name:     symfony
     database_user:     root
     database_password: ~
 
+    redis_host: 127.0.0.1
+    redis_port: 6379
+    redis_index: 0
+
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
     mailer_user:       ~
     mailer_password:   ~
-    mailer_port:       25
+    mailer_port: 25
     mailer_encryption: ~
+    mail_sender:       no-reply@domain.tld
 
     # A secret key that's used to generate certain security-related tokens
-    secret:            ThisTokenIsNotSoSecretChangeItWithRandomDotOrg
+    secret:            965436407b8b3ac3d595e96d85b5fa06c90973f9
 
-    jwt_private_key_path: %kernel.root_dir%/var/jwt/private.pem   # ssh private key path
-    jwt_public_key_path:  %kernel.root_dir%/var/jwt/public.pem    # ssh public key path
-    jwt_key_pass_phrase:  ''                                      # ssh key pass phrase
-    jwt_token_ttl:        86400
+    # Twitter
+    twitter_consumer_key: ~
+    twitter_consumer_secret: ~
+    twitter_token: ~
+    twitter_token_secret: ~
+    twitter_enable: false
 
-    mail_developer: 'developer@domain.com'
-    mail_webmaster: 'webmaster@domain.com'
-    mail_sender:    'no-reply@domain.com'
+    # Facebook
+    facebook_page_id: ~
+    facebook_app_id: ~
+    facebook_token: ~
+    facebook_secret: ~
+    facebook_enable: false
 
-    backup_processor_type: 'zip'
-    backup_directory: '/tmp'
-    backup_password:  'azerty'
+    # cors
+    cors_allow_origin: http://localhost
+
+    app_name: rest-project
+    base_url_confirmation: http://localhost?token=
+    base_url_remark: http://localhost/remarks/
+
+    enable_log_request: false
+    enable_history: false
+
+    lifetime_cache_score: 600 # ten minutes
+    lifetime_cache_vote_user: 600 # ten minutes
+    lifetime_cache_count_vote: 600 # ten minutes
+    lifetime_cache_count_response: 600 # ten minutes
+
+    # slack monolog
+    slack_token: "token-slack"
+    slack_channel: "channel-slack"

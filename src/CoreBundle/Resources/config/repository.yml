@@ -1,0 +1,68 @@
+services:
+    core.log_request_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments: ['CoreBundle:LogRequest']
+
+    core.emotion_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments: ['CoreBundle:Emotion']
+
+    core.theme_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments: ['CoreBundle:Theme']
+
+    core.remark_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments: ['CoreBundle:Remark']
+
+    core.response_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments: ['CoreBundle:Response']
+        calls:
+            - [setLifetimeCacheCountResponse, ['%lifetime_cache_count_response%']]
+
+    core.vote_response_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments: ['CoreBundle:VoteResponse']
+        calls:
+            - [setLifetimeCache, ['%lifetime_cache_vote_user%', '%lifetime_cache_count_vote%']]
+
+    core.vote_remark_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments: ['CoreBundle:VoteRemark']
+        calls:
+            - [setLifetimeCache, ['%lifetime_cache_vote_user%', '%lifetime_cache_count_vote%']]
+
+    core.report_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments: ['CoreBundle:Report']
+
+    core.news_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments: ['CoreBundle:News']
+
+    core.grade_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments: ['CoreBundle:Grade']
+
+    core.action_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments: ['CoreBundle:Action']
+
+    core.history_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments: ['CoreBundle:History']
+        calls:
+            - [setLifetimeCacheScore, ['%lifetime_cache_score%']]
