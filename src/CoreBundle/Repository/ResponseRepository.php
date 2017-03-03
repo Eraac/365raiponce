@@ -53,7 +53,7 @@ class ResponseRepository extends AbstractPostedRepository
             ->useResultCache(true, $this->lifetimeCacheCountResponse, KeyBuilder::keyCountPublishedResponseForRemark($remark))
         ;
 
-        return (bool) $query->getSingleScalarResult();
+        return $query->getSingleScalarResult();
     }
 
     /**
@@ -80,7 +80,7 @@ class ResponseRepository extends AbstractPostedRepository
             ->useResultCache(true, $this->lifetimeCacheCountResponse, KeyBuilder::keyCountUnpublishedResponseForRemark($remark))
         ;
 
-        return (bool) $query->getSingleScalarResult();
+        return $query->getSingleScalarResult();
     }
 
     /**
