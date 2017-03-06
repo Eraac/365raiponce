@@ -62,10 +62,15 @@ class VoteListener
      */
     private function invalideCache(AbstractVote $vote)
     {
-        $key = $vote instanceof VoteRemark ?
+        $keyCount = $vote instanceof VoteRemark ?
             KeyBuilder::keyCountVoteForRemark($vote->getRemark(), $vote->getType()) :
             KeyBuilder::keyCountVoteForResponse($vote->getResponse());
 
-        $this->client->delete($key);
+        $keyHasVote = $vote instanceof VoteRemark ?
+            KeyBuilder::keyUserHasVoteForRemark($vote->getRemark(), $vote->getUser(), $vote->getType()) :
+            KeyBuilder::keyUserHasVoteForResponse($vote->getResponse(), $vote->getUser());
+
+        $this->client->delete($keyCount);
+        $this->client->delete($keyHasVote);
     }
 }
