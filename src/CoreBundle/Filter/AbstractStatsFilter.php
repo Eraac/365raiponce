@@ -15,6 +15,14 @@ abstract class AbstractStatsFilter extends AbstractFilter
     const DAY   = 'created_day';
 
     /**
+     * @return array
+     */
+    protected function getDefaultFilters() : array
+    {
+        return [];
+    }
+
+    /**
      * @inheritdoc
      */
     protected function getMapping() : array

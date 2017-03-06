@@ -42,6 +42,10 @@ abstract class AbstractFilter
      */
     public function applyFilter(QueryBuilder $qb, array $criterias) : QueryBuilder
     {
+        if (empty($criterias)) {
+            $criterias = $this->getDefaultFilters();
+        }
+
         foreach ($criterias as $key => $criteria) {
             $method = $this->getMethod($key);
 
@@ -95,6 +99,18 @@ abstract class AbstractFilter
         }
 
         return $qb;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getDefaultFilters() : array
+    {
+        return [
+            '_order' => [
+                'id' => 'ASC',
+            ]
+        ];
     }
 
     /**

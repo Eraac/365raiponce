@@ -109,8 +109,7 @@ abstract class AbstractFilterTest extends WebTestCase
         $qb = $this->getQueryBuilder();
 
         foreach ($this->getCriterias() as $key => $criteria) {
-            if (!empty($this->getBadValueCriterias()[$key])) {
-                $value = $this->getBadValueCriterias()[$key];
+            if (!empty($value = $this->getBadValueCriterias()[$key])) {
 
                 $fail = $this->filterHasFailed($filter, $qb, [$criteria => $value]);
 
