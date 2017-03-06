@@ -25,6 +25,7 @@ class RemarkFilter extends AbstractStatsFilter
                 self::POSTED_AFTER  => [$this->repo, 'filterByPostedAfter'],
                 'emotion'   => [$this->repo, 'filterByEmotion'],
                 'theme'     => [$this->repo, 'filterByTheme'],
+                'scale_emotion' => [$this->repo, 'filterByScaleEmotion'],
             ]
         );
     }
@@ -39,8 +40,9 @@ class RemarkFilter extends AbstractStatsFilter
             [
                 self::POSTED_BEFORE => [$this, 'validateTimestamp'],
                 self::POSTED_AFTER  => [$this, 'validateTimestamp'],
-                'emotion'   => [$this, 'validateNumber'],
-                'theme'     => [$this, 'validateNumber'],
+                'emotion'       => [$this, 'validateNumber'],
+                'theme'         => [$this, 'validateNumber'],
+                'scale_emotion' => [$this, 'validateNumber'],
             ]
         );
     }
@@ -56,8 +58,9 @@ class RemarkFilter extends AbstractStatsFilter
                 self::POSTED_YEAR  => [$this->repo, 'orderByPostedYear'],
                 self::POSTED_MONTH => [$this->repo, 'orderByPostedMonth'],
                 self::POSTED_DAY   => [$this->repo, 'orderByPostedDay'],
-                'emotion'   => [$this->repo, 'orderByEmotion'],
-                'theme'     => [$this->repo, 'orderByTheme'],
+                'emotion'       => [$this->repo, 'orderByEmotion'],
+                'theme'         => [$this->repo, 'orderByTheme'],
+                'scale_emotion' => [$this->repo, 'orderByScaleEmotion'],
             ]
         );
     }
@@ -75,6 +78,7 @@ class RemarkFilter extends AbstractStatsFilter
                 self::POSTED_DAY   => [$this->repo, 'groupByPostedDay'],
                 'emotion'   => [$this->repo, 'groupByEmotion'],
                 'theme'     => [$this->repo, 'groupByTheme'],
+                'scale_emotion' => [$this->repo, 'groupByScaleEmotion'],
             ]
         );
     }

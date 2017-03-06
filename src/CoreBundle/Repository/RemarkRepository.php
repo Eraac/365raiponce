@@ -64,6 +64,19 @@ class RemarkRepository extends AbstractPostedRepository
 
     /**
      * @param QueryBuilder $qb
+     * @param              $scaleEmotion
+     *
+     * @return QueryBuilder
+     */
+    public function filterByScaleEmotion(QueryBuilder $qb, $scaleEmotion) : QueryBuilder
+    {
+        $alias = $this->getAlias($qb);
+
+        return $this->getEqOrIn($qb, $scaleEmotion, $alias . 'scaleEmotion', 'scale_emotion');
+    }
+
+    /**
+     * @param QueryBuilder $qb
      * @param string       $orderBy
      * @param string       $order
      *
@@ -182,5 +195,18 @@ class RemarkRepository extends AbstractPostedRepository
         $this->safeLeftJoin($qb, 'theme', 't');
 
         return $this->groupBy($qb, 't.id', 'theme_id');
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string       $groupBy
+     *
+     * @return QueryBuilder
+     */
+    public function groupByScaleEmotion(QueryBuilder $qb, string $groupBy) : QueryBuilder
+    {
+        $alias = $this->getAlias($qb);
+
+        return $this->groupBy($qb, $alias . 'scaleEmotion', 'scale_emotion');
     }
 }

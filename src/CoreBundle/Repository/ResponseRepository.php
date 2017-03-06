@@ -208,6 +208,21 @@ class ResponseRepository extends AbstractPostedRepository
 
     /**
      * @param QueryBuilder $qb
+     * @param              $scaleEmotion
+     *
+     * @return QueryBuilder
+     */
+    public function filterByScaleEmotion(QueryBuilder $qb, $scaleEmotion) : QueryBuilder
+    {
+        $alias = 're';
+
+        $this->safeLeftJoin($qb, 'remark', $alias);
+
+        return $this->getEqOrIn($qb, $scaleEmotion, $alias . '.scaleEmotion', 'scale_emotion');
+    }
+
+    /**
+     * @param QueryBuilder $qb
      * @param string       $orderBy
      * @param string       $order
      *
@@ -282,6 +297,22 @@ class ResponseRepository extends AbstractPostedRepository
         $this->safeLeftJoin($qb, 'theme', $alias, 're.');
 
         return $this->applyOrder($qb, '.name', $order, $alias);
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string       $orderBy
+     * @param string       $order
+     *
+     * @return QueryBuilder
+     */
+    public function orderByScaleEmotion(QueryBuilder $qb, string $orderBy, string $order) : QueryBuilder
+    {
+        $alias = 're';
+
+        $this->safeLeftJoin($qb, 'remark', $alias);
+
+        return $this->applyOrder($qb, '.scaleEmotion', $order, $alias);
     }
 
     /**
@@ -376,5 +407,18 @@ class ResponseRepository extends AbstractPostedRepository
         $this->safeLeftJoin($qb, 'author', 'a');
 
         return $this->groupBy($qb, 'a.id', 'author_id');
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string       $groupBy
+     *
+     * @return QueryBuilder
+     */
+    public function groupByScaleEmotion(QueryBuilder $qb, string $groupBy) : QueryBuilder
+    {
+        $this->safeLeftJoin($qb, 'remark', 're');
+
+        return $this->groupBy($qb, 're.scaleEmotion', 'scale_emotion');
     }
 }

@@ -26,6 +26,7 @@ interface StatsDocs extends Docs
     const FILTER_CREATED_YEAR  = ['name' => 'filter[created_year]', 'dataType' => 'integer', 'pattern' => 'integer', 'description' => 'Filter content by creation year'];
     const FILTER_CREATED_MONTH = ['name' => 'filter[created_month]', 'dataType' => 'integer', 'pattern' => 'integer', 'description' => 'Filter content by creation month'];
     const FILTER_CREATED_DAY   = ['name' => 'filter[created_day]', 'dataType' => 'integer', 'pattern' => 'integer', 'description' => 'Filter content by creation day'];
+    const FILTER_SCALE_EMOTION = ['name' => 'filter[scale_emotion]', 'dataType' => 'integer', 'description' => 'Search by scale emotion'];
 
     const ORDER_CREATED_YEAR  = ['name' => 'filter[_order][created_year]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by created year'];
     const ORDER_CREATED_MONTH = ['name' => 'filter[_order][created_month]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by created month'];
@@ -34,6 +35,7 @@ interface StatsDocs extends Docs
     const ORDER_POSTED_MONTH  = ['name' => 'filter[_order][posted_month]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by posted month'];
     const ORDER_POSTED_DAY    = ['name' => 'filter[_order][posted_day]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by posted day'];
     const ORDER_COUNT         = ['name' => 'filter[_order][count]', 'pattern' => '(ASC|DESC)', 'description' => 'Order result by count'];
+    const ORDER_SCALE_EMOTION = ['name' => 'filter[_order][scale_emotion]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by scale emotion'];
 
     const GROUP_CREATED_YEAR  = ['name' => 'filter[_group][]=created_year', 'description' => 'Group by created year'];
     const GROUP_CREATED_MONTH = ['name' => 'filter[_group][]=created_month', 'description' => 'Group by created month'];
@@ -43,6 +45,7 @@ interface StatsDocs extends Docs
     const GROUP_POSTED_DAY    = ['name' => 'filter[_group][]=posted_day', 'description' => 'Group by posted day'];
     const GROUP_EMOTION       = ['name' => 'filter[_group][]=emotion', 'description' => 'Group by emotion'];
     const GROUP_THEME         = ['name' => 'filter[_group][]=theme', 'description' => 'Group by theme'];
+    const GROUP_SCALE_EMOTION = ['name' => 'filter[_group][]=scale_emotion', 'description' => 'Group by scale emotion'];
 
 
     const GET = [
@@ -65,6 +68,7 @@ interface StatsDocs extends Docs
             self::FILTER_CREATED_DAY,
             self::FILTER_EMOTION,
             self::FILTER_THEME,
+            self::FILTER_SCALE_EMOTION,
             self::ORDER_CREATED_YEAR,
             self::ORDER_CREATED_MONTH,
             self::ORDER_CREATED_DAY,
@@ -73,6 +77,7 @@ interface StatsDocs extends Docs
             self::ORDER_POSTED_DAY,
             self::ORDER_EMOTION,
             self::ORDER_THEME,
+            self::ORDER_SCALE_EMOTION,
             self::ORDER_COUNT,
             self::GROUP_CREATED_YEAR,
             self::GROUP_CREATED_MONTH,
@@ -82,6 +87,7 @@ interface StatsDocs extends Docs
             self::GROUP_POSTED_DAY,
             self::GROUP_EMOTION,
             self::GROUP_THEME,
+            self::GROUP_SCALE_EMOTION,
         ]
     ];
 
@@ -99,6 +105,7 @@ interface StatsDocs extends Docs
             self::FILTER_THEME,
             self::FILTER_REMARK,
             ['name' => 'filter[author]', 'dataType' => 'integer', 'description' => 'Search by author (id)'],
+            self::FILTER_SCALE_EMOTION,
             self::ORDER_CREATED_YEAR,
             self::ORDER_CREATED_MONTH,
             self::ORDER_CREATED_DAY,
@@ -109,6 +116,7 @@ interface StatsDocs extends Docs
             self::ORDER_REMARK,
             ['name' => 'filter[_order][author]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by author (username)'],
             self::ORDER_THEME,
+            self::ORDER_SCALE_EMOTION,
             self::ORDER_COUNT,
             self::GROUP_CREATED_YEAR,
             self::GROUP_CREATED_MONTH,
@@ -120,6 +128,7 @@ interface StatsDocs extends Docs
             self::GROUP_THEME,
             ['name' => 'filter[_group][]=remark', 'description' => 'Group by remark'],
             ['name' => 'filter[_group][]=author', 'description' => 'Group by author'],
+            self::GROUP_SCALE_EMOTION,
         ]
     ];
 
@@ -152,6 +161,7 @@ interface StatsDocs extends Docs
             self::FILTER_EMOTION,
             self::FILTER_THEME,
             self::FILTER_REMARK,
+            self::FILTER_SCALE_EMOTION,
             ['name' => 'filter[type]', 'pattern' => '(0|1)', 'dataType' => 'integer', 'description' => 'Search by type (ref to vote_remarks)'],
             ['name' => 'filter[voter]', 'dataType' => 'integer', 'description' => 'Search by user id'],
             self::ORDER_CREATED_YEAR,
@@ -161,6 +171,7 @@ interface StatsDocs extends Docs
             self::ORDER_EMOTION,
             self::ORDER_THEME,
             self::ORDER_REMARK,
+            self::ORDER_SCALE_EMOTION,
             ['name' => 'filter[_order][type]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by type (ref to vote_remarks)'],
             ['name' => 'filter[_order][voter]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by voter (username)'],
             self::GROUP_CREATED_YEAR,
@@ -168,6 +179,7 @@ interface StatsDocs extends Docs
             self::GROUP_CREATED_DAY,
             self::GROUP_EMOTION,
             self::GROUP_THEME,
+            self::GROUP_SCALE_EMOTION,
             ['name' => 'filter[_group][]=remark', 'description' => 'Group by remark'],
             ['name' => 'filter[_group][]=type', 'description' => 'Group by type'],
             ['name' => 'filter[_group][]=voter', 'description' => 'Group by user'],
@@ -185,6 +197,7 @@ interface StatsDocs extends Docs
             self::FILTER_EMOTION,
             self::FILTER_THEME,
             self::FILTER_REMARK,
+            self::FILTER_SCALE_EMOTION,
             ['name' => 'filter[response]', 'dataType' => 'integer', 'description' => 'Search by response'],
             ['name' => 'filter[voter]', 'dataType' => 'integer', 'description' => 'Search by user id (user has voted)'],
             ['name' => 'filter[receiver]', 'dataType' => 'integer', 'description' => 'Search by user id (user has receive the vote)'],
@@ -195,6 +208,7 @@ interface StatsDocs extends Docs
             self::ORDER_EMOTION,
             self::ORDER_THEME,
             self::ORDER_REMARK,
+            self::ORDER_SCALE_EMOTION,
             ['name' => 'filter[_order][response]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by response'],
             ['name' => 'filter[_order][voter]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by voter (username)'],
             ['name' => 'filter[_order][receiver]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by user has receive the vote (username)'],
@@ -203,6 +217,7 @@ interface StatsDocs extends Docs
             self::GROUP_CREATED_DAY,
             self::GROUP_EMOTION,
             self::GROUP_THEME,
+            self::GROUP_SCALE_EMOTION,
             ['name' => 'filter[_group][]=remark', 'description' => 'Group by remark'],
             ['name' => 'filter[_group][]=response', 'description' => 'Group by response'],
             ['name' => 'filter[_group][]=voter', 'description' => 'Group by voter'],

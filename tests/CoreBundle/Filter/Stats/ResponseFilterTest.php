@@ -35,7 +35,7 @@ class ResponseFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getCriterias(),
-            ['posted_before', 'posted_after', 'emotion', 'theme', 'remark', 'author']
+            ['posted_before', 'posted_after', 'emotion', 'theme', 'remark', 'author', 'scale_emotion']
         );
     }
 
@@ -46,7 +46,7 @@ class ResponseFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getGoodValueCriterias(),
-            [65432, 987654321, 3, [4, 2], 1, [1, 2]]
+            [65432, 987654321, 3, [4, 2], 1, [1, 2], 4]
         );
     }
 
@@ -57,7 +57,7 @@ class ResponseFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getBadValueCriterias(),
-            ['not', 'a', 'number', 'oups', 'string', 'power']
+            ['not', 'a', 'number', 'oups', 'string', 'power', 'not']
         );
     }
 
@@ -68,7 +68,7 @@ class ResponseFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getOrderBy(),
-            ['posted_year', 'posted_month', 'posted_day', 'theme', 'emotion', 'remark', 'author']
+            ['posted_year', 'posted_month', 'posted_day', 'theme', 'emotion', 'remark', 'author', 'scale_emotion']
         );
     }
 
@@ -76,7 +76,7 @@ class ResponseFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getGoodValueOrderBy(),
-            ['DESC', 'DESC', 'ASC', 'DESC', 'ASC', 'ASC', 'DESC']
+            ['DESC', 'DESC', 'ASC', 'DESC', 'ASC', 'ASC', 'DESC', 'ASC']
         );
     }
 
@@ -87,7 +87,7 @@ class ResponseFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getBadValueOrderBy(),
-            ['B', 'E', 'U', 'R', 'K', 'K', 'O', 'K']
+            ['B', 'E', 'U', 'R', 'K', 'K', 'O', 'K', 'O']
         );
     }
 
@@ -98,7 +98,7 @@ class ResponseFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getGroupBy(),
-            ['posted_year', 'posted_month', 'posted_day', 'emotion', 'theme', 'remark', 'author']
+            ['posted_year', 'posted_month', 'posted_day', 'emotion', 'theme', 'remark', 'author', 'scale_emotion']
         );
     }
 }

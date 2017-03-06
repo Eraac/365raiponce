@@ -27,6 +27,7 @@ class ResponseFilter extends AbstractStatsFilter
                 'theme'     => [$this->repo, 'filterByTheme'],
                 'remark'    => [$this->repo, 'filterByRemark'],
                 'author'    => [$this->repo, 'filterByAuthor'],
+                'scale_emotion' => [$this->repo, 'filterByScaleEmotion'],
             ]
         );
     }
@@ -45,6 +46,7 @@ class ResponseFilter extends AbstractStatsFilter
                 'theme'     => [$this, 'validateNumber'],
                 'remark'    => [$this, 'validateNumber'],
                 'author'    => [$this, 'validateNumber'],
+                'scale_emotion' => [$this, 'validateNumber'],
             ]
         );
     }
@@ -64,6 +66,7 @@ class ResponseFilter extends AbstractStatsFilter
                 'theme'     => [$this->repo, 'orderByTheme'],
                 'remark'    => [$this->repo, 'orderByRemark'],
                 'author'    => [$this->repo, 'orderByAuthor'],
+                'scale_emotion' => [$this->repo, 'orderByScaleEmotion'],
             ]
         );
     }
@@ -83,6 +86,7 @@ class ResponseFilter extends AbstractStatsFilter
                 'theme'     => [$this->repo, 'groupByTheme'],
                 'remark'    => [$this->repo, 'groupByRemark'],
                 'author'    => [$this->repo, 'groupByAuthor'],
+                'scale_emotion' => [$this->repo, 'groupByScaleEmotion'],
             ]
         );
     }

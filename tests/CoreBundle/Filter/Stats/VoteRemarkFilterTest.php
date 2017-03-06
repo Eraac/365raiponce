@@ -32,7 +32,7 @@ class VoteRemarkFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getCriterias(),
-            ['emotion', 'theme', 'remark', 'type', 'voter']
+            ['emotion', 'theme', 'remark', 'type', 'voter', 'scale_emotion']
         );
     }
 
@@ -43,7 +43,7 @@ class VoteRemarkFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getGoodValueCriterias(),
-            [65432, 987654321, [4, 2], 1, 1]
+            [65432, 987654321, [4, 2], 1, 1, [8, 9, 10]]
         );
     }
 
@@ -54,7 +54,7 @@ class VoteRemarkFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getBadValueCriterias(),
-            ['not', 'a', 'number', 3, 'admin']
+            ['not', 'a', 'number', 3, 'admin', 'try']
         );
     }
 
@@ -65,7 +65,7 @@ class VoteRemarkFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getOrderBy(),
-            ['emotion', 'theme', 'remark', 'type', 'voter']
+            ['emotion', 'theme', 'remark', 'type', 'voter', 'scale_emotion']
         );
     }
 
@@ -73,7 +73,7 @@ class VoteRemarkFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getGoodValueOrderBy(),
-            ['DESC', 'DESC', 'ASC', 'DESC', 'DESC']
+            ['DESC', 'DESC', 'ASC', 'DESC', 'DESC', 'DESC']
         );
     }
 
@@ -84,7 +84,7 @@ class VoteRemarkFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getBadValueOrderBy(),
-            ['B', 'E', 'U', 'R', 'K']
+            ['B', 'E', 'U', 'R', 'K', 'O']
         );
     }
 
@@ -95,7 +95,7 @@ class VoteRemarkFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getGroupBy(),
-            ['emotion', 'theme', 'remark', 'type', 'voter']
+            ['emotion', 'theme', 'remark', 'type', 'voter', 'scale_emotion']
         );
     }
 }

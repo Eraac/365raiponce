@@ -16,11 +16,12 @@ class VoteRemarkFilter extends AbstractStatsFilter
         return array_merge(
             parent::getMapping(),
             [
-                'emotion'   => [$this->repo, 'filterByEmotion'],
-                'theme'     => [$this->repo, 'filterByTheme'],
-                'remark'    => [$this->repo, 'filterByRemark'],
-                'type'      => [$this->repo, 'filterByType'],
-                'voter'     => [$this->repo, 'filterByVoter'],
+                'emotion'       => [$this->repo, 'filterByEmotion'],
+                'theme'         => [$this->repo, 'filterByTheme'],
+                'remark'        => [$this->repo, 'filterByRemark'],
+                'type'          => [$this->repo, 'filterByType'],
+                'voter'         => [$this->repo, 'filterByVoter'],
+                'scale_emotion' => [$this->repo, 'filterByScaleEmotion'],
             ]
         );
     }
@@ -33,11 +34,12 @@ class VoteRemarkFilter extends AbstractStatsFilter
         return array_merge(
             parent::getMappingValidate(),
             [
-                'emotion'   => [$this, 'validateNumber'],
-                'theme'     => [$this, 'validateNumber'],
-                'remark'    => [$this, 'validateNumber'],
-                'type'      => [$this, 'validateType'],
-                'voter'     => [$this, 'validateNumber'],
+                'emotion'       => [$this, 'validateNumber'],
+                'theme'         => [$this, 'validateNumber'],
+                'remark'        => [$this, 'validateNumber'],
+                'type'          => [$this, 'validateType'],
+                'voter'         => [$this, 'validateNumber'],
+                'scale_emotion' => [$this, 'validateNumber'],
             ]
         );
     }
@@ -50,11 +52,12 @@ class VoteRemarkFilter extends AbstractStatsFilter
         return array_merge(
             parent::getMappingOrderBy(),
             [
-                'emotion'   => [$this->repo, 'applyOrder'],
-                'theme'     => [$this->repo, 'applyOrder'],
-                'remark'    => [$this->repo, 'applyOrder'],
-                'type'      => [$this->repo, 'applyOrder'],
-                'voter'     => [$this->repo, 'orderByVoter'],
+                'emotion'       => [$this->repo, 'orderByEmotion'],
+                'theme'         => [$this->repo, 'orderByTheme'],
+                'remark'        => [$this->repo, 'applyOrder'],
+                'type'          => [$this->repo, 'applyOrder'],
+                'voter'         => [$this->repo, 'orderByVoter'],
+                'scale_emotion' => [$this->repo, 'orderByScaleEmotion'],
             ]
         );
     }
@@ -67,11 +70,12 @@ class VoteRemarkFilter extends AbstractStatsFilter
         return array_merge(
             parent::getMappingGroupBy(),
             [
-                'emotion'   => [$this->repo, 'groupByEmotion'],
-                'theme'     => [$this->repo, 'groupByTheme'],
-                'voter'     => [$this->repo, 'groupByVoter'],
-                'type'      => [$this->repo, 'groupByType'],
-                'remark'    => [$this->repo, 'groupByRemark'],
+                'emotion'       => [$this->repo, 'groupByEmotion'],
+                'theme'         => [$this->repo, 'groupByTheme'],
+                'voter'         => [$this->repo, 'groupByVoter'],
+                'type'          => [$this->repo, 'groupByType'],
+                'remark'        => [$this->repo, 'groupByRemark'],
+                'scale_emotion' => [$this->repo, 'groupByScaleEmotion'],
             ]
         );
     }

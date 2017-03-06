@@ -31,7 +31,7 @@ class RemarkFilterTest extends AbstractUpdatedFilterTest
     {
         return array_merge(
             parent::getCriterias(),
-            ['posted_before', 'posted_after', 'emotion', 'theme']
+            ['posted_before', 'posted_after', 'emotion', 'theme', 'scale_emotion']
         );
     }
 
@@ -42,7 +42,7 @@ class RemarkFilterTest extends AbstractUpdatedFilterTest
     {
         return array_merge(
             parent::getGoodValueCriterias(),
-            ['876543', '234567', '1', ['1', '2']]
+            ['876543', '234567', '1', ['1', '2'], '4']
         );
     }
 
@@ -53,7 +53,7 @@ class RemarkFilterTest extends AbstractUpdatedFilterTest
     {
         return array_merge(
             parent::getBadValueCriterias(),
-            ['not', 'timestamp', 'letter', ['not', 'number']]
+            ['not', 'timestamp', 'letter', ['not', 'number'], 'try']
         );
     }
 

@@ -47,6 +47,7 @@ interface RemarkDocs extends Docs
         self::FILTER_POSTED_AFTER,
         self::FILTER_EMOTION,
         self::FILTER_THEME,
+        ['name' => 'filter[scale_emotion]', 'dataType' => 'integer', 'description' => 'Search by scale emotion'],
         self::FILTER_CREATED_BEFORE,
         self::FILTER_CREATED_AFTER,
         self::FILTER_UPDATED_BEFORE,

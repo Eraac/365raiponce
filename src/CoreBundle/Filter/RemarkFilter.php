@@ -17,8 +17,9 @@ class RemarkFilter extends AbstractUpdatedFilter
             [
                 self::POSTED_BEFORE => [$this->repo, 'filterByPostedBefore'],
                 self::POSTED_AFTER  => [$this->repo, 'filterByPostedAfter'],
-                'emotion' => [$this->repo, 'filterByEmotion'],
-                'theme' => [$this->repo, 'filterByTheme'],
+                'emotion'       => [$this->repo, 'filterByEmotion'],
+                'theme'         => [$this->repo, 'filterByTheme'],
+                'scale_emotion' => [$this->repo, 'filterByScaleEmotion'],
             ]
         );
     }
@@ -33,8 +34,9 @@ class RemarkFilter extends AbstractUpdatedFilter
             [
                 self::POSTED_BEFORE => [$this, 'validateTimestamp'],
                 self::POSTED_AFTER  => [$this, 'validateTimestamp'],
-                'emotion' => [$this, 'validateNumber'],
-                'theme' => [$this, 'validateNumber'],
+                'emotion'       => [$this, 'validateNumber'],
+                'theme'         => [$this, 'validateNumber'],
+                'scale_emotion' => [$this, 'validateNumber'],
             ]
         );
     }

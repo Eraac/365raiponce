@@ -32,7 +32,7 @@ class VoteResponseFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getCriterias(),
-            ['emotion', 'theme', 'remark', 'response', 'voter', 'receiver']
+            ['emotion', 'theme', 'remark', 'response', 'voter', 'receiver', 'scale_emotion']
         );
     }
 
@@ -43,7 +43,7 @@ class VoteResponseFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getGoodValueCriterias(),
-            [65432, 987654321, [4, 2], 1, 1, 3]
+            [65432, 987654321, [4, 2], 1, 1, 3, 4]
         );
     }
 
@@ -54,7 +54,7 @@ class VoteResponseFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getBadValueCriterias(),
-            ['not', 'a', 'number', 'start', 'admin', 'stop']
+            ['not', 'a', 'number', 'start', 'admin', 'stop', 'haha']
         );
     }
 
@@ -65,7 +65,7 @@ class VoteResponseFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getOrderBy(),
-            ['emotion', 'theme', 'remark', 'response', 'voter', 'receiver']
+            ['emotion', 'theme', 'remark', 'response', 'voter', 'receiver', 'scale_emotion']
         );
     }
 
@@ -73,7 +73,7 @@ class VoteResponseFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getGoodValueOrderBy(),
-            ['DESC', 'DESC', 'ASC', 'DESC', 'DESC', 'ASC']
+            ['DESC', 'DESC', 'ASC', 'DESC', 'DESC', 'ASC', 'ASC']
         );
     }
 
@@ -84,7 +84,7 @@ class VoteResponseFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getBadValueOrderBy(),
-            ['B', 'E', 'U', 'R', 'K', 'O']
+            ['B', 'E', 'U', 'R', 'K', 'O', 'N']
         );
     }
 
@@ -95,7 +95,7 @@ class VoteResponseFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getGroupBy(),
-            ['emotion', 'theme', 'remark', 'response', 'voter', 'receiver']
+            ['emotion', 'theme', 'remark', 'response', 'voter', 'receiver', 'scale_emotion']
         );
     }
 }

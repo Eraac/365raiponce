@@ -63,16 +63,15 @@ abstract class AbstractRepository extends EntityRepository
 
     /**
      * @param QueryBuilder $qb
-     * @param string       $attribute
-     * @param string|array $value
+     * @param string|array $id
      *
      * @return QueryBuilder
      */
-    public function filterById(QueryBuilder $qb, string $attribute, $value) : QueryBuilder
+    public function filterById(QueryBuilder $qb, $id) : QueryBuilder
     {
         $alias = $this->getAlias($qb);
 
-        return $this->getEqOrIn($qb, $value, $alias . $attribute, 'id');
+        return $this->getEqOrIn($qb, $id, $alias . 'id', 'id');
     }
 
     /**
@@ -88,15 +87,7 @@ abstract class AbstractRepository extends EntityRepository
     {
         $this->safeLeftJoin($qb, $attribute, $aliasJoin);
 
-        if (is_array($value)) {
-            $expr = $qb->expr()->in($aliasJoin . '.' . $attributeJoin, ':' . $attribute);
-        } else {
-            $expr = $qb->expr()->eq($aliasJoin . '.' . $attributeJoin, ':' . $attribute);
-        }
-
-        return $qb
-            ->andWhere($expr)
-            ->setParameter($attribute, $value);
+        return $this->getEqOrIn($qb, $value, $aliasJoin . '.' . $attributeJoin, $attribute);
     }
 
     /**

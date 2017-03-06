@@ -32,7 +32,7 @@ class RemarkFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getCriterias(),
-            ['posted_before', 'posted_after', 'emotion', 'theme']
+            ['posted_before', 'posted_after', 'emotion', 'theme', 'scale_emotion']
         );
     }
 
@@ -43,7 +43,7 @@ class RemarkFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getGoodValueCriterias(),
-            [65432, 987654321, 3, [4, 2]]
+            [65432, 987654321, 3, [4, 2], [3, 6]]
         );
     }
 
@@ -54,7 +54,7 @@ class RemarkFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getBadValueCriterias(),
-            ['not', 'a', 'number', 'oups']
+            ['not', 'a', 'number', 'oups', ['not', 5]]
         );
     }
 
@@ -65,7 +65,7 @@ class RemarkFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getOrderBy(),
-            ['posted_year', 'posted_month', 'posted_day', 'emotion', 'theme']
+            ['posted_year', 'posted_month', 'posted_day', 'emotion', 'theme', 'scale_emotion']
         );
     }
 
@@ -73,7 +73,7 @@ class RemarkFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getGoodValueOrderBy(),
-            ['DESC', 'DESC', 'ASC', 'DESC', 'ASC']
+            ['DESC', 'DESC', 'ASC', 'DESC', 'ASC', 'DESC']
         );
     }
 
@@ -84,7 +84,7 @@ class RemarkFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getBadValueOrderBy(),
-            ['B', 'E', 'U', 'R', 'K', 'O']
+            ['B', 'E', 'U', 'R', 'K', 'O', 'R']
         );
     }
 
@@ -95,7 +95,7 @@ class RemarkFilterTest extends AbstractStatsFilterTest
     {
         return array_merge(
             parent::getGroupBy(),
-            ['posted_year', 'posted_month', 'posted_day', 'emotion', 'theme']
+            ['posted_year', 'posted_month', 'posted_day', 'emotion', 'theme', 'scale_emotion']
         );
     }
 }

@@ -148,6 +148,22 @@ class VoteResponseRepository extends AbstractVoteRepository
 
     /**
      * @param QueryBuilder $qb
+     * @param int|array    $scale
+     *
+     * @return QueryBuilder
+     */
+    public function filterByScaleEmotion(QueryBuilder $qb, $scale) : QueryBuilder
+    {
+        $alias = 'rem';
+
+        $this->safeLeftJoin($qb, 'response', 'res');
+        $this->safeLeftJoin($qb, 'remark', $alias, 'res.');
+
+        return $this->getEqOrIn($qb, $scale, $alias . '.scaleEmotion', 'scale_emotion');
+    }
+
+    /**
+     * @param QueryBuilder $qb
      * @param int|array    $receiver
      *
      * @return QueryBuilder
@@ -232,6 +248,23 @@ class VoteResponseRepository extends AbstractVoteRepository
 
     /**
      * @param QueryBuilder $qb
+     * @param string       $orderBy
+     * @param string       $order
+     *
+     * @return QueryBuilder
+     */
+    public function orderByScaleEmotion(QueryBuilder $qb, string $orderBy, string $order) : QueryBuilder
+    {
+        $alias = 'rem';
+
+        $this->safeLeftJoin($qb, 'response', 'res');
+        $this->safeLeftJoin($qb, 'remark', $alias, 'res.');
+
+        return $this->applyOrder($qb, '.scaleEmotion', $order, $alias);
+    }
+
+    /**
+     * @param QueryBuilder $qb
      * @param string       $groupBy
      *
      * @return QueryBuilder
@@ -301,5 +334,19 @@ class VoteResponseRepository extends AbstractVoteRepository
         $this->safeLeftJoin($qb, 'response', 'res');
 
         return $this->groupBy($qb, 'res.id', 'response_id');
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string       $groupBy
+     *
+     * @return QueryBuilder
+     */
+    public function groupByScaleEmotion(QueryBuilder $qb, string $groupBy) : QueryBuilder
+    {
+        $this->safeLeftJoin($qb, 'response', 'res');
+        $this->safeLeftJoin($qb, 'remark', 'rem', 'res.');
+
+        return $this->groupBy($qb, 'rem.scaleEmotion', 'scale_emotion');
     }
 }

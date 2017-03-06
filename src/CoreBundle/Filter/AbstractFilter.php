@@ -103,7 +103,7 @@ abstract class AbstractFilter
     protected function getMapping() : array
     {
         return [
-            'id'     => [$this->repo, ''],
+            'id'     => [$this->repo, 'filterById'],
             '_order' => [$this, 'applyOrder'],
         ];
     }
