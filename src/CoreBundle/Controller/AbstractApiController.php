@@ -8,6 +8,7 @@ use CoreBundle\Filter\AbstractFilter;
 use CoreBundle\Service\Paginator;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\ORM\Query\QueryException;
 use Doctrine\ORM\QueryBuilder;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Routing\ClassResourceInterface;
@@ -70,6 +71,11 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
 
         if ('json' !== $request->getContentType()) {
             return $this->createJsonError('core.error.bad_content_type', JsonResponse::HTTP_BAD_REQUEST);
+        }
+
+        // if form has errors
+        if ($form->getErrors(true)->count()) {
+            return $form;
         }
 
         return $this->createJsonError('core.error.wrong_key_json', JsonResponse::HTTP_BAD_REQUEST);
