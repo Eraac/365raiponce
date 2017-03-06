@@ -6,8 +6,8 @@ use CoreBundle\Entity\AbstractVote;
 use CoreBundle\Entity\VoteRemark;
 use CoreBundle\Event\NewVoteEvent;
 use CoreBundle\Service\KeyBuilder;
+use Doctrine\Common\Cache\PredisCache;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Predis\Client;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class VoteListener
@@ -18,21 +18,21 @@ class VoteListener
     private $dispatcher;
 
     /**
-     * @var Client
+     * @var PredisCache
      */
-    private $redis;
+    private $client;
 
 
     /**
      * VoteListener constructor.
      *
      * @param EventDispatcherInterface $dispatcher
-     * @param Client                   $redis
+     * @param PredisCache              $client
      */
-    public function __construct(EventDispatcherInterface $dispatcher, Client $redis)
+    public function __construct(EventDispatcherInterface $dispatcher, PredisCache $client)
     {
         $this->dispatcher = $dispatcher;
-        $this->redis = $redis;
+        $this->client = $client;
     }
 
     /**
@@ -66,6 +66,6 @@ class VoteListener
             KeyBuilder::keyCountVoteForRemark($vote->getRemark(), $vote->getType()) :
             KeyBuilder::keyCountVoteForResponse($vote->getResponse());
 
-        $this->redis->del($key);
+        $this->client->delete($key);
     }
 }
