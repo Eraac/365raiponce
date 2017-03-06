@@ -6,7 +6,7 @@ use CoreBundle\Entity\AbstractVote;
 use CoreBundle\Entity\VoteRemark;
 use CoreBundle\Event\NewVoteEvent;
 use CoreBundle\Service\KeyBuilder;
-use Doctrine\Common\Cache\PredisCache;
+use Doctrine\Common\Cache\CacheProvider;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -18,7 +18,7 @@ class VoteListener
     private $dispatcher;
 
     /**
-     * @var PredisCache
+     * @var CacheProvider
      */
     private $client;
 
@@ -27,9 +27,9 @@ class VoteListener
      * VoteListener constructor.
      *
      * @param EventDispatcherInterface $dispatcher
-     * @param PredisCache              $client
+     * @param CacheProvider            $client
      */
-    public function __construct(EventDispatcherInterface $dispatcher, PredisCache $client)
+    public function __construct(EventDispatcherInterface $dispatcher, CacheProvider $client)
     {
         $this->dispatcher = $dispatcher;
         $this->client = $client;
