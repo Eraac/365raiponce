@@ -37,6 +37,7 @@ interface HistoryDocs extends Docs
             Response::HTTP_BAD_REQUEST  => self::HTTP_BAD_REQUEST,
         ],
         'filters' => [
+            self::FILTER_ID,
             self::FILTER_PAGINATION_PAGE,
             self::FILTER_PAGINATION_LIMIT,
             self::FILTER_CREATED_BEFORE,
@@ -46,6 +47,7 @@ interface HistoryDocs extends Docs
             ['name' => 'filter[is_used_for_score]', 'pattern' => '(0|1)', 'description' => 'Search by used for score'],
             ['name' => 'filter[action]', 'dataType' => 'integer', 'description' => 'Search by action (id)'],
             ['name' => 'filter[user]', 'dataType' => 'integer', 'description' => 'Search by user (id)'],
+            self::ORDER_ID,
             ['name' => 'filter[_order][is_used_for_score]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by used for score'],
             ['name' => 'filter[_order][action]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by action (id)'],
             ['name' => 'filter[_order][user]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by user (username)'],

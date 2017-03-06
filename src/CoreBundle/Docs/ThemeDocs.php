@@ -43,6 +43,7 @@ interface ThemeDocs extends Docs
             Response::HTTP_BAD_REQUEST  => self::HTTP_BAD_REQUEST,
         ],
         'filters' => [
+            self::FILTER_ID,
             ['name' => 'filter[name]', 'dataType' => 'string', 'description' => 'Search by name'],
             self::ORDER_ID,
             ['name' => 'filter[_order][name]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by name'],

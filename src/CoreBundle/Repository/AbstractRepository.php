@@ -64,6 +64,20 @@ abstract class AbstractRepository extends EntityRepository
     /**
      * @param QueryBuilder $qb
      * @param string       $attribute
+     * @param string|array $value
+     *
+     * @return QueryBuilder
+     */
+    public function filterById(QueryBuilder $qb, string $attribute, $value) : QueryBuilder
+    {
+        $alias = $this->getAlias($qb);
+
+        return $this->getEqOrIn($qb, $value, $alias . $attribute, 'id');
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param string       $attribute
      * @param int|array    $value
      * @param string       $aliasJoin
      * @param string       $attributeJoin

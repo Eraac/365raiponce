@@ -36,7 +36,7 @@ abstract class AbstractFilterTest extends WebTestCase
      */
     protected function getCriterias() : array
     {
-        return [];
+        return ['id'];
     }
 
     /**
@@ -44,7 +44,7 @@ abstract class AbstractFilterTest extends WebTestCase
      */
     protected function getGoodValueCriterias() : array
     {
-        return [];
+        return [1];
     }
 
     /**
@@ -52,7 +52,7 @@ abstract class AbstractFilterTest extends WebTestCase
      */
     protected function getBadValueCriterias() : array
     {
-        return [];
+        return [''];
     }
 
     /**

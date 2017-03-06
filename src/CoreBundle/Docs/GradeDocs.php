@@ -37,6 +37,7 @@ interface GradeDocs extends Docs
             Response::HTTP_BAD_REQUEST  => self::HTTP_BAD_REQUEST,
         ],
         'filters' => [
+            self::FILTER_ID,
             ['name' => 'filter[name]', 'dataType' => 'string', 'description' => 'Search by name'],
             ['name' => 'filter[score_min]', 'dataType' => 'integer', 'description' => 'Search by score'],
             ['name' => 'filter[score_max]', 'dataType' => 'integer', 'description' => 'Search by score'],

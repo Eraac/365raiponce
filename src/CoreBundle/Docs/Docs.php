@@ -40,6 +40,7 @@ interface Docs
     const FILTER_EMOTION          = ['name' => 'filter[emotion]', 'dataType' => 'integer', 'description' => 'Search by emotion (id)'];
     const FILTER_THEME            = ['name' => 'filter[theme]', 'dataType' => 'integer', 'description' => 'Search by theme (id)'];
     const FILTER_REMARK           = ['name' => 'filter[remark]', 'dataType' => 'integer', 'description' => 'Search by remark (id)'];
+    const FILTER_ID               = ['name' => 'filter[id]', 'dataType' => 'integer', 'description' => 'Search by id'];
 
     const ORDER_EMOTION           = ['name' => 'filter[_order][emotion]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by emotion'];
     const ORDER_THEME             = ['name' => 'filter[_order][theme]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by theme'];

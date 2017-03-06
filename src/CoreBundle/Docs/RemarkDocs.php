@@ -42,15 +42,16 @@ interface RemarkDocs extends Docs
     ];
 
     const FILTERS = [
+        self::FILTER_ID,
         self::FILTER_POSTED_BEFORE,
         self::FILTER_POSTED_AFTER,
         self::FILTER_EMOTION,
         self::FILTER_THEME,
-        self::ORDER_ID,
         self::FILTER_CREATED_BEFORE,
         self::FILTER_CREATED_AFTER,
         self::FILTER_UPDATED_BEFORE,
         self::FILTER_UPDATED_AFTER,
+        self::ORDER_ID,
         ['name' => 'filter[_order][posted_at]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by posted at'],
         self::ORDER_EMOTION,
         self::ORDER_THEME,

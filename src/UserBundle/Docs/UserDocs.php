@@ -49,8 +49,9 @@ interface UserDocs extends Docs
             Response::HTTP_UNAUTHORIZED => self::HTTP_UNAUTHORIZED
         ],
         'filters' => [
+            self::FILTER_ID,
             ['name' => 'filter[username]', 'dataType' => 'string', 'description' => 'Search by username'],
-            ['name' => 'filter[_order][id]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by id'],
+            self::ORDER_ID,
             ['name' => 'filter[_order][username]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by username'],
             self::FILTER_CREATED_BEFORE,
             self::FILTER_CREATED_AFTER,

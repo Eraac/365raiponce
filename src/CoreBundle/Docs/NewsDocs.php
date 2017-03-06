@@ -43,6 +43,7 @@ interface NewsDocs extends Docs
             Response::HTTP_FORBIDDEN    => self::HTTP_FORBIDDEN
         ],
         'filters' => [
+            self::FILTER_ID,
             ['name' => 'filter[started_before]', 'dataType' => 'string', 'description' => 'Search by started date'],
             ['name' => 'filter[started_after]', 'dataType' => 'string', 'description' => 'Search by started date'],
             ['name' => 'filter[ended_before]', 'dataType' => 'string', 'description' => 'Search by ended date'],

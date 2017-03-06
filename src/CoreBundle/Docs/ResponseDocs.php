@@ -44,6 +44,7 @@ interface ResponseDocs extends Docs
     ];
 
     const FILTERS = [
+        self::FILTER_ID,
         self::FILTER_POSTED_BEFORE,
         self::FILTER_POSTED_AFTER,
         ['name' => 'filter[remark]', 'dataType' => 'integer', 'description' => 'Search by remark (id)'],
