@@ -72,8 +72,8 @@ class RetrieveStats
         return [
             "count_remarks_publish"        => $remarkRepo->countPublished($from, $to),
             "count_remarks_unpublish"      => $remarkRepo->countUnpublished($from, $to),
-            "count_reponses_publish"       => $responseRepo->countPublished($from, $to),
-            "count_response_unpublish"     => $responseRepo->countUnpublished($from, $to),
+            "count_responses_publish"      => $responseRepo->countPublished($from, $to),
+            "count_responses_unpublish"    => $responseRepo->countUnpublished($from, $to),
             "count_users"                  => $userRepo->countAll($from, $to),
             "count_votes_remarks_sexist"   => $voteRemarkRepo->countAll($from, $to, VoteRemark::IS_SEXIST),
             "count_votes_remarks_lived"    => $voteRemarkRepo->countAll($from, $to, VoteRemark::ALREADY_LIVED),
