@@ -46,7 +46,10 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-        server_version: 5.6
+        server_version: 5.7
+        # https://coderwall.com/p/goyc8w/how-to-stop-doctrine-from-turning-integer-into-string
+        options:
+            20: false
         mapping_types:
             enum: string
     orm:
