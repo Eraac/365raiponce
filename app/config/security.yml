@@ -5,8 +5,9 @@ security:
 
     role_hierarchy:
         ROLE_SUPER_ADMIN:       ROLE_ADMIN
-        ROLE_ADMIN:             ROLE_VIEW_LOG_REQUEST
+        ROLE_ADMIN:             [ROLE_VIEW_LOG_REQUEST, ROLE_VIEW_STATS]
         ROLE_VIEW_LOG_REQUEST:  ROLE_USER
+        ROLE_VIEW_STATS:        ROLE_USER
 
     providers:
         fos_userbundle:
@@ -40,6 +41,6 @@ security:
             anonymous:  true
 
     access_control:
-        - { path: ^/stats, roles: ROLE_ADMIN }
-        - { path: ^/exports, roles: ROLE_ADMIN }
-        - { path: ^/imports, roles: ROLE_ADMIN }
+        - { path: ^/stats, roles: ROLE_VIEW_STATS }
+        - { path: ^/log-requests, roles: ROLE_VIEW_LOG_REQUEST }
+        - { path: ^/(exports|imports), roles: ROLE_ADMIN }

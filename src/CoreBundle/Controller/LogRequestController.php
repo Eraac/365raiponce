@@ -14,8 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @package CoreBundle\Controller
  *
- * @Security("is_granted('ROLE_VIEW_LOG_REQUEST')")
- *
  * @FOSRest\Version(AbstractApiController::ALL_API_VERSIONS)
  */
 class LogRequestController extends AbstractApiController
