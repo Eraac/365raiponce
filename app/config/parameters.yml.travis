@@ -26,6 +26,7 @@ parameters:
     secret: 965436407b8b3ac3d595e96d85b5fa06c90973f9
     cors_allow_origin: '*'
     app_name: 365raiponce
+    base_url_reset_password: 'http://localhost?token='
     base_url_confirmation: "http://localhost?token="
     base_url_remark: "http://localhost/remarks/"
     enable_log_request: false

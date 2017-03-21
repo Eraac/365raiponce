@@ -49,22 +49,25 @@ class Mailer implements MailerInterface
         $context = [
             'user'  => $user,
             'token' => $user->getConfirmationToken(),
+            'reset_url' => $this->parameters['base_url_reset_password'] . $user->getConfirmationToken(),
         ];
 
         $this->sendMessage($template, $context, $user->getEmail());
     }
 
     /**
-     * @param string $to
+     * @param UserInterface $user
      * @param string $filename
      */
-    public function sendExportUsers(string $to, string $filename)
+    public function sendExportUsers(UserInterface $user, string $filename)
     {
         $template = "UserBundle:Export:users.txt.twig";
 
+        $context = ['user' => $user];
+
         $attachment = \Swift_Attachment::fromPath($filename)->setFilename('users.csv');
 
-        $this->sendMessage($template, [], $to, $attachment);
+        $this->sendMessage($template, $context, $user->getEmail(), $attachment);
     }
 
     /**

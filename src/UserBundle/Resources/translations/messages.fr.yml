@@ -1,24 +1,41 @@
+base_email_html:
+    hello: "Bonjour %username%,"
+    footer: |
+        <p>Cordialement,</p>
+        <p>L'équipe 365raiponce</p>
+
 registration:
     email:
-        subject: "Bienvenue %username% !"
-        message: |
-            Bonjour %username% !
+        subject: "Bienvenue %username%"
+        message_txt: |
+            Bienvenue %username%,
 
             Pour valider votre compte utilisateur, merci de vous rendre sur %confirmation_url%
+            Suite à votre validation vos réponses seront automatiquement publiées.
 
             Cordialement,
-            L'équipe
+            L'équipe 365raiponce
+        message_html:
+            preview: "Confirmation de votre adresse mail"
+            action: "Merci de valider votre compte, cela permettra d'avoir vos réponses publiées automatiquement."
+            cta: '<a class="cta" href="%confirmation_url%" target="_blank">Valider votre compte</a>'
+            failback_cta: 'Si le bouton ne fonctionne pas, merci de cliquer sur ce lien : <a href="%confirmation_url%">%confirmation_url%</a>'
 
 resetting:
     email:
         subject: "Réinitialisation de votre mot de passe"
-        message: |
-            Bonjour %username% !
+        message_txt: |
+            Bonjour %username%,
 
-            Voici votre code pour réinitialiser votre mot de passe : %token%
+            Voici le lien pour réinitialiser votre mot de passe : %reset_url%
 
             Cordialement,
-            L'équipe
+            L'équipe 365raiponce
+        message_html:
+            preview: "Vous avez demandé une réinitialisation de votre mot de passe"
+            action: "Vous avez demandé une réinitialisation de votre mot de passe, pour continuer merci de cliquer sur le bouton."
+            cta: '<a class="cta" href="%reset_url%" target="_blank">Réinitialiser votre mot de passe</a>'
+            failback_cta: 'Si le bouton ne fonctionne pas, merci de cliquer sur ce lien : <a href="%reset_url%">%reset_url%</a>'
     password_request_expired: "Votre requête a expirée"
 
 confirmation:
@@ -34,5 +51,8 @@ user:
 export_users:
     email:
         subject: "Export des utilisateurs"
-        message: |
+        message_txt: |
             Votre export est terminé. Vous pouvez le trouver en pièce jointe.
+        message_html:
+            preview: "Votre export est disponible"
+            action: "Votre export est terminé. Vous pouvez le trouver en pièce jointe."

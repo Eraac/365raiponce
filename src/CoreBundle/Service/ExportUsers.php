@@ -5,6 +5,7 @@ namespace CoreBundle\Service;
 use CoreBundle\Event\ExportUsersEvent;
 use UserBundle\Mailer\Mailer;
 use UserBundle\Repository\UserRepository;
+use FOS\UserBundle\Model\UserInterface;
 
 /**
  * Class ExportUsers
@@ -44,15 +45,15 @@ class ExportUsers
     }
 
     /**
-     * @param string $sendTo
+     * @param UserInterface $user
      */
-    public function export(string $sendTo)
+    public function export(UserInterface $user)
     {
         $users = $this->repo->exportUsers();
 
         $filename = $this->encoder->transform($users, ['username', 'email']);
 
-        $this->mailer->sendExportUsers($sendTo, $filename);
+        $this->mailer->sendExportUsers($user, $filename);
     }
 
     /**
@@ -60,6 +61,6 @@ class ExportUsers
      */
     public function onExport(ExportUsersEvent $event)
     {
-        $this->export($event->getEmail());
+        $this->export($event->getUser());
     }
 }

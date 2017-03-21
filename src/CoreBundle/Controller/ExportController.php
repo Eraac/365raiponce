@@ -29,9 +29,9 @@ class ExportController extends AbstractApiController implements ExportDocs
      */
     public function getUsersAction() : JsonResponse
     {
-        $email = $this->getUser()->getEmail();
+        $user = $this->getUser();
 
-        $this->delayedDispatch(ExportUsersEvent::NAME, new ExportUsersEvent($email));
+        $this->delayedDispatch(ExportUsersEvent::NAME, new ExportUsersEvent($user));
 
         return new JsonResponse([], JsonResponse::HTTP_ACCEPTED);
     }

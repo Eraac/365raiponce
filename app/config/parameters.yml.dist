@@ -41,6 +41,7 @@ parameters:
     cors_allow_origin: http://localhost
 
     app_name: rest-project
+    base_url_reset_password: http://localhost?token=
     base_url_confirmation: http://localhost?token=
     base_url_remark: http://localhost/remarks/
 

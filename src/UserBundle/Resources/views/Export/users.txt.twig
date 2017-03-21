@@ -1,3 +1,5 @@
+{% extends 'UserBundle::base_email.html.twig' %}
+
 {% block subject %}
     {% autoescape false %}
         {{ 'export_users.email.subject'|trans() }}
@@ -6,8 +8,14 @@
 
 {% block body_text %}
     {% autoescape false %}
-        {{ 'export_users.email.message'|trans() }}
+        {{ 'export_users.email.message_txt'|trans() }}
     {% endautoescape %}
 {% endblock %}
 
-{% block body_html %}{% endblock %}
+{% block preview %}
+    {{ 'export_users.email.message_html.preview'|trans() }}
+{% endblock %}
+
+{% block action %}
+    {{ 'export_users.email.message_html.action'|trans() }}
+{% endblock %}

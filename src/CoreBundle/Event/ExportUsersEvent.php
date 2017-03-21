@@ -2,6 +2,7 @@
 
 namespace CoreBundle\Event;
 
+use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 class ExportUsersEvent extends Event
@@ -9,23 +10,23 @@ class ExportUsersEvent extends Event
     const NAME = 'core.export.users';
 
     /**
-     * @var string
+     * @var UserInterface
      */
-    protected $email;
+    protected $user;
 
 
     /**
      * ExportUsersEvent constructor.
      *
-     * @param string $to
+     * @param UserInterface $user
      */
-    public function __construct(string $to)
+    public function __construct(UserInterface $user)
     {
-        $this->email = $to;
+        $this->user = $user;
     }
 
-    public function getEmail() : string
+    public function getUser() : UserInterface
     {
-        return $this->email;
+        return $this->user;
     }
 }
