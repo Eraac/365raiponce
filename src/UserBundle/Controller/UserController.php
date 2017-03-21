@@ -184,7 +184,7 @@ class UserController extends AbstractUserController implements UserDocs
         }
 
         if ($user->isPasswordRequestNonExpired($this->getParameter('fos_user.resetting.token_ttl'))) {
-            return $this->createJsonError('resetting.password_already_requested', JsonResponse::HTTP_BAD_REQUEST, [], 'FOSUserBundle');
+            return $this->createJsonError('user.error.forget_password.password_already_requested', JsonResponse::HTTP_BAD_REQUEST);
         }
 
         if (null === $user->getConfirmationToken()) {

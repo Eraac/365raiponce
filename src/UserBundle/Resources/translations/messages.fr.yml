@@ -47,6 +47,7 @@ user:
         forget_password:
             wrong_email: "L'email d'utilisateur n'est pas valide"
             not_found: "Le nom d'utilisateur n'existe pas"
+            password_already_requested: "Vous avez déjà demandé un nouveau mot de passe récemment"
 
 export_users:
     email:
