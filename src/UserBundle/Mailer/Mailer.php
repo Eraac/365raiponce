@@ -84,6 +84,7 @@ class Mailer implements MailerInterface
         $htmlBody = $template->renderBlock('body_html', $context);
 
         $message = \Swift_Message::newInstance()
+            ->setFrom([$this->parameters['sender_email'] => $this->parameters['sender_name']])
             ->setSubject($subject)
             ->setTo($toEmail);
 
