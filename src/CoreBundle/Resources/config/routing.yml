@@ -2,6 +2,10 @@ log_request:
     type: rest
     resource: CoreBundle\Controller\LogRequestController
 
+health_check:
+    type: rest
+    resource: CoreBundle\Controller\HealthCheckController
+
 emotion:
     type: rest
     resource: CoreBundle\Controller\EmotionController
