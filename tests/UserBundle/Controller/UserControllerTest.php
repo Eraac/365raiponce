@@ -86,6 +86,14 @@ class UserControllerTest extends AbstractControllerTest
         ];
 
         $this->isBadRequest(Request::METHOD_POST, self::PREFIX_URL, $params);
+
+        $params = [
+            'username'  => null,
+            'email'     => 'valid-email@domain.tld',
+            'password'  => 'hello',
+        ];
+
+        $this->isBadRequest(Request::METHOD_POST, self::PREFIX_URL, $params);
     }
 
     // === POST - CONFIRM ===

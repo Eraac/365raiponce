@@ -5,9 +5,12 @@ UserBundle\Entity\User:
 
     properties:
         username:
+            - NotNull: ~
             - Type: string
         email:
+            - NotNull: ~
             - Type: string
             - Email: ~
         plainPassword:
+            - NotNull: ~
             - Type: string
