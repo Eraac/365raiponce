@@ -13,7 +13,7 @@ services:
             - "@logger"
             - "@security.token_storage"
             - "@doctrine.orm.entity_manager"
-            - "%enable_log_request%"
+            - "%env(ENABLE_LOG_REQUEST)%"
         tags:
             - { name: kernel.event_listener, event: kernel.terminate, method: onKernelTerminate, priority: -255 }
 
@@ -75,7 +75,7 @@ services:
 
     core.remark_published_listener:
         class: CoreBundle\EventListener\RemarkPublishedListener
-        arguments: ['@core.client.twitter', '@core.client.facebook', '%base_url_remark%']
+        arguments: ['@core.client.twitter', '@core.client.facebook', '%env(BASE_URL_REMARK)%']
         tags:
             - { name: kernel.event_listener, event: core.published.remark, method: onRemarkPublished }
 
@@ -89,7 +89,7 @@ services:
 
     core.history_listener:
         class: CoreBundle\EventListener\HistoryListener
-        arguments: ['@doctrine.orm.entity_manager', '%enable_history%']
+        arguments: ['@doctrine.orm.entity_manager', '%env(ENABLE_HISTORY)%']
         tags:
            - { name: kernel.event_listener, event: core.history.publish_response, method: onResponsePublished }
            - { name: kernel.event_listener, event: core.history.unpublish_response, method: onResponseUnpublished }

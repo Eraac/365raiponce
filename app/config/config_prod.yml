@@ -31,8 +31,8 @@ monolog:
             handler:        slack
         slack:
             type:           slack
-            token:          "%slack_token%"
-            channel:        "%slack_channel%"
+            token:          "%env(SLACK_TOKEN)%"
+            channel:        "%env(SLACK_CHANNEL)%"
             level:          warning
 
         auth:

@@ -1,39 +1,48 @@
 # This file is auto-generated during the composer install
 parameters:
-    database_host: 127.0.0.1
-    database_port: null
-    database_name: 365raiponce
-    database_user: root
-    database_password: ~
-    mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: null
-    mailer_password: null
-    mailer_port: 25
-    mailer_encryption: null
-    mail_sender: no-reply@symfony.local
-    twitter_consumer_key: ""
-    twitter_consumer_secret: ""
-    twitter_token: ""
-    twitter_token_secret: ""
-    twitter_enable: false
+    env(DATABASE_HOST): 127.0.0.1
+    env(DATABASE_PORT): null
+    env(DATABASE_NAME): 365raiponce
+    env(DATABASE_USER): root
+    env(DATABASE_PASSWORD): ~
+    env(MAILER_TRANSPORT): smtp
+    env(MAILER_HOST): 127.0.0.1
+    env(MAILER_USER): null
+    env(MAILER_PASSWORD): null
+    env(MAILER_PORT): 25
+    env(MAILER_ENCRYPTION): null
+    env(MAIL_SENDER): no-reply@symfony.local
+
+    # Twitter
+    env(TWITTER_CONSUMER_KEY): ""
+    env(TWITTER_CONSUMER_SECRET): ""
+    env(TWITTER_TOKEN): ""
+    env(TWITTER_TOKEN_SECRET): ""
+    env(TWITTER_ENABLE): false
+
     # Facebook
-    facebook_page_id: ""
-    facebook_app_id: ""
-    facebook_token: ""
-    facebook_secret: ""
-    facebook_enable: false
-    secret: 965436407b8b3ac3d595e96d85b5fa06c90973f9
-    cors_allow_origin: '*'
-    app_name: 365raiponce
-    base_url_reset_password: 'http://localhost?token='
-    base_url_confirmation: "http://localhost?token="
-    base_url_remark: "http://localhost/remarks/"
-    enable_log_request: false
-    lifetime_cache_score: 600 # ten minutes
-    lifetime_cache_vote_user: 600 # ten minutes
-    lifetime_cache_count_vote: 600 # ten minutes
-    lifetime_cache_count_response: 600 # ten minutes
-    enable_history: true
-    slack_token: "my-token"
-    slack_channel: "my-channel"
+    env(FACEBOOK_PAGE_ID): ""
+    env(FACEBOOK_APP_ID): ""
+    env(FACEBOOK_TOKEN): ""
+    env(FACEBOOK_SECRET): ""
+    env(FACEBOOK_ENABLE): false
+
+    env(SECRET): 965436407b8b3ac3d595e96d85b5fa06c90973f9
+
+    env(CORS_ALLOW_ORIGIN): '*'
+    env(APP_NAME): 365raiponce
+
+    env(BASE_URL_RESET_PASSWORD): 'http://localhost?token='
+    env(BASE_URL_CONFIRMATION): "http://localhost?token="
+    env(BASE_URL_REMARK): "http://localhost/remarks/"
+
+    env(ENABLE_LOG_REQUEST): false
+    env(ENABLE_HISTORY): true
+
+    env(LIFETIME_CACHE_SCORE): 600 # ten minutes
+    env(LIFETIME_CACHE_VOTE_USER): 600 # ten minutes
+    env(LIFETIME_CACHE_COUNT_VOTE): 600 # ten minutes
+    env(LIFETIME_CACHE_COUNT_RESPONSE): 600 # ten minutes
+
+    env(SLACK_TOKEN): "my-token"
+    env(SLACK_CHANNEL): "my-channel"

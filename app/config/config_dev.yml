@@ -1,4 +1,5 @@
 imports:
+    - { resource: parameters.yml }
     - { resource: config.yml }
 
 framework:
@@ -22,5 +23,6 @@ monolog:
             type:   console
             channels: [!event, !doctrine]
 
-#swiftmailer:
+swiftmailer:
+    encryption: null
 #    delivery_address: me@example.com

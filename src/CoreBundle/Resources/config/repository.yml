@@ -24,21 +24,21 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments: ['CoreBundle:Response']
         calls:
-            - [setLifetimeCacheCountResponse, ['%lifetime_cache_count_response%']]
+            - [setLifetimeCacheCountResponse, ['%env(LIFETIME_CACHE_COUNT_RESPONSE)%']]
 
     core.vote_response_repository:
         class: Doctrine\ORM\EntityRepository
         factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments: ['CoreBundle:VoteResponse']
         calls:
-            - [setLifetimeCache, ['%lifetime_cache_vote_user%', '%lifetime_cache_count_vote%']]
+            - [setLifetimeCache, ['%env(LIFETIME_CACHE_VOTE_USER)%', '%env(LIFETIME_CACHE_COUNT_VOTE)%']]
 
     core.vote_remark_repository:
         class: Doctrine\ORM\EntityRepository
         factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments: ['CoreBundle:VoteRemark']
         calls:
-            - [setLifetimeCache, ['%lifetime_cache_vote_user%', '%lifetime_cache_count_vote%']]
+            - [setLifetimeCache, ['%env(LIFETIME_CACHE_VOTE_USER)%', '%env(LIFETIME_CACHE_COUNT_VOTE)%']]
 
     core.report_repository:
         class: Doctrine\ORM\EntityRepository
@@ -65,4 +65,4 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments: ['CoreBundle:History']
         calls:
-            - [setLifetimeCacheScore, ['%lifetime_cache_score%']]
+            - [setLifetimeCacheScore, ['%env(LIFETIME_CACHE_SCORE)%']]

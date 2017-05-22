@@ -47,21 +47,21 @@ services:
         class: CoreBundle\Service\Twitter
         arguments:
             - '@logger'
-            - '%twitter_consumer_key%'
-            - '%twitter_consumer_secret%'
-            - '%twitter_token%'
-            - '%twitter_token_secret%'
-            - '%twitter_enable%'
+            - '%env(TWITTER_CONSUMER_KEY)%'
+            - '%env(TWITTER_CONSUMER_SECRET)%'
+            - '%env(TWITTER_TOKEN)%'
+            - '%env(TWITTER_TOKEN_SECRET)%'
+            - '%env(TWITTER_ENABLE)%'
 
     core.client.facebook:
         class: CoreBundle\Service\Facebook
         arguments:
             - '@logger'
-            - '%facebook_page_id%'
-            - '%facebook_app_id%'
-            - '%facebook_token%'
-            - '%facebook_secret%'
-            - '%facebook_enable%'
+            - '%env(FACEBOOK_PAGE_ID)%'
+            - '%env(FACEBOOK_APP_ID)%'
+            - '%env(FACEBOOK_TOKEN)%'
+            - '%env(FACEBOOK_SECRET)%'
+            - '%env(FACEBOOK_ENABLE)%'
 
     core.score_control:
         class: CoreBundle\Service\ScoreControl

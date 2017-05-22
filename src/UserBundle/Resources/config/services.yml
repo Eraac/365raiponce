@@ -18,7 +18,7 @@ services:
         arguments:
             - '@mailer'
             - '@twig'
-            - { base_url_confirmation: '%base_url_confirmation%', base_url_reset_password: '%base_url_reset_password%', sender_email: '%mail_sender%', sender_name: '%app_name%' }
+            - { base_url_confirmation: '%env(BASE_URL_CONFIRMATION)%', base_url_reset_password: '%env(BASE_URL_RESET_PASSWORD)%', sender_email: '%env(MAIL_SENDER)%', sender_name: '%env(APP_NAME)%' }
 
     user.user_edit_admin_type:
         class: UserBundle\Form\UserEditAdminType
