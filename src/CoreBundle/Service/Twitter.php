@@ -99,6 +99,8 @@ class Twitter
                 $this->tokenSecret
             );
 
+        $connection->setDecodeJsonAsArray(true);
+
         return $connection;
     }
 }
